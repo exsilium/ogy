@@ -1,0 +1,25 @@
+{
+  "name": "ogy",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/index.js",
+  "bin": {
+    "ogy": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "npx tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "@types/node": "^20.11.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "figlet": "^1.7.0"
+  }
+}
