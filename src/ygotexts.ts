@@ -189,4 +189,125 @@ export class YgoTexts {
 
     return filesVerified;
   }
+
+  /* Update DICT_J.bin */
+  public updateDict(texto: string, filename: string): void {
+    let pointerCount = 0;
+    let headerSize = 0;
+    let tableSize = 0;
+    let tablePos = 0;
+    let pointer = 0;
+
+    const splitText = texto.replace(/[\n\r]/g, "").split("<FIM/>").filter(Boolean);
+    const binBuffer = fs.readFileSync(filename.replace(".txt", ".bin"));
+    const backupTabela = Buffer.from(binBuffer);
+    const fileBytes: Buffer[] = [];
+
+    pointerCount = binBuffer.readInt32LE(0);
+    headerSize = binBuffer.readInt32LE(4);
+    tableSize = binBuffer.readInt32LE(8);
+
+    tablePos = headerSize;
+    const newTable = Buffer.alloc(tableSize);
+
+    // We construct the table header based on the old file information (0-11) // FIXME
+    newTable.writeInt32LE(pointerCount, 0);
+    newTable.writeInt32LE(headerSize, 4);
+    newTable.writeInt32LE(tableSize, 8);
+
+    for (const item of splitText) {
+      const textSplit = item.replace("<b>", "\r\n").replace("<TEXTO/>", "").split("<TEXTO>").filter(Boolean);
+      const dataPoint = this.getPointerInfo(textSplit[0]);
+      tablePos = dataPoint[0];
+
+      //
+      newTable.writeInt32LE(pointer + dataPoint[1], tablePos);
+      if (textSplit.length > 1) {
+        const convertedText = this.removeTags(textSplit[1]);
+        const textToBytes = Buffer.from(convertedText, 'utf16le');
+        fileBytes.push(textToBytes);
+        pointer += textToBytes.length;
+      }
+    }
+
+    const textFinalBytes = Buffer.concat([newTable, ...fileBytes]);
+    fs.writeFileSync(filename.replace(".txt", ".bin"), textFinalBytes);
+  }
+
+  // Helpers
+  // This is called by updateDict when working with the DICT_J import
+  private getPointerInfo(text: string): number[] {
+    text = text.replace(" ", "").replace(">", "").replace("<", "§");
+    const information: number[] = new Array(2);
+    const inf = text.split('§').pop()?.split(':') ?? [];
+    const separator = inf[1].split(',');
+    const pointerPosition = parseInt(separator[0]);
+    const pointerValue = parseInt(separator[1]);
+
+    information[0] = pointerPosition;
+    information[1] = pointerValue;
+
+    return information;
+  }
+
+  // This is called by updateDict when working with the DICT_J import
+  private removeTags(text: string): string {
+    let sb = "";
+    for (let i = 0; i < text.length; i++) {
+      if (text[i] !== '<') {
+        sb += text[i];
+      } else {
+        let tagCommand: string | null = "";
+        if (text[i + 1] === 'M') {
+          i += 2;
+          sb += "$m";
+
+          while (text[i] !== '>') {
+            sb += text[i];
+            i++;
+          }
+          i++;
+          let ignore = "";
+          while (text[i] !== '>') {
+            ignore += text[i];
+            i++;
+          }
+        } else {
+          while (text[i] !== '>') {
+            tagCommand += text[i];
+            i++;
+          }
+
+          tagCommand += text[i];
+          tagCommand = this.tagConverter(tagCommand);
+          sb += tagCommand;
+        }
+      }
+    }
+    return sb;
+  }
+
+  // Called by removeTags
+  private tagConverter(tag: string | null): string | null {
+    if (tag === null) {
+      return null;
+    }
+
+    if (tag.includes("<NULL>")) {
+      return "\0";
+    }
+
+    if (tag.includes("<r>")) {
+      return "\r";
+    }
+
+    if (tag.toUpperCase().includes("<COR") || tag.toUpperCase().includes("<JOGADOR")) {
+      tag = tag.replace(" ", "").replace(">", "");
+      const valueCOR = tag.split(':');
+      return valueCOR[valueCOR.length - 1];
+    }
+
+    return null;
+  }
+
 }

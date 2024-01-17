@@ -16,7 +16,14 @@ async function test() {
   const result = await ygoTextInstance.exportToTxt("./test", TagForce.TagForce6);
 }
 
-test();
+function test2() {
+  const DICTJtxt = fs.readFileSync("./test/DICT_J.txt", 'utf8');
+  const ygoTextInstance = new YgoTexts();
+  ygoTextInstance.updateDict(DICTJtxt, "./test/DICT_J.txt");
+}
+
+//test();
+//test2();
 //
 
 program
