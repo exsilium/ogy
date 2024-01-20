@@ -14,7 +14,7 @@ console.log("OGY - Yu-Gi-Oh! Translation tool\n");
 /* This is very raw - quick and dirty */
 program
   .version("0.0.1")
-  .description("A helper tool to export and import CARD texts for Yu-Gi-Oh! 5D Tag Force 6")
+  .description("A helper tool to export and import CARD texts for Yu-Gi-Oh! 5D's Tag Force 6")
   .option("-e --export <directory>", "Process and export CARD_ files in the directory for export")
   .option("-i --import <directory>", "Process and import texts to .bin files")
   .parse(process.argv);

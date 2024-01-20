@@ -30,9 +30,38 @@ Assets and data in this repository are freely made available to general public u
 
 Assets which do not contain or include IP from Konami are licensed under the permissive BSD-2-Clause License.
 
+### How to use
+
+You require a modern `node` >= `v18` to build and run the tool.
+
+1. Unpack the cardinfo_jpn.ehp file and store the .bin files in a folder
+2. Run `npm i`, `npm run build` to build the project
+3. `node dist/index.js -e <directory>` for exporting translations to `CARD_J.txt` and `CARD_Desc_J.txt`
+
+```
+% node dist/index.js
+   ___   ______   _____   ______  ___  
+  / _ \ / ___\ \ / / \ \ / / ___|/ _ \ 
+ | | | | |  _ \ V /| |\ V / |  _| | | |
+ | |_| | |_| | | | | | | || |_| | |_| |
+  \___/ \____| |_| | | |_| \____|\___/ 
+                   |_|                 
+OGY - Yu-Gi-Oh! Translation tool
+
+Usage: index [options]
+
+A helper tool to export and import CARD texts for Yu-Gi-Oh! 5D's Tag Force 6
+
+Options:
+  -V, --version            output the version number
+  -e --export <directory>  Process and export CARD_ files in the directory for export
+  -i --import <directory>  Process and import texts to .bin files
+  -h, --help               display help for command
+```
+
 ## Structure
 
-- cardinfo_jpn.ehp - Located in `PSP_GAME/USRDIR/duelsys/` - 
+- cardinfo_jpn.ehp - Located in `PSP_GAME/USRDIR/duelsys/`
   - CARD_Desc_J.bin
   - CARD_Huff_J.bin
   - CARD_Indx_J.bin

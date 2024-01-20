@@ -1,7 +1,7 @@
 {
   "name": "ogy",
   "version": "0.0.1",
-  "description": "A tool to export and import Yu-Gi-Oh! 5D Tag Force 6 card translations",
+  "description": "A tool to export and import Yu-Gi-Oh! 5D's Tag Force 6 card translations",
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
