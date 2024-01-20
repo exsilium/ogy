@@ -1,0 +1,5013 @@
+<Tipo de Ponteiro = Interno Indireto>
+
+
+<PONTEIRO: 12,0>
+<TEXTO> sealed by magic. Whosoever breaks this seal will know infinite power.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 16,0>
+<TEXTO> instead of conducting a normal draw during your Draw Phase<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 20,0>
+<TEXTO>This card cannot be Normal Summoned or Set. This card can<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 24,0>
+<TEXTO>he butts in by any means necessary. It's also said<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 28,0>
+<TEXTO>when the three are together, something happens.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 32,0>
+<TEXTO>, inflict the difference as Battle Damage to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 36,0>
+<TEXTO> card is Set, pick up and see the card. If<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 40,0>
+<TEXTO> roll a six-sided die. If the result is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 44,0>
+<TEXTO>Special Summon with the effect of "$m<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 48,0>
+<TEXTO>. (If it's a tie, you get to choose.)<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 52,0>
+<TEXTO>, OR unequip the Union equipment and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 56,0>
+<TEXTO> whose DEF is lower than the ATK of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 60,0>
+<TEXTO>" in its card name, or is named "$m<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 64,0>
+<TEXTO>based on its type apply the proper<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 68,0>
+<TEXTO>(s) must be the correct one(s).<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 72,0>
+<TEXTO>"$m6234", "$m6328", or "$m6329"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 76,0>
+<TEXTO> you are attempting to Ritual<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 80,0>
+<TEXTO>"$m4064" and "Kuriboh Tokens"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 84,0>
+<TEXTO> Tuner + 1 or more non-Tuner<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 88,0>
+<TEXTO> name, or is named "$m5195".<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 92,0>
+<TEXTO>metal. It upgrades by fusing<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 96,0>
+<TEXTO>1 "Elemental HERO" monster <NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 100,0>
+<TEXTO> and decreases its DEF by 2<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 104,0>
+<TEXTO> force to be reckoned with.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 108,0>
+<TEXTO>Gamma meld as one to form a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 112,0>
+<TEXTO>Specializing in combination<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 116,0>
+<TEXTO>During battle between this<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 120,0>
+<TEXTO>. (You do not use "$m4837"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 124,0>
+<TEXTO> to its original position.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 128,0>
+<TEXTO> to an adjacent unoccupied<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 132,0>
+<TEXTO>. Then shuffle your Deck.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 136,0>
+<TEXTO>ed, toss a coin:
+●Heads:<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 140,0>
+<TEXTO>(Monster, Spell, or Trap)<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 144,0>
+<TEXTO>s (this is not optional)<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 148,0>
+<TEXTO> Deck is then shuffled.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 152,0>
+<TEXTO>magic. Whosoever breaks<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 156,0>
+<TEXTO>e Ojama Trio. It's said<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 160,0>
+<TEXTO> for thousands of years<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 164,0>
+<TEXTO> as a result of battle<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 168,0>
+<TEXTO> and makes them 0, the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 172,0>
+<TEXTO>ed. Unless you pay 500<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 176,0>
+<TEXTO> detach 1 Xyz Material<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 180,0>
+<TEXTO>Detach 2 Xyz Material<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 184,0>
+<TEXTO>/Level 1/ATK 0/DEF 0)<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 188,0>
+<TEXTO> once again in a row.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 192,0>
+<TEXTO>wraps itself around a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 196,0>
+<TEXTO>egate the activation<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 200,0>
+<TEXTO> to its owner's hand<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 204,0>
+<TEXTO> is applied normally<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 208,0>
+<TEXTO> without flipping it<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 212,0>
+<TEXTO>ozoic Fossil Knight"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 216,0>
+<TEXTO>. If he/she calls it<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 220,0>
+<TEXTO>2 "Hydrogeddons" and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 224,0>
+<TEXTO> Spell or Trap Card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 228,0>
+<TEXTO>on it to have it be<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 232,0>
+<TEXTO>Earthbound Immortal<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 236,0>
+<TEXTO>oss a coin and call<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 240,0>
+<TEXTO>ATK greater than or<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 244,0>
+<TEXTO>Damage Calculation.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 248,0>
+<TEXTO> "Gladiator Beast"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 252,0>
+<TEXTO> whose total Level<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 256,0>
+<TEXTO> at a time. If the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 260,0>
+<TEXTO> without Tributing<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 264,0>
+<TEXTO> draw 1 more card.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 268,0>
+<TEXTO>oss a coin 3 times<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 272,0>
+<TEXTO>fortune today is "<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 276,0>
+<TEXTO>/EARTH/Level 4/ATK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 280,0>
+<TEXTO>A high-performance<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 284,0>
+<TEXTO>d and has resolved<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 288,0>
+<TEXTO>. Call the type of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 292,0>
+<TEXTO>s on both sides of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 296,0>
+<TEXTO>result is multipli<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 300,0>
+<TEXTO> to the Graveyard<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 304,0>
+<TEXTO> Defense Position<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 308,0>
+<TEXTO>amage calculation<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 312,0>
+<TEXTO>crease the ATK of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 316,0>
+<TEXTO> Level 4 or lower<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 320,0>
+<TEXTO>is used to Ritual<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 324,0>
+<TEXTO> Synchro Material<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 328,0>
+<TEXTO> its owner's Deck<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 332,0>
+<TEXTO> OR unequip it to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 336,0>
+<TEXTO> would have taken<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 340,0>
+<TEXTO>you would receive<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 344,0>
+<TEXTO> non-Monster Card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 348,0>
+<TEXTO> - 1 Dark Tuner
+<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 352,0>
+<TEXTO>'s 3rd turn after<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 356,0>
+<TEXTO> a "Bamboo Sword"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 360,0>
+<TEXTO>If "$m5533" is on<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 364,0>
+<TEXTO> is removed from<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 368,0>
+<TEXTO> Fusion Material<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 372,0>
+<TEXTO> battle position<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 376,0>
+<TEXTO>"Elemental Hero"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 380,0>
+<TEXTO> to your side of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 384,0>
+<TEXTO>". You must also<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 388,0>
+<TEXTO>Spellcaster-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 392,0>
+<TEXTO>immediately with<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 396,0>
+<TEXTO>without applying<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 400,0>
+<TEXTO> unless you send<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 404,0>
+<TEXTO>Direct Damage to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 408,0>
+<TEXTO> on it (max. 1).<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 412,0>
+<TEXTO>"Spirit Message"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 416,0>
+<TEXTO> Special Summon<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 420,0>
+<TEXTO>on your side of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 424,0>
+<TEXTO>Attack Position<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 428,0>
+<TEXTO> Tribute Summon<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 432,0>
+<TEXTO>your Main Phase<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 436,0>
+<TEXTO>"Crystal Beast"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 440,0>
+<TEXTO> "Arcana Force"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 444,0>
+<TEXTO>Spell, Trap, or<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 448,0>
+<TEXTO>Battle Position<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 452,0>
+<TEXTO>ing conditions.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 456,0>
+<TEXTO>each of his/her<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 460,0>
+<TEXTO>f the result is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 464,0>
+<TEXTO>"Fortune Fairy"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 468,0>
+<TEXTO> Elemental Hero<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 472,0>
+<TEXTO>"/Assault Mode"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 476,0>
+<TEXTO> or "Evil Hero"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 480,0>
+<TEXTO> "$m6775" is on<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 484,0>
+<TEXTO> fire-breathing<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 488,0>
+<TEXTO> "Phantom Beast<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 492,0>
+<TEXTO>Aqua-Type/WATER<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 496,0>
+<TEXTO>Ally of Justice<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 500,0>
+<TEXTO> whip-like tail<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 504,0>
+<TEXTO> just about any<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 508,0>
+<TEXTO> your opponent<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 512,0>
+<TEXTO> the End Phase<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 516,0>
+<TEXTO> Standby Phase<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 520,0>
+<TEXTO> the end of th<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 524,0>
+<TEXTO> Battle Damage<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 528,0>
+<TEXTO>00 or more ATK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 532,0>
+<TEXTO>ing card and a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 536,0>
+<TEXTO>"Destiny Hero"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 540,0>
+<TEXTO>00 or less ATK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 544,0>
+<TEXTO> "Six Samurai"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 548,0>
+<TEXTO> 1 random card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 552,0>
+<TEXTO>different name<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 556,0>
+<TEXTO> six-sided die<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 560,0>
+<TEXTO>call it right,<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 564,0>
+<TEXTO>"Fortune Lady"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 568,0>
+<TEXTO>the difference<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 572,0>
+<TEXTO> Spells, Traps<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 576,0>
+<TEXTO>hand, Deck, or<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 580,0>
+<TEXTO>"Koa'ki Meiru"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 584,0>
+<TEXTO>call it wrong,<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 588,0>
+<TEXTO>battle between<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 592,0>
+<TEXTO>Gravekeeper's"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 596,0>
+<TEXTO> by 1 (max 12)<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 600,0>
+<TEXTO>. These tokens<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 604,0>
+<TEXTO>. These Tokens<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 608,0>
+<TEXTO>distribute new<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 612,0>
+<TEXTO> can no longer<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 616,0>
+<TEXTO> a Chain (of 2<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 620,0>
+<TEXTO>Heads or Tails<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 624,0>
+<TEXTO>Once per turn<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 628,0>
+<TEXTO>Normal Summon<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 632,0>
+<TEXTO>Activate only<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 636,0>
+<TEXTO> Battle Phase<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 640,0>
+<TEXTO> the selected<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 644,0>
+<TEXTO>e Damage Step<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 648,0>
+<TEXTO>Spell Counter<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 652,0>
+<TEXTO> original ATK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 656,0>
+<TEXTO>either player<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 660,0>
+<TEXTO> and sends it<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 664,0>
+<TEXTO>Equip only to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 668,0>
+<TEXTO>gains 500 ATK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 672,0>
+<TEXTO>"Morphtronic"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 676,0>
+<TEXTO>until the end<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 680,0>
+<TEXTO>". This Token<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 684,0>
+<TEXTO> and equip it<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 688,0>
+<TEXTO>Dinosaur-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 692,0>
+<TEXTO>ed or flipped<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 696,0>
+<TEXTO> successfully<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 700,0>
+<TEXTO>once per turn<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 704,0>
+<TEXTO>Battle Damage<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 708,0>
+<TEXTO>"Neo-Spacian"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 712,0>
+<TEXTO>owners' hands<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 716,0>
+<TEXTO>are listed on<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 720,0>
+<TEXTO>as Chain Link<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 724,0>
+<TEXTO>or applying d<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 728,0>
+<TEXTO>, you win the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 732,0>
+<TEXTO> "Batteryman"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 736,0>
+<TEXTO>"Ice Barrier"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 740,0>
+<TEXTO>ler will take<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 744,0>
+<TEXTO>turn in which<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 748,0>
+<TEXTO>
+●Batteryman<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 752,0>
+<TEXTO>Dark Scorpion<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 756,0>
+<TEXTO> "Reptilianne<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 760,0>
+<TEXTO> you control<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 764,0>
+<TEXTO> Life Points<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 768,0>
+<TEXTO> ATK and DEF<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 772,0>
+<TEXTO>by Tributing<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 776,0>
+<TEXTO>hand or Deck<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 780,0>
+<TEXTO>Warrior-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 784,0>
+<TEXTO>Machine-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 788,0>
+<TEXTO> declares an<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 792,0>
+<TEXTO> Zombie-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 796,0>
+<TEXTO>Psychic-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 800,0>
+<TEXTO>Reptile-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 804,0>
+<TEXTO>owner's hand<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 808,0>
+<TEXTO>the equipped<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 812,0>
+<TEXTO>
+Your lucky<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 816,0>
+<TEXTO>his/her hand<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 820,0>
+<TEXTO>"Lightsworn"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 824,0>
+<TEXTO> appropriate<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 828,0>
+<TEXTO>/Level 1/ATK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 832,0>
+<TEXTO>is sent from<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 836,0>
+<TEXTO>the combined<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 840,0>
+<TEXTO>s its ATK by<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 844,0>
+<TEXTO> as an Equip<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 848,0>
+<TEXTO> "$m5982" is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 852,0>
+<TEXTO>Thunder-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 856,0>
+<TEXTO> higher than<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 860,0>
+<TEXTO> when resolv<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 864,0>
+<TEXTO> of darkness<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 868,0>
+<TEXTO>, by sending<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 872,0>
+<TEXTO> Damage Step<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 876,0>
+<TEXTO> Spell, Trap<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 880,0>
+<TEXTO>owner's Deck<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 884,0>
+<TEXTO> "$m5791" is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 888,0>
+<TEXTO>"Iron Chain"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 892,0>
+<TEXTO>required for<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 896,0>
+<TEXTO> name are in<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 900,0>
+<TEXTO>you do this,<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 904,0>
+<TEXTO>"$m7807" + 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 908,0>
+<TEXTO>A mechanical<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 912,0>
+<TEXTO> dark forces<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 916,0>
+<TEXTO> of Darkness<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 920,0>
+<TEXTO> in response<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 924,0>
+<TEXTO>By tributing<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 928,0>
+<TEXTO> shaped like<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 932,0>
+<TEXTO>particularly<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 936,0>
+<TEXTO>ne time only<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 940,0>
+<TEXTO> can withsta<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 944,0>
+<TEXTO> Sea Serpent<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 948,0>
+<TEXTO> Sarcophagus<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 952,0>
+<TEXTO> Spell Card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 956,0>
+<TEXTO>ed and sent<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 960,0>
+<TEXTO> treated as<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 964,0>
+<TEXTO>can only be<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 968,0>
+<TEXTO>During your<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 972,0>
+<TEXTO>Dragon-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 976,0>
+<TEXTO>oth players<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 980,0>
+<TEXTO> activation<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 984,0>
+<TEXTO>by removing<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 988,0>
+<TEXTO>During each<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 992,0>
+<TEXTO>This card's<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 996,0>
+<TEXTO> changed to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1000,0>
+<TEXTO>raw 2 cards<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1004,0>
+<TEXTO>er than the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1008,0>
+<TEXTO>Insect-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1012,0>
+<TEXTO> Equip Card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1016,0>
+<TEXTO> the ATK of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1020,0>
+<TEXTO> Draw Phase<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1024,0>
+<TEXTO>"Blackwing"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1028,0>
+<TEXTO>as possible<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1032,0>
+<TEXTO>/DARK/Level<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1036,0>
+<TEXTO> lower than<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1040,0>
+<TEXTO>an ATK of 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1044,0>
+<TEXTO> an "Alien"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1048,0>
+<TEXTO> once each.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1052,0>
+<TEXTO>razor-sharp<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1056,0>
+<TEXTO> name as th<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1060,0>
+<TEXTO> mysterious<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1064,0>
+<TEXTO>immediately<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1068,0>
+<TEXTO>"Infernity"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1072,0>
+<TEXTO>highest ATK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1076,0>
+<TEXTO>Zombie-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1080,0>
+<TEXTO>"Dragunity"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1084,0>
+<TEXTO>electricity<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1088,0>
+<TEXTO> the bottom<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1092,0>
+<TEXTO>normal draw<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1096,0>
+<TEXTO>"Chrysalis"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1100,0>
+<TEXTO>Mist Valley<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1104,0>
+<TEXTO>devastating<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1108,0>
+<TEXTO>A forbidden<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1112,0>
+<TEXTO> Gadget: If<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1116,0>
+<TEXTO> formidable<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1120,0>
+<TEXTO>they draw (<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1124,0>
+<TEXTO>s listed on<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1128,0>
+<TEXTO>Six Samurai<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1132,0>
+<TEXTO>s incredibl<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1136,0>
+<TEXTO> projectile<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1140,0>
+<TEXTO>underground<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1144,0>
+<TEXTO> Protection<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1148,0>
+<TEXTO> this card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1152,0>
+<TEXTO> the field<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1156,0>
+<TEXTO> from your<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1160,0>
+<TEXTO> by battle<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1164,0>
+<TEXTO> your hand<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1168,0>
+<TEXTO> from play<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1172,0>
+<TEXTO> damage to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1176,0>
+<TEXTO> Trap Card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1180,0>
+<TEXTO>'s side of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1184,0>
+<TEXTO> this turn<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1188,0>
+<TEXTO> face-down<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1192,0>
+<TEXTO> number of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1196,0>
+<TEXTO>Extra Deck<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1200,0>
+<TEXTO> End Phase<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1204,0>
+<TEXTO>Plant-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1208,0>
+<TEXTO> Attribute<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1212,0>
+<TEXTO> next turn<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1216,0>
+<TEXTO>Fiend-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1220,0>
+<TEXTO> following<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1224,0>
+<TEXTO>declare an<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1228,0>
+<TEXTO> or higher<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1232,0>
+<TEXTO> Spell and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1236,0>
+<TEXTO>Fairy-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1240,0>
+<TEXTO> there are<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1244,0>
+<TEXTO>ach player<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1248,0>
+<TEXTO>Continuous<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1252,0>
+<TEXTO>Beast-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1256,0>
+<TEXTO> Card Zone<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1260,0>
+<TEXTO> Tokens" (<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1264,0>
+<TEXTO> unaffecte<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1268,0>
+<TEXTO> less than<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1272,0>
+<TEXTO>respective<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1276,0>
+<TEXTO> involving<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1280,0>
+<TEXTO> Tributing<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1284,0>
+<TEXTO>.
+●Tails:<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1288,0>
+<TEXTO>only equip<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1292,0>
+<TEXTO>ou take no<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1296,0>
+<TEXTO>Main Phase<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1300,0>
+<TEXTO>includes "<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1304,0>
+<TEXTO>"Cloudian"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1308,0>
+<TEXTO> amount of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1312,0>
+<TEXTO> dangerous<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1316,0>
+<TEXTO> conducted<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1320,0>
+<TEXTO>substitute<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1324,0>
+<TEXTO> more than<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1328,0>
+<TEXTO>the number<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1332,0>
+<TEXTO> for every<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1336,0>
+<TEXTO> at a time<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1340,0>
+<TEXTO>tremendous<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1344,0>
+<TEXTO>capable of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1348,0>
+<TEXTO>Dark World<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1352,0>
+<TEXTO>Control of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1356,0>
+<TEXTO> beautiful<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1360,0>
+<TEXTO>oss a coin<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1364,0>
+<TEXTO>(excluding<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1368,0>
+<TEXTO> Fish-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1372,0>
+<TEXTO>etherworld<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1376,0>
+<TEXTO>declares a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1380,0>
+<TEXTO> placed on<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1384,0>
+<TEXTO> Card, and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1388,0>
+<TEXTO> continues<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1392,0>
+<TEXTO> used once<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1396,0>
+<TEXTO> dimension<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1400,0>
+<TEXTO> remaining<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1404,0>
+<TEXTO>the lowest<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1408,0>
+<TEXTO> known for<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1412,0>
+<TEXTO> minus the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1416,0>
+<TEXTO> any order<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1420,0>
+<TEXTO>Change all<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1424,0>
+<TEXTO> coin toss<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1428,0>
+<TEXTO>Draw Phase<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1432,0>
+<TEXTO>This fairy<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1436,0>
+<TEXTO>ed if "$m6<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1440,0>
+<TEXTO>An amphibi<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1444,0>
+<TEXTO> something<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1448,0>
+<TEXTO>tidal wave<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1452,0>
+<TEXTO> potential<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1456,0>
+<TEXTO> to shreds<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1460,0>
+<TEXTO>f "$m3748"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1464,0>
+<TEXTO>activation<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1468,0>
+<TEXTO>, you can<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1472,0>
+<TEXTO>This card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1476,0>
+<TEXTO>Graveyard<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1480,0>
+<TEXTO> activate<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1484,0>
+<TEXTO> equipped<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1488,0>
+<TEXTO> equal to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1492,0>
+<TEXTO>00 points<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1496,0>
+<TEXTO> opponent<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1500,0>
+<TEXTO> for each<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1504,0>
+<TEXTO> from the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1508,0>
+<TEXTO>. Destroy<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1512,0>
+<TEXTO>cannot be<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1516,0>
+<TEXTO>s long as<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1520,0>
+<TEXTO> directly<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1524,0>
+<TEXTO> increase<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1528,0>
+<TEXTO>egate the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1532,0>
+<TEXTO> or lower<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1536,0>
+<TEXTO> there is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1540,0>
+<TEXTO> creature<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1544,0>
+<TEXTO> you have<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1548,0>
+<TEXTO>, place 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1552,0>
+<TEXTO>elect and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1556,0>
+<TEXTO>the above<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1560,0>
+<TEXTO> you take<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1564,0>
+<TEXTO> Token" (<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1568,0>
+<TEXTO> for each<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1572,0>
+<TEXTO>non-Tuner<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1576,0>
+<TEXTO>only when<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1580,0>
+<TEXTO>hange the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1584,0>
+<TEXTO> of those<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1588,0>
+<TEXTO> used for<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1592,0>
+<TEXTO> powerful<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1596,0>
+<TEXTO>Rock-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1600,0>
+<TEXTO>Each time<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1604,0>
+<TEXTO>ed or was<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1608,0>
+<TEXTO> addition<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1612,0>
+<TEXTO>Pyro-Type<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1616,0>
+<TEXTO>add it to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1620,0>
+<TEXTO>is halved<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1624,0>
+<TEXTO> a direct<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1628,0>
+<TEXTO>by paying<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1632,0>
+<TEXTO>including<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1636,0>
+<TEXTO> gets the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1640,0>
+<TEXTO>Trap Card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1644,0>
+<TEXTO> multiple<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1648,0>
+<TEXTO>Archfiend<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1652,0>
+<TEXTO>" and "$m<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1656,0>
+<TEXTO>the total<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1660,0>
+<TEXTO>. Destroy<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1664,0>
+<TEXTO> are each<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1668,0>
+<TEXTO> has been<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1672,0>
+<TEXTO>his Token<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1676,0>
+<TEXTO>your next<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1680,0>
+<TEXTO> anything<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1684,0>
+<TEXTO> per turn<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1688,0>
+<TEXTO> an enemy<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1692,0>
+<TEXTO>educe the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1696,0>
+<TEXTO>"Naturia"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1700,0>
+<TEXTO>"X-Saber"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1704,0>
+<TEXTO>destructi<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1708,0>
+<TEXTO>-Material<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1712,0>
+<TEXTO>Spell and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1716,0>
+<TEXTO> than "$m<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1720,0>
+<TEXTO> into the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1724,0>
+<TEXTO> differen<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1728,0>
+<TEXTO>you took.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1732,0>
+<TEXTO>number is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1736,0>
+<TEXTO>its sharp<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1740,0>
+<TEXTO> over the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1744,0>
+<TEXTO>a pair of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1748,0>
+<TEXTO>witch the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1752,0>
+<TEXTO>picked up<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1756,0>
+<TEXTO>among the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1760,0>
+<TEXTO>manipulat<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1764,0>
+<TEXTO> "$m5224"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1768,0>
+<TEXTO>Amazoness<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1772,0>
+<TEXTO> strength<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1776,0>
+<TEXTO>he ATK of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1780,0>
+<TEXTO> For each<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1784,0>
+<TEXTO>less than<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1788,0>
+<TEXTO>generates<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1792,0>
+<TEXTO> harmless<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1796,0>
+<TEXTO>Attack or<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1800,0>
+<TEXTO> treasure<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1804,0>
+<TEXTO>designate<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1808,0>
+<TEXTO>turn that<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1812,0>
+<TEXTO> boulders<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1816,0>
+<TEXTO> one-eyed<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1820,0>
+<TEXTO>Halve all<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1824,0>
+<TEXTO>there are<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1828,0>
+<TEXTO>.
+●Trap:<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1832,0>
+<TEXTO>.
+●WIND:<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1836,0>
+<TEXTO>bsolutely<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1840,0>
+<TEXTO>
+●EARTH:<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1844,0>
+<TEXTO>extremely<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1848,0>
+<TEXTO> monster<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1852,0>
+<TEXTO> destroy<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1856,0>
+<TEXTO> face-up<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1860,0>
+<TEXTO> Monster<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1864,0>
+<TEXTO> control<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1868,0>
+<TEXTO> inflict<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1872,0>
+<TEXTO> in your<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1876,0>
+<TEXTO> of your<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1880,0>
+<TEXTO> face-up<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1884,0>
+<TEXTO>. If you<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1888,0>
+<TEXTO> discard<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1892,0>
+<TEXTO>the same<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1896,0>
+<TEXTO>ach time<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1900,0>
+<TEXTO>ed by th<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1904,0>
+<TEXTO> instead<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1908,0>
+<TEXTO>the turn<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1912,0>
+<TEXTO> is sent<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1916,0>
+<TEXTO> and the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1920,0>
+<TEXTO> becomes<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1924,0>
+<TEXTO> to your<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1928,0>
+<TEXTO> Synchro<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1932,0>
+<TEXTO> enemies<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1936,0>
+<TEXTO> negated<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1940,0>
+<TEXTO> the top<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1944,0>
+<TEXTO>sed as a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1948,0>
+<TEXTO> sending<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1952,0>
+<TEXTO>would be<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1956,0>
+<TEXTO> you can<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1960,0>
+<TEXTO>. During<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1964,0>
+<TEXTO>Deck and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1968,0>
+<TEXTO> another<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1972,0>
+<TEXTO>controls<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1976,0>
+<TEXTO>Increase<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1980,0>
+<TEXTO> warrior<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1984,0>
+<TEXTO> or less<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1988,0>
+<TEXTO> to have<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1992,0>
+<TEXTO> counter<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 1996,0>
+<TEXTO> declare<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2000,0>
+<TEXTO> only be<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2004,0>
+<TEXTO>select a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2008,0>
+<TEXTO>with "$m<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2012,0>
+<TEXTO>original<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2016,0>
+<TEXTO>" or "$m<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2020,0>
+<TEXTO> flipped<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2024,0>
+<TEXTO>"$m4798"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2028,0>
+<TEXTO> (except<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2032,0>
+<TEXTO>equipped<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2036,0>
+<TEXTO> or Flip<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2040,0>
+<TEXTO>. If the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2044,0>
+<TEXTO>ed, Flip<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2048,0>
+<TEXTO>the turn<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2052,0>
+<TEXTO> name is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2056,0>
+<TEXTO>does not<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2060,0>
+<TEXTO>hand and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2064,0>
+<TEXTO> look at<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2068,0>
+<TEXTO>equip it<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2072,0>
+<TEXTO> protect<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2076,0>
+<TEXTO> decreas<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2080,0>
+<TEXTO> his/her<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2084,0>
+<TEXTO> "Genex"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2088,0>
+<TEXTO> massive<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2092,0>
+<TEXTO>, it can<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2096,0>
+<TEXTO>at least<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2100,0>
+<TEXTO>"$m4340"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2104,0>
+<TEXTO> card(s)<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2108,0>
+<TEXTO> for the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2112,0>
+<TEXTO> its own<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2116,0>
+<TEXTO>"Fabled"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2120,0>
+<TEXTO>and sent<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2124,0>
+<TEXTO>"$m6570"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2128,0>
+<TEXTO> machine<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2132,0>
+<TEXTO> by this<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2136,0>
+<TEXTO>, except<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2140,0>
+<TEXTO> them to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2144,0>
+<TEXTO>place it<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2148,0>
+<TEXTO> vicious<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2152,0>
+<TEXTO>resolves<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2156,0>
+<TEXTO>Spell or<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2160,0>
+<TEXTO>position<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2164,0>
+<TEXTO> is also<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2168,0>
+<TEXTO> the DEF<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2172,0>
+<TEXTO> applied<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2176,0>
+<TEXTO>offering<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2180,0>
+<TEXTO> through<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2184,0>
+<TEXTO> without<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2188,0>
+<TEXTO> current<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2192,0>
+<TEXTO>is still<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2196,0>
+<TEXTO>battling<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2200,0>
+<TEXTO>ach turn<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2204,0>
+<TEXTO> receive<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2208,0>
+<TEXTO>. Negate<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2212,0>
+<TEXTO>wields a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2216,0>
+<TEXTO> pick up<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2220,0>
+<TEXTO>"$m6390"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2224,0>
+<TEXTO>are sent<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2228,0>
+<TEXTO> between<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2232,0>
+<TEXTO>"$m4284"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2236,0>
+<TEXTO>use this<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2240,0>
+<TEXTO>"$m4068"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2244,0>
+<TEXTO>mystical<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2248,0>
+<TEXTO>Decrease<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2252,0>
+<TEXTO>"Jurrac"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2256,0>
+<TEXTO> will be<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2260,0>
+<TEXTO>Send all<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2264,0>
+<TEXTO>a single<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2268,0>
+<TEXTO>color is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2272,0>
+<TEXTO> Type of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2276,0>
+<TEXTO> Inflict<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2280,0>
+<TEXTO>/effects<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2284,0>
+<TEXTO>treat it<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2288,0>
+<TEXTO>Pay half<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2292,0>
+<TEXTO>sorcerer<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2296,0>
+<TEXTO> defense<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2300,0>
+<TEXTO>'s field<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2304,0>
+<TEXTO>an Equip<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2308,0>
+<TEXTO>is reduc<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2312,0>
+<TEXTO>powerful<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2316,0>
+<TEXTO> exactly<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2320,0>
+<TEXTO> ancient<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2324,0>
+<TEXTO> doesn't<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2328,0>
+<TEXTO>oisonous<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2332,0>
+<TEXTO>pay 2000<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2336,0>
+<TEXTO>pays 500<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2340,0>
+<TEXTO>instead.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2344,0>
+<TEXTO>"$m5140"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2348,0>
+<TEXTO>. If not<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2352,0>
+<TEXTO> written<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2356,0>
+<TEXTO>f a Dark<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2360,0>
+<TEXTO>Deck and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2364,0>
+<TEXTO>dinosaur<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2368,0>
+<TEXTO>. Switch<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2372,0>
+<TEXTO> already<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2376,0>
+<TEXTO>equals -<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2380,0>
+<TEXTO>. Return<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2384,0>
+<TEXTO> mermaid<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2388,0>
+<TEXTO> serpent<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2392,0>
+<TEXTO>. Reveal<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2396,0>
+<TEXTO> (except<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2400,0>
+<TEXTO> rest of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2404,0>
+<TEXTO>revealed<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2408,0>
+<TEXTO> as many<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2412,0>
+<TEXTO> to this<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2416,0>
+<TEXTO>. Select<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2420,0>
+<TEXTO>you take<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2424,0>
+<TEXTO>anywhere<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2428,0>
+<TEXTO> attack<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2432,0>
+<TEXTO> effect<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2436,0>
+<TEXTO> cannot<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2440,0>
+<TEXTO> during<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2444,0>
+<TEXTO>You can<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2448,0>
+<TEXTO> of the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2452,0>
+<TEXTO> except<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2456,0>
+<TEXTO>Tribute<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2460,0>
+<TEXTO> Summon<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2464,0>
+<TEXTO> 1 card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2468,0>
+<TEXTO> to the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2472,0>
+<TEXTO>elect 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2476,0>
+<TEXTO> remove<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2480,0>
+<TEXTO> return<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2484,0>
+<TEXTO> select<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2488,0>
+<TEXTO> and it<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2492,0>
+<TEXTO> target<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2496,0>
+<TEXTO> Fusion<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2500,0>
+<TEXTO>" + "$m<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2504,0>
+<TEXTO>Counter<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2508,0>
+<TEXTO> in the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2512,0>
+<TEXTO> battle<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2516,0>
+<TEXTO> Normal<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2520,0>
+<TEXTO> damage<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2524,0>
+<TEXTO> Effect<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2528,0>
+<TEXTO>Deck to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2532,0>
+<TEXTO> a card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2536,0>
+<TEXTO>While i<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2540,0>
+<TEXTO>Destroy<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2544,0>
+<TEXTO>remains<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2548,0>
+<TEXTO>is turn<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2552,0>
+<TEXTO>hand to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2556,0>
+<TEXTO>Inflict<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2560,0>
+<TEXTO> change<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2564,0>
+<TEXTO>s equal<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2568,0>
+<TEXTO> during<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2572,0>
+<TEXTO>Spell &<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2576,0>
+<TEXTO>'s hand<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2580,0>
+<TEXTO>hen you<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2584,0>
+<TEXTO>side of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2588,0>
+<TEXTO>ing the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2592,0>
+<TEXTO> of all<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2596,0>
+<TEXTO> player<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2600,0>
+<TEXTO>the ATK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2604,0>
+<TEXTO> dragon<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2608,0>
+<TEXTO> can be<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2612,0>
+<TEXTO>Discard<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2616,0>
+<TEXTO>. While<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2620,0>
+<TEXTO> or Set<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2624,0>
+<TEXTO>shuffle<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2628,0>
+<TEXTO>'s turn<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2632,0>
+<TEXTO> on the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2636,0>
+<TEXTO>ay 1000<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2640,0>
+<TEXTO>ctivate<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2644,0>
+<TEXTO>hand or<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2648,0>
+<TEXTO>targets<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2652,0>
+<TEXTO>Special<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2656,0>
+<TEXTO> at the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2660,0>
+<TEXTO> become<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2664,0>
+<TEXTO> on it.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2668,0>
+<TEXTO>'s card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2672,0>
+<TEXTO>ed, the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2676,0>
+<TEXTO> cannot<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2680,0>
+<TEXTO> if you<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2684,0>
+<TEXTO>its ATK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2688,0>
+<TEXTO>ir hand<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2692,0>
+<TEXTO>"
+This<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2696,0>
+<TEXTO>pay 500<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2700,0>
+<TEXTO>Deck in<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2704,0>
+<TEXTO> do not<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2708,0>
+<TEXTO> spirit<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2712,0>
+<TEXTO> of its<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2716,0>
+<TEXTO> in its<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2720,0>
+<TEXTO>1 Union<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2724,0>
+<TEXTO>"$m6653<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2728,0>
+<TEXTO> random<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2732,0>
+<TEXTO> Winged<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2736,0>
+<TEXTO> Ritual<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2740,0>
+<TEXTO>card is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2744,0>
+<TEXTO> result<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2748,0>
+<TEXTO>Deck or<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2752,0>
+<TEXTO>. (This<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2756,0>
+<TEXTO> deadly<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2760,0>
+<TEXTO>as many<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2764,0>
+<TEXTO>You can<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2768,0>
+<TEXTO>battles<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2772,0>
+<TEXTO>. After<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2776,0>
+<TEXTO> "Worm"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2780,0>
+<TEXTO>another<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2784,0>
+<TEXTO> before<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2788,0>
+<TEXTO>. Also,<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2792,0>
+<TEXTO>inflict<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2796,0>
+<TEXTO>d after<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2800,0>
+<TEXTO>hand by<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2804,0>
+<TEXTO> of "$m<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2808,0>
+<TEXTO>conduct<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2812,0>
+<TEXTO> that's<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2816,0>
+<TEXTO>s or is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2820,0>
+<TEXTO> and no<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2824,0>
+<TEXTO> lethal<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2828,0>
+<TEXTO> wicked<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2832,0>
+<TEXTO>said to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2836,0>
+<TEXTO>Pay 500<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2840,0>
+<TEXTO> 1 DARK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2844,0>
+<TEXTO>is high<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2848,0>
+<TEXTO>riginal<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2852,0>
+<TEXTO>Declare<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2856,0>
+<TEXTO>is sent<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2860,0>
+<TEXTO> is not<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2864,0>
+<TEXTO>on, all<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2868,0>
+<TEXTO> master<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2872,0>
+<TEXTO>is Flip<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2876,0>
+<TEXTO> unless<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2880,0>
+<TEXTO> it was<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2884,0>
+<TEXTO> and is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2888,0>
+<TEXTO>becomes<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2892,0>
+<TEXTO> of 1 o<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2896,0>
+<TEXTO> double<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2900,0>
+<TEXTO> by the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2904,0>
+<TEXTO> to its<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2908,0>
+<TEXTO> Token"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2912,0>
+<TEXTO>When th<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2916,0>
+<TEXTO>because<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2920,0>
+<TEXTO>. It is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2924,0>
+<TEXTO>Monster<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2928,0>
+<TEXTO> if the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2932,0>
+<TEXTO> a DARK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2936,0>
+<TEXTO>Synchro<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2940,0>
+<TEXTO>, ignor<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2944,0>
+<TEXTO> Gemini<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2948,0>
+<TEXTO>card in<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2952,0>
+<TEXTO>to draw<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2956,0>
+<TEXTO> Spirit<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2960,0>
+<TEXTO>'s Deck<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2964,0>
+<TEXTO>shuffle<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2968,0>
+<TEXTO> roll a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2972,0>
+<TEXTO>card to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2976,0>
+<TEXTO> amount<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2980,0>
+<TEXTO>. Until<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2984,0>
+<TEXTO> switch<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2988,0>
+<TEXTO>This ca<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2992,0>
+<TEXTO> summon<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 2996,0>
+<TEXTO>"$m4041<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3000,0>
+<TEXTO>"Alien"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3004,0>
+<TEXTO>Pick up<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3008,0>
+<TEXTO> create<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3012,0>
+<TEXTO> living<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3016,0>
+<TEXTO>Look at<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3020,0>
+<TEXTO>be used<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3024,0>
+<TEXTO> Beast-<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3028,0>
+<TEXTO> as the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3032,0>
+<TEXTO>en from<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3036,0>
+<TEXTO>ing its<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3040,0>
+<TEXTO>are not<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3044,0>
+<TEXTO>"Ojama"<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3048,0>
+<TEXTO>owners'<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3052,0>
+<TEXTO>A giant<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3056,0>
+<TEXTO>Drawing<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3060,0>
+<TEXTO>, put 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3064,0>
+<TEXTO>up to 2<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3068,0>
+<TEXTO> is low<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3072,0>
+<TEXTO>appears<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3076,0>
+<TEXTO>ed when<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3080,0>
+<TEXTO>ed from<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3084,0>
+<TEXTO>soldier<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3088,0>
+<TEXTO>do not,<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3092,0>
+<TEXTO>strange<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3096,0>
+<TEXTO>include<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3100,0>
+<TEXTO>covered<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3104,0>
+<TEXTO>"$m6393<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3108,0>
+<TEXTO>Destroy<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3112,0>
+<TEXTO>you can<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3116,0>
+<TEXTO>deliver<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3120,0>
+<TEXTO>increas<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3124,0>
+<TEXTO>require<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3128,0>
+<TEXTO> x 300.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3132,0>
+<TEXTO> travel<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3136,0>
+<TEXTO> victim<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3140,0>
+<TEXTO>equip 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3144,0>
+<TEXTO> strong<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3148,0>
+<TEXTO>If this<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3152,0>
+<TEXTO> 1 FIRE<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3156,0>
+<TEXTO>Deck by<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3160,0>
+<TEXTO> launch<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3164,0>
+<TEXTO> ATK is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3168,0>
+<TEXTO> turn i<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3172,0>
+<TEXTO> always<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3176,0>
+<TEXTO>s
+When<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3180,0>
+<TEXTO>look at<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3184,0>
+<TEXTO> almost<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3188,0>
+<TEXTO> flying<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3192,0>
+<TEXTO>to make<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3196,0>
+<TEXTO>. When<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3200,0>
+<TEXTO> cards<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3204,0>
+<TEXTO> Level<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3208,0>
+<TEXTO> gains<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3212,0>
+<TEXTO> their<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3216,0>
+<TEXTO>When i<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3220,0>
+<TEXTO>iscard<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3224,0>
+<TEXTO>00 ATK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3228,0>
+<TEXTO> it is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3232,0>
+<TEXTO> the o<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3236,0>
+<TEXTO> until<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3240,0>
+<TEXTO> 1 "$m<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3244,0>
+<TEXTO> cards<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3248,0>
+<TEXTO> while<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3252,0>
+<TEXTO> Deck.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3256,0>
+<TEXTO>Return<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3260,0>
+<TEXTO> up to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3264,0>
+<TEXTO> other<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3268,0>
+<TEXTO> after<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3272,0>
+<TEXTO>. When<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3276,0>
+<TEXTO>when a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3280,0>
+<TEXTO>. If i<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3284,0>
+<TEXTO> and 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3288,0>
+<TEXTO> place<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3292,0>
+<TEXTO>not be<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3296,0>
+<TEXTO>When a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3300,0>
+<TEXTO>return<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3304,0>
+<TEXTO> loses<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3308,0>
+<TEXTO>, then<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3312,0>
+<TEXTO>Select<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3316,0>
+<TEXTO>. Your<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3320,0>
+<TEXTO>00/DEF<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3324,0>
+<TEXTO> for a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3328,0>
+<TEXTO> Cards<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3332,0>
+<TEXTO> it is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3336,0>
+<TEXTO> LIGHT<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3340,0>
+<TEXTO>, draw<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3344,0>
+<TEXTO>ler of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3348,0>
+<TEXTO>'s ATK<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3352,0>
+<TEXTO> WATER<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3356,0>
+<TEXTO>. Then<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3360,0>
+<TEXTO> and a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3364,0>
+<TEXTO> takes<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3368,0>
+<TEXTO>during<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3372,0>
+<TEXTO>send 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3376,0>
+<TEXTO> power<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3380,0>
+<TEXTO> of an<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3384,0>
+<TEXTO>During<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3388,0>
+<TEXTO> it to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3392,0>
+<TEXTO>. This<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3396,0>
+<TEXTO> only.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3400,0>
+<TEXTO>reveal<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3404,0>
+<TEXTO>", "$m<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3408,0>
+<TEXTO>change<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3412,0>
+<TEXTO>. If a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3416,0>
+<TEXTO> EARTH<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3420,0>
+<TEXTO>negate<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3424,0>
+<TEXTO> add 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3428,0>
+<TEXTO>iscard<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3432,0>
+<TEXTO> twice<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3436,0>
+<TEXTO> on to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3440,0>
+<TEXTO> as an<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3444,0>
+<TEXTO> Level<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3448,0>
+<TEXTO> Tuner<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3452,0>
+<TEXTO>(s) is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3456,0>
+<TEXTO>Send 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3460,0>
+<TEXTO>lace 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3464,0>
+<TEXTO> card.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3468,0>
+<TEXTO>"$m631<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3472,0>
+<TEXTO>quip t<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3476,0>
+<TEXTO>If you<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3480,0>
+<TEXTO> and s<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3484,0>
+<TEXTO>either<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3488,0>
+<TEXTO>arrior<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3492,0>
+<TEXTO>(s) on<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3496,0>
+<TEXTO>00 DEF<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3500,0>
+<TEXTO>s, the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3504,0>
+<TEXTO>s that<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3508,0>
+<TEXTO>cannot<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3512,0>
+<TEXTO>nd the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3516,0>
+<TEXTO> turn.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3520,0>
+<TEXTO>on are<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3524,0>
+<TEXTO> by an<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3528,0>
+<TEXTO>, send<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3532,0>
+<TEXTO>ed. If<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3536,0>
+<TEXTO>select<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3540,0>
+<TEXTO>, that<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3544,0>
+<TEXTO> by 10<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3548,0>
+<TEXTO>When a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3552,0>
+<TEXTO>his is<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3556,0>
+<TEXTO> draws<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3560,0>
+<TEXTO> "$m57<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3564,0>
+<TEXTO>top of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3568,0>
+<TEXTO>ed, or<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3572,0>
+<TEXTO>target<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3576,0>
+<TEXTO>on. If<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3580,0>
+<TEXTO> Field<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3584,0>
+<TEXTO>to the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3588,0>
+<TEXTO> (max.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3592,0>
+<TEXTO>. Take<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3596,0>
+<TEXTO>s lose<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3600,0>
+<TEXTO>DEF of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3604,0>
+<TEXTO> on it<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3608,0>
+<TEXTO>. That<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3612,0>
+<TEXTO>to add<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3616,0>
+<TEXTO>led by<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3620,0>
+<TEXTO>Effect<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3624,0>
+<TEXTO>s from<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3628,0>
+<TEXTO> which<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3632,0>
+<TEXTO>DEF by<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3636,0>
+<TEXTO> Deck,<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3640,0>
+<TEXTO> hand.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3644,0>
+<TEXTO>ay 800<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3648,0>
+<TEXTO>s by 5<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3652,0>
+<TEXTO> sword<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3656,0>
+<TEXTO> to an<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3660,0>
+<TEXTO> Cards<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3664,0>
+<TEXTO>1 "$m7<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3668,0>
+<TEXTO>, if a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3672,0>
+<TEXTO> is in<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3676,0>
+<TEXTO> whose<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3680,0>
+<TEXTO>bottom<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3684,0>
+<TEXTO> to in<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3688,0>
+<TEXTO> is on<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3692,0>
+<TEXTO> fiend<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3696,0>
+<TEXTO>"$m728<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3700,0>
+<TEXTO>, "$m4<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3704,0>
+<TEXTO>00) in<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3708,0>
+<TEXTO>that's<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3712,0>
+<TEXTO>. Send<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3716,0>
+<TEXTO>/EARTH<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3720,0>
+<TEXTO>battle<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3724,0>
+<TEXTO> can a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3728,0>
+<TEXTO>can be<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3732,0>
+<TEXTO> enemy<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3736,0>
+<TEXTO>ed and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3740,0>
+<TEXTO>ed, it<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3744,0>
+<TEXTO> of th<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3748,0>
+<TEXTO> it in<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3752,0>
+<TEXTO> sends<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3756,0>
+<TEXTO>. Thes<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3760,0>
+<TEXTO> "$m40<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3764,0>
+<TEXTO>and of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3768,0>
+<TEXTO>ed the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3772,0>
+<TEXTO>Heads:<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3776,0>
+<TEXTO> that<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3780,0>
+<TEXTO> with<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3784,0>
+<TEXTO> this<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3788,0>
+<TEXTO> from<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3792,0>
+<TEXTO>, and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3796,0>
+<TEXTO> your<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3800,0>
+<TEXTO>FLIP:<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3804,0>
+<TEXTO> card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3808,0>
+<TEXTO>ed by<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3812,0>
+<TEXTO>emove<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3816,0>
+<TEXTO>s the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3820,0>
+<TEXTO>hand.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3824,0>
+<TEXTO> send<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3828,0>
+<TEXTO> gain<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3832,0>
+<TEXTO>. The<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3836,0>
+<TEXTO>s and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3840,0>
+<TEXTO>n and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3844,0>
+<TEXTO>s are<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3848,0>
+<TEXTO> as a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3852,0>
+<TEXTO> must<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3856,0>
+<TEXTO>gains<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3860,0>
+<TEXTO> they<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3864,0>
+<TEXTO> of a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3868,0>
+<TEXTO>Level<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3872,0>
+<TEXTO>, but<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3876,0>
+<TEXTO>, the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3880,0>
+<TEXTO> when<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3884,0>
+<TEXTO> Card<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3888,0>
+<TEXTO>hand,<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3892,0>
+<TEXTO>ed to<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3896,0>
+<TEXTO>while<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3900,0>
+<TEXTO>s its<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3904,0>
+<TEXTO>Deck.<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3908,0>
+<TEXTO> very<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3912,0>
+<TEXTO>While<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3916,0>
+<TEXTO> take<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3920,0>
+<TEXTO> have<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3924,0>
+<TEXTO> to 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3928,0>
+<TEXTO> name<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3932,0>
+<TEXTO>, you<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3936,0>
+<TEXTO>t the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3940,0>
+<TEXTO> into<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3944,0>
+<TEXTO>se of<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3948,0>
+<TEXTO> to a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3952,0>
+<TEXTO>, its<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3956,0>
+<TEXTO> each<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3960,0>
+<TEXTO> in a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3964,0>
+<TEXTO>e and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3968,0>
+<TEXTO> is a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3972,0>
+<TEXTO>. You<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3976,0>
+<TEXTO>e the<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3980,0>
+<TEXTO>add 1<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3984,0>
+<TEXTO>, all<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3988,0>
+<TEXTO>t and<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3992,0>
+<TEXTO>-like<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 3996,0>
+<TEXTO> huge<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 4000,0>
+<TEXTO>has a<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 4004,0>
+<TEXTO>ed in<NULL><TEXTO/>
+<FIM/>
+
+
+<PONTEIRO: 4008,0>
+<TEXTO>Add 1<NULL><TEXTO/>
+<FIM/>
+
+
