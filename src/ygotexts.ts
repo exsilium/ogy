@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { TagForce, Dictionary } from './compressor';
-import { Huffman } from './huffman';
+import { TagForce, Dictionary } from './compressor.js';
+import { Huffman } from './huffman.js';
 
 export class YgoTexts {
 
@@ -190,6 +190,70 @@ export class YgoTexts {
     return filesVerified;
   }
 
+  /* This handles the CARD_Desc_J.txt */
+  public updateCardDesc(text: string, filename: string, tagForce4: boolean): void {
+    let headerSize = 0;
+    let tableSize = 0;
+    let posTable = 0;
+    let pointer = 0;
+    let idx = "";
+    let dict = "";
+    const textDivider = text.replace(/[\n\r]/g, "").split("<FIM/>").filter(Boolean);
+    const tableInfo = this.getPointerType(textDivider[0]).split(',');
+    idx = tableInfo[1];  // CARD_Indx_J.bin
+    dict = tableInfo[2]; // DICT_J.bin
+    const dictionary = new Dictionary();
+
+    const dictBuffer = fs.readFileSync(dict.replace(".bin", ".txt"), 'utf-8');
+    const binBuffer = fs.readFileSync(idx);
+    const fileBytes: Buffer[] = [];
+    tableSize = binBuffer.length;
+
+    posTable = headerSize;
+    const newTable = Buffer.alloc(tableSize);
+    const padding = Buffer.alloc(4);
+    fileBytes.push(padding);
+
+    let descriptionUncompressed = "";
+    let totalSize = 0;
+    totalSize = 4;
+    pointer = 4;
+
+    for (const item of textDivider) {
+      const textSplit = item.replace("<b>", "\r\n").split("<NOME>").filter(Boolean);
+      const infoPoint = this.getPointerInfo(textSplit[0]);
+      posTable = infoPoint[0];
+
+      newTable.writeInt32LE(pointer + infoPoint[1], posTable);
+
+      const name = textSplit[1].split("<NOME/>").filter(Boolean);
+      const nameConverted = this.removeTags(name[0]);
+      const textDescription = this.removeTags(name[1].replace("<DESCRICAO>", "").replace("<DESCRICAO/>", ""));
+      descriptionUncompressed += textDescription;
+      const textBytes = Buffer.from(nameConverted, 'utf16le');
+      fileBytes.push(textBytes);
+      totalSize += textBytes.length;
+      pointer = totalSize;
+    }
+
+    const textFinalBytes = Buffer.concat(fileBytes);
+    const descriptionDictionary = dictionary.getDictionaryTextAndReplace(dict, descriptionUncompressed);
+
+    fs.writeFileSync(filename.replace(".txt", ".bin").replace("CARD_Desc", "CARD_Name"), textFinalBytes);
+    // First update of CARD_Indx_J.bin
+    fs.writeFileSync(idx, newTable);
+
+    let descriptionBytes = Buffer.from(descriptionDictionary, 'utf16le');
+    if (descriptionBytes[0] !== 0) {
+      descriptionBytes = descriptionBytes.slice(2);
+    }
+    fs.writeFileSync(filename.replace(".txt", ".bin"), descriptionBytes);
+
+    this.compress(filename.replace(".txt", ".bin"), filename.replace(".txt", ".bin").replace("CARD_Desc", "CARD_Huff"), idx);
+
+    this.updateDict(dictBuffer, dict.replace(".bin", ".txt"));
+  }
+
   /* Update DICT_J.bin */
   public updateDict(texto: string, filename: string): void {
     let pointerCount = 0;
@@ -220,7 +284,6 @@ export class YgoTexts {
       const dataPoint = this.getPointerInfo(textSplit[0]);
       tablePos = dataPoint[0];
 
-      //
       newTable.writeInt32LE(pointer + dataPoint[1], tablePos);
       if (textSplit.length > 1) {
         const convertedText = this.removeTags(textSplit[1]);
@@ -310,4 +373,20 @@ export class YgoTexts {
     return null;
   }
 
+  // Called by updateCardDesc
+  private getPointerType(text: string): string {
+    const divider = text.replace(".bin>", ".bin>~").split('~');
+    const otherDivider = divider[0].replace(" ", "").replace("<", "").replace(">", "").split('=');
+    if (text.includes("CARD_Indx")) {
+      return otherDivider[1].trim() + "," + otherDivider[2].trim() + "," + otherDivider[3].trim();
+    } else {
+      return otherDivider[1].trim() + "," + otherDivider[2].trim();
+    }
+  }
+
+  // Called by updateCardDesc
+  private compress(cardDesc: string, cardHuff: string, cardIdx: string): void {
+    const huffman = new Huffman();
+    huffman.compress(cardDesc, cardHuff, cardIdx);
+  }
 }

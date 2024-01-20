@@ -257,6 +257,42 @@ class Dictionary {
     return sb;
   }
 
+  // Called by updateCardDesc
+  public getDictionaryTextAndReplace(dir: string, descricoesCarta: string): string {
+    const termos = this.retorneListaDeCodigos(dir);
+    let result = descricoesCarta;
+
+    for (const [key, value] of Object.entries(termos)) {
+      result = result.split(value).join(key);
+    }
+
+    return result;
+  }
+
+  private retorneListaDeCodigos(dir: string): Record<string, string> {
+    const dic = fs.readFileSync(dir.replace('.bin', '.txt'), 'utf8').replace(/<PONTEIRO/g, '~<PONTEIRO');
+    const dicSplit = dic.split('~');
+    const termos: Record<string, string> = {};
+    let contador = 0;
+
+    for (let i = 0; i < dicSplit.length; i++) {
+      if (!dicSplit[i].includes('<TEXTO>')) {
+        continue;
+      }
+
+      const termo = dicSplit[i].replace('<TEXTO>', '<TEXTO>|').replace('<TEXTO/>', '|<TEXTO/>').split('|')[1].replace(/<NULL>/g, '');
+
+      if (termo.length === 0) {
+        throw new Error(`Texto vazio encontrado no dicionário\n${dicSplit[i]}`);
+      }
+
+      termos['$d' + contador.toString().padStart(3, '0')] = termo;
+      contador++;
+    }
+
+    return termos;
+  }
+
 }
 
 export { TagForce, Dictionary }

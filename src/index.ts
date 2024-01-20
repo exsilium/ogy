@@ -1,37 +1,22 @@
-const { Command } = require("commander");
-const fs = require("fs");
-const path = require("path");
-const figlet = require("figlet");
+import * as fs from 'fs';
+import * as path from 'path';
+import figlet from 'figlet';
+import { Command } from '@commander-js/extra-typings';
 
 const program = new Command();
 
-import { TagForce } from './compressor';
-import { YgoTexts } from './ygotexts';
+import { TagForce } from './compressor.js';
+import { YgoTexts } from './ygotexts.js';
 
 console.log(figlet.textSync("OGY|YGO"));
-console.log("OGY - Yu-Gi-Oh! Translation tool");
+console.log("OGY - Yu-Gi-Oh! Translation tool\n");
 
-async function test() {
-  const ygoTextInstance = new YgoTexts();
-  const result = await ygoTextInstance.exportToTxt("./test", TagForce.TagForce6);
-}
-
-function test2() {
-  const DICTJtxt = fs.readFileSync("./test/DICT_J.txt", 'utf8');
-  const ygoTextInstance = new YgoTexts();
-  ygoTextInstance.updateDict(DICTJtxt, "./test/DICT_J.txt");
-}
-
-//test();
-//test2();
-//
-
+/* This is very raw - quick and dirty */
 program
   .version("0.0.1")
-  .description("An example CLI for managing a directory")
-  .option("-l, --ls  [value]", "List directory contents")
-  .option("-m, --mkdir <value>", "Create a directory")
-  .option("-t, --touch <value>", "Create a file")
+  .description("A helper tool to export and import CARD texts for Yu-Gi-Oh! 5D Tag Force 6")
+  .option("-e --export <directory>", "Process and export CARD_ files in the directory for export")
+  .option("-i --import <directory>", "Process and import texts to .bin files")
   .parse(process.argv);
 
 const options = program.opts();
@@ -51,28 +36,22 @@ async function listDirContents(filepath: string) {
   }
 }
 
-function createDir(filepath: string) {
-  if (!fs.existsSync(filepath)) {
-    fs.mkdirSync(filepath);
-    console.log("The directory has been created successfully");
-  }
+if ("export" in options) {
+  const resolvedPath = path.resolve(process.cwd(), <string> options.export);
+  console.log("Export Path: " + resolvedPath);
+
+  const ygoTextInstance = new YgoTexts();
+  const result = await ygoTextInstance.exportToTxt(resolvedPath, TagForce.TagForce6);
+  listDirContents(resolvedPath);
 }
 
-function createFile(filepath: string) {
-  fs.openSync(filepath, "w");
-  console.log("An empty file has been created");
-}
+if ("import" in options) {
+  const resolvedPath = path.resolve(process.cwd(), <string> options.import);
+  console.log("Import Path: " + resolvedPath);
 
-if (options.ls) {
-  const filepath = typeof options.ls === "string" ? options.ls : __dirname;
-  listDirContents(filepath);
-}
-
-if (options.mkdir) {
-  createDir(path.resolve(__dirname, options.mkdir));
-}
-if (options.touch) {
-  createFile(path.resolve(__dirname, options.touch));
+  const CardDesc = fs.readFileSync(resolvedPath + "/CARD_Desc_J.txt", 'utf8');
+  const ygoTextInstance = new YgoTexts();
+  ygoTextInstance.updateCardDesc(CardDesc, resolvedPath + "/CARD_Desc_J.txt", false);
 }
 
 if (!process.argv.slice(2).length) {

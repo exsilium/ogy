@@ -8,6 +8,5 @@
     "sourceMap": true,
     "esModuleInterop": true,
   },
-  "exclude": ["node_modules", "backup"],
-  "include": ["test/**/*.ts"]
+  "exclude": ["node_modules", "backup", "test/**/*.ts"]
 }
