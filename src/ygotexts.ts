@@ -16,17 +16,17 @@ export class YgoTexts {
     const descriptionText: string[] = [];
     this.exportToTxtInternalPointers(Dict);
     const huff = new Huffman();
-    const descomp = await huff.decompress(cardDesc, cardHuff, cardIdx);
+    const desDecompressed = await huff.decompress(cardDesc, cardHuff, cardIdx);
 
     const conversorDeCodigos = new Dictionary();
-    const tex = conversorDeCodigos.translateWithDictionary(Dict, cardIdx, descomp, cardIntID, cardName, tagForce);
+    const tex = conversorDeCodigos.translateWithDictionary(Dict, cardIdx, desDecompressed, cardIntID, cardName, tagForce);
 
     // Process each text and add to descriptionText
-    tex.forEach(textoo => {
-      if (textoo.includes("\0")) {
-        descriptionText.push("<DESCRICAO>" + textoo.replace("\0", "<NULL>") + "<DESCRICAO/><FIM/>\n\n");
+    tex.forEach(texts => {
+      if (texts.includes("\0")) {
+        descriptionText.push("<DESCRICAO>" + texts.replace("\0", "<NULL>") + "<DESCRICAO/><FIM/>\n\n");
       } else {
-        descriptionText.push("<DESCRICAO>" + textoo + "<NULL>" + "<DESCRICAO/><FIM/>\n\n");
+        descriptionText.push("<DESCRICAO>" + texts + "<NULL>" + "<DESCRICAO/><FIM/>\n\n");
       }
     });
 
@@ -76,10 +76,10 @@ export class YgoTexts {
       );
     });
 
-    const textosCartaFinal: string[] = ["<Tipo de Ponteiro=Informação de Cartas=" + cardIdx + " = " + Dict + ">"];
-    texts.forEach((texto, i) => textosCartaFinal.push(texto + descriptionText[i]));
+    const cardTextsFinal: string[] = ["<Tipo de Ponteiro=Informação de Cartas=" + cardIdx + " = " + Dict + ">"];
+    texts.forEach((texto, i) => cardTextsFinal.push(texto + descriptionText[i]));
 
-    fs.writeFileSync(cardDesc.replace(".bin", ".txt"), textosCartaFinal.join('\n'));
+    fs.writeFileSync(cardDesc.replace(".bin", ".txt"), cardTextsFinal.join('\n'));
   }
 
   public exportToTxtInternalPointers(binDir: string): void {
