@@ -3,7 +3,7 @@ import * as path from 'path';
 import { assert } from "chai";
 import { fileURLToPath } from "url";
 
-import { TagForce } from '../src/compressor.js';
+import { YuGiOh } from '../src/compressor.js';
 import { YgoTexts } from '../src/ygotexts.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -12,21 +12,21 @@ const __dirname = path.dirname(__filename);
 describe("ogy application level tests", () => {
   beforeEach(done => setTimeout(done, 200));
   it("setup test data files", () => {
-    fs.copyFile(__dirname + "/data/CARD_Desc_J.bin", __dirname + "/CARD_Desc_J.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/CARD_Genre.bin", __dirname + "/CARD_Genre.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/CARD_Huff_J.bin", __dirname + "/CARD_Huff_J.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/CARD_Indx_J.bin", __dirname + "/CARD_Indx_J.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/CARD_IntID.bin", __dirname + "/CARD_IntID.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/CARD_Name_J.bin", __dirname + "/CARD_Name_J.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/CARD_Pass.bin", __dirname + "/CARD_Pass.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/CARD_Prop.bin", __dirname + "/CARD_Prop.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/CARD_SamePict_J.bin", __dirname + "/CARD_SamePict_J.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/CARD_Sort_J.bin", __dirname + "/CARD_Sort_J.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/CARD_Top_J.bin", __dirname + "/CARD_Top_J.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/DICT_J.bin", __dirname + "/DICT_J.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/CARD_SamePict_J.bin", __dirname + "/CARD_SamePict_J.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/DLG_Indx_J.bin", __dirname + "/DLG_Indx_J.bin", (err) => { if (err) throw err; });
-    fs.copyFile(__dirname + "/data/DLG_Text_J.bin", __dirname + "/DLG_Text_J.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_Desc_J.bin", __dirname + "/CARD_Desc_J.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_Genre.bin", __dirname + "/CARD_Genre.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_Huff_J.bin", __dirname + "/CARD_Huff_J.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_Indx_J.bin", __dirname + "/CARD_Indx_J.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_IntID.bin", __dirname + "/CARD_IntID.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_Name_J.bin", __dirname + "/CARD_Name_J.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_Pass.bin", __dirname + "/CARD_Pass.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_Prop.bin", __dirname + "/CARD_Prop.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_SamePict_J.bin", __dirname + "/CARD_SamePict_J.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_Sort_J.bin", __dirname + "/CARD_Sort_J.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_Top_J.bin", __dirname + "/CARD_Top_J.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/DICT_J.bin", __dirname + "/DICT_J.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/CARD_SamePict_J.bin", __dirname + "/CARD_SamePict_J.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/DLG_Indx_J.bin", __dirname + "/DLG_Indx_J.bin", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/tf6/DLG_Text_J.bin", __dirname + "/DLG_Text_J.bin", (err) => { if (err) throw err; });
   });
 
   it("check test data files", () => {
@@ -54,7 +54,7 @@ describe("ogy application level tests", () => {
    */
   it("extraction of CARD_Desc_J.txt and DICT_J.txt should work", async () => {
     const ygoTextInstance = new YgoTexts();
-    const result = await ygoTextInstance.exportToTxt(__dirname, TagForce.TagForce6);
+    const result = await ygoTextInstance.exportToTxt(__dirname, YuGiOh.TF6);
 
     assert.equal(fs.existsSync(__dirname + "/CARD_Desc_J.txt"), true);
     assert.equal(fs.existsSync(__dirname + "/DICT_J.txt"), true);
@@ -67,7 +67,7 @@ describe("ogy application level tests", () => {
    */
   it("check the results for CARD_Desc_J.txt",() => {
     let data = fs.readFileSync(__dirname + "/CARD_Desc_J.txt").toString('utf-8');
-    let compareData = fs.readFileSync(__dirname + "/data/ygtool/CARD_Desc_J.txt").toString('utf8');
+    let compareData = fs.readFileSync(__dirname + "/data/tf6/ygtool/CARD_Desc_J.txt").toString('utf8');
 
 
     data = data.substring(data.indexOf('\n')).replace(/[\n\r]/g, "");
@@ -78,7 +78,7 @@ describe("ogy application level tests", () => {
 
   it("check the results for DICT_J.txt",() => {
     let data = fs.readFileSync(__dirname + "/DICT_J.txt").toString('utf-8');
-    let compareData = fs.readFileSync(__dirname + "/data/ygtool/DICT_J.txt").toString('utf8');
+    let compareData = fs.readFileSync(__dirname + "/data/tf6/ygtool/DICT_J.txt").toString('utf8');
 
     data = data.replace(/[\n\r]/g, "");
     compareData = compareData.replace(/[\n\r]/g, "");
@@ -96,7 +96,7 @@ describe("ogy application level tests", () => {
     ygoTextInstance.updateDict(DICTJtxt, __dirname + "/DICT_J.txt");
 
     const data = fs.readFileSync(__dirname + "/DICT_J.bin")
-    const compareData = fs.readFileSync(__dirname + "/data/ygtool/DICT_J.bin")
+    const compareData = fs.readFileSync(__dirname + "/data/tf6/ygtool/DICT_J.bin")
 
     assert.equal(Buffer.compare(data, compareData), 0);
   });
@@ -116,35 +116,35 @@ describe("ogy application level tests", () => {
     ygoTextInstance.updateCardDesc(CardDesc, __dirname + "/CARD_Desc_J.txt", false);
 
     const data = fs.readFileSync(__dirname + "/CARD_Desc_J.bin");
-    const compareData = fs.readFileSync(__dirname + "/data/ygtool/CARD_Desc_J.bin");
+    const compareData = fs.readFileSync(__dirname + "/data/tf6/ygtool/CARD_Desc_J.bin");
 
     assert.equal(Buffer.compare(data, compareData), 0);
   });
 
   it("check Huffman consistency",() => {
     const dataHuff = fs.readFileSync(__dirname + "/CARD_Huff_J.bin");
-    const compareDataHuff = fs.readFileSync(__dirname + "/data/ygtool/CARD_Huff_J.bin");
+    const compareDataHuff = fs.readFileSync(__dirname + "/data/tf6/ygtool/CARD_Huff_J.bin");
 
     assert.equal(Buffer.compare(dataHuff, compareDataHuff), 0);
   });
 
   it("check Index consistency",() => {
     const dataIndx = fs.readFileSync(__dirname + "/CARD_Indx_J.bin");
-    const compareDataIndx = fs.readFileSync(__dirname + "/data/ygtool/CARD_Indx_J.bin");
+    const compareDataIndx = fs.readFileSync(__dirname + "/data/tf6/ygtool/CARD_Indx_J.bin");
 
     assert.equal(Buffer.compare(dataIndx, compareDataIndx), 0);
   });
 
   it("check Card Name consistency",() => {
     const dataName = fs.readFileSync(__dirname + "/CARD_Name_J.bin");
-    const compareDataName = fs.readFileSync(__dirname + "/data/ygtool/CARD_Name_J.bin");
+    const compareDataName = fs.readFileSync(__dirname + "/data/tf6/ygtool/CARD_Name_J.bin");
 
     assert.equal(Buffer.compare(dataName, compareDataName), 0);
   });
 
   it("check Dictionary consistency",() => {
     const data = fs.readFileSync(__dirname + "/CARD_Desc_J.bin");
-    const compareData = fs.readFileSync(__dirname + "/data/ygtool/CARD_Desc_J.bin");
+    const compareData = fs.readFileSync(__dirname + "/data/tf6/ygtool/CARD_Desc_J.bin");
 
     assert.equal(Buffer.compare(data, compareData), 0);
   });

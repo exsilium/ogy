@@ -5,7 +5,7 @@ import { Command } from '@commander-js/extra-typings';
 
 const program = new Command();
 
-import { TagForce } from './compressor.js';
+import { YuGiOh } from './compressor.js';
 import { YgoTexts } from './ygotexts.js';
 
 console.log(figlet.textSync("OGY|YGO"));
@@ -41,7 +41,7 @@ if ("export" in options) {
   console.log("Export Path: " + resolvedPath);
 
   const ygoTextInstance = new YgoTexts();
-  const result = await ygoTextInstance.exportToTxt(resolvedPath, TagForce.TagForce6);
+  const result = await ygoTextInstance.exportToTxt(resolvedPath, YuGiOh.TF6);
   listDirContents(resolvedPath);
 }
 

@@ -1,11 +1,14 @@
 import * as fs from 'fs';
 
-enum TagForce {
-  TagForce2,
-  TagForce3,
-  TagForce4,
-  TagForce5,
-  TagForce6,
+enum YuGiOh {
+  TF1, // Yu-Gi-Oh! GX: Tag Force, 2006, PSP
+  TF2, // Yu-Gi-Oh! GX: Tag Force 2, 2007, PSP
+  TF3, // Yu-Gi-Oh! GX: Tag Force 3, 2008, PSP
+  TF4, // Yu-Gi-Oh! 5D's: Tag Force 4, 2009, PSP
+  TF5, // Yu-Gi-Oh! 5D's: Tag Force 5, 2010, PSP
+  TF6, // Yu-Gi-Oh! 5D's: Tag Force 6, 2011, PSP (*Default)
+  TFS, // Yu-Gi-Oh! Arc-V Tag Force Special, 2015, PSP
+  SCB, // Yu-Gi-Oh! Saikyo Card Battle, 2016, 3DS
 }
 
 enum SeekOrigin {
@@ -65,7 +68,7 @@ class Dictionary {
     descriptions: string[],
     cardIntIDL: string,
     cardNameL: string,
-    tagForce: TagForce
+    tagForce: YuGiOh
   ): string[] {
     const cardIndx = fs.readFileSync(cardIndxL);
     const dictE = fs.readFileSync(dictEL);
@@ -113,7 +116,7 @@ class Dictionary {
     descriptionWithCoding: string,
     headerSize: number,
     tableSize: number,
-    tagForce: TagForce,
+    tagForce: YuGiOh,
     readDictE: CustomBinaryReader,
     readCardIntId: CustomBinaryReader,
     readCardIdx: CustomBinaryReader,
@@ -209,15 +212,15 @@ class Dictionary {
   private getPointerWithCardIntId(
     readCardIntId: CustomBinaryReader,
     value: string,
-    tagForce: TagForce
+    tagForce: YuGiOh
   ): number {
     let posPointerXCardIDInt = parseInt(value) * 2;
 
-    if (tagForce === TagForce.TagForce4 || tagForce === TagForce.TagForce5) {
+    if (tagForce === YuGiOh.TF4 || tagForce === YuGiOh.TF5) {
       if (posPointerXCardIDInt >= 0x1C20) {
         posPointerXCardIDInt -= 0x1C20;
       }
-    } else if (tagForce === TagForce.TagForce6) {
+    } else if (tagForce === YuGiOh.TF6) {
       if (posPointerXCardIDInt >= 0x1B06) {
         posPointerXCardIDInt -= 0x1B06;
       }
@@ -295,4 +298,4 @@ class Dictionary {
 
 }
 
-export { TagForce, Dictionary }
+export { YuGiOh, Dictionary }

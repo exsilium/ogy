@@ -1,11 +1,11 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { TagForce, Dictionary } from './compressor.js';
+import { YuGiOh, Dictionary } from './compressor.js';
 import { Huffman } from './huffman.js';
 
 export class YgoTexts {
 
-  public async exportToTxt(dirCard: string, tagForce: TagForce): Promise<void> {
+  public async exportToTxt(dirCard: string, tagForce: YuGiOh): Promise<void> {
     const sourceFiles = this.requiredFiles(dirCard).sort();
     const cardDesc = sourceFiles[0];
     const cardHuff = sourceFiles[1];
