@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-01-23 11:42+0000\n"
+"POT-Creation-Date: 2024-01-23 12:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19206,7 +19206,7 @@ msgstr ""
 #. type: Name
 #. pointer: 11808
 #: 11808
-msgid "Spirit Message "E""
+msgid "Spirit Message \"E\""
 msgstr ""
 
 #. type: Description
@@ -19219,7 +19219,7 @@ msgstr ""
 #. type: Name
 #. pointer: 11816
 #: 11816
-msgid "Spirit Message "A""
+msgid "Spirit Message \"A\""
 msgstr ""
 
 #. type: Description
@@ -19232,7 +19232,7 @@ msgstr ""
 #. type: Name
 #. pointer: 11824
 #: 11824
-msgid "Spirit Message "T""
+msgid "Spirit Message \"T\""
 msgstr ""
 
 #. type: Description
@@ -19245,7 +19245,7 @@ msgstr ""
 #. type: Name
 #. pointer: 11832
 #: 11832
-msgid "Spirit Message "H""
+msgid "Spirit Message \"H\""
 msgstr ""
 
 #. type: Description
@@ -37237,7 +37237,7 @@ msgstr ""
 #. type: Name
 #. pointer: 22904
 #: 22904
-msgid "Corruption Cell "A""
+msgid "Corruption Cell \"A\""
 msgstr ""
 
 #. type: Description
@@ -39642,7 +39642,7 @@ msgstr ""
 #. type: Name
 #. pointer: 24384
 #: 24384
-msgid "Otherworld - The "A" Zone"
+msgid "Otherworld - The \"A\" Zone"
 msgstr ""
 
 #. type: Description
@@ -42060,7 +42060,7 @@ msgstr ""
 #. type: Name
 #. pointer: 25872
 #: 25872
-msgid "Detonator Circle "A""
+msgid "Detonator Circle \"A\""
 msgstr ""
 
 #. type: Description
@@ -45219,7 +45219,7 @@ msgstr ""
 #. type: Name
 #. pointer: 27816
 #: 27816
-msgid "Interplanetary Invader "A""
+msgid "Interplanetary Invader \"A\""
 msgstr ""
 
 #. type: Description
@@ -53539,7 +53539,7 @@ msgstr ""
 #. type: Name
 #. pointer: 32936
 #: 32936
-msgid "Shiny Black "C""
+msgid "Shiny Black \"C\""
 msgstr ""
 
 #. type: Description
@@ -62184,7 +62184,7 @@ msgstr ""
 #. type: Name
 #. pointer: 38256
 #: 38256
-msgid "Karakuri Soldier mdl 236 "Nisamu""
+msgid "Karakuri Soldier mdl 236 \"Nisamu\""
 msgstr ""
 
 #. type: Description
@@ -62197,7 +62197,7 @@ msgstr ""
 #. type: Name
 #. pointer: 38264
 #: 38264
-msgid "Karakuri Merchant mdl 177 "Inashichi""
+msgid "Karakuri Merchant mdl 177 \"Inashichi\""
 msgstr ""
 
 #. type: Description
@@ -62210,7 +62210,7 @@ msgstr ""
 #. type: Name
 #. pointer: 38272
 #: 38272
-msgid "Karakuri Strategist mdl 248 "Nishipachi""
+msgid "Karakuri Strategist mdl 248 \"Nishipachi\""
 msgstr ""
 
 #. type: Description
@@ -62223,7 +62223,7 @@ msgstr ""
 #. type: Name
 #. pointer: 38280
 #: 38280
-msgid "Karakuri Ninja mdl 339 "Sazank""
+msgid "Karakuri Ninja mdl 339 \"Sazank\""
 msgstr ""
 
 #. type: Description
@@ -62236,7 +62236,7 @@ msgstr ""
 #. type: Name
 #. pointer: 38288
 #: 38288
-msgid "Karakuri Bushi mdl 6318 "Muzanichiha""
+msgid "Karakuri Bushi mdl 6318 \"Muzanichiha\""
 msgstr ""
 
 #. type: Description
@@ -62496,7 +62496,7 @@ msgstr ""
 #. type: Name
 #. pointer: 38448
 #: 38448
-msgid "Karakuri Shogun mdl 00 "Burei""
+msgid "Karakuri Shogun mdl 00 \"Burei\""
 msgstr ""
 
 #. type: Description
@@ -64134,7 +64134,7 @@ msgstr ""
 #. type: Name
 #. pointer: 39456
 #: 39456
-msgid "Karakuri Barrel mdl 96 "Shinkuro""
+msgid "Karakuri Barrel mdl 96 \"Shinkuro\""
 msgstr ""
 
 #. type: Description
@@ -64563,7 +64563,7 @@ msgstr ""
 #. type: Name
 #. pointer: 39720
 #: 39720
-msgid "Karakuri Watchdog mdl 313 "Saizan""
+msgid "Karakuri Watchdog mdl 313 \"Saizan\""
 msgstr ""
 
 #. type: Description
@@ -64576,7 +64576,7 @@ msgstr ""
 #. type: Name
 #. pointer: 39728
 #: 39728
-msgid "Karakuri Ninja mdl 919 "Kuick""
+msgid "Karakuri Ninja mdl 919 \"Kuick\""
 msgstr ""
 
 #. type: Description
@@ -64758,7 +64758,7 @@ msgstr ""
 #. type: Name
 #. pointer: 39840
 #: 39840
-msgid "Karakuri Steel Shogun mdl 00X "Bureido""
+msgid "Karakuri Steel Shogun mdl 00X \"Bureido\""
 msgstr ""
 
 #. type: Description
@@ -65915,7 +65915,7 @@ msgstr ""
 #. type: Name
 #. pointer: 40552
 #: 40552
-msgid "Karakuri Muso mdl 818 "Haipa""
+msgid "Karakuri Muso mdl 818 \"Haipa\""
 msgstr ""
 
 #. type: Description
@@ -65954,7 +65954,7 @@ msgstr ""
 #. type: Name
 #. pointer: 40576
 #: 40576
-msgid "Maxx "C""
+msgid "Maxx \"C\""
 msgstr ""
 
 #. type: Description
@@ -66383,7 +66383,7 @@ msgstr ""
 #. type: Name
 #. pointer: 40840
 #: 40840
-msgid "Karakuri Komachi mdl 224 "Ninishi""
+msgid "Karakuri Komachi mdl 224 \"Ninishi\""
 msgstr ""
 
 #. type: Description
@@ -66396,7 +66396,7 @@ msgstr ""
 #. type: Name
 #. pointer: 40848
 #: 40848
-msgid "Karakuri Ninja mdl 7749 "Nanashick""
+msgid "Karakuri Ninja mdl 7749 \"Nanashick\""
 msgstr ""
 
 #. type: Description
