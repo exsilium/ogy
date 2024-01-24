@@ -2,11 +2,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import figlet from 'figlet';
 import { Command } from '@commander-js/extra-typings';
-
-const program = new Command();
-
 import { YuGiOh } from './compressor.js';
 import { YgoTexts } from './ygotexts.js';
+
+const program = new Command();
 
 console.log(figlet.textSync("OGY|YGO"));
 console.log("OGY - Yu-Gi-Oh! Translation tool\n");
@@ -17,6 +16,7 @@ program
   .description("A helper tool to export and import CARD texts for Yu-Gi-Oh! 5D's Tag Force 6")
   .option("-e --export <directory>", "Process and export CARD_ files in the directory for export")
   .option("-i --import <directory>", "Process and import texts to .bin files")
+  .option("-f --format <format>", "Specify the export/import format: pot|ygt, default: ygt")
   .parse(process.argv);
 
 const options = program.opts();
@@ -41,8 +41,27 @@ if ("export" in options) {
   console.log("Export Path: " + resolvedPath);
 
   const ygoTextInstance = new YgoTexts();
-  const result = await ygoTextInstance.exportToTxt(resolvedPath, YuGiOh.TF6);
-  listDirContents(resolvedPath);
+
+  if("format" in options) {
+    // We have format specifier added in the cli call
+    if(options.format === "pot") {
+      console.log("Output format selected: POT");
+      const result = await ygoTextInstance.exportToPot(resolvedPath, YuGiOh.TF6);
+    }
+    else if(options.format === "ygt") {
+      console.log("Output format selected: YGTool");
+      const result = await ygoTextInstance.exportToTxt(resolvedPath, YuGiOh.TF6);
+    }
+    else {
+      // Unknown format specified
+      console.error("Invalid format specified, legal values: 'pot' || 'ygt', you specified: '" + options.format + "'");
+      process.exit(1);
+    }
+  }
+  else {
+    const result = await ygoTextInstance.exportToTxt(resolvedPath, YuGiOh.TF6);
+    listDirContents(resolvedPath);
+  }
 }
 
 if ("import" in options) {
