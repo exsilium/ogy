@@ -104,11 +104,8 @@ describe("ogy application level tests", () => {
   /*
   This is more realistic use-case where we actually want to update back the Card Descriptions.
   When doing so, several files will get updated:
-    - CARD_Desc_J.bin <-- binary similarity
-    - CARD_Huff_J.bin <-- binary similarity
-    - CARD_Indx_J.bin <-- binary similarity
-    - CARD_Name_J.bin <-- binary similarity
-    - DICT_J.bin <-- binary similarity
+    - CARD_Name_J.bin <-- binary similarity with YGTool
+    - DICT_J.bin <-- binary similarity YGTool
   */
   it("update of Card descriptions",() => {
     const CardDesc = fs.readFileSync(__dirname + "/CARD_Desc_J.txt", 'utf8');
@@ -116,21 +113,21 @@ describe("ogy application level tests", () => {
     ygoTextInstance.updateCardDesc(CardDesc, __dirname + "/CARD_Desc_J.txt", false);
 
     const data = fs.readFileSync(__dirname + "/CARD_Desc_J.bin");
-    const compareData = fs.readFileSync(__dirname + "/data/tf6/ygtool/CARD_Desc_J.bin");
+    const compareData = fs.readFileSync(__dirname + "/data/tf6/ogy/CARD_Desc_J.bin");
 
     assert.equal(Buffer.compare(data, compareData), 0);
   });
 
   it("check Huffman consistency",() => {
     const dataHuff = fs.readFileSync(__dirname + "/CARD_Huff_J.bin");
-    const compareDataHuff = fs.readFileSync(__dirname + "/data/tf6/ygtool/CARD_Huff_J.bin");
+    const compareDataHuff = fs.readFileSync(__dirname + "/data/tf6/ogy/CARD_Huff_J.bin");
 
     assert.equal(Buffer.compare(dataHuff, compareDataHuff), 0);
   });
 
   it("check Index consistency",() => {
     const dataIndx = fs.readFileSync(__dirname + "/CARD_Indx_J.bin");
-    const compareDataIndx = fs.readFileSync(__dirname + "/data/tf6/ygtool/CARD_Indx_J.bin");
+    const compareDataIndx = fs.readFileSync(__dirname + "/data/tf6/ogy/CARD_Indx_J.bin");
 
     assert.equal(Buffer.compare(dataIndx, compareDataIndx), 0);
   });
@@ -144,7 +141,7 @@ describe("ogy application level tests", () => {
 
   it("check Dictionary consistency",() => {
     const data = fs.readFileSync(__dirname + "/CARD_Desc_J.bin");
-    const compareData = fs.readFileSync(__dirname + "/data/tf6/ygtool/CARD_Desc_J.bin");
+    const compareData = fs.readFileSync(__dirname + "/data/tf6/ogy/CARD_Desc_J.bin");
 
     assert.equal(Buffer.compare(data, compareData), 0);
   });
