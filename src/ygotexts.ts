@@ -309,7 +309,7 @@ export class YgoTexts {
     let pointer = 0;
     let idx = "";
     let dict = "";
-    const textDivider = text.replace(/[\n\r]/g, "").split("<FIM/>").filter(Boolean);
+    const textDivider = text.replace(/\r\n/g, "<b>").replace(/[\n\r]/g, "").split("<FIM/>").filter(Boolean);
     const tableInfo = this.getPointerType(textDivider[0]).split(',');
     idx = tableInfo[1];  // CARD_Indx_J.bin
     dict = tableInfo[2]; // DICT_J.bin
@@ -331,7 +331,7 @@ export class YgoTexts {
     pointer = 4;
 
     for (const item of textDivider) {
-      const textSplit = item.replace("<b>", "\r\n").split("<NOME>").filter(Boolean);
+      const textSplit = item.replace(/<b>/g, String.fromCharCode(13,10)).split("<NOME>").filter(Boolean);
       const infoPoint = this.getPointerInfo(textSplit[0]);
       posTable = infoPoint[0];
 

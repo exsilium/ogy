@@ -3,3 +3,7 @@
 dist/
 node_modules/
 mochawesome-report/
+test/*.bin
+test/*.txt
+test/*.tin
+test/*.po

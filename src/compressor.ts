@@ -1,4 +1,6 @@
 import * as fs from 'fs';
+import * as path from 'path';
+import * as gettextParser from 'gettext-parser';
 
 enum YuGiOh {
   TF1, // Yu-Gi-Oh! GX: Tag Force, 2006, PSP
@@ -10,6 +12,17 @@ enum YuGiOh {
   TFS, // Yu-Gi-Oh! Arc-V Tag Force Special, 2015, PSP
   SCB, // Yu-Gi-Oh! Saikyo Card Battle, 2016, 3DS
 }
+
+type Entry = {
+  Name: string;
+  Description: string;
+};
+
+type PhraseFrequency = {
+  phrase: string;
+  frequency: number;
+  length: number;
+};
 
 enum SeekOrigin {
   Begin = 0,
@@ -298,4 +311,223 @@ class Dictionary {
 
 }
 
-export { YuGiOh, Dictionary }
+class Transformer {
+  private entries: Record<number, Entry>;
+
+  constructor() {
+    this.entries = {};
+  }
+
+  addEntry(key: number, name?: string, description?: string): void {
+    const existingEntry = this.entries[key];
+    if (existingEntry) {
+      if (name) {
+        existingEntry.Name = name;
+      }
+      if (description) {
+        existingEntry.Description = description;
+      }
+    } else {
+      const newEntry: Entry = {} as Entry;
+      if (name) {
+        newEntry.Name = name;
+      }
+      if (description) {
+        newEntry.Description = description;
+      }
+      this.entries[key] = newEntry;
+    }
+  }
+
+  getEntry(key: number): Entry | undefined {
+    return this.entries[key];
+  }
+
+  printAllEntries(): void {
+    console.log(this.entries);
+  }
+  poToTxt(sourcePo: string) {
+    const po = gettextParser.po.parse(fs.readFileSync(sourcePo))
+    console.log("Starting work on: " + sourcePo);
+
+    // Initialize a counter
+    let count = 0;
+
+    // Access translations
+    for (const [msgid, translation] of Object.entries(po.translations[''])) {
+      console.log('Original:', msgid);
+      console.log('Translation:', translation.msgstr[0]);
+
+      // Access comments add an Entry based on pointer
+      if (translation.comments) {
+        if (translation.comments.extracted) {
+          if(translation.comments.reference) {
+            const types = translation.comments.extracted.replace(/\n/g, "").split("type: ").filter(item => item !== "")
+            let textToAdd = msgid;
+            if(translation.msgstr[0].length > 0) {
+              textToAdd = translation.msgstr[0];
+            }
+            types.forEach(entry => {
+              const [label, pointerStr] = entry.split('pointer: ');
+              const pointer = parseInt(pointerStr, 10);
+
+              if (label.startsWith('Name')) {
+                console.log(`Processing Name at Pointer: ${pointer}`);
+                this.addEntry(pointer, textToAdd)
+              } else if (label.startsWith('Description')) {
+                console.log(`Processing Description at Pointer: ${pointer}`);
+                this.addEntry(pointer, undefined, textToAdd);
+              }
+            });
+          }
+        }
+      }
+      console.log('---------------------------');
+      count++;
+    }
+    console.log("Entries processed: " + count);
+    this.writeDictBuilderInput(sourcePo);
+    fs.writeFileSync(sourcePo.replace(".po", ".txt"), this.entriesToTxt());
+    console.log("Files written, task complete.");
+  }
+
+  /*
+  Here we generate the TXT based on the Entries, instead of going through all the entries, we follow
+  The known pattern from 0 in increments of 8 until 43144
+   */
+  private entriesToTxt(): string {
+    let txtOutput: string = "<Tipo de Ponteiro=Informação de Cartas=/Users/exile/Projects/Personal/ogy/test/CARD_Indx_J.bin = /Users/exile/Projects/Personal/ogy/test/DICT_J.bin>";
+    let pointer = 0;
+
+    while(pointer <= 43144) {
+      txtOutput += `\n<PONTEIRO: ${pointer},0>\n` +
+        `<NOME>` + this.entries[pointer].Name + `<NULL><NOME/>\n` +
+        `<DESCRICAO>` + this.entries[pointer].Description.replace(/<BR>/g, String.fromCharCode(13,10)) + `<NULL><DESCRICAO/><FIM/>\n\n`;
+      pointer += 8;
+    }
+    return txtOutput;
+  }
+
+  /*
+  Here we generate the main input file for DICT generation
+   */
+  private writeDictBuilderInput(sourcePo: string): void {
+    let txtOutput: string = "";
+    let pointer = 8;
+
+    while(pointer <= 43144) {
+      txtOutput += this.entries[pointer].Description.replace(/<BR>/g, "\r\n") + "\r\n";
+      pointer += 8;
+    }
+    fs.writeFileSync(path.dirname(sourcePo) + "/DICT_J.tin", txtOutput);
+  }
+
+  private parseDecimalNumbers(inputString: string): number[] {
+    const regex = /\b\d+\b/g; // Regular expression to match decimal numbers
+    const matches = inputString.match(regex);
+    if (matches) {
+      return matches.map(num => parseInt(num, 10));
+    }
+    return [];
+  }
+}
+
+class DictionaryBuilder {
+  private globalTokenNr = 0;
+  private DICT: string = "<Tipo de Ponteiro = Interno Indireto>\n\n";
+  private pointer: number = 0;
+
+  public build(dictInputFile: string) {
+    const text = fs.readFileSync(dictInputFile);
+    const maxPhraseLength = 15;
+    const maxTokens = 1;
+    let phraseTokenMap = new Map<string, string>;
+
+    let processingText = text.toString('utf8')
+
+    for (let run = 1; run <= 1000; run++) {
+      let tempMap = new Map(this.findFrequentPhrases(processingText, maxPhraseLength, maxTokens));
+      tempMap.forEach((value, key) => {
+        phraseTokenMap.set(key, value);
+        processingText = processingText.replace(new RegExp(this.escapeRegExp(key), 'g'), "<M");
+
+        // Regular expression to extract the number after "&d"
+        const regex = /&d(\d+)/;
+        const match = value.match(regex);
+        let numPointer: number | null = null;
+
+        if (match) {
+          numPointer = parseInt(match[1], 10); // Convert the extracted string to number
+          const pointerString = "\n<PONTEIRO: " + (numPointer * 4 + 12) + ",0>\n<TEXTO>" + key + "<NULL><TEXTO/>\n<FIM/>\n\n";
+          this.DICT += pointerString;
+        }
+      });
+
+      console.log(tempMap);
+      console.log("Remaining text size for processing: " + processingText.length);
+    }
+
+    fs.writeFileSync(dictInputFile.replace(".tin", ".txt"), this.DICT);
+    console.log("Output written");
+  }
+
+  private escapeRegExp(string: string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  private findFrequentPhrases(text: string, maxPhraseLength: number, maxTokens: number): Map<string, string> {
+    const wordArray = text.split(/\s+/);
+    const phraseCount = new Map<string, { frequency: number; length: number }>();
+
+    // Count the frequency of each phrase
+    for (let length = 1; length <= maxPhraseLength; length++) {
+      for (let i = 0; i <= wordArray.length - length; i++) {
+        const phrase = wordArray.slice(i, i + length).join(' ');
+        if (phrase.includes("<M")) {
+          continue; // Skip phrases containing "<M"
+        }
+        else if (phrase.includes("●")) {
+          continue;
+        }
+
+        const current = phraseCount.get(phrase);
+        if (current) {
+          current.frequency++;
+        } else {
+          phraseCount.set(phrase, { frequency: 1, length });
+        }
+      }
+    }
+
+    // Filter, convert to array, and sort by length, then by frequency
+    const sortedPhrases: PhraseFrequency[] = Array.from(phraseCount.entries())
+      .filter(([_, { frequency }]) => frequency >= 15)
+      .map(([phrase, { frequency, length }]) => ({ phrase, frequency, length }))
+      .sort((a, b) => b.length - a.length || b.frequency - a.frequency);
+
+    // Select the top 'maxTokens' phrases and assign tokens
+    const phraseTokenMap = new Map<string, string>();
+    for (let i = 0; i < Math.min(maxTokens, sortedPhrases.length); i++) {
+      const token = `&d${this.globalTokenNr.toString().padStart(3, '0')}`;
+
+      /*
+       Some of the phrases were problematic as they included line feeds and as such were
+       invalid and were not able to be removed from the original text. The following will
+       check if we actually can use the phrase and if not, we increment the maxToken and
+       move along.
+       */
+      const pattern = new RegExp(this.escapeRegExp(sortedPhrases[i].phrase), 'g');
+      if(pattern.test(text) == false) {
+        maxTokens++;
+        continue;
+      }
+
+      phraseTokenMap.set(sortedPhrases[i].phrase, token + " F" + sortedPhrases[i].frequency.toString());
+      this.globalTokenNr++;
+    }
+
+    return phraseTokenMap;
+  }
+}
+
+export { YuGiOh, Dictionary, DictionaryBuilder, Transformer }
