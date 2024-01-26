@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-01-23 12:04+0000\n"
-"PO-Revision-Date: 2024-01-24 13:41+0000\n"
+"PO-Revision-Date: 2024-01-25 23:06+0000\n"
 "Last-Translator: Exile <exile@chamber.ee>\n"
 "Language-Team: \n"
 "Language: et\n"
@@ -63486,7 +63486,7 @@ msgstr ""
 #. pointer: 39848
 #: 39848
 msgid "Atomic Scrap Dragon"
-msgstr "Aatomiline Vanametall-Draakon"
+msgstr "Aatomi Vanametall-Draakon"
 
 #. type: Description
 #. pointer: 39848
@@ -63496,9 +63496,9 @@ msgid ""
 "opponent's cards to the Deck. When this card is destroyed by your opponent's card (either by battle or by card effect) and sent to the Graveyard, Select 1 non-Synchro \"Scrap\" monster from your "
 "Graveyard. and Special Summon it."
 msgstr ""
-"1 Vanametall\" Tuuner + 2 või enam mittetuunerist koletist<BR>Korra käigu kohta võid valida 1 kaardi, mida kontrollid, ja kuni 3 kaarti vastase surnuaias. Hävita valitud kaart ja tagasta vastase "
-"kaardid kaardipakki. Kui see kaart hävitatakse vastase kaardi poolt (kas lahingu või kaardi efekti tõttu) ja saadetakse surnuaeda, vali oma surnuaiast 1 mittesünkro \"Vanametall\" koletis ja kutsu "
-"see eriliselt välja."
+"1 \"Vanametall\" Tuuner + 2 või enam mittetuunerist koletist<BR>Korra käigu kohta võid valida 1 kaardi, mida kontrollid, ja kuni 3 kaarti vastase surnuaias. Hävita valitud kaart ja tagasta vastase "
+"kaardid kaardipakki. Kui see kaart hävitatakse vastase kaardi poolt (kas lahingu või kaardi efekti tõttu) ja saadetakse surnuaeda, vali oma surnuaiast 1 mittesünkro \"Vanametall\" koletis ja Eri-"
+"väljakutsu see."
 
 #. type: Name
 #. pointer: 39856
