@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-01-23 12:04+0000\n"
-"PO-Revision-Date: 2024-01-25 23:06+0000\n"
+"PO-Revision-Date: 2024-01-27 09:51+0000\n"
 "Last-Translator: Exile <exile@chamber.ee>\n"
 "Language-Team: \n"
 "Language: et\n"
@@ -19661,7 +19661,7 @@ msgstr ""
 #. pointer: 12712
 #: 12712
 msgid "Blast with Chain"
-msgstr ""
+msgstr "Plahvatus Ahelaga"
 
 #. type: Description
 #. pointer: 12712
@@ -19670,6 +19670,8 @@ msgid ""
 "After activation, this card is treated as an Equip Card that increases the ATK of the equipped monster by 500 points. Equip a monster on your side of the field with this card. If this card is "
 "destroyed by the effect of another card while it is an Equip Card, select 1 card on the field and destroy it."
 msgstr ""
+"Pärast aktiveerimist koheldakse seda kaarti kui varustuskaarti, mis suurendab varustatud koletise ATK-d 500 punkti. Varusta selle kaardiga väljal olev koletis oma poolelt. Kui see kaart hävitatakse "
+"teise kaardi efekti tõttu, kui see on varustuskaart, vali väljal 1 olev kaart ja hävita see."
 
 #. type: Name
 #. pointer: 12720
@@ -22577,7 +22579,7 @@ msgstr ""
 #. pointer: 14520
 #: 14520
 msgid "Big Bang Shot"
-msgstr ""
+msgstr "Suure Paugu Lask"
 
 #. type: Description
 #. pointer: 14520
@@ -22586,6 +22588,8 @@ msgid ""
 "The equipped monster gains 400 ATK. When the equipped monster attacks a Defense Position monster whose DEF is lower than the equipped monster's ATK, inflict the difference as Battle Damage to your "
 "opponent. When this card is removed from the field, the equipped monster is removed from play."
 msgstr ""
+"Varustatud koletis saab juurde 400 ATK. Kui varustatud koletis ründab kaitseasendis olevat koletist, mille DEF on madalam kui varustatud koletise ATK, tekitab vahe võrra lahingukahju vastasele. Kui "
+"see kaart eemaldatakse väljalt, eemaldatakse varustatud koletis mängust."
 
 #. type: Name
 #. pointer: 14528
@@ -36354,7 +36358,7 @@ msgstr ""
 #. pointer: 23160
 #: 23160
 msgid "Card Trooper"
-msgstr ""
+msgstr "Kaardisõdur"
 
 #. type: Description
 #. pointer: 23160
@@ -36363,6 +36367,8 @@ msgid ""
 "Once per turn: You can choose a number from 1 to 3, then send that many cards from the top of your Deck to the Graveyard; this card gains 500 ATK for each card sent to the Graveyard this way, until "
 "the End Phase. When this card you control is destroyed and sent to your Graveyard: Draw 1 card."
 msgstr ""
+"Kord käigu kohta: Võid valida numbri 1 kuni 3 vahel, seejärel saata niipalju kaarte oma kaardipakist surnuaeda; see kaart saab iga nii saadetud kaardi eest 500 ATK juurde, kuni käigu lõppfaasini. "
+"Kui see sinu poolt kontrollitav kaart hävitatakse ja saadetakse sinu surnuaeda: Tõmba 1 kaart."
 
 #. type: Name
 #. pointer: 23168
@@ -37142,13 +37148,13 @@ msgstr ""
 #. pointer: 23656
 #: 23656
 msgid "Card Trader"
-msgstr ""
+msgstr "Kaardikaupleja"
 
 #. type: Description
 #. pointer: 23656
 #: 23656
 msgid "Once per turn, during your Standby Phase, you can shuffle 1 card from your hand into the Deck, then draw 1 card."
-msgstr ""
+msgstr "Kord käigu kohta, oma valmisolekufaasi jooksul, võid segada 1 kaardi oma käest kaardipakki, seejärel tõmmata 1 kaart."
 
 #. type: Name
 #. pointer: 23664
@@ -40997,7 +41003,7 @@ msgstr ""
 #. pointer: 26024
 #: 26024
 msgid "Beast King Barbaros"
-msgstr ""
+msgstr "Loomade Kuningas Barbaros"
 
 #. type: Description
 #. pointer: 26024
@@ -41006,6 +41012,8 @@ msgid ""
 "You can Normal Summon or Set this card without Tributing, but its original ATK will becomes 1900. You can Tribute 3 monsters to Tribute Summon this card. If you do: Destroy all cards your opponent "
 "controls."
 msgstr ""
+"Seda kaarti saab tavaliselt kutsuda või seada ilma ohverdamata, kuid selle algne ATK on 1900. Saad ohverdada 3 koletist, et kutsuda see kaart ohverduskutsumisega. Kui teed seda: Hävita kõik kaardid,"
+" mida vastane kontrollib."
 
 #. type: Name
 #. pointer: 26032
@@ -41530,13 +41538,13 @@ msgstr ""
 #. pointer: 26344
 #: 26344
 msgid "Burden of the Mighty"
-msgstr ""
+msgstr "Võimsate Koorem"
 
 #. type: Description
 #. pointer: 26344
 #: 26344
 msgid "Each face-up monster your opponent controls loses 100 ATK × its own Level."
-msgstr ""
+msgstr "Iga vastase poolt kontrollitav näoga ülespoole pööratud koletis kaotab 100 ATK-d × oma enda tase."
 
 #. type: Name
 #. pointer: 26352
