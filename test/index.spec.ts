@@ -5,11 +5,12 @@ import { fileURLToPath } from "url";
 
 import { YuGiOh } from '../src/compressor.js';
 import { YgoTexts } from '../src/ygotexts.js';
+import { Ehp } from "../src/ehp.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-describe("ogy application level tests", () => {
+describe("ogy application level tests - card", () => {
   beforeEach(done => setTimeout(done, 200));
   it("setup test data files", () => {
     fs.copyFile(__dirname + "/data/tf6/CARD_Desc_J.bin", __dirname + "/CARD_Desc_J.bin", (err) => { if (err) throw err; });
@@ -163,5 +164,45 @@ describe("ogy application level tests", () => {
     fs.unlinkSync(__dirname + "/DICT_J.txt");
     fs.unlinkSync(__dirname + "/DLG_Indx_J.bin");
     fs.unlinkSync(__dirname + "/DLG_Text_J.bin");
+  });
+});
+
+describe("ogy application level tests - ehp", () => {
+  beforeEach(done => setTimeout(done, 200));
+  it("setup test data files", () => {
+    fs.copyFile(__dirname + "/data/tf6/cardinfo_jpn.ehp", __dirname + "/cardinfo_jpn.ehp", (err) => { if (err) throw err; });
+  });
+
+  it("extraction of .ehp to extract directory", () => {
+    const ehp = new Ehp(__dirname + "/extract", __dirname + "/cardinfo_jpn.ehp");
+    ehp.extract();
+
+    assert.equal(fs.existsSync(__dirname + "/extract/CARD_Desc_J.bin"), true);
+  });
+
+  it("extracted files must match to originals", () => {
+    const data = fs.readFileSync(__dirname + "/extract/CARD_Desc_J.bin");
+    const compareData = fs.readFileSync(__dirname + "/data/tf6/CARD_Desc_J.bin");
+
+    assert.equal(Buffer.compare(data, compareData), 0);
+  });
+
+  it("update of .ehp from extract directory", () => {
+    const ehp = new Ehp(__dirname + "/extract", __dirname + "/cardinfo_jpn.ehp");
+    ehp.update();
+
+    assert.equal(fs.existsSync(__dirname + "/cardinfo_jpn.ehp"), true);
+  });
+
+  it("updated ehp must match to original", () => {
+    const data = fs.readFileSync(__dirname + "/cardinfo_jpn.ehp");
+    const compareData = fs.readFileSync(__dirname + "/data/tf6/cardinfo_jpn.ehp");
+
+    assert.equal(Buffer.compare(data, compareData), 0);
+  });
+
+  it("clean up", () => {
+    fs.unlinkSync(__dirname + "/cardinfo_jpn.ehp");
+    fs.rmSync(__dirname + "/extract", { recursive: true, force: true });
   });
 });

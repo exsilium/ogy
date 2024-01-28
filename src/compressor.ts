@@ -387,7 +387,7 @@ class Transformer {
     }
     console.log("Entries processed: " + count);
     this.writeDictBuilderInput(sourcePo);
-    fs.writeFileSync(sourcePo.replace(".po", ".txt"), this.entriesToTxt());
+    fs.writeFileSync(sourcePo.replace(".po", ".txt"), this.entriesToTxt(path.dirname(sourcePo)));
     console.log("Files written, task complete.");
   }
 
@@ -395,8 +395,8 @@ class Transformer {
   Here we generate the TXT based on the Entries, instead of going through all the entries, we follow
   The known pattern from 0 in increments of 8 until 43144
    */
-  private entriesToTxt(): string {
-    let txtOutput: string = "<Tipo de Ponteiro=Informação de Cartas=/Users/exile/Projects/Personal/ogy/test/CARD_Indx_J.bin = /Users/exile/Projects/Personal/ogy/test/DICT_J.bin>";
+  private entriesToTxt(directory: string): string {
+    let txtOutput: string = "<Tipo de Ponteiro=Informação de Cartas=" + directory + "/CARD_Indx_J.bin = " + directory + "/DICT_J.bin>";
     let pointer = 0;
 
     while(pointer <= 43144) {
