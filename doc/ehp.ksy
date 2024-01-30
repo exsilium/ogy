@@ -1,5 +1,6 @@
 #
-# Kaitai
+# Kaitai Struct definition for .EHP container files - a proprietary file format
+# used to bundle together various types of game data on Sony PSP
 #
 
 meta:
