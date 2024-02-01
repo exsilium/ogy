@@ -32,22 +32,40 @@ function main(target) {
     var tfs = doc.textFrames;
     for (var j = 0; j < tfs.length; j++) {
       jfile[doc.name]["frames_" + j] = {};
-      for (var k = 0; k < tfs[j].story.paragraphs.length; k++) {
-        if (tfs[j].story.contents != "" && tfs[j].story.paragraphs[k].contents.length > 1) { // Empty strings (AI text frames) are skipped, as well as single character entries
-          try {
-            /* Update object for JSON */
-            jfile[doc.name]["frames_" + j]["paragraphs_" + String(k)] = {};
-            jfile[doc.name]["frames_" + j]["paragraphs_" + String(k)].contents = tfs[j].story.paragraphs[k].contents;
+      /* We skip the text element if the name begins with "DNT:" (Do Not Translate) */
+      if (tfs[j].name.indexOf("DNT:") !== 0) {
+        var msgid = "";
+        for (var k = 0; k < tfs[j].story.paragraphs.length; k++) {
+          // Empty strings (AI text frames) are skipped, as well as single character entries
+          if (tfs[j].story.contents != "" && tfs[j].story.paragraphs[k].contents.length > 1) {
+            try {
+              /* In Adobe .AI context, a paragraph is considered a single line */
+              /* Update object for JSON, each paragraph a separate object within a frame structure */
+              jfile[doc.name]["frames_" + j]["paragraphs_" + String(k)] = {};
+              jfile[doc.name]["frames_" + j]["paragraphs_" + String(k)].contents = tfs[j].story.paragraphs[k].contents;
 
-            /* Expand POT */
-            potfile += "#: " + doc.name + ":" + j + "." + String(k) + "\n";
-            potfile += "msgid \"" +  tfs[j].story.paragraphs[k].contents.replace(/"/g, '\\"') + "\"\nmsgstr \"\"\n\n";
+              /* Expand POT */
+              if(k === 0) {
+                /* First paragraph/line of the text object, we create the POT entry */
+                msgid = "#: " + doc.name + ":" + j + "\nmsgid \"\"\n\"";
 
-            /* To make it easier to find relevant string, we update the frame object name */
-            tfs[j].name = j + ": " + tfs[j].story.paragraphs[k].contents;
-          } catch (e) {
-            continue ;
+                /* To make it easier to find relevant string, we update the frame object name */
+                tfs[j].name = j + ": " + tfs[j].story.paragraphs[k].contents;
+              }
+              else {
+                /* Paragraph/line separator in the translation string */
+                msgid += "<BR>";
+              }
+              msgid += tfs[j].story.paragraphs[k].contents.replace(/"/g, '\\"');
+            } catch (e) {
+              continue;
+            }
           }
+        }
+        if(msgid.length > 0) {
+          /* We actually added something to msgid expand POT */
+          /* We clone the string and add a separator */
+          potfile += msgid + "\"\nmsgstr \"\"\n\n";
         }
       }
     }
@@ -72,7 +90,7 @@ function writeTXT(array) {
 
     if (targetFolder) {
       alert("You selected: " + targetFolder.fsName);
-      tempFile = new File(targetFolder.fsName + "/" + "extract_texts" + ((exportFormat === "JSON") ? ".json" : ".pot"));
+      var tempFile = new File(targetFolder.fsName + "/" + app.activeDocument.name.replace(/\.ai/ig, "") + ((exportFormat === "JSON") ? ".json" : ".pot"));
       tempFile.encoding = "UTF-8";
       tempFile.open("w");
       tempFile.writeln(array);
@@ -115,10 +133,13 @@ function getCurrentDateString() {
 
 var myScriptName = "Export script";
 
-var dialog = new Window("dialog", "Select File Type");
+var dialog = new Window("dialog", "Select File Type and Options");
+//var potHeaderAdd = dialog.add("edittext", [0, 0, 600, 100], "", {multiline: true, name: "POT Header"});
 var jsonRadio = dialog.add("radiobutton", undefined, "JSON");
 var potRadio = dialog.add("radiobutton", undefined, "POT");
 var confirmButton = dialog.add("button", undefined, "OK");
+
+//potHeaderAdd.text = "# Yu-Gi-Oh! Portable Object Template - Ruleset V10\n# This file is distributed under the same license as the OGY package.\n#\n";
 
 confirmButton.onClick = function() {
   if (jsonRadio.value) {
