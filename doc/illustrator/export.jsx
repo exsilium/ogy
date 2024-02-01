@@ -35,14 +35,14 @@ function main(target) {
       /* We skip the text element if the name begins with "DNT:" (Do Not Translate) */
       if (tfs[j].name.indexOf("DNT:") !== 0) {
         var msgid = "";
-        for (var k = 0; k < tfs[j].story.paragraphs.length; k++) {
+        for (var k = 0; k < tfs[j].paragraphs.length; k++) {
           // Empty strings (AI text frames) are skipped, as well as single character entries
-          if (tfs[j].story.contents != "" && tfs[j].story.paragraphs[k].contents.length > 1) {
+          if (tfs[j].contents != "" && tfs[j].paragraphs[k].contents.length > 1) {
             try {
               /* In Adobe .AI context, a paragraph is considered a single line */
               /* Update object for JSON, each paragraph a separate object within a frame structure */
               jfile[doc.name]["frames_" + j]["paragraphs_" + String(k)] = {};
-              jfile[doc.name]["frames_" + j]["paragraphs_" + String(k)].contents = tfs[j].story.paragraphs[k].contents;
+              jfile[doc.name]["frames_" + j]["paragraphs_" + String(k)].contents = tfs[j].paragraphs[k].contents;
 
               /* Expand POT */
               if(k === 0) {
@@ -50,13 +50,13 @@ function main(target) {
                 msgid = "#: " + doc.name + ":" + j + "\nmsgid \"\"\n\"";
 
                 /* To make it easier to find relevant string, we update the frame object name */
-                tfs[j].name = j + ": " + tfs[j].story.paragraphs[k].contents;
+                tfs[j].name = j + ": " + tfs[j].paragraphs[k].contents;
               }
               else {
                 /* Paragraph/line separator in the translation string */
                 msgid += "<BR>";
               }
-              msgid += tfs[j].story.paragraphs[k].contents.replace(/"/g, '\\"');
+              msgid += tfs[j].paragraphs[k].contents.replace(/"/g, '\\"');
             } catch (e) {
               continue;
             }
