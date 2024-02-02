@@ -1,19 +1,20 @@
 # Yu-Gi-Oh! Portable Object Template - Ruleset V10
 # This file is distributed under the same license as the OGY package.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-02-01 20:49+0000\n"
-"PO-Revision-Date: 2024-02-01 20:51+0200\n"
+"PO-Revision-Date: 2024-01-30 19:05+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pontoon\n"
 
 #: SD_RuleBook_EN_10.ai:0
 msgid "Version 10"
@@ -21,30 +22,24 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:1
 msgid "OFFICIAL RULEBOOK"
-msgstr ""
+msgstr "AMETLIK REEGLISTIK"
 
 #: SD_RuleBook_EN_10.ai:4
 msgid "Pendulum Monsters ................................................................ 16"
 msgstr ""
 
-#: SD_RuleBook_EN_10.ai:5 SD_RuleBook_EN_10.ai:7 SD_RuleBook_EN_10.ai:9 SD_RuleBook_EN_10.ai:13
-#: SD_RuleBook_EN_10.ai:15 SD_RuleBook_EN_10.ai:17 SD_RuleBook_EN_10.ai:19
-#: SD_RuleBook_EN_10.ai:21 SD_RuleBook_EN_10.ai:23 SD_RuleBook_EN_10.ai:25
-#: SD_RuleBook_EN_10.ai:27 SD_RuleBook_EN_10.ai:29 SD_RuleBook_EN_10.ai:31
-#: SD_RuleBook_EN_10.ai:33 SD_RuleBook_EN_10.ai:35 SD_RuleBook_EN_10.ai:37
-#: SD_RuleBook_EN_10.ai:39 SD_RuleBook_EN_10.ai:41 SD_RuleBook_EN_10.ai:43
-#: SD_RuleBook_EN_10.ai:45
+#: SD_RuleBook_EN_10.ai:5 SD_RuleBook_EN_10.ai:7 SD_RuleBook_EN_10.ai:9 SD_RuleBook_EN_10.ai:13 SD_RuleBook_EN_10.ai:15 SD_RuleBook_EN_10.ai:17 SD_RuleBook_EN_10.ai:19 SD_RuleBook_EN_10.ai:21
+#: SD_RuleBook_EN_10.ai:23 SD_RuleBook_EN_10.ai:25 SD_RuleBook_EN_10.ai:27 SD_RuleBook_EN_10.ai:29 SD_RuleBook_EN_10.ai:31 SD_RuleBook_EN_10.ai:33 SD_RuleBook_EN_10.ai:35 SD_RuleBook_EN_10.ai:37
+#: SD_RuleBook_EN_10.ai:39 SD_RuleBook_EN_10.ai:41 SD_RuleBook_EN_10.ai:43 SD_RuleBook_EN_10.ai:45
 msgid "  "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:6
-msgid ""
-"Turn Structure ........................................................................ 34"
+msgid "Turn Structure ........................................................................ 34"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:8
-msgid ""
-"Preparing to Duel ................................................................... 33"
+msgid "Preparing to Duel ................................................................... 33"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:10
@@ -56,14 +51,11 @@ msgid "Let the Duel Begin"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:14
-msgid ""
-"Glossary ................................................................................... "
-"52"
+msgid "Glossary ................................................................................... 52"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:16
-msgid ""
-"Other Rules .............................................................................. 49"
+msgid "Other Rules .............................................................................. 49"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:18
@@ -75,13 +67,11 @@ msgid "Monster Battle Rules ....................................................
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:22
-msgid ""
-"Link Monsters ......................................................................... 12"
+msgid "Link Monsters ......................................................................... 12"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:24
-msgid ""
-"Spell & Trap Cards ................................................................... 26"
+msgid "Spell & Trap Cards ................................................................... 26"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:26
@@ -89,13 +79,11 @@ msgid "Summoning Monster Cards .................................................
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:28
-msgid ""
-"Ritual Monsters ...................................................................... 23"
+msgid "Ritual Monsters ...................................................................... 23"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:30
-msgid ""
-"Fusion Monsters ...................................................................... 22"
+msgid "Fusion Monsters ...................................................................... 22"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:32
@@ -103,23 +91,19 @@ msgid "Synchro Monsters ........................................................
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:34
-msgid ""
-"Xyz Monsters ........................................................................... 18"
+msgid "Xyz Monsters ........................................................................... 18"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:36
-msgid ""
-"Effect Monsters ........................................................................ 9"
+msgid "Effect Monsters ........................................................................ 9"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:38
-msgid ""
-"Monster Cards .......................................................................... 6"
+msgid "Monster Cards .......................................................................... 6"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:40
-msgid ""
-"The Game Mat ............................................................................. 4"
+msgid "The Game Mat ............................................................................. 4"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:42
@@ -127,24 +111,20 @@ msgid "Things you need to Duel .................................................
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:44
-msgid ""
-"About the Game .......................................................................... 1"
+msgid "About the Game .......................................................................... 1"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:46 SD_RuleBook_EN_10.ai:47
 msgid "Table of Contents"
 msgstr ""
 
-#: SD_RuleBook_EN_10.ai:48 SD_RuleBook_EN_10.ai:718 SD_RuleBook_EN_10.ai:720
-#: SD_RuleBook_EN_10.ai:723 SD_RuleBook_EN_10.ai:742 SD_RuleBook_EN_10.ai:767
-#: SD_RuleBook_EN_10.ai:770 SD_RuleBook_EN_10.ai:775 SD_RuleBook_EN_10.ai:798
+#: SD_RuleBook_EN_10.ai:48 SD_RuleBook_EN_10.ai:718 SD_RuleBook_EN_10.ai:720 SD_RuleBook_EN_10.ai:723 SD_RuleBook_EN_10.ai:742 SD_RuleBook_EN_10.ai:767 SD_RuleBook_EN_10.ai:770
+#: SD_RuleBook_EN_10.ai:775 SD_RuleBook_EN_10.ai:798
 msgid "Other Rules"
 msgstr ""
 
-#: SD_RuleBook_EN_10.ai:50 SD_RuleBook_EN_10.ai:615 SD_RuleBook_EN_10.ai:616
-#: SD_RuleBook_EN_10.ai:642 SD_RuleBook_EN_10.ai:643 SD_RuleBook_EN_10.ai:665
-#: SD_RuleBook_EN_10.ai:666 SD_RuleBook_EN_10.ai:698 SD_RuleBook_EN_10.ai:702
-#: SD_RuleBook_EN_10.ai:712
+#: SD_RuleBook_EN_10.ai:50 SD_RuleBook_EN_10.ai:615 SD_RuleBook_EN_10.ai:616 SD_RuleBook_EN_10.ai:642 SD_RuleBook_EN_10.ai:643 SD_RuleBook_EN_10.ai:665 SD_RuleBook_EN_10.ai:666
+#: SD_RuleBook_EN_10.ai:698 SD_RuleBook_EN_10.ai:702 SD_RuleBook_EN_10.ai:712
 msgid "Battles and Chains"
 msgstr ""
 
@@ -152,25 +132,20 @@ msgstr ""
 msgid "How to Play"
 msgstr ""
 
-#: SD_RuleBook_EN_10.ai:54 SD_RuleBook_EN_10.ai:156 SD_RuleBook_EN_10.ai:187
-#: SD_RuleBook_EN_10.ai:188 SD_RuleBook_EN_10.ai:215 SD_RuleBook_EN_10.ai:216
-#: SD_RuleBook_EN_10.ai:236 SD_RuleBook_EN_10.ai:237 SD_RuleBook_EN_10.ai:403
-#: SD_RuleBook_EN_10.ai:404 SD_RuleBook_EN_10.ai:448 SD_RuleBook_EN_10.ai:449
-#: SD_RuleBook_EN_10.ai:468 SD_RuleBook_EN_10.ai:469 SD_RuleBook_EN_10.ai:483
-#: SD_RuleBook_EN_10.ai:484
+#: SD_RuleBook_EN_10.ai:54 SD_RuleBook_EN_10.ai:156 SD_RuleBook_EN_10.ai:187 SD_RuleBook_EN_10.ai:188 SD_RuleBook_EN_10.ai:215 SD_RuleBook_EN_10.ai:216 SD_RuleBook_EN_10.ai:236
+#: SD_RuleBook_EN_10.ai:237 SD_RuleBook_EN_10.ai:403 SD_RuleBook_EN_10.ai:404 SD_RuleBook_EN_10.ai:448 SD_RuleBook_EN_10.ai:449 SD_RuleBook_EN_10.ai:468 SD_RuleBook_EN_10.ai:469
+#: SD_RuleBook_EN_10.ai:483 SD_RuleBook_EN_10.ai:484
 msgid "Game Cards"
 msgstr ""
 
-#: SD_RuleBook_EN_10.ai:56 SD_RuleBook_EN_10.ai:93 SD_RuleBook_EN_10.ai:105
-#: SD_RuleBook_EN_10.ai:106
+#: SD_RuleBook_EN_10.ai:56 SD_RuleBook_EN_10.ai:93 SD_RuleBook_EN_10.ai:105 SD_RuleBook_EN_10.ai:106
 msgid "Getting Started"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:60
 msgid ""
-"Booster Packs are released every few months, <BR>bringing new cards and new combos to add "
-"new <BR>strength to your Deck. Duels evolve every time <BR>a new Booster Pack is released, "
-"keeping your <BR>Duels cool and exciting."
+"Booster Packs are released every few months, <BR>bringing new cards and new combos to add new <BR>strength to your Deck. Duels evolve every time <BR>a new Booster Pack is released, keeping your "
+"<BR>Duels cool and exciting."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:61
@@ -179,9 +154,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:62
 msgid ""
-"Even if a card does not have enough power on its own, <BR>it may become powerful when "
-"combined <BR>with other cards. It’s fun to collect all the <BR>different cards available and "
-"create your <BR>own combos, then unleash them in a Duel."
+"Even if a card does not have enough power on its own, <BR>it may become powerful when combined <BR>with other cards. It’s fun to collect all the <BR>different cards available and create your <BR>own"
+" combos, then unleash them in a Duel."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:63
@@ -190,9 +164,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:64
 msgid ""
-"With thousands of cards to choose from, you can create and <BR>customize your own Deck with "
-"your favorite cards. Every Duelist <BR>will have their own unique Deck, completely different "
-"from every <BR>other Duelist’s Deck, which makes it really exciting to play!"
+"With thousands of cards to choose from, you can create and <BR>customize your own Deck with your favorite cards. Every Duelist <BR>will have their own unique Deck, completely different from every "
+"<BR>other Duelist’s Deck, which makes it really exciting to play!"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:65
@@ -205,31 +178,24 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:67
 msgid ""
-"This is the ofﬁcial Yu-Gi-Oh! TRADING CARD GAME rulebook. It’s <BR>important to learn how to "
-"play correctly, so you should read this <BR>rulebook before playing if you’re new to the "
-"game. Understanding <BR>the rules will help you make the best use of your cards, so keep "
-"<BR>the rulebook handy during your ﬁrst few games. You can also visit     <BR>www.yugioh-"
-"card.com for more information."
+"This is the ofﬁcial Yu-Gi-Oh! TRADING CARD GAME rulebook. It’s <BR>important to learn how to play correctly, so you should read this <BR>rulebook before playing if you’re new to the game. "
+"Understanding <BR>the rules will help you make the best use of your cards, so keep <BR>the rulebook handy during your ﬁrst few games. You can also visit     <BR>www.yugioh-card.com for more "
+"information."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:68
 msgid ""
-"Everything you need to start playing is in this Deck, but there are <BR>thousands more cards "
-"to choose from, so collecting additional cards <BR>in Booster Packs will let you customize "
-"your Deck and increase your <BR>chances of winning!"
+"Everything you need to start playing is in this Deck, but there are <BR>thousands more cards to choose from, so collecting additional cards <BR>in Booster Packs will let you customize your Deck and "
+"increase your <BR>chances of winning!"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:69
 msgid ""
-"In this game, two players Duel each other using a variety of Monster, <BR>Spell, and Trap "
-"Cards to defeat their opponent’s monsters and be the <BR>ﬁrst to drop the other’s LP (Life "
-"Points) to 0."
+"In this game, two players Duel each other using a variety of Monster, <BR>Spell, and Trap Cards to defeat their opponent’s monsters and be the <BR>ﬁrst to drop the other’s LP (Life Points) to 0."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:70
-msgid ""
-"With the Yu-Gi-Oh! TRADING CARD GAME you can take part in the <BR>exciting card game action "
-"seen in the family of Yu-Gi-Oh! TV and <BR>comic mega-hits."
+msgid "With the Yu-Gi-Oh! TRADING CARD GAME you can take part in the <BR>exciting card game action seen in the family of Yu-Gi-Oh! TV and <BR>comic mega-hits."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:71
@@ -270,11 +236,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:83
 msgid ""
-"This is a separate Deck of cards you can use to change your Deck <BR>during a Match. After "
-"each Duel in a Match, you can swap any card <BR>from your Side Deck with a card from your "
-"Deck and/or Extra Deck to                   <BR>customize your strategy against your "
-"opponent. The number of cards in <BR>your Side Decks must not exceed 15. The number of cards "
-"in your Side <BR>Deck before and after you swap any cards must be exactly the same.  "
+"This is a separate Deck of cards you can use to change your Deck <BR>during a Match. After each Duel in a Match, you can swap any card <BR>from your Side Deck with a card from your Deck and/or Extra"
+" Deck to                   <BR>customize your strategy against your opponent. The number of cards in <BR>your Side Decks must not exceed 15. The number of cards in your Side <BR>Deck before and "
+"after you swap any cards must be exactly the same.  "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:84
@@ -282,9 +246,7 @@ msgid "These cards are not counted towards the 40-card minimum limit \\ <BR>of y
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:85
-msgid ""
-"The Extra Deck can contain Xyz Monsters, Synchro Monsters and <BR>Fusion Monsters, in any "
-"combination."
+msgid "The Extra Deck can contain Xyz Monsters, Synchro Monsters and <BR>Fusion Monsters, in any combination."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:86
@@ -292,28 +254,19 @@ msgid "You can have up to 15 cards in the Extra Deck."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:87
-msgid ""
-"This Deck consists of Xyz Monsters, Synchro Monsters and Fusion <BR>Monsters, which can be "
-"used during the game if you meet certain <BR>requirements. The rules for Extra Decks are: "
+msgid "This Deck consists of Xyz Monsters, Synchro Monsters and Fusion <BR>Monsters, which can be used during the game if you meet certain <BR>requirements. The rules for Extra Decks are: "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:88
-msgid ""
-"Try to keep your Deck close to the 40-card minimum. Having a Deck <BR>with too many cards "
-"makes it hard to draw your best cards when you <BR>need them. This Deck is called your Main "
-"Deck."
+msgid "Try to keep your Deck close to the 40-card minimum. Having a Deck <BR>with too many cards makes it hard to draw your best cards when you <BR>need them. This Deck is called your Main Deck."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:89
-msgid ""
-"Also, some cards are Forbidden, Limited or Semi-Limited in ofﬁcial <BR>tournaments. (See "
-"page 45 for details.)"
+msgid "Also, some cards are Forbidden, Limited or Semi-Limited in ofﬁcial <BR>tournaments. (See page 45 for details.)"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:90
-msgid ""
-"You can only have up to 3 copies of the same card in your Deck, <BR>Extra Deck and Side Deck "
-"combined."
+msgid "You can only have up to 3 copies of the same card in your Deck, <BR>Extra Deck and Side Deck combined."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:91
@@ -325,42 +278,32 @@ msgid "Assemble your favorite cards into a Deck that follows these rules: "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:95
-msgid ""
-"Plastic sleeves can prevent your cards <BR>from getting bent or scratched. If you <BR>use "
-"card sleeves, they all have to be <BR>the same so your cards aren’t marked."
+msgid "Plastic sleeves can prevent your cards <BR>from getting bent or scratched. If you <BR>use card sleeves, they all have to be <BR>the same so your cards aren’t marked."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:96
 msgid ""
-"LP changes quickly during a Duel. It’s <BR>smart to use a calculator to keep track <BR>of "
-"your LP. During important Duels, <BR>you should track your LP on paper as <BR>well to be "
-"extra-careful."
+"LP changes quickly during a Duel. It’s <BR>smart to use a calculator to keep track <BR>of your LP. During important Duels, <BR>you should track your LP on paper as <BR>well to be extra-careful."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:97
 msgid ""
-"Tokens are used to represent <BR>monsters that can be created by card <BR>effects. Any "
-"object used for a Token <BR>needs to have two distinct ways to <BR>place it that can clearly "
-"indicate the <BR>monster’s battle position. (See page <BR>45 for details.)"
+"Tokens are used to represent <BR>monsters that can be created by card <BR>effects. Any object used for a Token <BR>needs to have two distinct ways to <BR>place it that can clearly indicate the "
+"<BR>monster’s battle position. (See page <BR>45 for details.)"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:98
 msgid ""
-"Some cards will require markers <BR>(called counters) to keep track of <BR>things like the "
-"number of turns, or a <BR>card’s power level. You can use small <BR>objects like glass "
-"beads, paper clips, <BR>or pennies for the counters, which are <BR>then placed on these face-"
-"up cards."
+"Some cards will require markers <BR>(called counters) to keep track of <BR>things like the number of turns, or a <BR>card’s power level. You can use small <BR>objects like glass beads, paper clips, "
+"<BR>or pennies for the counters, which are <BR>then placed on these face-up cards."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:99
-msgid ""
-"Just like the coin, there are some <BR>cards that need a die roll. If you play <BR>with "
-"these, have a standard die ready <BR>with numbers 1 through 6."
+msgid "Just like the coin, there are some <BR>cards that need a die roll. If you play <BR>with these, have a standard die ready <BR>with numbers 1 through 6."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:100
-msgid ""
-"Some cards require a coin toss. If you <BR>play with these, have a coin ready to <BR>ﬂip."
+msgid "Some cards require a coin toss. If you <BR>play with these, have a coin ready to <BR>ﬂip."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:101
@@ -389,10 +332,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:112
 msgid ""
-"This is where you put your monsters that are Summoned to <BR>the ﬁeld by special methods "
-"from the Extra Deck, like Link <BR>Monsters and Fusion Monsters. Normally, each player can "
-"<BR>only use 1 of these zones. A monster placed in this zone <BR>does not count towards the "
-"5-monster limit of your Main <BR>Monster Zone."
+"This is where you put your monsters that are Summoned to <BR>the ﬁeld by special methods from the Extra Deck, like Link <BR>Monsters and Fusion Monsters. Normally, each player can <BR>only use 1 of "
+"these zones. A monster placed in this zone <BR>does not count towards the 5-monster limit of your Main <BR>Monster Zone."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:113
@@ -401,71 +342,53 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:114
 msgid ""
-"Place your Extra Deck face-down in this space. You can <BR>look at the cards in your own "
-"Extra Deck during the game. <BR>During a Duel, Extra Deck Monsters may be Summoned <BR>to "
-"the ﬁeld from here using special methods. Pendulum <BR>Monster Cards that would be sent from "
-"the ﬁeld to the <BR>Graveyard are placed face-up here. "
+"Place your Extra Deck face-down in this space. You can <BR>look at the cards in your own Extra Deck during the game. <BR>During a Duel, Extra Deck Monsters may be Summoned <BR>to the ﬁeld from here "
+"using special methods. Pendulum <BR>Monster Cards that would be sent from the ﬁeld to the <BR>Graveyard are placed face-up here. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:115
 msgid ""
-"Special Spell Cards called Field Spell Cards are played here. <BR>Each player can have 1 "
-"Field Spell Card on their own side <BR>of the ﬁeld. To use another Field Spell, send your "
-"previous <BR>one to the Graveyard. Field Spell Cards do not count <BR>towards the 5-card "
-"limit of your Spell & Trap Zone."
+"Special Spell Cards called Field Spell Cards are played here. <BR>Each player can have 1 Field Spell Card on their own side <BR>of the ﬁeld. To use another Field Spell, send your previous <BR>one to"
+" the Graveyard. Field Spell Cards do not count <BR>towards the 5-card limit of your Spell & Trap Zone."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:116
 msgid ""
-"Your Deck is placed face-down in this space. You draw cards <BR>from here to add to your "
-"hand. If a card effect requires you <BR>to reveal cards from your Deck, or look through it, "
-"shufﬂe <BR>it and put it back in this space afterwards."
+"Your Deck is placed face-down in this space. You draw cards <BR>from here to add to your hand. If a card effect requires you <BR>to reveal cards from your Deck, or look through it, shufﬂe <BR>it and"
+" put it back in this space afterwards."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:117
 msgid ""
-"When Monster Cards are destroyed, and when Spell & <BR>Trap Cards are used, they’re sent "
-"face-up to this space. <BR>The contents of both players’ Graveyards are public "
-"<BR>knowledge, and your opponent can look through yours at <BR>any time during the Duel. The "
-"order of the cards in the <BR>Graveyard should not be changed. Graveyard is shortened <BR>in "
-"the card text to “GY”."
+"When Monster Cards are destroyed, and when Spell & <BR>Trap Cards are used, they’re sent face-up to this space. <BR>The contents of both players’ Graveyards are public <BR>knowledge, and your "
+"opponent can look through yours at <BR>any time during the Duel. The order of the cards in the <BR>Graveyard should not be changed. Graveyard is shortened <BR>in the card text to “GY”."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:118
 msgid ""
-"This is where you put Spell & Trap Cards. You can have up to <BR>5 cards here. You place "
-"them here face-up to activate them, <BR>or place them face-down. Pendulum Monster Cards can "
-"be <BR>activated in the leftmost and rightmost zones as Spells. This <BR>causes the zone you "
-"use to also become a Pendulum Zone <BR>for as long as the Pendulum Monster Card is there. "
-"(See <BR>page 23 for details on Pendulum Monster Cards.)"
+"This is where you put Spell & Trap Cards. You can have up to <BR>5 cards here. You place them here face-up to activate them, <BR>or place them face-down. Pendulum Monster Cards can be <BR>activated "
+"in the leftmost and rightmost zones as Spells. This <BR>causes the zone you use to also become a Pendulum Zone <BR>for as long as the Pendulum Monster Card is there. (See <BR>page 23 for details on "
+"Pendulum Monster Cards.)"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:119
 msgid ""
-"This is where you put your monsters when they’re played.<BR>You can have up to 5 cards here. "
-"There are 3 ways to <BR>position your Monster Cards: face-up Attack Position, <BR>face-up "
-"Defense Position, and face-down Defense Position. <BR>Place the card upright for Attack "
-"Position, and sideways <BR>for Defense Position."
+"This is where you put your monsters when they’re played.<BR>You can have up to 5 cards here. There are 3 ways to <BR>position your Monster Cards: face-up Attack Position, <BR>face-up Defense "
+"Position, and face-down Defense Position. <BR>Place the card upright for Attack Position, and sideways <BR>for Defense Position."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:120
-msgid ""
-"You can also Duel without using the Game Mat as <BR>long as you remember where to place the "
-"cards."
+msgid "You can also Duel without using the Game Mat as <BR>long as you remember where to place the cards."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:121
 msgid ""
-"Each Duelist needs their own Game Mat; place <BR>them together while Dueling. This combined "
-"space <BR>is known as “the ﬁeld.” The Game Mat contained <BR>in this product is just for "
-"your half of the ﬁeld. <BR>The cards you “control” are the cards on your side <BR>of the "
-"ﬁeld."
+"Each Duelist needs their own Game Mat; place <BR>them together while Dueling. This combined space <BR>is known as “the ﬁeld.” The Game Mat contained <BR>in this product is just for your half of the "
+"ﬁeld. <BR>The cards you “control” are the cards on your side <BR>of the ﬁeld."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:122
-msgid ""
-"The Game Mat helps you organize your cards <BR>during a Duel. When you use your cards you "
-"place <BR>them on the Game Mat. Different kinds of cards <BR>are placed in different Zones."
+msgid "The Game Mat helps you organize your cards <BR>during a Duel. When you use your cards you place <BR>them on the Game Mat. Different kinds of cards <BR>are placed in different Zones."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:123
@@ -490,34 +413,24 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:145
 msgid ""
-"Card effects are written here, describing the monster’s special <BR>abilities and how to use "
-"them. Normally, the effects of monsters <BR>cannot be used while they are Set face-down on "
-"the ﬁeld. Yellow <BR>Normal Monster Cards do not have effects, and have a description <BR>of "
-"them written here that does not affect the game."
+"Card effects are written here, describing the monster’s special <BR>abilities and how to use them. Normally, the effects of monsters <BR>cannot be used while they are Set face-down on the ﬁeld. "
+"Yellow <BR>Normal Monster Cards do not have effects, and have a description <BR>of them written here that does not affect the game."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:146
-msgid ""
-"ATK is a monster’s Attack Points and DEF is a monster’s Defense <BR>Points. High Attack and "
-"Defense Points are good when battling! "
+msgid "ATK is a monster’s Attack Points and DEF is a monster’s Defense <BR>Points. High Attack and Defense Points are good when battling! "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:147
-msgid ""
-"A card’s identiﬁcation number is found here. This number is useful <BR>for collecting, and "
-"for sorting your collection. "
+msgid "A card’s identiﬁcation number is found here. This number is useful <BR>for collecting, and for sorting your collection. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:148
-msgid ""
-"Monsters are divided into various Types. Some monsters with <BR>speciﬁc abilities will have "
-"additional information here too, next to <BR>their Type."
+msgid "Monsters are divided into various Types. Some monsters with <BR>speciﬁc abilities will have additional information here too, next to <BR>their Type."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:149
-msgid ""
-"Every monster has an Attribute. <BR>This Attribute is sometimes <BR>important for card "
-"effects."
+msgid "Every monster has an Attribute. <BR>This Attribute is sometimes <BR>important for card effects."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:150 SD_RuleBook_EN_10.ai:409 SD_RuleBook_EN_10.ai:434
@@ -528,13 +441,11 @@ msgstr ""
 msgid "ATK (Attack Points) / DEF (Defense Points)"
 msgstr ""
 
-#: SD_RuleBook_EN_10.ai:152 SD_RuleBook_EN_10.ai:160 SD_RuleBook_EN_10.ai:408
-#: SD_RuleBook_EN_10.ai:436
+#: SD_RuleBook_EN_10.ai:152 SD_RuleBook_EN_10.ai:160 SD_RuleBook_EN_10.ai:408 SD_RuleBook_EN_10.ai:436
 msgid "Card Number"
 msgstr ""
 
-#: SD_RuleBook_EN_10.ai:153 SD_RuleBook_EN_10.ai:164 SD_RuleBook_EN_10.ai:410
-#: SD_RuleBook_EN_10.ai:438
+#: SD_RuleBook_EN_10.ai:153 SD_RuleBook_EN_10.ai:164 SD_RuleBook_EN_10.ai:410 SD_RuleBook_EN_10.ai:438
 msgid "Type"
 msgstr ""
 
@@ -558,8 +469,7 @@ msgstr ""
 msgid "Level"
 msgstr ""
 
-#: SD_RuleBook_EN_10.ai:163 SD_RuleBook_EN_10.ai:170 SD_RuleBook_EN_10.ai:411
-#: SD_RuleBook_EN_10.ai:435
+#: SD_RuleBook_EN_10.ai:163 SD_RuleBook_EN_10.ai:170 SD_RuleBook_EN_10.ai:411 SD_RuleBook_EN_10.ai:435
 msgid "Card Name"
 msgstr ""
 
@@ -572,15 +482,11 @@ msgid "Card"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:168
-msgid ""
-"Count the number of stars here <BR>to ﬁnd out the monster’s Level. <BR>For Xyz Monsters, the "
-"number <BR>of stars is the Rank of the <BR>monster, and is on left.  "
+msgid "Count the number of stars here <BR>to ﬁnd out the monster’s Level. <BR>For Xyz Monsters, the number <BR>of stars is the Rank of the <BR>monster, and is on left.  "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:169
-msgid ""
-"This is the card’s name. When a <BR>card name is mentioned in card <BR>text it appears in "
-"quotations. If <BR>cards have the same name, they <BR>are considered to be the same <BR>card."
+msgid "This is the card’s name. When a <BR>card name is mentioned in card <BR>text it appears in quotations. If <BR>cards have the same name, they <BR>are considered to be the same <BR>card."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:171 SD_RuleBook_EN_10.ai:172
@@ -611,8 +517,7 @@ msgstr ""
 msgid "DARK "
 msgstr ""
 
-#: SD_RuleBook_EN_10.ai:197 SD_RuleBook_EN_10.ai:219 SD_RuleBook_EN_10.ai:223
-#: SD_RuleBook_EN_10.ai:227 SD_RuleBook_EN_10.ai:232
+#: SD_RuleBook_EN_10.ai:197 SD_RuleBook_EN_10.ai:219 SD_RuleBook_EN_10.ai:223 SD_RuleBook_EN_10.ai:227 SD_RuleBook_EN_10.ai:232
 msgid "Example"
 msgstr ""
 
@@ -622,10 +527,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:199
 msgid ""
-"This effect is active while the Effect Monster Card is face-up on <BR>the ﬁeld. The effect "
-"starts when the face-up monster appears <BR>on the ﬁeld, and ends once that monster is gone "
-"or is no longer <BR>face-up; there is no trigger for its activation. These monsters <BR>are "
-"most useful if you have a strategy to protect them while <BR>they are on the ﬁeld."
+"This effect is active while the Effect Monster Card is face-up on <BR>the ﬁeld. The effect starts when the face-up monster appears <BR>on the ﬁeld, and ends once that monster is gone or is no longer"
+" <BR>face-up; there is no trigger for its activation. These monsters <BR>are most useful if you have a strategy to protect them while <BR>they are on the ﬁeld."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:200
@@ -653,9 +556,7 @@ msgid "• Continuous Effect "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:206
-msgid ""
-"An Effect Monster is a monster <BR>that has special abilities.<BR>The effects of these "
-"monsters <BR>are split into four categories:"
+msgid "An Effect Monster is a monster <BR>that has special abilities.<BR>The effects of these monsters <BR>are split into four categories:"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:207
@@ -668,24 +569,19 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:211
 msgid ""
-"These are basic Monster Cards <BR>without special abilities. Many <BR>Normal Monsters have "
-"higher <BR>Attack Points and Defense <BR>Points than Effect Monsters, <BR>instead of having "
-"special <BR>abilities. "
+"These are basic Monster Cards <BR>without special abilities. Many <BR>Normal Monsters have higher <BR>Attack Points and Defense <BR>Points than Effect Monsters, <BR>instead of having special "
+"<BR>abilities. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:212
 msgid ""
-"There are many kinds of Monster Cards. This game is more than a <BR>simple slugfest, so "
-"monsters with high Attack and Defense Points will <BR>not be enough. There are also monsters "
-"with strong special effects <BR>even though their ATK and DEF points are low. Therefore, "
-"your <BR>success in a Duel depends on how skillfully you can make use of the <BR>different "
-"kinds of cards. Let’s take a look at the different kinds of <BR>monsters."
+"There are many kinds of Monster Cards. This game is more than a <BR>simple slugfest, so monsters with high Attack and Defense Points will <BR>not be enough. There are also monsters with strong "
+"special effects <BR>even though their ATK and DEF points are low. Therefore, your <BR>success in a Duel depends on how skillfully you can make use of the <BR>different kinds of cards. Let’s take a "
+"look at the different kinds of <BR>monsters."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:213
-msgid ""
-"Monster Cards are used to battle and defeat your opponent. Battles <BR>between Monster Cards "
-"are the foundation of any Duel."
+msgid "Monster Cards are used to battle and defeat your opponent. Battles <BR>between Monster Cards are the foundation of any Duel."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:214
@@ -698,11 +594,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:221
 msgid ""
-"Flip effect is a part of the Trigger Effect.<BR>This is an effect that is activated when a "
-"face-down card is <BR>ﬂipped face-up. This can happen when it is Flip Summoned, <BR>attacked "
-"while face-down, or ﬂipped face-up by a card effect. <BR>These effects start with the word "
-"“FLIP:” on the card. When <BR>you have a face-down monster, your opponent must be wary "
-"<BR>because they don’t know if it has a Flip effect or not. "
+"Flip effect is a part of the Trigger Effect.<BR>This is an effect that is activated when a face-down card is <BR>ﬂipped face-up. This can happen when it is Flip Summoned, <BR>attacked while face-"
+"down, or ﬂipped face-up by a card effect. <BR>These effects start with the word “FLIP:” on the card. When <BR>you have a face-down monster, your opponent must be wary <BR>because they don’t know if "
+"it has a Flip effect or not. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:222
@@ -710,16 +604,13 @@ msgid "Flip Effect "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:224
-msgid ""
-"When this card is destroyed by battle and sent to the <BR>Graveyard: Target 1 card on the "
-"ﬁeld; destroy that target."
+msgid "When this card is destroyed by battle and sent to the <BR>Graveyard: Target 1 card on the ﬁeld; destroy that target."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:225
 msgid ""
-"These effects are activated at speciﬁc times, such as “during <BR>the Standby Phase” or "
-"“when this monster is destroyed”. These <BR>cards can make for some great combos, but it’s "
-"easier for your <BR>opponent to predict what will happen, so they might try to stop <BR>you."
+"These effects are activated at speciﬁc times, such as “during <BR>the Standby Phase” or “when this monster is destroyed”. These <BR>cards can make for some great combos, but it’s easier for your "
+"<BR>opponent to predict what will happen, so they might try to stop <BR>you."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:226
@@ -727,9 +618,7 @@ msgid "Trigger Effect"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:228
-msgid ""
-"When an effect is activated (Quick Effect):<BR>You can target 1 card in your Graveyard; "
-"Special Summon it."
+msgid "When an effect is activated (Quick Effect):<BR>You can target 1 card in your Graveyard; Special Summon it."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:229
@@ -738,10 +627,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:230
 msgid ""
-"These are special monster effects that you can activate even <BR>during your opponent’s "
-"turn. These types of effects have a <BR>Spell Speed of 2, even though all other monster "
-"effects have a <BR>Spell Speed of 1. (See Spell Speed, page 41.) Since it’s difﬁcult for "
-"<BR>your opponent to predict these cards, they can give them an <BR>unexpected surprise."
+"These are special monster effects that you can activate even <BR>during your opponent’s turn. These types of effects have a <BR>Spell Speed of 2, even though all other monster effects have a "
+"<BR>Spell Speed of 1. (See Spell Speed, page 41.) Since it’s difﬁcult for <BR>your opponent to predict these cards, they can give them an <BR>unexpected surprise."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:231
@@ -754,11 +641,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:234
 msgid ""
-"You use this type of effect just by declaring its activation during <BR>your Main Phase. "
-"(See Turn Structure, page 30.) There are some <BR>Ignition Effects that have a cost to "
-"activate, like discarding cards <BR>from your hand, Tributing a monster, or paying LP. "
-"Because you <BR>can choose when to activate this type of effect, it’s easy to <BR>create "
-"combos with them."
+"You use this type of effect just by declaring its activation during <BR>your Main Phase. (See Turn Structure, page 30.) There are some <BR>Ignition Effects that have a cost to activate, like "
+"discarding cards <BR>from your hand, Tributing a monster, or paying LP. Because you <BR>can choose when to activate this type of effect, it’s easy to <BR>create combos with them."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:235
@@ -770,29 +654,21 @@ msgid "LINK MONSTERS"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:242
-msgid ""
-"If there is a Link Monster already on the ﬁeld, you can Link Summon a <BR>monster in one of "
-"your zones it points to. "
+msgid "If there is a Link Monster already on the ﬁeld, you can Link Summon a <BR>monster in one of your zones it points to. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:243
-msgid ""
-"If 2 Extra Monster Zones are available, you can choose either one to <BR>Summon your "
-"monster. "
+msgid "If 2 Extra Monster Zones are available, you can choose either one to <BR>Summon your monster. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:244
-msgid ""
-"Place the Link Monster from your Extra Deck in the Extra Monster <BR>Zone, or one of your "
-"Main Monster Zones that another Link <BR>Monster is pointing to."
+msgid "Place the Link Monster from your Extra Deck in the Extra Monster <BR>Zone, or one of your Main Monster Zones that another Link <BR>Monster is pointing to."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:245
 msgid ""
-"During your Main Phase, declare that you are Link Summoning, <BR>send a number of face-up "
-"monsters from your ﬁeld to the <BR>Graveyard equal to the Link Rating of that Link Monster. "
-"They <BR>must also match the material requirements listed in the monster’s <BR>“recipe” "
-"written on the card."
+"During your Main Phase, declare that you are Link Summoning, <BR>send a number of face-up monsters from your ﬁeld to the <BR>Graveyard equal to the Link Rating of that Link Monster. They <BR>must "
+"also match the material requirements listed in the monster’s <BR>“recipe” written on the card."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:246
@@ -804,9 +680,7 @@ msgid "HOW TO LINK SUMMON"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:248
-msgid ""
-"Materials you need to Summon this <BR>Monster. Use this “recipe” printed here <BR>to Link "
-"Summon this monster."
+msgid "Materials you need to Summon this <BR>Monster. Use this “recipe” printed here <BR>to Link Summon this monster."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:249
@@ -819,9 +693,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:251
 msgid ""
-"its effects on cards or zones that its lit-up, <BR>red Link Arrows point to. When a Link "
-"<BR>Monster’s red arrow points to a monster, <BR>those monsters are “linked”. When two "
-"<BR>Link Monsters have red arrows that point <BR>at each other, they are “co-linked”.  "
+"its effects on cards or zones that its lit-up, <BR>red Link Arrows point to. When a Link <BR>Monster’s red arrow points to a monster, <BR>those monsters are “linked”. When two <BR>Link Monsters have"
+" red arrows that point <BR>at each other, they are “co-linked”.  "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:252
@@ -846,10 +719,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:257
 msgid ""
-"A Link Monster is a new kind of <BR>monster with the ability to increase <BR>the number of "
-"monsters you can <BR>Summon from your Extra Deck. <BR>In addition to the 1 Extra Monster "
-"<BR>Zone you can usually use, you can <BR>also Summon monsters from the <BR>Extra Deck to "
-"any of your Main <BR>Monster Zones that has a Link <BR>Monster’s red arrow pointing to it."
+"A Link Monster is a new kind of <BR>monster with the ability to increase <BR>the number of monsters you can <BR>Summon from your Extra Deck. <BR>In addition to the 1 Extra Monster <BR>Zone you can "
+"usually use, you can <BR>also Summon monsters from the <BR>Extra Deck to any of your Main <BR>Monster Zones that has a Link <BR>Monster’s red arrow pointing to it."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:261 SD_RuleBook_EN_10.ai:262
@@ -861,21 +732,15 @@ msgid "OR"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:269
-msgid ""
-"      The materials match any other requirements in the materials line <BR>      (such as "
-"only Effect Monsters, or only a speciﬁc Type of monster)."
+msgid "      The materials match any other requirements in the materials line <BR>      (such as only Effect Monsters, or only a speciﬁc Type of monster)."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:270
-msgid ""
-"     The number of materials you use meets the number speciﬁed in <BR>     the materials "
-"line or “recipe”."
+msgid "     The number of materials you use meets the number speciﬁed in <BR>     the materials line or “recipe”."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:271
-msgid ""
-"     The amount of materials you use matches the Link Rating (Link <BR>     Monsters count "
-"as 1 OR their own Link Rating)."
+msgid "     The amount of materials you use matches the Link Rating (Link <BR>     Monsters count as 1 OR their own Link Rating)."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:272
@@ -883,30 +748,23 @@ msgid "Remember that when you Link Summon, you need to meet 3 goals:"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:273
-msgid ""
-"As long as the materials meet the requirements of the Link Monster <BR>you want to Summon, "
-"you can use a Token or Trap Card that is <BR>treated as a monster as the Link Material."
+msgid "As long as the materials meet the requirements of the Link Monster <BR>you want to Summon, you can use a Token or Trap Card that is <BR>treated as a monster as the Link Material."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:274
 msgid ""
-"If you take control of your opponent’s monster in the Extra Monster <BR>Zone, it moves to "
-"your Main Monster Zone. When it goes back to <BR>your opponent, it goes to their Main "
-"Monster Zone, not the Extra <BR>Monster Zone."
+"If you take control of your opponent’s monster in the Extra Monster <BR>Zone, it moves to your Main Monster Zone. When it goes back to <BR>your opponent, it goes to their Main Monster Zone, not the "
+"Extra <BR>Monster Zone."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:275
 msgid ""
-"If your opponent has a monster in the Extra Monster Zone, it’s still <BR>a monster they "
-"control so you can’t attack directly. You have to <BR>battle and destroy all their monsters "
-"ﬁrst, including the one in the <BR>Extra Monster Zone."
+"If your opponent has a monster in the Extra Monster Zone, it’s still <BR>a monster they control so you can’t attack directly. You have to <BR>battle and destroy all their monsters ﬁrst, including "
+"the one in the <BR>Extra Monster Zone."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:276
-msgid ""
-"Link Monsters have no DEF and cannot ever be in Defense Position. <BR>They can’t be changed "
-"to Defense Position by a card effect. They <BR>can’t even be ﬂipped into face-down Defense "
-"Position."
+msgid "Link Monsters have no DEF and cannot ever be in Defense Position. <BR>They can’t be changed to Defense Position by a card effect. They <BR>can’t even be ﬂipped into face-down Defense Position."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:277
@@ -919,12 +777,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:279
 msgid ""
-"Monsters Summoned from the <BR>Extra Deck normally have to go in <BR>the Extra Monster Zone. "
-"But Link <BR>Monsters open up more zones <BR>for you to use, because every <BR>Main Monster "
-"Zone that a Link <BR>Monster points to can also be <BR>used to Summon monsters from your "
-"Extra Deck. Monsters that <BR>started in the Extra Deck, but later end up in the Graveyard "
-"(or <BR>are banished) and are Summoned from there, also go in the Main <BR>Monster Zones "
-"(and don’t need a Link Monster to point to them). "
+"Monsters Summoned from the <BR>Extra Deck normally have to go in <BR>the Extra Monster Zone. But Link <BR>Monsters open up more zones <BR>for you to use, because every <BR>Main Monster Zone that a "
+"Link <BR>Monster points to can also be <BR>used to Summon monsters from your Extra Deck. Monsters that <BR>started in the Extra Deck, but later end up in the Graveyard (or <BR>are banished) and are "
+"Summoned from there, also go in the Main <BR>Monster Zones (and don’t need a Link Monster to point to them). "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:280
@@ -933,12 +788,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:281
 msgid ""
-"Normally, 1 monster equals 1 Link Material. But when you use a <BR>Link Monster as material "
-"for another Link Summon, you can count <BR>it as either 1 monster, or as a number of "
-"monsters equal to its <BR>Link Rating. For example, if you want to Summon a Link 3 monster "
-"<BR>that requires 2 or more materials in its “recipe”, you can either <BR>use 3 monsters "
-"(each counts as 1 material) or else a Link 2 Link <BR>Monster (counts as 1 or 2 materials) "
-"and a second monster (counts <BR>as 1 material). "
+"Normally, 1 monster equals 1 Link Material. But when you use a <BR>Link Monster as material for another Link Summon, you can count <BR>it as either 1 monster, or as a number of monsters equal to its"
+" <BR>Link Rating. For example, if you want to Summon a Link 3 monster <BR>that requires 2 or more materials in its “recipe”, you can either <BR>use 3 monsters (each counts as 1 material) or else a "
+"Link 2 Link <BR>Monster (counts as 1 or 2 materials) and a second monster (counts <BR>as 1 material). "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:282
@@ -958,9 +810,7 @@ msgid "You can Special Summon <BR>monsters with<BR>Levels 2, 3, 4, 5, 6 and 7."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:289
-msgid ""
-"number that determines which monsters <BR>you can Special Summon during a <BR>Pendulum "
-"Summon. The Pendulum Scale <BR>of this card is 1."
+msgid "number that determines which monsters <BR>you can Special Summon during a <BR>Pendulum Summon. The Pendulum Scale <BR>of this card is 1."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:290
@@ -972,9 +822,7 @@ msgid "Pendulum Scale"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:292
-msgid ""
-"card as a regular Monster Card, this is <BR>its effect. Some Pendulum Monster Cards <BR>may "
-"not have monster effects."
+msgid "card as a regular Monster Card, this is <BR>its effect. Some Pendulum Monster Cards <BR>may not have monster effects."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:293 SD_RuleBook_EN_10.ai:301
@@ -991,37 +839,27 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:296
 msgid ""
-"Whenever one of your Pendulum Monster Cards on the ﬁeld <BR>(regardless of which Zone it is "
-"in, or even if it is a monster or <BR>not) would be sent to the Graveyard, place it face-up "
-"on your <BR>Extra Deck instead. You can Pendulum Summon it back to the ﬁeld <BR>later! "
-"Monsters Pendulum Summoned from the Extra Deck must be <BR>Summoned to the Extra Monster "
-"Zone or your Main Monster Zone <BR>pointed to by a Link Monster."
+"Whenever one of your Pendulum Monster Cards on the ﬁeld <BR>(regardless of which Zone it is in, or even if it is a monster or <BR>not) would be sent to the Graveyard, place it face-up on your "
+"<BR>Extra Deck instead. You can Pendulum Summon it back to the ﬁeld <BR>later! Monsters Pendulum Summoned from the Extra Deck must be <BR>Summoned to the Extra Monster Zone or your Main Monster Zone"
+" <BR>pointed to by a Link Monster."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:297
 msgid ""
-"Check the Pendulum Scales on the sides of your 2 <BR>Pendulum Monster Cards, then Special "
-"Summon as many <BR>monsters as you want from your hand and as many face-<BR>up Pendulum "
-"Monsters from your Extra Deck, whose <BR>Levels are in between those Pendulum Scales."
+"Check the Pendulum Scales on the sides of your 2 <BR>Pendulum Monster Cards, then Special Summon as many <BR>monsters as you want from your hand and as many face-<BR>up Pendulum Monsters from your "
+"Extra Deck, whose <BR>Levels are in between those Pendulum Scales."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:298
-msgid ""
-"After you have one in each Pendulum Zone, once <BR>per turn during your Main Phase, declare "
-"that you’re <BR>Pendulum Summoning. "
+msgid "After you have one in each Pendulum Zone, once <BR>per turn during your Main Phase, declare that you’re <BR>Pendulum Summoning. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:299
-msgid ""
-"During your Main Phase, activate Pendulum Monster <BR>Cards as Spell Cards in your leftmost "
-"and rightmost Spell <BR>& Trap Zones. These Spell & Trap Zones also become <BR>Pendulum "
-"Zones."
+msgid "During your Main Phase, activate Pendulum Monster <BR>Cards as Spell Cards in your leftmost and rightmost Spell <BR>& Trap Zones. These Spell & Trap Zones also become <BR>Pendulum Zones."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:300
-msgid ""
-"card as a Spell Card in your Pendulum <BR>Zone, this is its effect. Some Pendulum "
-"<BR>Monster Cards may not have Pendulum<BR>Effects."
+msgid "card as a Spell Card in your Pendulum <BR>Zone, this is its effect. Some Pendulum <BR>Monster Cards may not have Pendulum<BR>Effects."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:302
@@ -1030,10 +868,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:303
 msgid ""
-"Pendulum Monster Cards <BR>are a unique kind of card <BR>that blurs the line between "
-"<BR>Monsters and Spells! They can <BR>be Summoned as monsters to <BR>attack or defend, or "
-"you can <BR>activate them as Spell Cards <BR>in your Pendulum Zones to <BR>activate extra "
-"special abilities <BR>and allow you to Pendulum <BR>Summon!"
+"Pendulum Monster Cards <BR>are a unique kind of card <BR>that blurs the line between <BR>Monsters and Spells! They can <BR>be Summoned as monsters to <BR>attack or defend, or you can <BR>activate "
+"them as Spell Cards <BR>in your Pendulum Zones to <BR>activate extra special abilities <BR>and allow you to Pendulum <BR>Summon!"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:307 SD_RuleBook_EN_10.ai:308
@@ -1045,15 +881,11 @@ msgid "HOW TO XYZ SUMMON"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:315
-msgid ""
-"When an Xyz Monster tells you to “detach” a material, take one of the <BR>stacked Xyz "
-"Material cards beneath your Xyz Monster and put it in the <BR>Graveyard."
+msgid "When an Xyz Monster tells you to “detach” a material, take one of the <BR>stacked Xyz Material cards beneath your Xyz Monster and put it in the <BR>Graveyard."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:316
-msgid ""
-"If there is a Link Monster on the ﬁeld, you can Xyz Summon a monster in <BR>one of your "
-"zones it points to."
+msgid "If there is a Link Monster on the ﬁeld, you can Xyz Summon a monster in <BR>one of your zones it points to."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:317
@@ -1065,34 +897,25 @@ msgid "LEVEL 4"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:320
-msgid ""
-"Take the Xyz Monster from your Extra Deck and <BR>put it on top of the stacked Xyz Materials "
-"in the <BR>Extra Monster Zone in face-up Attack or Defense <BR>Position."
+msgid "Take the Xyz Monster from your Extra Deck and <BR>put it on top of the stacked Xyz Materials in the <BR>Extra Monster Zone in face-up Attack or Defense <BR>Position."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:321
-msgid ""
-"During your Main Phase, declare that you are <BR>Xyz Summoning and stack the Xyz Materials "
-"on <BR>top of each other."
+msgid "During your Main Phase, declare that you are <BR>Xyz Summoning and stack the Xyz Materials on <BR>top of each other."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:322
-msgid ""
-"Choose an Xyz Monster from your Extra Deck <BR>that you have the right Xyz Materials for. "
-"The <BR>Xyz Materials should be face-up on your ﬁeld."
+msgid "Choose an Xyz Monster from your Extra Deck <BR>that you have the right Xyz Materials for. The <BR>Xyz Materials should be face-up on your ﬁeld."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:323
-msgid ""
-"Xyz Summoning is your cool and easy way to Special Summon <BR>Xyz Monsters from your Extra "
-"Deck. Here’s how to do it!"
+msgid "Xyz Summoning is your cool and easy way to Special Summon <BR>Xyz Monsters from your Extra Deck. Here’s how to do it!"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:324
 msgid ""
-"These are the Xyz Materials <BR>you need to Summon this <BR>monster. You use 2 Level 4 "
-"<BR>Monsters as the Xyz Materials <BR>to Summon this monster. Xyz <BR>Materials must be face-"
-"up <BR>before you can use them."
+"These are the Xyz Materials <BR>you need to Summon this <BR>monster. You use 2 Level 4 <BR>Monsters as the Xyz Materials <BR>to Summon this monster. Xyz <BR>Materials must be face-up <BR>before you "
+"can use them."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:325
@@ -1100,9 +923,7 @@ msgid "Xyz Materials -"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:326
-msgid ""
-"This is the Rank of your Xyz <BR>Monster. Xyz Monsters have <BR>Ranks instead of Levels. "
-"<BR>Stronger Xyz Monsters have <BR>higher Ranks. This is a Rank <BR>4 Xyz Monster."
+msgid "This is the Rank of your Xyz <BR>Monster. Xyz Monsters have <BR>Ranks instead of Levels. <BR>Stronger Xyz Monsters have <BR>higher Ranks. This is a Rank <BR>4 Xyz Monster."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:327
@@ -1115,10 +936,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:329
 msgid ""
-"Xyz Monsters (pronounced “ik-<BR>seez”) are a powerful kind of <BR>monster! You can Summon "
-"an <BR>Xyz Monster whenever you <BR>control monsters that are the <BR>same Level. Xyz "
-"Monsters start <BR>in your Extra Deck, not in your <BR>Main Deck, and wait for you to "
-"<BR>call them into action."
+"Xyz Monsters (pronounced “ik-<BR>seez”) are a powerful kind of <BR>monster! You can Summon an <BR>Xyz Monster whenever you <BR>control monsters that are the <BR>same Level. Xyz Monsters start <BR>in"
+" your Extra Deck, not in your <BR>Main Deck, and wait for you to <BR>call them into action."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:330 SD_RuleBook_EN_10.ai:331
@@ -1130,30 +949,23 @@ msgid "TUNER MONSTERS FOR SYNCHRO SUMMON"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:336
-msgid ""
-"If there is a Link Monster on the ﬁeld, you can Synchro Summon a <BR>monster in one of your "
-"zones it points to."
+msgid "If there is a Link Monster on the ﬁeld, you can Synchro Summon a <BR>monster in one of your zones it points to."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:337
 msgid ""
-"After sending the Synchro Materials from the ﬁeld to the <BR>Graveyard, take the Synchro "
-"Monster from your Extra Deck and <BR>play it in the Extra Monster Zone in face-up Attack or "
-"Defense <BR>Position. "
+"After sending the Synchro Materials from the ﬁeld to the <BR>Graveyard, take the Synchro Monster from your Extra Deck and <BR>play it in the Extra Monster Zone in face-up Attack or Defense "
+"<BR>Position. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:338
-msgid ""
-"After double-checking the Level of the Synchro Monster you <BR>want, send the face-up "
-"Synchro Materials from your ﬁeld to the <BR>Graveyard."
+msgid "After double-checking the Level of the Synchro Monster you <BR>want, send the face-up Synchro Materials from your ﬁeld to the <BR>Graveyard."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:339
 msgid ""
-"In order to Synchro Summon <BR>a Synchro Monster, you need <BR>1 Tuner (look for “Tuner” "
-"next <BR>to its Type). The Tuner monster <BR>and other face-up monsters you <BR>use for the "
-"Synchro Summon are <BR>called Synchro Materials. The <BR>sum of their Levels is the Level "
-"<BR>of Synchro Monster you can <BR>Summon."
+"In order to Synchro Summon <BR>a Synchro Monster, you need <BR>1 Tuner (look for “Tuner” next <BR>to its Type). The Tuner monster <BR>and other face-up monsters you <BR>use for the Synchro Summon "
+"are <BR>called Synchro Materials. The <BR>sum of their Levels is the Level <BR>of Synchro Monster you can <BR>Summon."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:340
@@ -1170,9 +982,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:343
 msgid ""
-"During your Main Phase, you can declare a Synchro Summon when <BR>the combined total Levels "
-"of 1 face-up Tuner monster and any <BR>number of other face-up monsters you control are "
-"equal to the <BR>Level of the Synchro Monster you want to Synchro Summon."
+"During your Main Phase, you can declare a Synchro Summon when <BR>the combined total Levels of 1 face-up Tuner monster and any <BR>number of other face-up monsters you control are equal to the "
+"<BR>Level of the Synchro Monster you want to Synchro Summon."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:344
@@ -1181,12 +992,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:345
 msgid ""
-"Synchro Monsters are placed in the <BR>Extra Deck, separate from the Main <BR>Deck. You can "
-"Special Summon a <BR>powerful Synchro Monster to the <BR>ﬁeld in an instant just by using "
-"the <BR>Levels of your monsters. They can <BR>be Synchro Summoned from the <BR>Extra Deck by "
-"sending 1 face-up <BR>“Tuner” monster and any number <BR>of face-up non-Tuner monsters from "
-"<BR>your ﬁeld to the Graveyard, when <BR>the sum of all their Levels is exactly <BR>equal to "
-"the Level of the Synchro <BR>Monster."
+"Synchro Monsters are placed in the <BR>Extra Deck, separate from the Main <BR>Deck. You can Special Summon a <BR>powerful Synchro Monster to the <BR>ﬁeld in an instant just by using the <BR>Levels "
+"of your monsters. They can <BR>be Synchro Summoned from the <BR>Extra Deck by sending 1 face-up <BR>“Tuner” monster and any number <BR>of face-up non-Tuner monsters from <BR>your ﬁeld to the "
+"Graveyard, when <BR>the sum of all their Levels is exactly <BR>equal to the Level of the Synchro <BR>Monster."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:346
@@ -1210,9 +1018,7 @@ msgid "FUSION MONSTERS"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:360
-msgid ""
-"If there is a Link Monster on the ﬁeld, you can Fusion Summon a <BR>monster in one of your "
-"zones it points to. "
+msgid "If there is a Link Monster on the ﬁeld, you can Fusion Summon a <BR>monster in one of your zones it points to. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:361
@@ -1225,64 +1031,52 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:363
 msgid ""
-"After sending the Tributed monsters to the Graveyard, <BR>play the Ritual Monster Card in "
-"your Main Monster <BR>Zone in either face-up Attack or Defense Position. <BR>Finally, place "
-"the Ritual Spell Card in the Graveyard."
+"After sending the Tributed monsters to the Graveyard, <BR>play the Ritual Monster Card in your Main Monster <BR>Zone in either face-up Attack or Defense Position. <BR>Finally, place the Ritual Spell"
+" Card in the Graveyard."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:364
 msgid ""
-"If the activation of the Ritual Spell Card is successful, <BR>Tribute monsters by sending "
-"them from your hand or <BR>the ﬁeld to the Graveyard. The Ritual Spell Card will <BR>list "
-"the required amount to Tribute."
+"If the activation of the Ritual Spell Card is successful, <BR>Tribute monsters by sending them from your hand or <BR>the ﬁeld to the Graveyard. The Ritual Spell Card will <BR>list the required "
+"amount to Tribute."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:365
 msgid ""
-"When you have a Ritual Spell Card, along with the matching Ritual <BR>Monster Card, in your "
-"hand, along with the required Tribute (as <BR>listed on the Ritual Spell Card), you can "
-"activate the Ritual Spell Card, <BR>placing it in the Spell & Trap Zone."
+"When you have a Ritual Spell Card, along with the matching Ritual <BR>Monster Card, in your hand, along with the required Tribute (as <BR>listed on the Ritual Spell Card), you can activate the "
+"Ritual Spell Card, <BR>placing it in the Spell & Trap Zone."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:366
 msgid ""
-"Finally, place your Summoning card in the <BR>Graveyard. (If another card effect causes your "
-"<BR>Fusion Materials to be sent to a place other <BR>than the Graveyard when your Summoning "
-"card <BR>resolves, send them to that other place, but the Fusion Summon still <BR>happens "
-"anyway.)"
+"Finally, place your Summoning card in the <BR>Graveyard. (If another card effect causes your <BR>Fusion Materials to be sent to a place other <BR>than the Graveyard when your Summoning card "
+"<BR>resolves, send them to that other place, but the Fusion Summon still <BR>happens anyway.)"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:367
 msgid ""
-"Send the Fusion Materials to the Graveyard, then <BR>take the appropriate Fusion Monster "
-"from your <BR>Extra Deck and play it in the Extra Monster Zone <BR>in either face-up Attack "
-"or Defense Position. "
+"Send the Fusion Materials to the Graveyard, then <BR>take the appropriate Fusion Monster from your <BR>Extra Deck and play it in the Extra Monster Zone <BR>in either face-up Attack or Defense "
+"Position. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:368
 msgid ""
-"If you have all the Fusion Materials listed <BR>on the Fusion Monster Card, in the places "
-"<BR>speciﬁed on your Summoning card, you can <BR>activate your Summoning card by placing it "
-"in <BR>your Spell & Trap Zone."
+"If you have all the Fusion Materials listed <BR>on the Fusion Monster Card, in the places <BR>speciﬁed on your Summoning card, you can <BR>activate your Summoning card by placing it in <BR>your "
+"Spell & Trap Zone."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:369
 msgid ""
-"Ritual Monsters are special monsters <BR>that are Special Summoned with a <BR>speciﬁc Ritual "
-"Spell Card, along with <BR>a required Tribute. Ritual Monster <BR>Cards are placed in the "
-"Main Deck and <BR>cannot be Summoned unless you have <BR>all the proper cards together in "
-"your <BR>hand or on the ﬁeld. Ritual Monsters <BR>generally have high ATK and DEF and "
-"<BR>some have special abilities, just like <BR>Fusion Monsters."
+"Ritual Monsters are special monsters <BR>that are Special Summoned with a <BR>speciﬁc Ritual Spell Card, along with <BR>a required Tribute. Ritual Monster <BR>Cards are placed in the Main Deck and "
+"<BR>cannot be Summoned unless you have <BR>all the proper cards together in your <BR>hand or on the ﬁeld. Ritual Monsters <BR>generally have high ATK and DEF and <BR>some have special abilities, "
+"just like <BR>Fusion Monsters."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:370
 msgid ""
-"Fusion Monsters are also placed  <BR>in your Extra Deck (not in your  <BR>Main Deck). They "
-"are Summoned  <BR>by using the speciﬁc monsters  <BR>listed on the card (called  <BR>Fusion "
-"Materials) combined  <BR>with a Summoning card like  <BR>Polymerization. They usually "
-"<BR>have special abilities and very <BR>high Attack Points as well. Since <BR>Fusion Summons "
-"require speciﬁc <BR>cards, be sure and include those <BR>necessary cards in your Main "
-"<BR>Deck! "
+"Fusion Monsters are also placed  <BR>in your Extra Deck (not in your  <BR>Main Deck). They are Summoned  <BR>by using the speciﬁc monsters  <BR>listed on the card (called  <BR>Fusion Materials) "
+"combined  <BR>with a Summoning card like  <BR>Polymerization. They usually <BR>have special abilities and very <BR>high Attack Points as well. Since <BR>Fusion Summons require speciﬁc <BR>cards, be "
+"sure and include those <BR>necessary cards in your Main <BR>Deck! "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:371
@@ -1295,10 +1089,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:381
 msgid ""
-"If you Tribute Summon in face-down Defense Position, it is called <BR>a Tribute Set. A "
-"monster Tribute Set on the ﬁeld is NOT considered <BR>Summoned.<BR>Note: When a card "
-"explains a special method to Tribute Summon a <BR>monster, you can also Tribute Set the "
-"monster by the same method."
+"If you Tribute Summon in face-down Defense Position, it is called <BR>a Tribute Set. A monster Tribute Set on the ﬁeld is NOT considered <BR>Summoned.<BR>Note: When a card explains a special method "
+"to Tribute Summon a <BR>monster, you can also Tribute Set the monster by the same method."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:382
@@ -1307,10 +1099,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:383
 msgid ""
-"For monsters that are Level 5 or higher, you must Tribute at least <BR>1 monster you control "
-"before the Normal Summon/Set. This is <BR>called a Tribute Summon. Monsters that are Level 5 "
-"or 6 require                    <BR>1 Tribute and Monsters that are Level 7 or higher "
-"require 2 Tributes."
+"For monsters that are Level 5 or higher, you must Tribute at least <BR>1 monster you control before the Normal Summon/Set. This is <BR>called a Tribute Summon. Monsters that are Level 5 or 6 require"
+"                    <BR>1 Tribute and Monsters that are Level 7 or higher require 2 Tributes."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:384
@@ -1319,13 +1109,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:385
 msgid ""
-"To play a Monster Card from your hand in face-down Defense <BR>Position is called a Normal "
-"Set. A monster Normal Set on the <BR>ﬁeld is NOT considered Summoned. It has been Normal "
-"Set, and <BR>can be Summoned with a Flip Summon or ﬂipped face-up by an <BR>attack or card "
-"effect. Remember, you can only Normal Summon <BR>OR Normal Set (Normal Summon/Set, in "
-"short), once per turn, so <BR>if you Normal Set a monster you cannot also Normal Summon a "
-"<BR>monster that turn.<BR>Note: You cannot play a monster from your hand onto the ﬁeld "
-"<BR>in face-up Defense Position."
+"To play a Monster Card from your hand in face-down Defense <BR>Position is called a Normal Set. A monster Normal Set on the <BR>ﬁeld is NOT considered Summoned. It has been Normal Set, and <BR>can "
+"be Summoned with a Flip Summon or ﬂipped face-up by an <BR>attack or card effect. Remember, you can only Normal Summon <BR>OR Normal Set (Normal Summon/Set, in short), once per turn, so <BR>if you "
+"Normal Set a monster you cannot also Normal Summon a <BR>monster that turn.<BR>Note: You cannot play a monster from your hand onto the ﬁeld <BR>in face-up Defense Position."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:386
@@ -1358,33 +1144,24 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:393
 msgid ""
-"Monsters can also be Special Summoned onto the ﬁeld through the effect <BR>of another card. "
-"This is different from “Special Summon Monsters.” You <BR>cannot use a card effect to "
-"Special Summon those monsters from your <BR>hand, Deck, or the Graveyard unless it was "
-"properly Special Summoned <BR>ﬁrst. For example, if a Synchro Monster is sent from your "
-"Extra Deck <BR>to the Graveyard without being Synchro Summoned, you cannot use a <BR>Spell "
-"Card to Special Summon it from the Graveyard, because Synchro <BR>Monsters have to be "
-"properly Special Summoned ﬁrst, before they can <BR>be Special Summoned by another card’s "
-"effect."
+"Monsters can also be Special Summoned onto the ﬁeld through the effect <BR>of another card. This is different from “Special Summon Monsters.” You <BR>cannot use a card effect to Special Summon those"
+" monsters from your <BR>hand, Deck, or the Graveyard unless it was properly Special Summoned <BR>ﬁrst. For example, if a Synchro Monster is sent from your Extra Deck <BR>to the Graveyard without "
+"being Synchro Summoned, you cannot use a <BR>Spell Card to Special Summon it from the Graveyard, because Synchro <BR>Monsters have to be properly Special Summoned ﬁrst, before they can <BR>be "
+"Special Summoned by another card’s effect."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:394
 msgid ""
-"Some monsters can be played onto the ﬁeld without being Normal <BR>Summoned or Set. This is "
-"called a Special Summon. Pendulum Summons, <BR>Xyz Summons, Synchro Summons, Fusion Summons "
-"and Ritual Summons <BR>are all Special Summons. Some Effect Monsters also have speciﬁc "
-"<BR>conditions that allow you to Special Summon them. Unless otherwise <BR>speciﬁed, a "
-"Special Summoned monster is played onto the ﬁeld in your <BR>choice of face-up Attack "
-"Position or face-up Defense Position."
+"Some monsters can be played onto the ﬁeld without being Normal <BR>Summoned or Set. This is called a Special Summon. Pendulum Summons, <BR>Xyz Summons, Synchro Summons, Fusion Summons and Ritual "
+"Summons <BR>are all Special Summons. Some Effect Monsters also have speciﬁc <BR>conditions that allow you to Special Summon them. Unless otherwise <BR>speciﬁed, a Special Summoned monster is played "
+"onto the ﬁeld in your <BR>choice of face-up Attack Position or face-up Defense Position."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:395
 msgid ""
-"You can change a face-down Defense Position monster into face-<BR>up Attack Position, "
-"without using a card effect. This is called a Flip <BR>Summon. When you Flip Summon, you "
-"cannot change the monster to <BR>face-up Defense Position, only to face-up Attack Position. "
-"A Monster <BR>Card cannot be Flip Summoned in the same turn that it was Set onto <BR>the "
-"ﬁeld. You cannot use most monsters’ effects until they are face-up."
+"You can change a face-down Defense Position monster into face-<BR>up Attack Position, without using a card effect. This is called a Flip <BR>Summon. When you Flip Summon, you cannot change the "
+"monster to <BR>face-up Defense Position, only to face-up Attack Position. A Monster <BR>Card cannot be Flip Summoned in the same turn that it was Set onto <BR>the ﬁeld. You cannot use most monsters’"
+" effects until they are face-up."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:396
@@ -1405,16 +1182,14 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:401
 msgid ""
-"This is the most common way to Summon a monster. Simply play <BR>a Monster Card from your "
-"hand onto the ﬁeld in face-up Attack <BR>Position. All Normal Monsters, and most Effect "
-"Monsters (unless <BR>they have a speciﬁc restriction), can be Summoned in this way."
+"This is the most common way to Summon a monster. Simply play <BR>a Monster Card from your hand onto the ﬁeld in face-up Attack <BR>Position. All Normal Monsters, and most Effect Monsters (unless "
+"<BR>they have a speciﬁc restriction), can be Summoned in this way."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:402
 msgid ""
-"There are several ways to play monsters onto the ﬁeld. These ways <BR>can be categorized "
-"into 2 groups: actions that can be done only once <BR>per turn, and actions that can be done "
-"multiple times per turn. "
+"There are several ways to play monsters onto the ﬁeld. These ways <BR>can be categorized into 2 groups: actions that can be done only once <BR>per turn, and actions that can be done multiple times "
+"per turn. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:407 SD_RuleBook_EN_10.ai:437
@@ -1446,22 +1221,15 @@ msgid "Equip"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:418
-msgid ""
-"There are 6 types of icons that represent special properties a Spell or <BR>Trap Card may "
-"have. Spell and Trap Cards without an icon are called <BR>Normal Spell Cards or Normal Trap "
-"Cards."
+msgid "There are 6 types of icons that represent special properties a Spell or <BR>Trap Card may have. Spell and Trap Cards without an icon are called <BR>Normal Spell Cards or Normal Trap Cards."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:419
-msgid ""
-"A card’s identiﬁcation number is <BR>found here. This number is useful <BR>for collecting, "
-"and for sorting <BR>your collection."
+msgid "A card’s identiﬁcation number is <BR>found here. This number is useful <BR>for collecting, and for sorting <BR>your collection."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:420
-msgid ""
-"Each card’s activation <BR>conditions and effects are <BR>provided here. Read the card "
-"<BR>description carefully and follow <BR>the instructions."
+msgid "Each card’s activation <BR>conditions and effects are <BR>provided here. Read the card <BR>description carefully and follow <BR>the instructions."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:421
@@ -1473,16 +1241,11 @@ msgid "symbol and a Trap Card has the <BR>“TRAP "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:426
-msgid ""
-"Instead of having an Attribute <BR>symbol like Monster Cards, a <BR>Spell Card has the "
-"“SPELL "
+msgid "Instead of having an Attribute <BR>symbol like Monster Cards, a <BR>Spell Card has the “SPELL "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:427
-msgid ""
-"Remember, cards with the same <BR>name are considered to be the <BR>same card, and you can "
-"only <BR>have up to 3 copies of the same <BR>card in your Main Deck and Side <BR>Deck "
-"combined."
+msgid "Remember, cards with the same <BR>name are considered to be the <BR>same card, and you can only <BR>have up to 3 copies of the same <BR>card in your Main Deck and Side <BR>Deck combined."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:433
@@ -1498,65 +1261,48 @@ msgid "Spell & Trap Cards"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:452
-msgid ""
-"These cards may be placed face-<BR>down in the Field Zone, but are not <BR>active until "
-"ﬂipped face-up."
+msgid "These cards may be placed face-<BR>down in the Field Zone, but are not <BR>active until ﬂipped face-up."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:453
 msgid ""
-"These cards go in your Field Zone <BR>and stay there. Each player can have <BR>1 Field Spell "
-"Card on their own side <BR>of the ﬁeld. To use another Field <BR>Spell, send your previous "
-"one to the <BR>Graveyard. Many Field Spell effects <BR>apply to BOTH players. "
+"These cards go in your Field Zone <BR>and stay there. Each player can have <BR>1 Field Spell Card on their own side <BR>of the ﬁeld. To use another Field <BR>Spell, send your previous one to the "
+"<BR>Graveyard. Many Field Spell effects <BR>apply to BOTH players. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:454
 msgid ""
-"These cards give an extra effect to <BR>1 face-up monster of your choice <BR>(either your "
-"own or your opponent’s, <BR>depending on the card). They remain <BR>on the ﬁeld after they "
-"are activated. <BR>The Equip Spell Card affects only <BR>1 monster (called the equipped "
-"<BR>monster), but still occupies one of <BR>your Spell & Trap Zones. If possible, <BR>place "
-"it in the zone directly behind <BR>the equipped monster to help you <BR>remember. If the "
-"equipped monster <BR>is destroyed, ﬂipped face-down, or <BR>removed from the ﬁeld, its Equip "
-"<BR>Cards are destroyed."
+"These cards give an extra effect to <BR>1 face-up monster of your choice <BR>(either your own or your opponent’s, <BR>depending on the card). They remain <BR>on the ﬁeld after they are activated. "
+"<BR>The Equip Spell Card affects only <BR>1 monster (called the equipped <BR>monster), but still occupies one of <BR>your Spell & Trap Zones. If possible, <BR>place it in the zone directly behind "
+"<BR>the equipped monster to help you <BR>remember. If the equipped monster <BR>is destroyed, ﬂipped face-down, or <BR>removed from the ﬁeld, its Equip <BR>Cards are destroyed."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:455
 msgid ""
-"These are special Spell Cards that can be activated during any Phase of <BR>your turn, not "
-"just your Main Phase. You can also activate them during your <BR>opponent’s turn if you Set "
-"the card face-down ﬁrst, but then you cannot <BR>activate the card in the same turn you Set "
-"it."
+"These are special Spell Cards that can be activated during any Phase of <BR>your turn, not just your Main Phase. You can also activate them during your <BR>opponent’s turn if you Set the card face-"
+"down ﬁrst, but then you cannot <BR>activate the card in the same turn you Set it."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:456
 msgid ""
-"These cards remain on the ﬁeld once they are activated, and their effect <BR>continues while "
-"the card stays face-up on the ﬁeld. By using Continuous Spell <BR>Cards, you can create "
-"lasting positive effects with a single card, which is great <BR>but there’s the chance that "
-"the opponent will remove it from the ﬁeld before <BR>you beneﬁt from the effect."
+"These cards remain on the ﬁeld once they are activated, and their effect <BR>continues while the card stays face-up on the ﬁeld. By using Continuous Spell <BR>Cards, you can create lasting positive "
+"effects with a single card, which is great <BR>but there’s the chance that the opponent will remove it from the ﬁeld before <BR>you beneﬁt from the effect."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:457
-msgid ""
-"These Spell Cards are used to perform Ritual Summons. Use these cards <BR>in the same way as "
-"you would use Normal Spell Cards."
+msgid "These Spell Cards are used to perform Ritual Summons. Use these cards <BR>in the same way as you would use Normal Spell Cards."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:458
 msgid ""
-"Normal Spell Cards have single-use effects. To use a Normal Spell Card, <BR>announce its "
-"activation to your opponent, placing it face-up on the ﬁeld. <BR>If the activation succeeds, "
-"then you resolve the effect written on the card. <BR>After resolving the effect, send the "
-"card to the Graveyard. "
+"Normal Spell Cards have single-use effects. To use a Normal Spell Card, <BR>announce its activation to your opponent, placing it face-up on the ﬁeld. <BR>If the activation succeeds, then you resolve"
+" the effect written on the card. <BR>After resolving the effect, send the card to the Graveyard. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:459
 msgid ""
-"Spell Cards can normally be <BR>activated only during your Main <BR>Phase, and help you out "
-"with <BR>different effects. Spell Cards <BR>have many powerful effects, <BR>like destroying "
-"other cards or <BR>strengthening monsters. Save <BR>these cards in your hand until <BR>you "
-"can get the best results out <BR>of them."
+"Spell Cards can normally be <BR>activated only during your Main <BR>Phase, and help you out with <BR>different effects. Spell Cards <BR>have many powerful effects, <BR>like destroying other cards or"
+" <BR>strengthening monsters. Save <BR>these cards in your hand until <BR>you can get the best results out <BR>of them."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:460
@@ -1593,22 +1339,16 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:473
 msgid ""
-"Spell Cards can be Set face-down on the ﬁeld like Trap Cards. <BR>However, the rules for the "
-"two types of cards are different. <BR>Spell Cards can be activated during the Main Phases "
-"even in the <BR>same turn that you Set them (except for Quick-Play Spell Cards). <BR>Setting "
-"them does not allow you to use them on your opponent’s <BR>turn; they still can only be "
-"activated during your Main Phase.<BR>You can Set a Spell Card face-down on the ﬁeld to bluff "
-"your <BR>opponent into thinking you have a powerful Trap."
+"Spell Cards can be Set face-down on the ﬁeld like Trap Cards. <BR>However, the rules for the two types of cards are different. <BR>Spell Cards can be activated during the Main Phases even in the "
+"<BR>same turn that you Set them (except for Quick-Play Spell Cards). <BR>Setting them does not allow you to use them on your opponent’s <BR>turn; they still can only be activated during your Main "
+"Phase.<BR>You can Set a Spell Card face-down on the ﬁeld to bluff your <BR>opponent into thinking you have a powerful Trap."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:474
 msgid ""
-"Trap Cards will help you out with <BR>different effects, just like Spell <BR>Cards. The big "
-"difference between <BR>them is that you can activate Trap <BR>Cards during your opponent’s "
-"turn. <BR>Many Spell Cards have effects useful <BR>for offense, but Trap Cards have <BR>the "
-"ability to surprise the opponent <BR>by disrupting their attacks and <BR>strategies. Using "
-"Trap Cards can <BR>sometimes be tricky, since your <BR>opponent might have to do certain "
-"<BR>things before you can unleash them."
+"Trap Cards will help you out with <BR>different effects, just like Spell <BR>Cards. The big difference between <BR>them is that you can activate Trap <BR>Cards during your opponent’s turn. <BR>Many "
+"Spell Cards have effects useful <BR>for offense, but Trap Cards have <BR>the ability to surprise the opponent <BR>by disrupting their attacks and <BR>strategies. Using Trap Cards can <BR>sometimes "
+"be tricky, since your <BR>opponent might have to do certain <BR>things before you can unleash them."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:475
@@ -1617,15 +1357,10 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:477
 msgid ""
-"Before you can activate a Trap Card, you must Set it on the ﬁeld ﬁrst. <BR>You cannot "
-"activate a Trap in the same turn that you Set it, but you <BR>can activate it at any time "
-"after that—starting from the beginning of <BR>the next turn.<BR>Normal Trap Cards have "
-"single-use effects and once their effects are <BR>resolved, they will be sent to the "
-"Graveyard, just like Normal Spell <BR>Cards. They are also similar to Normal Spell Cards "
-"because once <BR>activated, their effects are not likely to be stopped. However, your "
-"<BR>opponent can destroy your face-down Trap Cards on the turn they were <BR>Set, or before "
-"the time is right to activate them. Because of this, you <BR>must be smart about how you use "
-"your Trap Cards."
+"Before you can activate a Trap Card, you must Set it on the ﬁeld ﬁrst. <BR>You cannot activate a Trap in the same turn that you Set it, but you <BR>can activate it at any time after that—starting "
+"from the beginning of <BR>the next turn.<BR>Normal Trap Cards have single-use effects and once their effects are <BR>resolved, they will be sent to the Graveyard, just like Normal Spell <BR>Cards. "
+"They are also similar to Normal Spell Cards because once <BR>activated, their effects are not likely to be stopped. However, your <BR>opponent can destroy your face-down Trap Cards on the turn they "
+"were <BR>Set, or before the time is right to activate them. Because of this, you <BR>must be smart about how you use your Trap Cards."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:478
@@ -1634,10 +1369,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:479
 msgid ""
-"These Trap Cards are normally activated in response to the activation of other <BR>cards, "
-"and may have abilities like negating the effects of those cards. These <BR>types of Traps "
-"are effective against Normal Spell Cards or Normal Trap Cards, <BR>which are otherwise hard "
-"to stop, however many Counter Trap Cards require <BR>a cost to activate them."
+"These Trap Cards are normally activated in response to the activation of other <BR>cards, and may have abilities like negating the effects of those cards. These <BR>types of Traps are effective "
+"against Normal Spell Cards or Normal Trap Cards, <BR>which are otherwise hard to stop, however many Counter Trap Cards require <BR>a cost to activate them."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:480
@@ -1646,11 +1379,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:481
 msgid ""
-"Just like Continuous Spell Cards, Continuous Trap Cards remain on the ﬁeld <BR>once they are "
-"activated and their effects continue while they are face-up on the <BR>ﬁeld. Some Continuous "
-"Trap Cards have abilities similar to the Ignition Effects or <BR>Trigger Effects that can be "
-"found on Effect Monster Cards. <BR>Continuous Trap Cards can have effects that limit your "
-"opponent’s options, or <BR>that slowly damage your opponent’s LP."
+"Just like Continuous Spell Cards, Continuous Trap Cards remain on the ﬁeld <BR>once they are activated and their effects continue while they are face-up on the <BR>ﬁeld. Some Continuous Trap Cards "
+"have abilities similar to the Ignition Effects or <BR>Trigger Effects that can be found on Effect Monster Cards. <BR>Continuous Trap Cards can have effects that limit your opponent’s options, or "
+"<BR>that slowly damage your opponent’s LP."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:482
@@ -1663,33 +1394,24 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:488
 msgid ""
-"Play rock-paper-scissors or ﬂip a coin. The winner decides to go ﬁrst or second <BR>in the "
-"Duel. For your next Duels, the loser of the previous Duel decides who goes <BR>ﬁrst. If the "
-"previous Duel ended in a tie, determine who starts ﬁrst in the next <BR>Duel with another "
-"coin toss, etc.<BR>Finally, draw 5 cards from the top of your Deck; this is your starting "
-"hand."
+"Play rock-paper-scissors or ﬂip a coin. The winner decides to go ﬁrst or second <BR>in the Duel. For your next Duels, the loser of the previous Duel decides who goes <BR>ﬁrst. If the previous Duel "
+"ended in a tie, determine who starts ﬁrst in the next <BR>Duel with another coin toss, etc.<BR>Finally, draw 5 cards from the top of your Deck; this is your starting hand."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:489
 msgid ""
-"Both players show each other their Side Decks, and record the number of cards in <BR>it, "
-"also conﬁrming that they have 15 or fewer cards (the cards should be counted <BR>face-down). "
-"If you exchange cards between your Side and Main Decks after a <BR>Duel, count the cards of "
-"your Side Deck for your opponent again to show that the <BR>number of your cards remain the "
-"same."
+"Both players show each other their Side Decks, and record the number of cards in <BR>it, also conﬁrming that they have 15 or fewer cards (the cards should be counted <BR>face-down). If you exchange "
+"cards between your Side and Main Decks after a <BR>Duel, count the cards of your Side Deck for your opponent again to show that the <BR>number of your cards remain the same."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:490
 msgid ""
-"After cutting, place the Decks face-down in the proper Deck Zones on the ﬁeld. <BR>If using "
-"an Extra Deck with Xyz Monsters, Synchro Monsters or Fusion Monsters, <BR>place it face-down "
-"in the Extra Deck Zone."
+"After cutting, place the Decks face-down in the proper Deck Zones on the ﬁeld. <BR>If using an Extra Deck with Xyz Monsters, Synchro Monsters or Fusion Monsters, <BR>place it face-down in the Extra "
+"Deck Zone."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:491
-msgid ""
-"After greeting your opponent, shufﬂe your Deck thoroughly. Then you may <BR>shufﬂe and cut "
-"your opponent’s Deck (be careful when touching your opponent’s <BR>cards)."
+msgid "After greeting your opponent, shufﬂe your Deck thoroughly. Then you may <BR>shufﬂe and cut your opponent’s Deck (be careful when touching your opponent’s <BR>cards)."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:492
@@ -1713,9 +1435,7 @@ msgid "Preparing to Duel"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:498
-msgid ""
-"Before starting a Duel, follow these 4 steps. Also, make sure you <BR>have all your extra "
-"items that your Deck might need, like a coin or <BR>counters."
+msgid "Before starting a Duel, follow these 4 steps. Also, make sure you <BR>have all your extra items that your Deck might need, like a coin or <BR>counters."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:499
@@ -1724,10 +1444,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:500
 msgid ""
-"Each player starts a Duel with 8000 LP (Life Points). You win a Duel <BR>if: you reduce your "
-"opponent’s LP to 0; if your opponent is unable <BR>to draw a card; or if a card’s special "
-"effect says you win. If you and <BR>your opponent both reach 0 LP at the same time, the Duel "
-"is declared <BR>a draw."
+"Each player starts a Duel with 8000 LP (Life Points). You win a Duel <BR>if: you reduce your opponent’s LP to 0; if your opponent is unable <BR>to draw a card; or if a card’s special effect says you"
+" win. If you and <BR>your opponent both reach 0 LP at the same time, the Duel is declared <BR>a draw."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:501
@@ -1736,18 +1454,16 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:502
 msgid ""
-"A single game is called a Duel, and a Duel ends when one player wins <BR>or the game ends in "
-"a draw. Duels are played in sets of 3 called a <BR>Match, and the winner of best 2-out-of-3 "
-"wins the Match."
+"A single game is called a Duel, and a Duel ends when one player wins <BR>or the game ends in a draw. Duels are played in sets of 3 called a <BR>Match, and the winner of best 2-out-of-3 wins the "
+"Match."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:503 SD_RuleBook_EN_10.ai:504
 msgid "Let the Duel Begin!"
 msgstr ""
 
-#: SD_RuleBook_EN_10.ai:505 SD_RuleBook_EN_10.ai:510 SD_RuleBook_EN_10.ai:541
-#: SD_RuleBook_EN_10.ai:542 SD_RuleBook_EN_10.ai:568 SD_RuleBook_EN_10.ai:569
-#: SD_RuleBook_EN_10.ai:585 SD_RuleBook_EN_10.ai:586 SD_RuleBook_EN_10.ai:614
+#: SD_RuleBook_EN_10.ai:505 SD_RuleBook_EN_10.ai:510 SD_RuleBook_EN_10.ai:541 SD_RuleBook_EN_10.ai:542 SD_RuleBook_EN_10.ai:568 SD_RuleBook_EN_10.ai:569 SD_RuleBook_EN_10.ai:585
+#: SD_RuleBook_EN_10.ai:586 SD_RuleBook_EN_10.ai:614
 msgid "How To Play"
 msgstr ""
 
@@ -1756,16 +1472,13 @@ msgid "Draw Phase"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:516
-msgid ""
-"IMPORTANT: The player who goes ﬁrst cannot draw during the <BR>Draw Phase of their ﬁrst turn."
+msgid "IMPORTANT: The player who goes ﬁrst cannot draw during the <BR>Draw Phase of their ﬁrst turn."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:517
 msgid ""
-"This is the ﬁrst phase. The player whose turn it is (the “turn player”) <BR>draws 1 card "
-"from the top of their Deck. A player with no cards left in <BR>their Deck and unable to draw "
-"loses the Duel. After you draw, Trap <BR>Cards or Quick-Play Spell Cards can be activated "
-"before proceeding <BR>to the Standby Phase."
+"This is the ﬁrst phase. The player whose turn it is (the “turn player”) <BR>draws 1 card from the top of their Deck. A player with no cards left in <BR>their Deck and unable to draw loses the Duel. "
+"After you draw, Trap <BR>Cards or Quick-Play Spell Cards can be activated before proceeding <BR>to the Standby Phase."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:518 SD_RuleBook_EN_10.ai:524
@@ -1790,9 +1503,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:523
 msgid ""
-"Some cards have effects that activate, or costs you must pay, in the <BR>Standby Phase. If "
-"you do not have any of these cards on the ﬁeld, you <BR>can still activate Trap Cards or "
-"Quick-Play Spell Cards before moving <BR>on to your Main Phase 1."
+"Some cards have effects that activate, or costs you must pay, in the <BR>Standby Phase. If you do not have any of these cards on the ﬁeld, you <BR>can still activate Trap Cards or Quick-Play Spell "
+"Cards before moving <BR>on to your Main Phase 1."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:525
@@ -1841,16 +1553,13 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:545
 msgid ""
-"This is when you play most of your cards: you can Normal Summon, <BR>Set, or change the "
-"battle position of a monster, activate a card’s <BR>effect, and Set Spell and Trap Cards. "
-"These actions can be done in <BR>any order you want, but some actions have restrictions."
+"This is when you play most of your cards: you can Normal Summon, <BR>Set, or change the battle position of a monster, activate a card’s <BR>effect, and Set Spell and Trap Cards. These actions can be"
+" done in <BR>any order you want, but some actions have restrictions."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:546
 msgid ""
-"The Battle Phase is split into       <BR>4 steps and is conducted in the <BR>order shown in "
-"the diagram. The <BR>Battle Step and Damage Step are <BR>repeated each time you attack "
-"<BR>with a monster."
+"The Battle Phase is split into       <BR>4 steps and is conducted in the <BR>order shown in the diagram. The <BR>Battle Step and Damage Step are <BR>repeated each time you attack <BR>with a monster."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:547
@@ -1886,9 +1595,7 @@ msgid "Set Spell Cards and Trap Cards"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:555
-msgid ""
-"You can Set Spell and Trap Cards face-down in your Spell & Trap <BR>Zone during this phase, "
-"as long as you have space."
+msgid "You can Set Spell and Trap Cards face-down in your Spell & Trap <BR>Zone during this phase, as long as you have space."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:556 SD_RuleBook_EN_10.ai:557
@@ -1897,9 +1604,7 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:558
 msgid ""
-"You can activate Spell and Trap Cards, or the effects of Spell, Trap, <BR>or Effect Monster "
-"Cards as many times as you want during this <BR>phase, as long as you can keep paying any "
-"costs involved. "
+"You can activate Spell and Trap Cards, or the effects of Spell, Trap, <BR>or Effect Monster Cards as many times as you want during this <BR>phase, as long as you can keep paying any costs involved. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:559
@@ -1908,12 +1613,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:560
 msgid ""
-"This includes Flip Summoning a monster, or changing the position <BR>of a face-up monster to "
-"face-up Attack or Defense Position. You <BR>can change the position of each monster you "
-"control, except in <BR>three cases.  1. You cannot change the battle position of a monster "
-"<BR>that was played onto the ﬁeld this turn.  2. You cannot change it <BR>in Main Phase 2 if "
-"the monster attacked during the Battle Phase. <BR>3. You cannot change it if you have "
-"already changed its battle <BR>position once this turn."
+"This includes Flip Summoning a monster, or changing the position <BR>of a face-up monster to face-up Attack or Defense Position. You <BR>can change the position of each monster you control, except "
+"in <BR>three cases.  1. You cannot change the battle position of a monster <BR>that was played onto the ﬁeld this turn.  2. You cannot change it <BR>in Main Phase 2 if the monster attacked during "
+"the Battle Phase. <BR>3. You cannot change it if you have already changed its battle <BR>position once this turn."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:561
@@ -1926,21 +1628,15 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:564
 msgid ""
-"There is no limit to the number of times you can Flip Summon or <BR>Special Summon during a "
-"turn, but you can only Normal Summon <BR>or Set a monster (including a Tribute Summon) once "
-"per turn. "
+"There is no limit to the number of times you can Flip Summon or <BR>Special Summon during a turn, but you can only Normal Summon <BR>or Set a monster (including a Tribute Summon) once per turn. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:566
-msgid ""
-"IMPORTANT: The player who goes ﬁrst cannot conduct their <BR>Battle Phase on their ﬁrst turn."
+msgid "IMPORTANT: The player who goes ﬁrst cannot conduct their <BR>Battle Phase on their ﬁrst turn."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:567
-msgid ""
-"Now it’s time to battle with your Monster Cards! This phase is divided <BR>into steps."
-"<BR>You do not have to conduct a Battle Phase every turn, even if you <BR>have a monster on "
-"the ﬁeld. "
+msgid "Now it’s time to battle with your Monster Cards! This phase is divided <BR>into steps.<BR>You do not have to conduct a Battle Phase every turn, even if you <BR>have a monster on the ﬁeld. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:572
@@ -1957,26 +1653,20 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:576
 msgid ""
-"After you’ve resolved all your battles by repeating the Battle and <BR>Damage Steps, and you "
-"have no more monsters you want to attack <BR>with, announce to your opponent that you are "
-"ending your Battle <BR>Phase."
+"After you’ve resolved all your battles by repeating the Battle and <BR>Damage Steps, and you have no more monsters you want to attack <BR>with, announce to your opponent that you are ending your "
+"Battle <BR>Phase."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:578
 msgid ""
-"In this step, the players calculate the result of the battle and <BR>whatever damage is "
-"done. (See “Monster Battle Rules”, page 37.) <BR>After ﬁnishing the Damage Step, return to "
-"the Battle Step."
+"In this step, the players calculate the result of the battle and <BR>whatever damage is done. (See “Monster Battle Rules”, page 37.) <BR>After ﬁnishing the Damage Step, return to the Battle Step."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:580
 msgid ""
-"Select 1 monster on your side of the ﬁeld to attack with, and 1 of <BR>your opponent’s "
-"monsters as your attack target, and then declare <BR>the attack. If your opponent does not "
-"have any monsters on the <BR>ﬁeld, you can attack directly. Play then proceeds to the Damage "
-"<BR>Step. Afterwards, the attacking player returns to the Battle Step, <BR>and repeats this "
-"procedure. Each face-up Attack Position monster <BR>you control is allowed 1 attack per "
-"turn. You do not have to attack <BR>with a monster if you don’t want to."
+"Select 1 monster on your side of the ﬁeld to attack with, and 1 of <BR>your opponent’s monsters as your attack target, and then declare <BR>the attack. If your opponent does not have any monsters on"
+" the <BR>ﬁeld, you can attack directly. Play then proceeds to the Damage <BR>Step. Afterwards, the attacking player returns to the Battle Step, <BR>and repeats this procedure. Each face-up Attack "
+"Position monster <BR>you control is allowed 1 attack per turn. You do not have to attack <BR>with a monster if you don’t want to."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:581
@@ -1985,9 +1675,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:582
 msgid ""
-"This step starts the Battle Phase. The turn player should<BR>announce “I’m entering the "
-"Battle Phase.” Remember, the player <BR>who goes ﬁrst cannot conduct a Battle Phase in their "
-"very ﬁrst <BR>turn."
+"This step starts the Battle Phase. The turn player should<BR>announce “I’m entering the Battle Phase.” Remember, the player <BR>who goes ﬁrst cannot conduct a Battle Phase in their very ﬁrst "
+"<BR>turn."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:583
@@ -1996,14 +1685,10 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:584
 msgid ""
-"After you’ve announced your <BR>attacking monster and the attack <BR>target monster during a "
-"Battle <BR>Step, the attack target might be <BR>removed from the ﬁeld, or a new <BR>monster "
-"may be played onto the <BR>opponent’s side of the ﬁeld before <BR>the Damage Step, due to a "
-"card’s <BR>effect. This causes a “Replay.” <BR>When this occurs, you can choose <BR>to "
-"attack with the same monster <BR>again, or choose to attack with a <BR>different monster, or "
-"choose not <BR>to attack at all. Note that if you <BR>attack with a different monster, "
-"<BR>the ﬁrst monster is still considered <BR>to have declared an attack, and it <BR>cannot "
-"attack again this turn."
+"After you’ve announced your <BR>attacking monster and the attack <BR>target monster during a Battle <BR>Step, the attack target might be <BR>removed from the ﬁeld, or a new <BR>monster may be played"
+" onto the <BR>opponent’s side of the ﬁeld before <BR>the Damage Step, due to a card’s <BR>effect. This causes a “Replay.” <BR>When this occurs, you can choose <BR>to attack with the same monster "
+"<BR>again, or choose to attack with a <BR>different monster, or choose not <BR>to attack at all. Note that if you <BR>attack with a different monster, <BR>the ﬁrst monster is still considered <BR>to"
+" have declared an attack, and it <BR>cannot attack again this turn."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:589
@@ -2015,9 +1700,7 @@ msgid "For more info on the Damage Step, please visit:"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:591
-msgid ""
-"During the Damage Step, there are limits on what cards you can <BR>activate. Also, during "
-"the Damage Step, Flip effects resolve a bit <BR>differently than they normally do."
+msgid "During the Damage Step, there are limits on what cards you can <BR>activate. Also, during the Damage Step, Flip effects resolve a bit <BR>differently than they normally do."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:592
@@ -2026,9 +1709,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:593
 msgid ""
-"When an attacked monster is ﬂipped face-up, any Flip effects are <BR>activated and resolved "
-"after damage calculation. If you need to select <BR>a monster for the Flip effect to target, "
-"you cannot target a monster <BR>that has already been destroyed during damage calculation."
+"When an attacked monster is ﬂipped face-up, any Flip effects are <BR>activated and resolved after damage calculation. If you need to select <BR>a monster for the Flip effect to target, you cannot "
+"target a monster <BR>that has already been destroyed during damage calculation."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:594
@@ -2036,9 +1718,7 @@ msgid "Attacking a Face-Down Card"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:595
-msgid ""
-"If you attack a face-down Defense Position monster, ﬂip the card to <BR>face-up Defense "
-"Position in the Damage Step. Now you can see the <BR>monster’s DEF and then calculate damage."
+msgid "If you attack a face-down Defense Position monster, ﬂip the card to <BR>face-up Defense Position in the Damage Step. Now you can see the <BR>monster’s DEF and then calculate damage."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:596
@@ -2047,9 +1727,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:597
 msgid ""
-"During the Damage Step, you can only activate Counter Trap Cards, <BR>or cards with effects "
-"that directly change a monster’s ATK or DEF. <BR>Also, these cards can only be activated up "
-"until the start of damage <BR>calculation."
+"During the Damage Step, you can only activate Counter Trap Cards, <BR>or cards with effects that directly change a monster’s ATK or DEF. <BR>Also, these cards can only be activated up until the "
+"start of damage <BR>calculation."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:598
@@ -2065,9 +1744,7 @@ msgid "Possible Other Actions <BR>in this Phase"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:601
-msgid ""
-"Resolve card effects which<BR>activate in this phase<BR>Discard if you have more "
-"than            <BR>6 cards in hand"
+msgid "Resolve card effects which<BR>activate in this phase<BR>Discard if you have more than            <BR>6 cards in hand"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:602
@@ -2088,21 +1765,15 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:608
 msgid ""
-"Announce the end of your turn, and if there are any cards on the <BR>ﬁeld which say “…during "
-"the End Phase…” in their text, resolve <BR>those effects in this phase. If you have more "
-"than 6 cards in your <BR>hand at the end of this phase, select and discard cards to the "
-"<BR>Graveyard until you only have 6 cards in your hand."
+"Announce the end of your turn, and if there are any cards on the <BR>ﬁeld which say “…during the End Phase…” in their text, resolve <BR>those effects in this phase. If you have more than 6 cards in "
+"your <BR>hand at the end of this phase, select and discard cards to the <BR>Graveyard until you only have 6 cards in your hand."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:610
 msgid ""
-"If you conducted your Battle Phase, your turn moves to Main Phase 2 <BR>afterwards. The "
-"actions a player can perform in this phase are the same <BR>as in Main Phase 1. However, if "
-"the player already did something in Main <BR>Phase 1 that has a limit to the number of times "
-"it can be done, the player <BR>cannot do it again in Main Phase 2. Consider if you want to "
-"activate and <BR>Set Spell & Trap Cards, or Summon or Set a monster (if you didn’t do that "
-"<BR>in Main Phase 1) based on your situation after the Battle Phase. Use this <BR>phase to "
-"prepare for the opponent’s turn."
+"If you conducted your Battle Phase, your turn moves to Main Phase 2 <BR>afterwards. The actions a player can perform in this phase are the same <BR>as in Main Phase 1. However, if the player already"
+" did something in Main <BR>Phase 1 that has a limit to the number of times it can be done, the player <BR>cannot do it again in Main Phase 2. Consider if you want to activate and <BR>Set Spell & "
+"Trap Cards, or Summon or Set a monster (if you didn’t do that <BR>in Main Phase 1) based on your situation after the Battle Phase. Use this <BR>phase to prepare for the opponent’s turn."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:612 SD_RuleBook_EN_10.ai:613
@@ -2151,59 +1822,46 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:634
 msgid ""
-"If there are no monsters on your opponent’s side of the ﬁeld, you <BR>can attack directly. "
-"The full amount of your attacking monster’s ATK <BR>is subtracted from the opponent’s LP as "
-"battle damage."
+"If there are no monsters on your opponent’s side of the ﬁeld, you <BR>can attack directly. The full amount of your attacking monster’s ATK <BR>is subtracted from the opponent’s LP as battle damage."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:635
 msgid ""
-"When your attacking monster’s ATK is lower than the DEF of <BR>the opponent’s monster, "
-"neither monster is destroyed.<BR>The amount that the opponent’s monster’s DEF exceeds the "
-"<BR>ATK of your attacking monster is subtracted from your LP as <BR>battle damage."
+"When your attacking monster’s ATK is lower than the DEF of <BR>the opponent’s monster, neither monster is destroyed.<BR>The amount that the opponent’s monster’s DEF exceeds the <BR>ATK of your "
+"attacking monster is subtracted from your LP as <BR>battle damage."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:636
-msgid ""
-"When your attacking monster’s ATK is equal to the DEF of the <BR>opponent’s monster, neither "
-"monster is destroyed.<BR>Neither player takes any battle damage."
+msgid "When your attacking monster’s ATK is equal to the DEF of the <BR>opponent’s monster, neither monster is destroyed.<BR>Neither player takes any battle damage."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:637
 msgid ""
-"When your attacking monster’s ATK is higher than the DEF of <BR>the opponent’s monster, the "
-"attacking monster destroys the <BR>opponent’s monster and sends it to the Graveyard. "
-"<BR>Neither player takes any battle damage."
+"When your attacking monster’s ATK is higher than the DEF of <BR>the opponent’s monster, the attacking monster destroys the <BR>opponent’s monster and sends it to the Graveyard. <BR>Neither player "
+"takes any battle damage."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:638
 msgid ""
-"When your attacking monster’s ATK is lower than the ATK of <BR>the opponent’s monster, the "
-"attacking monster is destroyed <BR>and sent to the Graveyard.<BR>The amount that the "
-"opponent’s monster’s ATK exceeds the <BR>ATK of your attacking monster is subtracted from "
-"your LP as <BR>battle damage."
+"When your attacking monster’s ATK is lower than the ATK of <BR>the opponent’s monster, the attacking monster is destroyed <BR>and sent to the Graveyard.<BR>The amount that the opponent’s monster’s "
+"ATK exceeds the <BR>ATK of your attacking monster is subtracted from your LP as <BR>battle damage."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:639
 msgid ""
-"When your attacking monster’s ATK is equal to the ATK of the <BR>opponent’s monster, the "
-"result is considered a tie, and both <BR>monsters are destroyed.<BR>Neither player takes any "
-"battle damage."
+"When your attacking monster’s ATK is equal to the ATK of the <BR>opponent’s monster, the result is considered a tie, and both <BR>monsters are destroyed.<BR>Neither player takes any battle damage."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:640
 msgid ""
-"When your attacking monster’s ATK is higher than the ATK of <BR>the opponent’s monster, the "
-"attacking monster destroys the <BR>opponent’s monster and sends it to the Graveyard. <BR>The "
-"amount that your attacking monster’s ATK exceeds the <BR>ATK of your opponent’s monster is "
-"subtracted from your <BR>opponent’s LP as battle damage."
+"When your attacking monster’s ATK is higher than the ATK of <BR>the opponent’s monster, the attacking monster destroys the <BR>opponent’s monster and sends it to the Graveyard. <BR>The amount that "
+"your attacking monster’s ATK exceeds the <BR>ATK of your opponent’s monster is subtracted from your <BR>opponent’s LP as battle damage."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:641
 msgid ""
-"You calculate battle damage based on the battle position of the <BR>monster you are "
-"attacking. If you attack an Attack Position monster, <BR>compare ATK vs. ATK. If you attack "
-"a Defense Position monster, <BR>compare your monster’s ATK vs. the attacked monster’s DEF. "
+"You calculate battle damage based on the battle position of the <BR>monster you are attacking. If you attack an Attack Position monster, <BR>compare ATK vs. ATK. If you attack a Defense Position "
+"monster, <BR>compare your monster’s ATK vs. the attacked monster’s DEF. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:644 SD_RuleBook_EN_10.ai:645
@@ -2223,9 +1881,7 @@ msgid "Traps (Normal, Continuous), Quick-Play Spells,<BR>Effect Monster’s Quic
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:651
-msgid ""
-"Spells (Normal, Equip, Continuous, Field, Ritual),<BR>Effect Monster’s effects (Ignition, "
-"Trigger, and Flip)"
+msgid "Spells (Normal, Equip, Continuous, Field, Ritual),<BR>Effect Monster’s effects (Ignition, Trigger, and Flip)"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:652 SD_RuleBook_EN_10.ai:676
@@ -2233,9 +1889,7 @@ msgid "Spell Speed 3"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:653
-msgid ""
-"This is the fastest of all Spell Speeds and can be used to respond to <BR>a card of any "
-"Spell Speed. Only another Spell Speed 3 card may be <BR>used to respond to these cards."
+msgid "This is the fastest of all Spell Speeds and can be used to respond to <BR>a card of any Spell Speed. Only another Spell Speed 3 card may be <BR>used to respond to these cards."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:654 SD_RuleBook_EN_10.ai:673
@@ -2243,9 +1897,7 @@ msgid "Spell Speed 2"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:655
-msgid ""
-"These cards can be used to respond to a Spell Speed 1 or 2 effect, and <BR>can typically be "
-"activated during any phase."
+msgid "These cards can be used to respond to a Spell Speed 1 or 2 effect, and <BR>can typically be activated during any phase."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:656
@@ -2254,17 +1906,14 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:657
 msgid ""
-"This is the slowest of all Spell Speeds. These cards cannot be <BR>activated in response to "
-"any other effects. Typically, these effects <BR>cannot be Chain Link 2 or higher, unless "
-"multiple Spell Speed 1 <BR>effects are activated simultaneously."
+"This is the slowest of all Spell Speeds. These cards cannot be <BR>activated in response to any other effects. Typically, these effects <BR>cannot be Chain Link 2 or higher, unless multiple Spell "
+"Speed 1 <BR>effects are activated simultaneously."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:658
 msgid ""
-"Spell, Trap, and Effect Monster effects have different Spell Speeds. <BR>There are Spell "
-"Speeds from 1 to 3. You can only respond with an <BR>effect if it is Spell Speed 2 or "
-"higher, and has an equal or greater Spell <BR>Speed than the effect on the Chain Link before "
-"it."
+"Spell, Trap, and Effect Monster effects have different Spell Speeds. <BR>There are Spell Speeds from 1 to 3. You can only respond with an <BR>effect if it is Spell Speed 2 or higher, and has an "
+"equal or greater Spell <BR>Speed than the effect on the Chain Link before it."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:659
@@ -2273,10 +1922,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:660
 msgid ""
-"Every type of card effect has a Spell Speed between 1 and 3. If you <BR>want to respond to a "
-"card effect in a Chain, you have to use an effect <BR>with Spell Speed 2 or higher, and it "
-"cannot have a lower Spell Speed <BR>than the effect you are responding to. Please see page "
-"41 for an <BR>introduction to each type of card’s Spell Speed. "
+"Every type of card effect has a Spell Speed between 1 and 3. If you <BR>want to respond to a card effect in a Chain, you have to use an effect <BR>with Spell Speed 2 or higher, and it cannot have a "
+"lower Spell Speed <BR>than the effect you are responding to. Please see page 41 for an <BR>introduction to each type of card’s Spell Speed. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:661
@@ -2285,18 +1932,12 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:662
 msgid ""
-"Chains are a way to order the resolution of multiple card effects. <BR>They are used when "
-"the effects of more than 1 card are activated <BR>at once (see page 46), or when a player "
-"wants to use an effect after <BR>a card has been played, but BEFORE that card has an effect "
-"on the <BR>game.<BR>If a card’s effect is activated, the opponent is always given a chance "
-"<BR>to respond with a card effect of their own, creating a Chain. If your <BR>opponent "
-"responds with an effect, then you can choose to respond <BR>and add another effect to the "
-"Chain. If your opponent does not <BR>respond, you may activate a second effect and create a "
-"Chain to <BR>your own card’s activation. Both players continue to add effects to <BR>the "
-"Chain until they both wish to add nothing else, then you resolve <BR>the outcome in reverse "
-"order – starting with the last card that was <BR>activated.<BR>You must always be careful "
-"not to resolve the effects of your cards <BR>before asking your opponent if they wish to "
-"make a Chain."
+"Chains are a way to order the resolution of multiple card effects. <BR>They are used when the effects of more than 1 card are activated <BR>at once (see page 46), or when a player wants to use an "
+"effect after <BR>a card has been played, but BEFORE that card has an effect on the <BR>game.<BR>If a card’s effect is activated, the opponent is always given a chance <BR>to respond with a card "
+"effect of their own, creating a Chain. If your <BR>opponent responds with an effect, then you can choose to respond <BR>and add another effect to the Chain. If your opponent does not <BR>respond, "
+"you may activate a second effect and create a Chain to <BR>your own card’s activation. Both players continue to add effects to <BR>the Chain until they both wish to add nothing else, then you "
+"resolve <BR>the outcome in reverse order – starting with the last card that was <BR>activated.<BR>You must always be careful not to resolve the effects of your cards <BR>before asking your opponent "
+"if they wish to make a Chain."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:663 SD_RuleBook_EN_10.ai:664
@@ -2305,12 +1946,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:669
 msgid ""
-"”Seven Tools of the Bandit” (Chain Link 3) is resolved ﬁrst and <BR>negates the activation "
-"of “Threatening Roar.” <BR>“Threatening Roar” (Chain Link 2) would then be resolved, but the "
-"<BR>effect of “Seven Tools of the Bandit” stops its activation. The turn <BR>player will "
-"still be able to declare attacks.<BR>Then the effect of “Heavy Storm” (Chain Link 1) is "
-"resolved <BR>successfully, destroying all Spell and Trap Cards on the ﬁeld, <BR>allowing the "
-"turn player to attack without interference from Spell <BR>or Trap Cards."
+"”Seven Tools of the Bandit” (Chain Link 3) is resolved ﬁrst and <BR>negates the activation of “Threatening Roar.” <BR>“Threatening Roar” (Chain Link 2) would then be resolved, but the <BR>effect of "
+"“Seven Tools of the Bandit” stops its activation. The turn <BR>player will still be able to declare attacks.<BR>Then the effect of “Heavy Storm” (Chain Link 1) is resolved <BR>successfully, "
+"destroying all Spell and Trap Cards on the ﬁeld, <BR>allowing the turn player to attack without interference from Spell <BR>or Trap Cards."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:670
@@ -2354,9 +1992,7 @@ msgid "In this case, Chain Links are stacked up as seen below."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:684
-msgid ""
-"Player A plays “Heavy Storm” and Player B responds by activating <BR>their Set “Threatening "
-"Roar.” Then, Player A responds to that by <BR>activating “Seven Tools of the Bandit.”"
+msgid "Player A plays “Heavy Storm” and Player B responds by activating <BR>their Set “Threatening Roar.” Then, Player A responds to that by <BR>activating “Seven Tools of the Bandit.”"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:685
@@ -2369,11 +2005,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:687
 msgid ""
-"As shown in the diagram above, the ﬁrst effect activated is Chain <BR>Link 1. The next "
-"effect is Chain Link 2, and so on. Every time a new <BR>Chain Link is made, they are stacked "
-"up in the order that the cards <BR>are activated. Once the Chain is completed, the outcome "
-"is resolved <BR>starting with the most recent card to be activated at the top of the "
-"<BR>Chain and proceeding down to Chain Link 1."
+"As shown in the diagram above, the ﬁrst effect activated is Chain <BR>Link 1. The next effect is Chain Link 2, and so on. Every time a new <BR>Chain Link is made, they are stacked up in the order "
+"that the cards <BR>are activated. Once the Chain is completed, the outcome is resolved <BR>starting with the most recent card to be activated at the top of the <BR>Chain and proceeding down to Chain"
+" Link 1."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:688
@@ -2417,9 +2051,7 @@ msgid "How a Chain Works"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:705
-msgid ""
-"• After a card’s activation, and at the end of each phase or step, <BR>  Priority passes to "
-"the opponent."
+msgid "• After a card’s activation, and at the end of each phase or step, <BR>  Priority passes to the opponent."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:706
@@ -2436,12 +2068,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:709
 msgid ""
-"A player must pass Priority to the opponent when moving on to <BR>the next phase or step. "
-"Strictly speaking, you would always declare <BR>that you’re passing Priority before the end "
-"of every phase and <BR>step, and ask your opponent if they wish to play a card. However, "
-"<BR>for ease of play, announcing the end of your phases or steps <BR>implies giving up "
-"Priority. Therefore, when announcing the end of <BR>a phase, your opponent can just say "
-"“Before the end of your phase, <BR>I activate this card” and use a card. "
+"A player must pass Priority to the opponent when moving on to <BR>the next phase or step. Strictly speaking, you would always declare <BR>that you’re passing Priority before the end of every phase "
+"and <BR>step, and ask your opponent if they wish to play a card. However, <BR>for ease of play, announcing the end of your phases or steps <BR>implies giving up Priority. Therefore, when announcing "
+"the end of <BR>a phase, your opponent can just say “Before the end of your phase, <BR>I activate this card” and use a card. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:710
@@ -2450,23 +2079,17 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:711
 msgid ""
-"The turn player always starts with Priority, or the choice to <BR>activate a card first, in "
-"each phase or step of their turn. As long as <BR>the turn player has Priority, the opponent "
-"cannot activate cards <BR>or effects, except for effects that activate automatically, like "
-"<BR>Trigger or Flip effects. <BR>The turn player can either:"
+"The turn player always starts with Priority, or the choice to <BR>activate a card first, in each phase or step of their turn. As long as <BR>the turn player has Priority, the opponent cannot "
+"activate cards <BR>or effects, except for effects that activate automatically, like <BR>Trigger or Flip effects. <BR>The turn player can either:"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:714
 msgid ""
-"Monster Tokens are monsters that appear on the ﬁeld as the result <BR>of a card’s effect. "
-"They are not included in the Deck, and cannot be <BR>sent anywhere other than the ﬁeld, such "
-"as the hand or Graveyard. <BR>When a Token is destroyed or returned to the hand or Deck, "
-"they are <BR>simply removed from the ﬁeld instead.<BR>You can use ofﬁcial Token cards or use "
-"coins, <BR>card sleeves, or any similar marker (as long <BR>as it can indicate Attack "
-"Position or Defense <BR>Position) as Monster Tokens and play them in <BR>Monster Zones. Each "
-"Monster Token takes up 1 <BR>of your 5 Monster Zones. Their battle position <BR>is always "
-"either face-up Attack Position or face-<BR>up Defense Position. Tokens cannot be used as "
-"<BR>an Xyz Material. Tokens on the ﬁeld are treated <BR>as Normal Monsters. "
+"Monster Tokens are monsters that appear on the ﬁeld as the result <BR>of a card’s effect. They are not included in the Deck, and cannot be <BR>sent anywhere other than the ﬁeld, such as the hand or "
+"Graveyard. <BR>When a Token is destroyed or returned to the hand or Deck, they are <BR>simply removed from the ﬁeld instead.<BR>You can use ofﬁcial Token cards or use coins, <BR>card sleeves, or any"
+" similar marker (as long <BR>as it can indicate Attack Position or Defense <BR>Position) as Monster Tokens and play them in <BR>Monster Zones. Each Monster Token takes up 1 <BR>of your 5 Monster "
+"Zones. Their battle position <BR>is always either face-up Attack Position or face-<BR>up Defense Position. Tokens cannot be used as <BR>an Xyz Material. Tokens on the ﬁeld are treated <BR>as Normal "
+"Monsters. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:715
@@ -2479,14 +2102,10 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:717
 msgid ""
-"Normally, your Deck (including Extra Deck and Side Deck) can <BR>contain up to 3 copies of a "
-"card that has the same name. However, <BR>certain cards have speciﬁc quantity restrictions "
-"that further limit the <BR>number that can be included in a Deck.<BR>There are 3 types of "
-"restrictions: Limited cards are restricted to           <BR>1 copy in a Deck, while Semi-"
-"Limited cards are restricted to 2 copies <BR>in a Deck. Forbidden cards are not allowed to "
-"be included at all. <BR>The list of Forbidden and Limited cards is updated regularly and is "
-"<BR>posted on the Yu-Gi-Oh! TCG Ofﬁcial Website.<BR>This list is applied to ofﬁcial "
-"tournaments so please check it before <BR>participating."
+"Normally, your Deck (including Extra Deck and Side Deck) can <BR>contain up to 3 copies of a card that has the same name. However, <BR>certain cards have speciﬁc quantity restrictions that further "
+"limit the <BR>number that can be included in a Deck.<BR>There are 3 types of restrictions: Limited cards are restricted to           <BR>1 copy in a Deck, while Semi-Limited cards are restricted to "
+"2 copies <BR>in a Deck. Forbidden cards are not allowed to be included at all. <BR>The list of Forbidden and Limited cards is updated regularly and is <BR>posted on the Yu-Gi-Oh! TCG Ofﬁcial "
+"Website.<BR>This list is applied to ofﬁcial tournaments so please check it before <BR>participating."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:724
@@ -2495,11 +2114,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:725
 msgid ""
-"Some monsters have effects that activate when they “leave the ﬁeld”. <BR>For example, these "
-"effects activate when the monster is sent to <BR>the Graveyard, or is banished, or is "
-"returned to the hand or Extra <BR>Deck. When a monster on the ﬁeld is shufﬂed into the Main "
-"Deck, or <BR>becomes an Xyz Material, it is no longer a card on the ﬁeld, however <BR>its "
-"effects that activate when it “leaves the ﬁeld” will not activate."
+"Some monsters have effects that activate when they “leave the ﬁeld”. <BR>For example, these effects activate when the monster is sent to <BR>the Graveyard, or is banished, or is returned to the hand"
+" or Extra <BR>Deck. When a monster on the ﬁeld is shufﬂed into the Main Deck, or <BR>becomes an Xyz Material, it is no longer a card on the ﬁeld, however <BR>its effects that activate when it "
+"“leaves the ﬁeld” will not activate."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:726
@@ -2508,12 +2125,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:727
 msgid ""
-"Monsters that are used to Xyz Summon are called “Xyz Materials”, <BR>and are placed "
-"underneath the Xyz Monster, to show that they are <BR>attached to it. Monsters that have "
-"become Xyz Materials are not <BR>treated as cards on the ﬁeld. When an Xyz Monster leaves "
-"the ﬁeld, <BR>all of the Xyz Materials attached to it are sent to the Graveyard. If <BR>an "
-"Xyz Monster is ﬂipped face-down, or becomes controlled by the <BR>opponent, the Xyz "
-"Materials are not sent to the Graveyard. They <BR>remain attached to the Xyz Monster."
+"Monsters that are used to Xyz Summon are called “Xyz Materials”, <BR>and are placed underneath the Xyz Monster, to show that they are <BR>attached to it. Monsters that have become Xyz Materials are "
+"not <BR>treated as cards on the ﬁeld. When an Xyz Monster leaves the ﬁeld, <BR>all of the Xyz Materials attached to it are sent to the Graveyard. If <BR>an Xyz Monster is ﬂipped face-down, or "
+"becomes controlled by the <BR>opponent, the Xyz Materials are not sent to the Graveyard. They <BR>remain attached to the Xyz Monster."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:728
@@ -2522,19 +2136,15 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:729
 msgid ""
-"You can only create a Chain by responding to the activation of a card <BR>or effect. "
-"Summoning a monster, Tributing, changing a monster’s <BR>battle position and paying costs "
-"are not effect activations and <BR>therefore you cannot respond to those actions using a "
-"Chain."
+"You can only create a Chain by responding to the activation of a card <BR>or effect. Summoning a monster, Tributing, changing a monster’s <BR>battle position and paying costs are not effect "
+"activations and <BR>therefore you cannot respond to those actions using a Chain."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:731
 msgid ""
-"You may need to place these on cards for some card effects. You <BR>cannot place counters "
-"unless a card effect allows it. Cards may have <BR>effects that change with the number of "
-"counters on them, or require <BR>you to remove counters as a cost. Some counters have "
-"speciﬁc <BR>names, such as “Spell Counter” or “Clock Counter.” Other than their <BR>names, "
-"each individual counter itself does not have any effects.  "
+"You may need to place these on cards for some card effects. You <BR>cannot place counters unless a card effect allows it. Cards may have <BR>effects that change with the number of counters on them, "
+"or require <BR>you to remove counters as a cost. Some counters have speciﬁc <BR>names, such as “Spell Counter” or “Clock Counter.” Other than their <BR>names, each individual counter itself does not"
+" have any effects.  "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:732
@@ -2543,9 +2153,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:733
 msgid ""
-"If there is a discrepancy between the basic rules and a card’s effect, the <BR>card effect "
-"takes precedence. For example, a monster can only attack <BR>once per turn, but with a card "
-"effect, it is possible to attack twice."
+"If there is a discrepancy between the basic rules and a card’s effect, the <BR>card effect takes precedence. For example, a monster can only attack <BR>once per turn, but with a card effect, it is "
+"possible to attack twice."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:734
@@ -2553,9 +2162,7 @@ msgid "0 ATK monsters "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:735
-msgid ""
-"Monsters with 0 ATK cannot destroy anything by battle. If two Attack <BR>Position monsters "
-"with 0 ATK battle each other, neither monster is <BR>destroyed. "
+msgid "Monsters with 0 ATK cannot destroy anything by battle. If two Attack <BR>Position monsters with 0 ATK battle each other, neither monster is <BR>destroyed. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:736
@@ -2564,14 +2171,10 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:737
 msgid ""
-"If effects of Spell Speed 1 cards (like Trigger Effects) are activated at <BR>the same time, "
-"they will be resolved in a special Chain. This Chain is <BR>made starting with the turn "
-"player’s mandatory effects. If there is only <BR>1 effect, that will be Chain Link 1. If "
-"there are 2 or more effects, the turn <BR>player builds the Chain starting with their "
-"mandatory effects, in any <BR>order. Then the opponent continues the Chain with their "
-"mandatory <BR>effects in any order. Afterwards, the turn player adds their optional "
-"<BR>effects in any order, and ﬁnally the opponent adds their optional <BR>effects in any "
-"order.  "
+"If effects of Spell Speed 1 cards (like Trigger Effects) are activated at <BR>the same time, they will be resolved in a special Chain. This Chain is <BR>made starting with the turn player’s "
+"mandatory effects. If there is only <BR>1 effect, that will be Chain Link 1. If there are 2 or more effects, the turn <BR>player builds the Chain starting with their mandatory effects, in any "
+"<BR>order. Then the opponent continues the Chain with their mandatory <BR>effects in any order. Afterwards, the turn player adds their optional <BR>effects in any order, and ﬁnally the opponent adds"
+" their optional <BR>effects in any order.  "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:738
@@ -2580,9 +2183,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:739
 msgid ""
-"For cases like “Each player targets 1 monster,” where both players <BR>resolve an effect "
-"simultaneously, the turn player resolves the effect <BR>ﬁrst. In this example, after the "
-"turn player makes their selection, the <BR>other player makes theirs."
+"For cases like “Each player targets 1 monster,” where both players <BR>resolve an effect simultaneously, the turn player resolves the effect <BR>ﬁrst. In this example, after the turn player makes "
+"their selection, the <BR>other player makes theirs."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:740
@@ -2591,12 +2193,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:741
 msgid ""
-"The number of cards in a player’s hand and Decks, the cards in their <BR>Graveyards, and "
-"each player’s current LP are all public knowledge <BR>and both players can verify these "
-"things at any time. If asked, you <BR>must answer these things to your opponent truthfully. "
-"You are <BR>allowed to pick up and verify the cards in your opponent’s Graveyard <BR>but you "
-"must ask their permission ﬁrst. Also, you may not change the <BR>order of the cards when "
-"verifying their Graveyard."
+"The number of cards in a player’s hand and Decks, the cards in their <BR>Graveyards, and each player’s current LP are all public knowledge <BR>and both players can verify these things at any time. "
+"If asked, you <BR>must answer these things to your opponent truthfully. You are <BR>allowed to pick up and verify the cards in your opponent’s Graveyard <BR>but you must ask their permission ﬁrst. "
+"Also, you may not change the <BR>order of the cards when verifying their Graveyard."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:745
@@ -2605,11 +2204,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:746
 msgid ""
-"Card effects are sometimes separated with a colon (:) and/or semi-colon (;). <BR>Text before "
-"the colon gives information on conditions to activate the effect, <BR>and timing on when it "
-"happens. Text before a semi-colon is what you do <BR>when the effect is activated. Text at "
-"the end of a sentence, after all colons <BR>and semi-colons, is what you do at resolution of "
-"the effect. "
+"Card effects are sometimes separated with a colon (:) and/or semi-colon (;). <BR>Text before the colon gives information on conditions to activate the effect, <BR>and timing on when it happens. Text"
+" before a semi-colon is what you do <BR>when the effect is activated. Text at the end of a sentence, after all colons <BR>and semi-colons, is what you do at resolution of the effect. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:747
@@ -2618,13 +2214,10 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:748
 msgid ""
-"A monster “battles” (and is “battling”) starting from when it attacks or <BR>is attacked. "
-"This includes both monsters attacking other monsters, and <BR>monsters attacking a player’s "
-"Life Points directly. When a card requires a <BR>monster to have “battled” (past tense), the "
-"attack had to have reached the <BR>damage calculation portion of the Damage Step in order "
-"for the monster to <BR>have “battled”. If the attack stops before damage calculation, the "
-"monster <BR>did not “battle”. (Note that an attack was still declared, however, so in "
-"<BR>most cases the attacking monster cannot declare another attack."
+"A monster “battles” (and is “battling”) starting from when it attacks or <BR>is attacked. This includes both monsters attacking other monsters, and <BR>monsters attacking a player’s Life Points "
+"directly. When a card requires a <BR>monster to have “battled” (past tense), the attack had to have reached the <BR>damage calculation portion of the Damage Step in order for the monster to <BR>have"
+" “battled”. If the attack stops before damage calculation, the monster <BR>did not “battle”. (Note that an attack was still declared, however, so in <BR>most cases the attacking monster cannot "
+"declare another attack."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:749
@@ -2633,14 +2226,10 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:750
 msgid ""
-"Cards you “control” are the cards in your Monster Zone, Spell & Trap Zone, <BR>Field Zone, "
-"and Pendulum Zone. Cards in your “possession” include all cards <BR>you control, plus the "
-"cards in your hand, Deck, Extra Deck, Graveyard, your <BR>banished cards, cards in the "
-"middle of being Summoned to your side of the <BR>ﬁeld, and Xyz Materials attached to "
-"monsters you control. If a player takes <BR>control of a card from their opponent, move it "
-"to the new controller’s side <BR>of the ﬁeld. If sent to the Graveyard, or returned to the "
-"hand or Deck, it <BR>is always returned to the Graveyard / hand / Deck of the original "
-"owner. "
+"Cards you “control” are the cards in your Monster Zone, Spell & Trap Zone, <BR>Field Zone, and Pendulum Zone. Cards in your “possession” include all cards <BR>you control, plus the cards in your "
+"hand, Deck, Extra Deck, Graveyard, your <BR>banished cards, cards in the middle of being Summoned to your side of the <BR>ﬁeld, and Xyz Materials attached to monsters you control. If a player takes "
+"<BR>control of a card from their opponent, move it to the new controller’s side <BR>of the ﬁeld. If sent to the Graveyard, or returned to the hand or Deck, it <BR>is always returned to the Graveyard"
+" / hand / Deck of the original owner. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:751
@@ -2648,9 +2237,7 @@ msgid "Cards on the Field"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:752
-msgid ""
-"When “cards on the ﬁeld” is written in card text, it means all the cards on <BR>the Game Mat "
-"other than the Graveyard, Deck, and Extra Deck."
+msgid "When “cards on the ﬁeld” is written in card text, it means all the cards on <BR>the Game Mat other than the Graveyard, Deck, and Extra Deck."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:753
@@ -2659,9 +2246,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:754
 msgid ""
-"Battle damage is damage inﬂicted to a player by an attacking monster, <BR>or by a battle "
-"between two monsters. This is different from damage from <BR>the effect of an Effect "
-"Monster, Spell Card or Trap Card."
+"Battle damage is damage inﬂicted to a player by an attacking monster, <BR>or by a battle between two monsters. This is different from damage from <BR>the effect of an Effect Monster, Spell Card or "
+"Trap Card."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:755
@@ -2670,9 +2256,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:756
 msgid ""
-"Although a card that has been used is normally sent to the Graveyard, <BR>a card which is "
-"banished is separated from the ﬁeld instead. You must <BR>return your banished cards so you "
-"can use them for the next Duel."
+"Although a card that has been used is normally sent to the Graveyard, <BR>a card which is banished is separated from the ﬁeld instead. You must <BR>return your banished cards so you can use them for"
+" the next Duel."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:757
@@ -2681,10 +2266,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:758
 msgid ""
-"Attacking directly means that a monster attacks a player instead of <BR>attacking a monster. "
-"In this case, the damage to the player will be equal <BR>to the monster’s ATK. Some monsters "
-"have an effect that allows them to <BR>attack directly even if the opponent controls a "
-"monster."
+"Attacking directly means that a monster attacks a player instead of <BR>attacking a monster. In this case, the damage to the player will be equal <BR>to the monster’s ATK. Some monsters have an "
+"effect that allows them to <BR>attack directly even if the opponent controls a monster."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:759
@@ -2693,14 +2276,10 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:760
 msgid ""
-"In addition to Equip Spell Cards, sometimes Trap Cards or Monster Cards <BR>can become "
-"equipped to a monster. Equipped Traps remain Trap Cards, but <BR>equipped monsters are "
-"considered to be Equip Spells. The term “Equip Card” <BR>includes all 3 kinds (standard "
-"Equip Spells, equipped Traps, and monsters <BR>equipped to other monsters).If a Monster Card "
-"is equipped to another <BR>monster, it remains equipped to that monster and cannot be moved "
-"to a <BR>different target, even by card effects that would normally be able to do so."
-"<BR>EXCEPTION: Union monsters equipped by their own effects can be moved <BR>by appropriate "
-"card effects."
+"In addition to Equip Spell Cards, sometimes Trap Cards or Monster Cards <BR>can become equipped to a monster. Equipped Traps remain Trap Cards, but <BR>equipped monsters are considered to be Equip "
+"Spells. The term “Equip Card” <BR>includes all 3 kinds (standard Equip Spells, equipped Traps, and monsters <BR>equipped to other monsters).If a Monster Card is equipped to another <BR>monster, it "
+"remains equipped to that monster and cannot be moved to a <BR>different target, even by card effects that would normally be able to do so.<BR>EXCEPTION: Union monsters equipped by their own effects "
+"can be moved <BR>by appropriate card effects."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:761
@@ -2709,10 +2288,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:762
 msgid ""
-"The effect of a card is the special ability written on it, like the effect <BR>of a Spell, "
-"Trap, or Effect Monster. Costs that are needed to activate <BR>an ability are not part of "
-"the effect. The conditions that describe <BR>how to play a “Special Summon Monster” are also "
-"not an effect. "
+"The effect of a card is the special ability written on it, like the effect <BR>of a Spell, Trap, or Effect Monster. Costs that are needed to activate <BR>an ability are not part of the effect. The "
+"conditions that describe <BR>how to play a “Special Summon Monster” are also not an effect. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:763
@@ -2720,9 +2297,7 @@ msgid "Discard"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:764
-msgid ""
-"Discard means to send a card from your hand to the Graveyard. <BR>This can happen because of "
-"a card effect or by adjusting the <BR>number of cards in your hand during the End Phase."
+msgid "Discard means to send a card from your hand to the Graveyard. <BR>This can happen because of a card effect or by adjusting the <BR>number of cards in your hand during the End Phase."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:765
@@ -2731,10 +2306,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:766
 msgid ""
-"A card is destroyed when it is sent to the Graveyard due to battle <BR>between monsters or "
-"by an effect that destroys a card. A card that <BR>is returned from the ﬁeld to the hand or "
-"Deck, or, that is sent to <BR>the Graveyard as a cost or Tribute, is NOT considered "
-"“destroyed.” "
+"A card is destroyed when it is sent to the Graveyard due to battle <BR>between monsters or by an effect that destroys a card. A card that <BR>is returned from the ﬁeld to the hand or Deck, or, that "
+"is sent to <BR>the Graveyard as a cost or Tribute, is NOT considered “destroyed.” "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:768 SD_RuleBook_EN_10.ai:769
@@ -2747,9 +2320,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:774
 msgid ""
-"A monster that is equipped with an Equip Card is an “equipped monster.” <BR>When this "
-"monster is destroyed or ﬂipped face-down, the equipped <BR>card loses its target, and is "
-"destroyed and sent to the Graveyard."
+"A monster that is equipped with an Equip Card is an “equipped monster.” <BR>When this monster is destroyed or ﬂipped face-down, the equipped <BR>card loses its target, and is destroyed and sent to "
+"the Graveyard."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:776
@@ -2758,10 +2330,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:777
 msgid ""
-"When a card says to “excavate” cards from your Deck, you reveal those <BR>cards to both "
-"players. Then, before you do anything else, apply the <BR>instructions from the card effect "
-"that excavated them. Cards that are <BR>being excavated are still treated as being in the "
-"Deck until sent elsewhere <BR>by the card instructions."
+"When a card says to “excavate” cards from your Deck, you reveal those <BR>cards to both players. Then, before you do anything else, apply the <BR>instructions from the card effect that excavated "
+"them. Cards that are <BR>being excavated are still treated as being in the Deck until sent elsewhere <BR>by the card instructions."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:778
@@ -2770,11 +2340,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:779
 msgid ""
-"Whenever an effect instructs you to add a card from your Deck to your <BR>hand, or to "
-"Special Summon a monster from your Deck, you can pick <BR>up your Deck and search through it "
-"for the appropriate card. You must <BR>shufﬂe your Deck after any time you search it and let "
-"your opponent <BR>shufﬂe or cut. You cannot activate an effect to search your Deck for a "
-"<BR>card if there are no cards that meet the requirements in your Deck."
+"Whenever an effect instructs you to add a card from your Deck to your <BR>hand, or to Special Summon a monster from your Deck, you can pick <BR>up your Deck and search through it for the appropriate"
+" card. You must <BR>shufﬂe your Deck after any time you search it and let your opponent <BR>shufﬂe or cut. You cannot activate an effect to search your Deck for a <BR>card if there are no cards that"
+" meet the requirements in your Deck."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:780
@@ -2783,10 +2351,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:781
 msgid ""
-"When an effect says to reveal a card, you show it to both players. You <BR>may have to "
-"reveal a face-down card, a card from your hand, or from the <BR>top of your Deck. Revealing "
-"a card does not activate the card or its Flip <BR>effect. Normally, revealed cards are "
-"returned to their original position <BR>after being looked at by both players."
+"When an effect says to reveal a card, you show it to both players. You <BR>may have to reveal a face-down card, a card from your hand, or from the <BR>top of your Deck. Revealing a card does not "
+"activate the card or its Flip <BR>effect. Normally, revealed cards are returned to their original position <BR>after being looked at by both players."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:782
@@ -2794,9 +2360,7 @@ msgid "Random"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:783
-msgid ""
-"When a card effect says to choose a card randomly, there is no ofﬁcial <BR>way of doing so, "
-"it is ﬁne as long as neither player has a way of knowing <BR>which card is being chosen."
+msgid "When a card effect says to choose a card randomly, there is no ofﬁcial <BR>way of doing so, it is ﬁne as long as neither player has a way of knowing <BR>which card is being chosen."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:784
@@ -2805,9 +2369,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:785
 msgid ""
-"Some monsters can inﬂict piercing battle damage when they attack a <BR>Defense Position "
-"monster. This means that you inﬂict damage to your <BR>opponent’s LP equal to the difference "
-"between the attacking monster’s <BR>ATK and the defending monster’s DEF."
+"Some monsters can inﬂict piercing battle damage when they attack a <BR>Defense Position monster. This means that you inﬂict damage to your <BR>opponent’s LP equal to the difference between the "
+"attacking monster’s <BR>ATK and the defending monster’s DEF."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:786
@@ -2816,11 +2379,9 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:787
 msgid ""
-"To pay a cost is an action required by a player in order to activate a card, <BR>an effect, "
-"or to Summon a monster. Tributing to Tribute Summon a Level <BR>5 monster is an example of a "
-"cost. Other common costs are discarding, <BR>paying LP, or banishing cards. You have to pay "
-"any costs before you <BR>declare the activation of the card. Even if the activation of the "
-"card is <BR>negated, you cannot get a refund of the cost that you have paid."
+"To pay a cost is an action required by a player in order to activate a card, <BR>an effect, or to Summon a monster. Tributing to Tribute Summon a Level <BR>5 monster is an example of a cost. Other "
+"common costs are discarding, <BR>paying LP, or banishing cards. You have to pay any costs before you <BR>declare the activation of the card. Even if the activation of the card is <BR>negated, you "
+"cannot get a refund of the cost that you have paid."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:788
@@ -2828,9 +2389,7 @@ msgid "Original ATK (or DEF)"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:789
-msgid ""
-"The Original ATK (or DEF) is the number of ATK (or DEF) points printed on <BR>the Monster "
-"Card. This does not include an increase from an Equip Spell <BR>Card or other card effect. "
+msgid "The Original ATK (or DEF) is the number of ATK (or DEF) points printed on <BR>the Monster Card. This does not include an increase from an Equip Spell <BR>Card or other card effect. "
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:790
@@ -2839,10 +2398,8 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:791
 msgid ""
-"Tributing is sending a monster you control to the Graveyard. You can <BR>Tribute a face-up "
-"or face-down monster, unless otherwise speciﬁed. <BR>Tributing a monster is one possible "
-"cost for Summoning a monster or <BR>activating an effect. A monster sent to the Graveyard by "
-"Tributing is not <BR>treated as “destroyed.”"
+"Tributing is sending a monster you control to the Graveyard. You can <BR>Tribute a face-up or face-down monster, unless otherwise speciﬁed. <BR>Tributing a monster is one possible cost for Summoning"
+" a monster or <BR>activating an effect. A monster sent to the Graveyard by Tributing is not <BR>treated as “destroyed.”"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:792
@@ -2850,9 +2407,7 @@ msgid "Shuffle"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:793
-msgid ""
-"There is no rule for how to shufﬂe, but while shufﬂing you cannot look at <BR>the cards you "
-"are shufﬂing, or arrange the cards and then shufﬂe them."
+msgid "There is no rule for how to shufﬂe, but while shufﬂing you cannot look at <BR>the cards you are shufﬂing, or arrange the cards and then shufﬂe them."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:794
@@ -2860,9 +2415,7 @@ msgid "Set"
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:795
-msgid ""
-"Playing a card face-down is called a Set. For Monster Cards, playing it in <BR>face-down "
-"Defense Position is called a Set. Any card that is face-down <BR>on the ﬁeld is a Set card."
+msgid "Playing a card face-down is called a Set. For Monster Cards, playing it in <BR>face-down Defense Position is called a Set. Any card that is face-down <BR>on the ﬁeld is a Set card."
 msgstr ""
 
 #: SD_RuleBook_EN_10.ai:796
@@ -2871,9 +2424,6 @@ msgstr ""
 
 #: SD_RuleBook_EN_10.ai:797
 msgid ""
-"A card can be sent to the Graveyard in various ways. Destroying a card, <BR>discarding, and "
-"Tributing a monster are all actions that send a card to <BR>the Graveyard, and will normally "
-"activate “When this card is sent to the <BR>Graveyard…” Trigger Effects. <BR>EXCEPTION: When "
-"a banished card is moved to the Graveyard, it is not <BR>considered to be “sent to the "
-"Graveyard”."
+"A card can be sent to the Graveyard in various ways. Destroying a card, <BR>discarding, and Tributing a monster are all actions that send a card to <BR>the Graveyard, and will normally activate "
+"“When this card is sent to the <BR>Graveyard…” Trigger Effects. <BR>EXCEPTION: When a banished card is moved to the Graveyard, it is not <BR>considered to be “sent to the Graveyard”."
 msgstr ""
