@@ -42,6 +42,27 @@ program
   });
 
 program
+  .command("po2json <source_po> <target_json>")
+  .description("helper function to convert .PO to .JSON structure")
+  .action((source_po, target_json) => {
+    console.log("po2json command called");
+
+    const resolvedSource = path.resolve(source_po);
+    const resolvedTarget = path.resolve(target_json);
+
+    if(fs.existsSync(resolvedSource)) {
+      console.log("Source PO: " + resolvedSource);
+      console.log("Target JSON: " + resolvedTarget);
+
+      const transformer = new Transformer();
+      transformer.poToJson(resolvedSource, resolvedTarget);
+    }
+    else {
+      console.log("Unable to find source PO: " + resolvedSource);
+    }
+  })
+
+program
   .version("0.2.0")
   .description("A helper tool to export and import CARD texts for Yu-Gi-Oh! 5D's Tag Force 6")
   .option("-e, --export <directory>", "process and export CARD_ files in the directory for export")

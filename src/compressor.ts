@@ -347,7 +347,7 @@ class Transformer {
     console.log(this.entries);
   }
   poToTxt(sourcePo: string) {
-    const po = gettextParser.po.parse(fs.readFileSync(sourcePo))
+    const po = gettextParser.po.parse(fs.readFileSync(sourcePo));
     console.log("Starting work on: " + sourcePo);
 
     // Initialize a counter
@@ -389,6 +389,14 @@ class Transformer {
     this.writeDictBuilderInput(sourcePo);
     fs.writeFileSync(sourcePo.replace(".po", ".txt"), this.entriesToTxt(path.dirname(sourcePo)));
     console.log("Files written, task complete.");
+  }
+
+  /*
+  Helper function to generate JSON from a PO
+   */
+  poToJson(sourcePo: string, targetJson: string) {
+    const po = gettextParser.po.parse(fs.readFileSync(sourcePo));
+    fs.writeFileSync(targetJson, JSON.stringify(po, null, 2));
   }
 
   /*

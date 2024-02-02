@@ -70,19 +70,20 @@ Usage: index [options] [command]
 A helper tool to export and import CARD texts for Yu-Gi-Oh! 5D's Tag Force 6
 
 Options:
-  -V, --version                     output the version number
-  -e, --export <directory>          process and export CARD_ files in the directory for export
-  -i, --import <directory>          process and import texts to .bin files
-  -f, --format <format>             specify the export format: pot|ygt, default: ygt
-  -t, --transform <directory>       transform CARD_Desc_J.po to CARD_Desc_J.txt
-  -b, --build <directory>           build a new Dictionary (slow)
-  -h, --help                        display help for command
+  -V, --version                      output the version number
+  -e, --export <directory>           process and export CARD_ files in the directory for export
+  -i, --import <directory>           process and import texts to .bin files
+  -f, --format <format>              specify the export format: pot|ygt, default: ygt
+  -t, --transform <directory>        transform CARD_Desc_J.po to CARD_Desc_J.txt
+  -b, --build <directory>            build a new Dictionary (slow)
+  -h, --help                         display help for command
 
 Commands:
-  card                              default command, actions based on option parameters
-  extract <source_ehp> <directory>  extract .ehp file to destination directory
-  update <target_ehp> <directory>   update existing .ehp file from the same files in directory
-  help [command]                    display help for command
+  card                               default command, actions based on option parameters
+  extract <source_ehp> <directory>   extract .ehp file to destination directory
+  update <target_ehp> <directory>    update existing .ehp file from the same files in directory
+  po2json <source_po> <target_json>  helper function to convert .PO to .JSON structure
+  help [command]                     display help for command
 ```
 
 ## Structure
