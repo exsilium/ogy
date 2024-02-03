@@ -59,11 +59,23 @@ function main(target) {
                         if(translationObject.msgstr[0].length > 0) {
                           var translationStringArray = translationObject.msgstr[0].replace(/\\\"/g, "\"").split("<BR>");
                           for (var k = 0; k < translationStringArray.length; k++) {
-                            try {
+                            try {
                               tfs[j].paragraphs[k].contents = translationStringArray[k];
-                            } catch (e) {continue ;
+                            } catch (e) {
+                              continue;
+                            }
+                            $.writeln("textFrame updated");
                           }
-                          $.writeln("textFrame updated");
+                          /* Remove excess paragraphs */
+                          if (translationStringArray.length < tfs[j].paragraphs.length) {
+                            for(var k = tfs[j].paragraphs.length -1; k >= translationStringArray.length; k--) {
+                              try {
+                                tfs[j].paragraphs[k].remove();
+                              } catch (e) {
+                                continue;
+                              }
+                            }
+                          }
                         }
                         else {
                           $.writeln("textFrame unchanged, empty msgstr object");
