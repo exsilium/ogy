@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-02-03 13:56+0000\n"
-"PO-Revision-Date: 2024-02-03 14:05+0000\n"
+"PO-Revision-Date: 2024-02-03 14:18+0000\n"
 "Last-Translator: Exile <exile@chamber.ee>\n"
 "Language-Team: \n"
 "Language: et\n"
@@ -222,15 +222,15 @@ msgstr "• Sa saad kahju, mis võrdub <BR>sinu ATK ja <BR>nende DEF vahega"
 
 #: Speed_Duel_Guide_EN.ai:86 Speed_Duel_Guide_EN.ai:112
 msgid "If your ATK is smaller"
-msgstr ""
+msgstr "Kui sinu ATK on väiksem"
 
 #: Speed_Duel_Guide_EN.ai:88 Speed_Duel_Guide_EN.ai:114
 msgid "• Destroy the other monster"
-msgstr ""
+msgstr "• Hävita teine koletis"
 
 #: Speed_Duel_Guide_EN.ai:89 Speed_Duel_Guide_EN.ai:115
 msgid "If your ATK is bigger"
-msgstr ""
+msgstr "Kui sinu ATK on suurem"
 
 #: Speed_Duel_Guide_EN.ai:90
 msgid "Compare the attacker’s ATK to the other monster’s DEF. Your opponent <BR>does not take any damage when you attack their Defense Position <BR>monster."
@@ -250,24 +250,24 @@ msgstr "• Hävita mõlemad koletised"
 
 #: Speed_Duel_Guide_EN.ai:109
 msgid "If both monsters<BR>have the same ATK"
-msgstr ""
+msgstr "Kui mõlemal koletisel<BR>on sama ATK"
 
 #: Speed_Duel_Guide_EN.ai:110
 msgid "• You take damage"
-msgstr ""
+msgstr "• Sa saad kahju"
 
 #: Speed_Duel_Guide_EN.ai:111
 msgid "• Destroy the attacker"
-msgstr ""
+msgstr "• Hävita ründaja"
 
 #: Speed_Duel_Guide_EN.ai:113
 msgid "• Opponent takes damage"
-msgstr ""
+msgstr "• Vastane saab kahju"
 
 #: Speed_Duel_Guide_EN.ai:116
 msgid "A destroyed monster is placed face-up in <BR>its owner’s Graveyard."
-msgstr ""
+msgstr "Hävitatud koletis asetatakse näoga ülespoole <BR>oma omaniku Surnuaeda."
 
 #: Speed_Duel_Guide_EN.ai:117
 msgid "Compare the attacker’s ATK to the other monster’s ATK. The weaker <BR>monster is destroyed. The player with the destroyed monster takes <BR>damage equal to the difference in Attack Points."
-msgstr ""
+msgstr "Võrdle ründaja ATK-d teise koletise ATK-ga. Nõrgem <BR>koletis hävitatakse. Koletise hävinud mängija saab <BR>kahju, mis võrdub Ründe Punktide vahega."
