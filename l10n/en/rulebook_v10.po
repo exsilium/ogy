@@ -1,3 +1,6 @@
+# Yu-Gi-Oh! Portable Object Template - Ruleset V10
+# This file is distributed under the same license as the OGY package.
+#
 #, fuzzy
 msgid ""
 msgstr ""

@@ -1,0 +1,312 @@
+# Yu-Gi-Oh! Portable Object Template - Speed Duel Guide
+# This file is distributed under the same license as the OGY package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2024-02-03 13:56+0000\n"
+"PO-Revision-Date: 2024-02-03 14:01+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: Speed_Duel_Guide_EN.ai:0
+msgid "CHOOSE YOUR SKILL WISELY, IT WILL<BR>HAVE A HUGE IMPACT ON THE DUEL!"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:3
+msgid "GAMEMAT"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:16
+msgid "Flip your Skill<BR>over to<BR>activate it"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:17
+msgid "STANDARD RULES FOR SPEED DUELING!"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:18
+msgid "CARDS LEGAL FOR SPEED DUELING"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:19
+msgid ""
+"These are just the basics. You can find out some more cool moves, and learn "
+"about advanced things like Quick-Play Spells <BR>by reading the full "
+"rulebook online at http://www.yugioh-card.com/en/rulebook"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:20
+msgid ""
+"Each of your Attack Position monsters can attack once per turn. Pick a "
+"monster for it to attack, or if your opponent has <BR>no monsters, you can "
+"attack their LP directly. Subtract your monster’s ATK points from your "
+"opponent’s LP. If you battle <BR>an opponent’s monster, refer to the chart "
+"on the right to see what happens! If you attack a face-down monster, flip it "
+"<BR>face-up, and if it survives the battle, it stays face-up."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:21
+msgid ""
+"Traps are not played face-up during your turn. Instead, you Set Traps face-"
+"down in your turn. Then on any turn after <BR>that (yours OR your opponent’s "
+"turn), you can flip them face-up and use their effect, then send them to the "
+"Graveyard. <BR>This lets you do a surprise move!"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:22
+msgid ""
+"Zone. All other Spells and Traps go to the Graveyard after you do what the "
+"card says."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:23
+msgid "symbol, it stays in play in the Spell & Trap "
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:24
+msgid " or Continuous "
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:25
+msgid "place it in the Field Zone. If a Spell or Trap has an Equip "
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:27
+msgid ""
+"You can play Spells right from your hand to the Spell & Trap Zone. Just "
+"follow the card directions. If it’s a Field Spell "
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:28
+msgid ""
+"Monsters with yellow borders have no special abilities, but are good at "
+"battling. Monsters with orange borders have <BR>Monsters with blue borders, "
+"like Relinquished, cannot be Summoned special abilities – just follow what "
+"the card says.<BR>except by using the Spell explained on the monster."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:29
+msgid ""
+"During your turn, you can Normal Summon 1 monster from your hand, in Attack "
+"Position (upright), or Set 1 monster face-<BR>down in Defense Position "
+"(sideways). Count the monster’s Level Stars when you Summon it. If it has 4 "
+"or less Level Stars, <BR>then you can just Summon or Set it. If it has more "
+"than 4 Stars, you need to Tribute a monster you already have in play "
+"<BR>first, by sending it to the Graveyard. You need to Tribute 1 monster to "
+"Summon or Set a Level 5 or 6 monster, or Tribute 2 <BR>monsters to Summon or "
+"Set a Level 7 or higher monster. If a card effect says to Special Summon a "
+"monster, you don’t need <BR>to Tribute unless the card effect says to. Also, "
+"Special Summons are “free” so they don’t take up your 1 regular Normal "
+"<BR>Summon/Set during your turn, and can even sometimes be done during your "
+"opponent’s turn!"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:30
+msgid ""
+"The Duel is played in turns. At the start of your turn, draw a card. Then "
+"you can Set Traps, play Spells, and Summon a <BR>monster, in any order. "
+"After all that, you can attack. When you are done attacking, your turn ends, "
+"and now it’s your <BR>opponent’s turn."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:31
+msgid ""
+"Each player draws the top 4 cards from their Deck for their starting hand."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:33
+msgid ""
+"Flip a coin at the start. The winner gets to choose to go first or second. "
+"If you go first, don’t draw a card<BR>on your first turn."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:35
+msgid ""
+"Each player chooses 1 Skill Card before the Duel and places it face-down in "
+"front of them."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:37
+msgid "You can’t have more than 3 copies of the same card in your Deck."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:39
+msgid ""
+"Shuffle the cards in your Deck together before the Duel (but not your Extra "
+"Deck)."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:41
+msgid ""
+"Your Deck needs to contain between 20 and 30 cards. Your Extra Deck, if you "
+"have any Fusion Monsters, <BR>can be between 0 and 5 cards."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:43
+msgid ""
+"If you have Fusion Monsters (purple cards), like Thousand Dragon, place them "
+"in the Extra Deck zone."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:45
+msgid ""
+"Each player begins with 4000 LP (Life Points). If your LP hit zero, you lose!"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:47
+msgid ""
+"You can use all your Speed Duel cards when you play the full<BR>Yu-Gi-Oh! "
+"TRADING CARD GAME, and put them in your Decks, except <BR>for Skill Cards. "
+"They can only be used in Speed Duels!"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:48
+msgid ""
+"Speed Duels are played with a carefully selected set of cards. <BR>For Speed "
+"Duels, you should only use cards with the Speed Duel <BR>watermark on them. "
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:49
+msgid ""
+"Skill Cards should be a secret from your opponent until you use them, <BR>so "
+"don’t let them see what the card is when you set up at the start of <BR>the "
+"Duel!"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:50
+msgid ""
+"Skill Cards are chosen before the start of the Duel. You choose 1 Skill "
+"<BR>Card and place it face-down before the Duel starts (so the character’s "
+"<BR>name is showing). It might say that you can flip it face-up at the start "
+"of <BR>the Duel. If it does not, then the instructions on the hidden side of "
+"the <BR>card will tell you when you can activate it by flipping it face-up. "
+"When <BR>you do, just follow the instructions on the card."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:51
+msgid ""
+"Your Speed Duel Starter Deck contains<BR>3 Speed Duel Decks. You can play "
+"these <BR>Decks as they are, or combine cards from <BR>each to build your "
+"own Deck the way you <BR>want. If this is your ﬁrst time playing the<BR>Yu-"
+"Gi-Oh! TRADING CARD GAME, this Dueling <BR>Guide will teach you the basics. "
+"You can <BR>also ﬁnd the complete rulebook online at<BR>http://www.yugioh-"
+"card.com/en/rulebook"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:54 Speed_Duel_Guide_EN.ai:56
+msgid "DEFENSE POSITION"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:55 Speed_Duel_Guide_EN.ai:57
+#: Speed_Duel_Guide_EN.ai:60 Speed_Duel_Guide_EN.ai:61
+#: Speed_Duel_Guide_EN.ai:64 Speed_Duel_Guide_EN.ai:65
+msgid "ATTACK POSITION"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:66 Speed_Duel_Guide_EN.ai:91
+msgid "No LP Lost"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:70
+msgid "500 LP Lost"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:74
+msgid "No LP Lost "
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:75 Speed_Duel_Guide_EN.ai:77
+#: Speed_Duel_Guide_EN.ai:79 Speed_Duel_Guide_EN.ai:93
+#: Speed_Duel_Guide_EN.ai:99 Speed_Duel_Guide_EN.ai:105
+msgid "TARGET"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:76 Speed_Duel_Guide_EN.ai:78
+#: Speed_Duel_Guide_EN.ai:80 Speed_Duel_Guide_EN.ai:94
+#: Speed_Duel_Guide_EN.ai:100 Speed_Duel_Guide_EN.ai:106
+msgid "ATTACKER"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:81 Speed_Duel_Guide_EN.ai:87
+#: Speed_Duel_Guide_EN.ai:107
+msgid "• No one takes damage"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:82 Speed_Duel_Guide_EN.ai:85
+msgid "• Both monsters survive"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:83
+msgid "If the ATK equals the DEF"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:84
+msgid ""
+"• You take damage equal to the <BR>difference between your ATK and <BR>their "
+"DEF"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:86 Speed_Duel_Guide_EN.ai:112
+msgid "If your ATK is smaller"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:88 Speed_Duel_Guide_EN.ai:114
+msgid "• Destroy the other monster"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:89 Speed_Duel_Guide_EN.ai:115
+msgid "If your ATK is bigger"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:90
+msgid ""
+"Compare the attacker’s ATK to the other monster’s DEF. Your opponent "
+"<BR>does not take any damage when you attack their Defense Position "
+"<BR>monster."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:97
+msgid "1000 LP Lost "
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:103
+msgid "800 LP Lost "
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:108
+msgid "• Destroy both monsters"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:109
+msgid "If both monsters<BR>have the same ATK"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:110
+msgid "• You take damage"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:111
+msgid "• Destroy the attacker"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:113
+msgid "• Opponent takes damage"
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:116
+msgid "A destroyed monster is placed face-up in <BR>its owner’s Graveyard."
+msgstr ""
+
+#: Speed_Duel_Guide_EN.ai:117
+msgid ""
+"Compare the attacker’s ATK to the other monster’s ATK. The weaker "
+"<BR>monster is destroyed. The player with the destroyed monster takes "
+"<BR>damage equal to the difference in Attack Points."
+msgstr ""
