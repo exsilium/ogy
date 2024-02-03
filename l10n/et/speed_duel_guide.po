@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-02-03 13:56+0000\n"
-"PO-Revision-Date: 2024-02-03 18:43+0000\n"
+"PO-Revision-Date: 2024-02-03 20:28+0000\n"
 "Last-Translator: Exile <exile@chamber.ee>\n"
 "Language-Team: \n"
 "Language: et\n"
@@ -50,17 +50,17 @@ msgid ""
 "ATK points from your opponent’s LP. If you battle <BR>an opponent’s monster, refer to the chart on the right to see what happens! If you attack a face-down monster, flip it <BR>face-up, and if it "
 "survives the battle, it stays face-up."
 msgstr ""
-"Iga sinu Ründepositsioonis olev koletis võib rünnata korra käigu kohta. Vali koletis, mida rünnata, või kui su <BR>vastasel ei ole koletisi, võid rünnata otse nende LP-d. Lahuta oma koletise ATK "
-"punktid vastase LP-st. Kui lahingusse <BR>astud vastase koletisega, vaata paremal olevat tabelit, et näha, mis juhtub! Kui ründad näoga allapoole olevat <BR>koletist, keera see näoga ülespoole ja "
-"kui see jääb lahingust ellu, jääb see näoga ülespoole."
+"Iga sinu Ründepositsioonis olev koletis võib rünnata korra käigu kohta. Vali koletis, mida rünnata, või kui su vastasel ei ole koletisi, võid rünnata otse nende LP-d. Lahuta oma koletise ATK punktid"
+" vastase LP-st. Kui lahingusse astud vastase koletisega, vaata paremal olevat tabelit, et näha, mis juhtub! Kui ründad näoga allapoole olevat koletist, keera see näoga ülespoole ja kui see jääb "
+"lahingust ellu, jääb see näoga ülespoole."
 
 #: Speed_Duel_Guide_EN.ai:21
 msgid ""
 "Traps are not played face-up during your turn. Instead, you Set Traps face-down in your turn. Then on any turn after <BR>that (yours OR your opponent’s turn), you can flip them face-up and use their"
 " effect, then send them to the Graveyard. <BR>This lets you do a surprise move!"
 msgstr ""
-"Lõkse ei mängita oma käigu ajal näoga ülespoole. Selle asemel paigutad sa Lõksud oma käigu ajal näoga allapoole. Seejärel <BR>ükskõik millisel järgneval käigul (sinu oma VÕI vastase käigu ajal) võid"
-" sa need ümber pöörata näoga ülespoole ja <BR>kasutada nende efekti, seejärel saata need surnuaeda. See võimaldab sul teha üllatuskäigu!"
+"Lõkse ei mängita oma käigu ajal näoga ülespoole. Selle asemel paigutad sa Lõksud oma käigu ajal näoga allapoole. Seejärel ükskõik millisel järgneval käigul (sinu oma VÕI vastase käigu ajal) võid sa "
+"need ümber pöörata näoga ülespoole ja kasutada nende efekti, seejärel saata need surnuaeda. See võimaldab sul teha üllatuskäigu!"
 
 #: Speed_Duel_Guide_EN.ai:22
 msgid "Zone. All other Spells and Traps go to the Graveyard after you do what the card says."
@@ -87,8 +87,8 @@ msgid ""
 "Monsters with yellow borders have no special abilities, but are good at battling. Monsters with orange borders have <BR>Monsters with blue borders, like Relinquished, cannot be Summoned special "
 "abilities – just follow what the card says.<BR>except by using the Spell explained on the monster."
 msgstr ""
-"Koletistel kollaste piiridega ei ole erilisi võimeid, kuid nad on head võitlejad. Koletistel oranžide piiridega on<BR>erilised võimed – järgi lihtsalt, mida kaart ütleb. Koletised siniste piiridega,"
-" nagu Relinquished, ei saa välja kutsuda<BR>muul viisil kui kasutades loitsu, mis on koletisel selgitatud."
+"Koletistel kollaste piiridega ei ole erilisi võimeid, kuid nad on head võitlejad. Koletistel oranžide piiridega on erilised võimed – järgi lihtsalt, mida kaart ütleb. Koletised siniste piiridega, "
+"nagu Relinquished, ei saa välja kutsuda muul viisil kui kasutades loitsu, mis on koletisel selgitatud."
 
 #: Speed_Duel_Guide_EN.ai:29
 msgid ""
@@ -146,12 +146,11 @@ msgstr "Iga mängija alustab 4000 LP-ga (Elupunktidega). Kui su LP jõuab nullin
 
 #: Speed_Duel_Guide_EN.ai:47
 msgid "You can use all your Speed Duel cards when you play the full<BR>Yu-Gi-Oh! TRADING CARD GAME, and put them in your Decks, except <BR>for Skill Cards. They can only be used in Speed Duels!"
-msgstr ""
-"Sa võid kasutada kõiki oma Speed Duel kaarte, kui mängid täis<BR>Yu-Gi-Oh! KOGUMISKAARDIMÄNGU ja panna need oma pakkidesse, välja <BR>arvatud Oskuse kaardid. Neid võib kasutada ainult Speed Duel'is!"
+msgstr "Sa võid kasutada kõiki oma Speed Duel kaarte, kui mängid täis Yu-Gi-Oh! KOGUMISKAARDIMÄNGU ja panna need oma pakkidesse, välja arvatud Oskuse kaardid. Neid võib kasutada ainult Speed Duel'is!"
 
 #: Speed_Duel_Guide_EN.ai:48
 msgid "Speed Duels are played with a carefully selected set of cards. <BR>For Speed Duels, you should only use cards with the Speed Duel <BR>watermark on them. "
-msgstr "Speed Duel'i mängitakse hoolikalt valitud kaartide komplektiga. <BR>Speed Duel'i jaoks peaksid kasutama ainult kaarte, millel on peal <BR>Speed Duel vesimärk."
+msgstr "Speed Duel'i mängitakse hoolikalt valitud kaartide komplektiga. Speed Duel'i jaoks peaksid kasutama ainult kaarte, millel on peal Speed Duel vesimärk."
 
 #: Speed_Duel_Guide_EN.ai:49
 msgid "Skill Cards should be a secret from your opponent until you use them, <BR>so don’t let them see what the card is when you set up at the start of <BR>the Duel!"
@@ -163,9 +162,8 @@ msgid ""
 "flip it face-up at the start of <BR>the Duel. If it does not, then the instructions on the hidden side of the <BR>card will tell you when you can activate it by flipping it face-up. When <BR>you do,"
 " just follow the instructions on the card."
 msgstr ""
-"Oskuskaardid valitakse enne duelli algust. Vali üks oskuskaart ja <BR>aseta see enne duelli algust tagurpidi (nii, et tegelase nimi on <BR>nähtav). Võib olla, et see ütleb, et võid selle duelli "
-"alguses ümber <BR>pöörata. Kui ei, siis juhised kaardi peidetud küljel ütlevad sulle, <BR>millal saad selle aktiveerida, pöörates selle nähtavaks. Kui sa seda <BR>teed, järgi kaardi peal olevaid "
-"juhiseid."
+"Oskuskaardid valitakse enne duelli algust. Vali üks oskuskaart ja aseta see enne duelli algust tagurpidi (nii, et tegelase nimi on nähtav). Võib olla, et see ütleb, et võid selle duelli alguses "
+"ümber pöörata. Kui ei, siis juhised kaardi peidetud küljel ütlevad sulle, millal saad selle aktiveerida, pöörates selle nähtavaks. Kui sa seda teed, järgi kaardi peal olevaid juhiseid."
 
 #: Speed_Duel_Guide_EN.ai:51
 msgid ""
@@ -233,7 +231,7 @@ msgstr "Kui sinu ATK on suurem"
 
 #: Speed_Duel_Guide_EN.ai:90
 msgid "Compare the attacker’s ATK to the other monster’s DEF. Your opponent <BR>does not take any damage when you attack their Defense Position <BR>monster."
-msgstr "Võrdle ründaja ATK-d teise koletise DEF'iga. Sinu vastane ei <BR>saa mingit kahju, kui sa ründad nende Kaitseasendis <BR>koletist."
+msgstr "Võrdle ründaja ATK-d teise koletise DEF'iga. Sinu vastane ei saa mingit kahju, kui sa ründad nende Kaitseasendis koletist."
 
 #: Speed_Duel_Guide_EN.ai:97
 msgid "1000 LP Lost "
@@ -269,4 +267,4 @@ msgstr "Hävitatud koletis asetatakse näoga ülespoole <BR>oma omaniku Surnuaed
 
 #: Speed_Duel_Guide_EN.ai:117
 msgid "Compare the attacker’s ATK to the other monster’s ATK. The weaker <BR>monster is destroyed. The player with the destroyed monster takes <BR>damage equal to the difference in Attack Points."
-msgstr "Võrdle ründaja ATK-d teise koletise ATK-ga. Nõrgem <BR>koletis hävitatakse. Koletise hävinud mängija saab <BR>kahju, mis võrdub Ründe Punktide vahega."
+msgstr "Võrdle ründaja ATK-d teise koletise ATK-ga. Nõrgem koletis hävitatakse. Koletise hävinud mängija saab kahju, mis võrdub Ründe Punktide vahega."
