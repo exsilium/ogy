@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-02-03 13:56+0000\n"
-"PO-Revision-Date: 2024-02-03 16:49+0000\n"
+"PO-Revision-Date: 2024-02-03 18:14+0000\n"
 "Last-Translator: Exile <exile@chamber.ee>\n"
 "Language-Team: \n"
 "Language: et\n"
@@ -26,7 +26,7 @@ msgstr "MÄNGUMATT"
 
 #: Speed_Duel_Guide_EN.ai:16
 msgid "Flip your Skill<BR>over to<BR>activate it"
-msgstr "Pööra oma Oskuse kaart<BR>üle, et<BR>see aktiveerida"
+msgstr "Pööra oma <BR>Oskuse kaart <BR>ümber, et see<BR>aktiveerida"
 
 #: Speed_Duel_Guide_EN.ai:17
 msgid "STANDARD RULES FOR SPEED DUELING!"
@@ -51,7 +51,7 @@ msgid ""
 "survives the battle, it stays face-up."
 msgstr ""
 "Iga sinu Ründepositsioonis olev koletis võib rünnata korra käigu kohta. Vali koletis, mida rünnata, või kui su <BR>vastasel ei ole koletisi, võid rünnata otse nende LP-d. Lahuta oma koletise ATK "
-"punktid vastase LP-st. Kui lahingusse astud <BR>vastase koletisega, vaata paremal olevat tabelit, et näha, mis juhtub! Kui ründad näoga allapoole olevat koletist, <BR>keera see näoga ülespoole ja "
+"punktid vastase LP-st. Kui lahingusse <BR>astud vastase koletisega, vaata paremal olevat tabelit, et näha, mis juhtub! Kui ründad näoga allapoole olevat <BR>koletist, keera see näoga ülespoole ja "
 "kui see jääb lahingust ellu, jääb see näoga ülespoole."
 
 #: Speed_Duel_Guide_EN.ai:21
@@ -109,8 +109,8 @@ msgid ""
 "The Duel is played in turns. At the start of your turn, draw a card. Then you can Set Traps, play Spells, and Summon a <BR>monster, in any order. After all that, you can attack. When you are done "
 "attacking, your turn ends, and now it’s your <BR>opponent’s turn."
 msgstr ""
-"Duell mängitakse käikude kaupa. Oma käigu alguses tõmba kaart. Seejärel võid sa seada Lõkse, mängida Loitse ja <BR>kutsuda välja koletise, mis tahes järjekorras. Pärast seda kõike, võid sa rünnata. "
-"Kui oled ründamise lõpetanud, lõpeb <BR>sinu käik ja nüüd on sinu vastase käik."
+"Duell mängitakse käikude kaupa. Oma käigu alguses tõmba kaart. Seejärel võid sa seada Lõkse, mängida Loitse ja kutsuda välja koletise, mis tahes järjekorras. Pärast seda kõike, võid sa rünnata. Kui "
+"oled ründamise lõpetanud, lõpeb sinu käik ja nüüd on sinu vastase käik."
 
 #: Speed_Duel_Guide_EN.ai:31
 msgid "Each player draws the top 4 cards from their Deck for their starting hand."
@@ -147,15 +147,15 @@ msgstr "Iga mängija alustab 4000 LP-ga (Elupunktidega). Kui su LP jõuab nullin
 #: Speed_Duel_Guide_EN.ai:47
 msgid "You can use all your Speed Duel cards when you play the full<BR>Yu-Gi-Oh! TRADING CARD GAME, and put them in your Decks, except <BR>for Skill Cards. They can only be used in Speed Duels!"
 msgstr ""
-"Sa võid kasutada kõiki oma Speed Duel kaarte, kui mängid täis<BR>Yu-Gi-Oh! KOGUMISKAARDIMÄNGU ja panna need oma pakkidesse, välja arvatud<BR>Oskuse kaardid. Neid võib kasutada ainult Speed Duel'is!"
+"Sa võid kasutada kõiki oma Speed Duel kaarte, kui mängid täis<BR>Yu-Gi-Oh! KOGUMISKAARDIMÄNGU ja panna need oma pakkidesse, välja <BR>arvatud Oskuse kaardid. Neid võib kasutada ainult Speed Duel'is!"
 
 #: Speed_Duel_Guide_EN.ai:48
 msgid "Speed Duels are played with a carefully selected set of cards. <BR>For Speed Duels, you should only use cards with the Speed Duel <BR>watermark on them. "
-msgstr "Speed Duel'i mängitakse hoolikalt valitud kaartide komplektiga. <BR>Speed Duel'i jaoks peaksid kasutama ainult kaarte, millel on peal Speed Duel <BR>vesimärk."
+msgstr "Speed Duel'i mängitakse hoolikalt valitud kaartide komplektiga. <BR>Speed Duel'i jaoks peaksid kasutama ainult kaarte, millel on peal <BR>Speed Duel vesimärk."
 
 #: Speed_Duel_Guide_EN.ai:49
 msgid "Skill Cards should be a secret from your opponent until you use them, <BR>so don’t let them see what the card is when you set up at the start of <BR>the Duel!"
-msgstr "Oskuskaardid peaksid olema sinu vastase eest saladus kuni sa neid kasutad, <BR>seega ära lase neil näha, mis kaart see on, kui sa duelli alguses <BR>sättima hakkad!"
+msgstr "Oskuskaardid peaksid olema sinu vastase eest saladus kuni sa neid <BR>kasutad, seega ära lase neil näha, mis kaart see on, kui sa duelli <BR>alguses sättima hakkad!"
 
 #: Speed_Duel_Guide_EN.ai:50
 msgid ""
@@ -163,8 +163,8 @@ msgid ""
 "flip it face-up at the start of <BR>the Duel. If it does not, then the instructions on the hidden side of the <BR>card will tell you when you can activate it by flipping it face-up. When <BR>you do,"
 " just follow the instructions on the card."
 msgstr ""
-"Oskuskaardid valitakse enne duelli algust. Vali üks oskuskaart ja <BR>aseta see enne duelli algust tagurpidi (nii, et tegelase nimi on nähtav). <BR>Võib olla, et see ütleb, et võid selle duelli "
-"alguses ümber pöörata. Kui ei, <BR>siis juhised kaardi peidetud küljel ütlevad sulle, millal saad selle aktiveerida, <BR>pöörates selle nähtavaks. Kui sa seda teed, järgi kaardi peal olevaid "
+"Oskuskaardid valitakse enne duelli algust. Vali üks oskuskaart ja <BR>aseta see enne duelli algust tagurpidi (nii, et tegelase nimi on <BR>nähtav). Võib olla, et see ütleb, et võid selle duelli "
+"alguses ümber <BR>pöörata. Kui ei, siis juhised kaardi peidetud küljel ütlevad sulle, <BR>millal saad selle aktiveerida, pöörates selle nähtavaks. Kui sa seda <BR>teed, järgi kaardi peal olevaid "
 "juhiseid."
 
 #: Speed_Duel_Guide_EN.ai:51
@@ -172,9 +172,8 @@ msgid ""
 "Your Speed Duel Starter Deck contains<BR>3 Speed Duel Decks. You can play these <BR>Decks as they are, or combine cards from <BR>each to build your own Deck the way you <BR>want. If this is your "
 "ﬁrst time playing the<BR>Yu-Gi-Oh! TRADING CARD GAME, this Dueling <BR>Guide will teach you the basics. You can <BR>also ﬁnd the complete rulebook online at<BR>http://www.yugioh-card.com/en/rulebook"
 msgstr ""
-"Sinu Speed Duel Algajakomplekt sisaldab<BR>3 Speed Duel kaardipakki. Sa võid neid pakke <BR>mängida nii, nagu need on, või ühendada <BR>kaarte igast pakist, et ehitada oma pakk nii, <BR>nagu sa "
-"soovid. Kui see on sinu esimene kord <BR>mängida Yu-Gi-Oh! KAARDIMÄNGU, siis see <BR>mängujuhend õpetab sulle põhitõdesid. <BR>Täieliku reeglistiku leiad veebis aadressil<BR>http://www.yugioh-"
-"card.com/en/rulebook"
+"Sinu Speed Duel Algajakomplekt sisaldab 3 Speed Duel kaardipakki. Sa võid neid pakke mängida nii, nagu need on, või ühendada kaarte igast pakist, et ehitada oma pakk nii, nagu sa soovid. Kui see on "
+"sinu esimene kord mängida Yu-Gi-Oh! KAARDIMÄNGU, siis see mängujuhend õpetab sulle põhitõdesid. Täieliku reeglistiku leiad veebis aadressil http://www.yugioh-card.com/en/rulebook"
 
 #: Speed_Duel_Guide_EN.ai:54 Speed_Duel_Guide_EN.ai:56
 msgid "DEFENSE POSITION"
@@ -198,7 +197,7 @@ msgstr "LP'd Pole Kaotatud "
 
 #: Speed_Duel_Guide_EN.ai:75 Speed_Duel_Guide_EN.ai:77 Speed_Duel_Guide_EN.ai:79 Speed_Duel_Guide_EN.ai:93 Speed_Duel_Guide_EN.ai:99 Speed_Duel_Guide_EN.ai:105
 msgid "TARGET"
-msgstr "SIHT"
+msgstr "SIHTMÄRK"
 
 #: Speed_Duel_Guide_EN.ai:76 Speed_Duel_Guide_EN.ai:78 Speed_Duel_Guide_EN.ai:80 Speed_Duel_Guide_EN.ai:94 Speed_Duel_Guide_EN.ai:100 Speed_Duel_Guide_EN.ai:106
 msgid "ATTACKER"
