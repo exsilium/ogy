@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-02-03 13:56+0000\n"
-"PO-Revision-Date: 2024-02-03 14:18+0000\n"
+"PO-Revision-Date: 2024-02-03 16:49+0000\n"
 "Last-Translator: Exile <exile@chamber.ee>\n"
 "Language-Team: \n"
 "Language: et\n"
@@ -30,18 +30,18 @@ msgstr "Pööra oma Oskuse kaart<BR>üle, et<BR>see aktiveerida"
 
 #: Speed_Duel_Guide_EN.ai:17
 msgid "STANDARD RULES FOR SPEED DUELING!"
-msgstr "KIIRDUELLI STANDARDREEGLID!"
+msgstr "SPEED DUEL STANDARDREEGLID!"
 
 #: Speed_Duel_Guide_EN.ai:18
 msgid "CARDS LEGAL FOR SPEED DUELING"
-msgstr "KIIRDUELLIKS LEGAALSED KAARDID"
+msgstr "SPEED DUEL LEGAALSED KAARDID"
 
 #: Speed_Duel_Guide_EN.ai:19
 msgid ""
 "These are just the basics. You can find out some more cool moves, and learn about advanced things like Quick-Play Spells <BR>by reading the full rulebook online at http://www.yugioh-"
 "card.com/en/rulebook"
 msgstr ""
-"Need on vaid põhitõed. Saad avastada rohkem lahedaid käike ja õppida edasijõudnute teemasid nagu Kiir-Mängu Loitsud <BR>lugedes täielikku reeglistikku veebis aadressil http://www.yugioh-"
+"Need on vaid põhitõed. Saad avastada rohkem lahedaid käike ja õppida edasijõudnute teemasid nagu Kiir-Mängu <BR>Loitsud lugedes täielikku reeglistikku veebis aadressil http://www.yugioh-"
 "card.com/en/rulebook"
 
 #: Speed_Duel_Guide_EN.ai:20
@@ -50,8 +50,8 @@ msgid ""
 "ATK points from your opponent’s LP. If you battle <BR>an opponent’s monster, refer to the chart on the right to see what happens! If you attack a face-down monster, flip it <BR>face-up, and if it "
 "survives the battle, it stays face-up."
 msgstr ""
-"Iga sinu Ründepositsioonis olev koletis võib rünnata korra käigu kohta. Vali koletis, mida rünnata, või kui su vastasel <BR>ei ole koletisi, võid rünnata otse nende LP-d. Lahuta oma koletise ATK "
-"punktid vastase LP-st. Kui lahingusse astud <BR>vastase koletisega, vaata paremal olevat tabelit, et näha, mis juhtub! Kui ründad näoga allapoole olevat koletist, keera see <BR>näoga ülespoole ja "
+"Iga sinu Ründepositsioonis olev koletis võib rünnata korra käigu kohta. Vali koletis, mida rünnata, või kui su <BR>vastasel ei ole koletisi, võid rünnata otse nende LP-d. Lahuta oma koletise ATK "
+"punktid vastase LP-st. Kui lahingusse astud <BR>vastase koletisega, vaata paremal olevat tabelit, et näha, mis juhtub! Kui ründad näoga allapoole olevat koletist, <BR>keera see näoga ülespoole ja "
 "kui see jääb lahingust ellu, jääb see näoga ülespoole."
 
 #: Speed_Duel_Guide_EN.ai:21
@@ -59,8 +59,8 @@ msgid ""
 "Traps are not played face-up during your turn. Instead, you Set Traps face-down in your turn. Then on any turn after <BR>that (yours OR your opponent’s turn), you can flip them face-up and use their"
 " effect, then send them to the Graveyard. <BR>This lets you do a surprise move!"
 msgstr ""
-"Lõkse ei mängita oma käigu ajal näoga ülespoole. Selle asemel paigutad sa Lõksud oma käigu ajal näoga allapoole. Seejärel ükskõik millisel järgneval käigul <BR>(sinu oma VÕI vastase käigu ajal) võid"
-" sa need ümber pöörata näoga ülespoole ja kasutada nende efekti, seejärel saata need surnuaeda. <BR>See võimaldab sul teha üllatuskäigu!"
+"Lõkse ei mängita oma käigu ajal näoga ülespoole. Selle asemel paigutad sa Lõksud oma käigu ajal näoga allapoole. Seejärel <BR>ükskõik millisel järgneval käigul (sinu oma VÕI vastase käigu ajal) võid"
+" sa need ümber pöörata näoga ülespoole ja <BR>kasutada nende efekti, seejärel saata need surnuaeda. See võimaldab sul teha üllatuskäigu!"
 
 #: Speed_Duel_Guide_EN.ai:22
 msgid "Zone. All other Spells and Traps go to the Graveyard after you do what the card says."
@@ -76,7 +76,7 @@ msgstr " või Püsiv "
 
 #: Speed_Duel_Guide_EN.ai:25
 msgid "place it in the Field Zone. If a Spell or Trap has an Equip "
-msgstr ", aseta see Väljatsooni. Kui Loitsul või Lõksul on Varustus- "
+msgstr "aseta see Väljatsooni. Kui Loitsul või Lõksul on Varustus- "
 
 #: Speed_Duel_Guide_EN.ai:27
 msgid "You can play Spells right from your hand to the Spell & Trap Zone. Just follow the card directions. If it’s a Field Spell "
@@ -99,18 +99,18 @@ msgid ""
 "even sometimes be done during your opponent’s turn!"
 msgstr ""
 "Oma käigu ajal võid sa Tavakutsuda välja 1 koletise oma käest Ründepositsioonis (püsti) või seada 1 koletise näoga <BR>allapoole Kaitsepositsioonis (külili). Arvesta koletise Tase Tähtede arvu, kui "
-"sa ta välja kutsud. Kui tal on 4 või vähem Taseme Tähte, <BR>siis võid sa lihtsalt kutsuda või seada ta. Kui tal on rohkem kui 4 Tähte, pead sa esmalt ohverdama koletise, kes on juba mängus "
-"<BR>saates ta Surnuaeda. Sa pead ohverdama 1 koletise, et kutsuda või seada Tase 5 või 6 koletis, või ohverdama 2 <BR>koletist, et kutsuda või seada Tase 7 või kõrgem koletis. Kui kaardi efekt "
-"ütleb, et kutsu koletis eriliselt välja, siis ei ole <BR>vaja ohverdada, välja arvatud juhul, kui kaardi efekt seda nõuab. Lisaks, erilised väljakutsed on \"tasuta\", nii et need ei kasuta ära sinu "
-"1 Tavakutsumist/Seadmist oma käigu ajal ja neid saab isegi mõnikord teha vastase käigu ajal!"
+"sa ta välja kutsud. Kui tal on 4 või vähem <BR> Taseme Tähte, siis võid sa lihtsalt kutsuda või seada ta. Kui tal on rohkem kui 4 Tähte, pead sa esmalt ohverdama <BR>koletise, kes on juba mängus "
+"saates ta Surnuaeda. Sa pead ohverdama 1 koletise, et kutsuda või seada Tase 5 või 6 <BR>koletis, või ohverdama 2 koletist, et kutsuda või seada Tase 7 või kõrgem koletis. Kui kaardi efekt ütleb, et"
+" kutsu <BR>koletis eriliselt välja, siis ei ole vaja ohverdada, välja arvatud juhul, kui kaardi efekt seda nõuab. Lisaks, erilised <BR>väljakutsed on \"tasuta\", nii et need ei kasuta ära sinu 1 "
+"Tavakutsumist/Seadmist oma käigu ajal ja neid saab isegi <BR>mõnikord teha vastase käigu ajal!"
 
 #: Speed_Duel_Guide_EN.ai:30
 msgid ""
 "The Duel is played in turns. At the start of your turn, draw a card. Then you can Set Traps, play Spells, and Summon a <BR>monster, in any order. After all that, you can attack. When you are done "
 "attacking, your turn ends, and now it’s your <BR>opponent’s turn."
 msgstr ""
-"Duell mängitakse käikude kaupa. Oma käigu alguses tõmba kaart. Seejärel võid sa seada Lõkse, mängida Loitse ja kutsuda välja <BR>koletise, mis tahes järjekorras. Pärast seda kõike, võid sa rünnata. "
-"Kui oled ründamise lõpetanud, lõpeb sinu käik ja nüüd on <BR>sinu vastase käik."
+"Duell mängitakse käikude kaupa. Oma käigu alguses tõmba kaart. Seejärel võid sa seada Lõkse, mängida Loitse ja <BR>kutsuda välja koletise, mis tahes järjekorras. Pärast seda kõike, võid sa rünnata. "
+"Kui oled ründamise lõpetanud, lõpeb <BR>sinu käik ja nüüd on sinu vastase käik."
 
 #: Speed_Duel_Guide_EN.ai:31
 msgid "Each player draws the top 4 cards from their Deck for their starting hand."
@@ -172,8 +172,8 @@ msgid ""
 "Your Speed Duel Starter Deck contains<BR>3 Speed Duel Decks. You can play these <BR>Decks as they are, or combine cards from <BR>each to build your own Deck the way you <BR>want. If this is your "
 "ﬁrst time playing the<BR>Yu-Gi-Oh! TRADING CARD GAME, this Dueling <BR>Guide will teach you the basics. You can <BR>also ﬁnd the complete rulebook online at<BR>http://www.yugioh-card.com/en/rulebook"
 msgstr ""
-"Sinu Speed Duel Algajakomplekt sisaldab<BR>3 Speed Duel kaardipakki. Sa võid neid pakke <BR>mängida nii, nagu need on, või ühendada kaarte <BR>igast pakist, et ehitada oma pakk nii, nagu sa "
-"<BR>soovid. Kui see on sinu esimene kord mängida<BR>Yu-Gi-Oh! KAARDIMÄNGU, siis see <BR>mängujuhend õpetab sulle põhitõdesid. Täieliku reeglistiku <BR>leiad veebis aadressil<BR>http://www.yugioh-"
+"Sinu Speed Duel Algajakomplekt sisaldab<BR>3 Speed Duel kaardipakki. Sa võid neid pakke <BR>mängida nii, nagu need on, või ühendada <BR>kaarte igast pakist, et ehitada oma pakk nii, <BR>nagu sa "
+"soovid. Kui see on sinu esimene kord <BR>mängida Yu-Gi-Oh! KAARDIMÄNGU, siis see <BR>mängujuhend õpetab sulle põhitõdesid. <BR>Täieliku reeglistiku leiad veebis aadressil<BR>http://www.yugioh-"
 "card.com/en/rulebook"
 
 #: Speed_Duel_Guide_EN.ai:54 Speed_Duel_Guide_EN.ai:56
