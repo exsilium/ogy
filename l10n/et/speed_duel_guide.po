@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-02-03 13:56+0000\n"
-"PO-Revision-Date: 2024-02-03 20:28+0000\n"
+"PO-Revision-Date: 2024-02-03 21:17+0000\n"
 "Last-Translator: Exile <exile@chamber.ee>\n"
 "Language-Team: \n"
 "Language: et\n"
@@ -110,7 +110,7 @@ msgid ""
 "attacking, your turn ends, and now it’s your <BR>opponent’s turn."
 msgstr ""
 "Duell mängitakse käikude kaupa. Oma käigu alguses tõmba kaart. Seejärel võid sa seada Lõkse, mängida Loitse ja kutsuda välja koletise, mis tahes järjekorras. Pärast seda kõike, võid sa rünnata. Kui "
-"oled ründamise lõpetanud, lõpeb sinu käik ja nüüd on sinu vastase käik."
+"oled ründamise lõpetanud, lõpeb sinu käik ja nüüd on sinu vastase kord."
 
 #: Speed_Duel_Guide_EN.ai:31
 msgid "Each player draws the top 4 cards from their Deck for their starting hand."
@@ -154,7 +154,7 @@ msgstr "Speed Duel'i mängitakse hoolikalt valitud kaartide komplektiga. Speed D
 
 #: Speed_Duel_Guide_EN.ai:49
 msgid "Skill Cards should be a secret from your opponent until you use them, <BR>so don’t let them see what the card is when you set up at the start of <BR>the Duel!"
-msgstr "Oskuskaardid peaksid olema sinu vastase eest saladus kuni sa neid <BR>kasutad, seega ära lase neil näha, mis kaart see on, kui sa duelli <BR>alguses sättima hakkad!"
+msgstr "Oskuskaardid peaksid olema sinu vastase eest saladus kuni sa neid kasutad, seega ära lase neil näha, mis kaart see on, kui sa duelli alguses sättima hakkad!"
 
 #: Speed_Duel_Guide_EN.ai:50
 msgid ""
