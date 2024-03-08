@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-01-23 12:04+0000\n"
-"PO-Revision-Date: 2024-01-27 09:51+0000\n"
+"PO-Revision-Date: 2024-03-08 19:28+0000\n"
 "Last-Translator: Exile <exile@chamber.ee>\n"
 "Language-Team: \n"
 "Language: et\n"
@@ -37154,7 +37154,7 @@ msgstr "Kaardikaupleja"
 #. pointer: 23656
 #: 23656
 msgid "Once per turn, during your Standby Phase, you can shuffle 1 card from your hand into the Deck, then draw 1 card."
-msgstr "Kord käigu kohta, oma valmisolekufaasi jooksul, võid segada 1 kaardi oma käest kaardipakki, seejärel tõmmata 1 kaart."
+msgstr "Kord käigu kohta, oma valmisolekufaasi ajal, võid segada 1 kaardi oma käest kaardipakki, seejärel tõmba pakist 1 kaart."
 
 #. type: Name
 #. pointer: 23664
