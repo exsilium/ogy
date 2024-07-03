@@ -413,7 +413,7 @@ export class YgoTexts {
   private getPointerInfo(text: string): number[] {
     text = text.replace(" ", "").replace(">", "").replace("<", "§");
     const information: number[] = new Array(2);
-    const inf = text.split('§').pop()?.split(':') ?? [];
+    const inf = text.split('§').pop()?.split('PONTEIRO:') ?? [];
     const separator = inf[1].split(',');
     const pointerPosition = parseInt(separator[0]);
     const pointerValue = parseInt(separator[1]);
