@@ -1,7 +1,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { YuGiOh, Dictionary } from './compressor.js';
+import { Dictionary, YuGiOh } from './compressor.js';
 import { Huffman } from './huffman.js';
+import { Logger } from './logger.js';
+import { processCardAsset } from './converter.js';
 
 export class YgoTexts {
 
@@ -90,84 +92,8 @@ export class YgoTexts {
 
    */
   public async exportToPot(dirCard: string, ygoType: YuGiOh): Promise<void> {
-    const sourceFiles = this.requiredFiles(dirCard).sort();
-    const cardDesc = sourceFiles[0];
-    const cardHuff = sourceFiles[1];
-    const cardIdx = sourceFiles[2];
-    const cardIntID = sourceFiles[3];
-    const cardName = sourceFiles[4];
-    const Dict = sourceFiles[5];
-    const descriptionText: string[] = [];
-    this.exportToTxtInternalPointers(Dict);
-    const huff = new Huffman();
-    const desDecompressed = await huff.decompress(cardDesc, cardHuff, cardIdx);
-
-    const conversorDeCodigos = new Dictionary();
-    const tex = conversorDeCodigos.translateWithDictionary(Dict, cardIdx, desDecompressed, cardIntID, cardName, ygoType);
-
-    // Process each text and add to descriptionText
-    tex.forEach(texts => {
-      descriptionText.push(texts.replace("\0", ""));
-    });
-
-    // Read binary data and process it
-    const binBuffer = fs.readFileSync(cardName);
-    const idxBuffer = fs.readFileSync(cardIdx);
-    const countOffsetSeek = 8;
-    const countOfPointers = idxBuffer.length / countOffsetSeek;
-    const pointers: number[] = [];
-    let positionsTable: number[] = [];
-
-    for (let i = 0; i < countOfPointers; i++) {
-      const position = i * countOffsetSeek;
-      positionsTable.push(position);
-      pointers.push(idxBuffer.readInt32LE(position));
-    }
-
+    /* This requires refactoring after different game types have been added */
     const texts: string[] = [];
-    const textsForAnalysis: string[] = [];
-
-    // Process and extract card names
-    pointers.forEach((pointer, i) => {
-      if (pointer === binBuffer.length || pointer > binBuffer.length) {
-        return;
-      }
-      let cardName = "";
-      let pos = pointer;
-      while (true) {
-        const character = binBuffer.slice(pos, pos + 2).toString('utf16le');
-        pos += 2;
-        if (character.includes("\0")) {
-          break;
-        }
-        cardName += character;
-      }
-
-      texts.push(
-        `#. type: Name\n` +
-        `#. pointer: ${positionsTable[i]}\n` +
-        `#: ${positionsTable[i]}\n` +
-        `msgid "${cardName
-          .replace(/\$CA/g, "<COR: $CA>")
-          .replace(/\$C0/g, "<COR: $C0>")
-          .replace(/\$C5/g, "<COR: $C5>")
-          .replace(/\$C8/g, "<COR: $C8>")
-          .replace(/\n/g, "<b>\n")
-          .replace(/\$0/g, "<JOGADOR: $0>")
-          .replace(/\0/g, "")
-          .replace(/"/g, "\\\"")}"\n` +
-        `msgstr ""\n` +
-        `\n` +
-        `#. type: Description\n` +
-        `#. pointer: ${positionsTable[i]}\n` +
-        `#: ${positionsTable[i]}\n` +
-        `msgid ""\n` +
-        `"` + descriptionText[i].replace(/"/g, "\\\"").replace(/\r\n/g, "<BR>") + `"\n` +
-        `msgstr ""\n`
-      );
-      textsForAnalysis.push(descriptionText[i]);
-    });
-
     const cardTextsFinal: string[] = [
       "# Yu-Gi-Oh! Portable Object Template - " + YuGiOh[ygoType] + "\n" +
       "# Export using OGY - https://github.com/exsilium/ogy\n" +
@@ -186,11 +112,126 @@ export class YgoTexts {
       "\"Content-Type: text/plain; charset=UTF-8\\n\"\n" +
       "\"Content-Transfer-Encoding: 8bit\\n\"\n"
     ];
-    texts.forEach((texto, i) => cardTextsFinal.push(texto));
 
-    const outputFile = path.dirname(cardDesc) + "/" + YuGiOh[ygoType].toLowerCase() +  ".pot";
-    console.log("Output file: " + outputFile);
-    fs.writeFileSync(outputFile , cardTextsFinal.join('\n'));
+    if(ygoType === YuGiOh.TF6) {
+      const sourceFiles = this.requiredFiles(dirCard).sort();
+      const cardDesc = sourceFiles[0];
+      const cardHuff = sourceFiles[1];
+      const cardIdx = sourceFiles[2];
+      const cardIntID = sourceFiles[3];
+      const cardName = sourceFiles[4];
+      const Dict = sourceFiles[5];
+      const descriptionText: string[] = [];
+      this.exportToTxtInternalPointers(Dict);
+      const huff = new Huffman();
+      const desDecompressed = await huff.decompress(cardDesc, cardHuff, cardIdx);
+
+      const conversorDeCodigos = new Dictionary();
+      const tex = conversorDeCodigos.translateWithDictionary(Dict, cardIdx, desDecompressed, cardIntID, cardName, ygoType);
+
+      // Process each text and add to descriptionText
+      tex.forEach(texts => {
+        descriptionText.push(texts.replace("\0", ""));
+      });
+
+      // Read binary data and process it
+      const binBuffer = fs.readFileSync(cardName);
+      const idxBuffer = fs.readFileSync(cardIdx);
+      const countOffsetSeek = 8;
+      const countOfPointers = idxBuffer.length / countOffsetSeek;
+      const pointers: number[] = [];
+      let positionsTable: number[] = [];
+
+      for (let i = 0; i < countOfPointers; i++) {
+        const position = i * countOffsetSeek;
+        positionsTable.push(position);
+        pointers.push(idxBuffer.readInt32LE(position));
+      }
+
+      const textsForAnalysis: string[] = [];
+
+      // Process and extract card names
+      pointers.forEach((pointer, i) => {
+        if (pointer === binBuffer.length || pointer > binBuffer.length) {
+          return;
+        }
+        let cardName = "";
+        let pos = pointer;
+        while (true) {
+          const character = binBuffer.slice(pos, pos + 2).toString('utf16le');
+          pos += 2;
+          if (character.includes("\0")) {
+            break;
+          }
+          cardName += character;
+        }
+
+        texts.push(
+          `#. type: Name\n` +
+          `#. pointer: ${positionsTable[i]}\n` +
+          `#: ${positionsTable[i]}\n` +
+          `msgid "${cardName
+            .replace(/\$CA/g, "<COR: $CA>")
+            .replace(/\$C0/g, "<COR: $C0>")
+            .replace(/\$C5/g, "<COR: $C5>")
+            .replace(/\$C8/g, "<COR: $C8>")
+            .replace(/\n/g, "<b>\n")
+            .replace(/\$0/g, "<JOGADOR: $0>")
+            .replace(/\0/g, "")
+            .replace(/"/g, "\\\"")}"\n` +
+          `msgstr ""\n` +
+          `\n` +
+          `#. type: Description\n` +
+          `#. pointer: ${positionsTable[i]}\n` +
+          `#: ${positionsTable[i]}\n` +
+          `msgid ""\n` +
+          `"` + descriptionText[i].replace(/"/g, "\\\"").replace(/\r\n/g, "<BR>") + `"\n` +
+          `msgstr ""\n`
+        );
+        textsForAnalysis.push(descriptionText[i]);
+      });
+
+      texts.forEach((texto, i) => cardTextsFinal.push(texto));
+
+      const outputFile = path.dirname(cardDesc) + "/" + YuGiOh[ygoType].toLowerCase() + ".pot";
+      console.log("Output file: " + outputFile);
+      fs.writeFileSync(outputFile, cardTextsFinal.join('\n'));
+    }
+    else if(ygoType === YuGiOh.MAD) {
+      const cardIndxFilename = dirCard + "/CARD_Indx.decrypted.bin";
+      const nameFilename = dirCard + "/CARD_Name.decrypted.bin";
+      const descFilename = dirCard + "/CARD_Desc.decrypted.bin";
+
+      const cardNames: string[] = processCardAsset(cardIndxFilename, nameFilename, 0);
+      const cardDescs: string[] = processCardAsset(cardIndxFilename, descFilename, 4);
+
+      Logger.enableDebug();
+      Logger.log("cardNames length: " + cardNames.length);
+      Logger.log("cardDescs length: " + cardDescs.length);
+
+      cardNames.forEach((cardName, i: number) => {
+        texts.push(
+          `#. type: Name\n` +
+          `#. pointer: ${i}\n` +
+          `#: ${i}\n` +
+          `msgid "${cardName}"\n` +
+          `msgstr ""\n` +
+          `\n` +
+          `#. type: Description\n` +
+          `#. pointer: ${i}\n` +
+          `#: ${i}\n` +
+          `msgid ""\n` +
+          `"` + cardDescs[i].replace(/"/g, "\\\"").replace(/\n/g, "<BR>") + `"\n` +
+          `msgstr ""\n`
+        );
+      });
+
+      texts.forEach((texto, i) => cardTextsFinal.push(texto));
+
+      const outputFile = path.dirname(nameFilename) + "/" + YuGiOh[ygoType].toLowerCase() + ".pot";
+      console.log("Output file: " + outputFile);
+      fs.writeFileSync(outputFile, cardTextsFinal.join('\n'));
+    }
   }
 
   public exportToTxtInternalPointers(binDir: string): void {

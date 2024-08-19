@@ -14,11 +14,11 @@ Tooling in this project is built using TypeScript for static typing and cross-pl
 
 ### Disclaimer
 
-- I am not personally part of any ROM hacking scene nor do I have any linkings to an active group who create hacks - in fact, I know very little about the subject. A lot of information is out there, but it is hacking group internal, scattered around forum threads or otherwise hard to find. In no way should the information here be considered authoritative. I am sure there are mistakes, if you find any, please let me know so I can fix them.
+- I am not affiliated with any ROM hacking community, nor do I have any connections with active groups that create hacks. My knowledge of the subject is limited. While there is a lot of information available, much of it is internal to hacking groups, scattered across forum threads, or otherwise difficult to access. The information provided here should not be considered authoritative. Mistakes are possible, and if you find any, please notify me so I can correct them.
 
-- The goal of this project is driven from personal desire to customize some of the card descriptions in the game.
+- This project is motivated purely by a personal desire to customize some of the card descriptions in the game.
 
-- There are no commercial incentives involved. The information and data provided here are for educational purpsoes.
+- There are no commercial incentives behind this project. The information and data provided are solely for educational purposes.
 
 ### License
 
@@ -70,20 +70,22 @@ Usage: index [options] [command]
 A helper tool to export and import CARD texts for Yu-Gi-Oh! 5D's Tag Force 6
 
 Options:
-  -V, --version                      output the version number
-  -e, --export <directory>           process and export CARD_ files in the directory for export
-  -i, --import <directory>           process and import texts to .bin files
-  -f, --format <format>              specify the export format: pot|ygt, default: ygt
-  -t, --transform <directory>        transform CARD_Desc_J.po to CARD_Desc_J.txt
-  -b, --build <directory>            build a new Dictionary (slow)
-  -h, --help                         display help for command
+  -V, --version                         output the version number
+  -e, --export <directory>              process and export CARD_ files in the directory for export
+  -i, --import <directory>              process and import texts to .bin files
+  -f, --format <format>                 specify the export format: pot|ygt, default: ygt
+  -g, --game <game>                     specify the game: tf6|mad, default: tf6
+  -t, --transform <directory>           transform CARD_Desc_J.po to CARD_Desc_J.txt
+  -b, --build <directory>               build a new Dictionary (slow)
+  -h, --help                            display help for command
 
 Commands:
-  card                               default command, actions based on option parameters
-  extract <source_ehp> <directory>   extract .ehp file to destination directory
-  update <target_ehp> <directory>    update existing .ehp file from the same files in directory
-  po2json <source_po> <target_json>  helper function to convert .PO to .JSON structure
-  help [command]                     display help for command
+  card                                  default command, actions based on option parameters
+  extract <source_ehp> <directory>      extract .ehp file to destination directory
+  unbundle <source_bundle> <directory>  extract UnityFS AssetBundle file to destination directory (EXPERIMENTAL and SPECIFIC to MD)
+  update <target_ehp> <directory>       update existing .ehp file from the same files in directory
+  po2json <source_po> <target_json>     helper function to convert .PO to .JSON structure
+  help [command]                        display help for command
 ```
 
 ## Structure

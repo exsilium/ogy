@@ -5,6 +5,8 @@ import { Command } from '@commander-js/extra-typings';
 import { YuGiOh, Transformer, DictionaryBuilder } from './compressor.js';
 import { YgoTexts } from './ygotexts.js';
 import { Ehp } from './ehp.js';
+import { AssetBundle } from './assetbundle.js';
+import { CABExtractor } from './cab.js';
 
 const program = new Command();
 
@@ -27,6 +29,28 @@ program
 
     const ehp = new Ehp(path.resolve(process.cwd(), directory), path.resolve(process.cwd(), source_ehp));
     ehp.extract();
+  });
+
+program
+  .command("unbundle <source_bundle> <directory>")
+  .description("extract UnityFS AssetBundle file to destination directory (EXPERIMENTAL and SPECIFIC to MD)")
+  .action(async (source_bundle, directory) => {
+    let extractedFile = "";
+    console.log("Unbundle command called");
+    console.log("Source bundle: " + path.resolve(process.cwd(), source_bundle));
+    console.log("Destination directory: " + path.resolve(process.cwd(), directory));
+
+    const assetBundle = new AssetBundle(source_bundle);
+    const extractedAssetBundle = assetBundle.extractAssetBundle(path.resolve(process.cwd(), directory));
+
+    for(const asset of extractedAssetBundle) {
+      const extractedFile = await CABExtractor.extract(path.join(directory, asset), directory);
+
+      // If we know about the extracted file, let's try to decrypt it.
+      if(extractedFile === "CARD_Indx") {
+        console.log("Trying to decrypt " + extractedFile);
+      }
+    }
   });
 
 program
@@ -68,6 +92,7 @@ program
   .option("-e, --export <directory>", "process and export CARD_ files in the directory for export")
   .option("-i, --import <directory>", "process and import texts to .bin files")
   .option("-f, --format <format>", "specify the export format: pot|ygt, default: ygt")
+  .option("-g, --game <game>", "specify the game: tf6|mad, default: tf6")
   .option("-t, --transform <directory>", "transform CARD_Desc_J.po to CARD_Desc_J.txt")
   .option("-b, --build <directory>", "build a new Dictionary (slow)")
   .parse(process.argv);
@@ -95,7 +120,20 @@ if ("export" in options) {
 
   const ygoTextInstance = new YgoTexts();
 
-  if("format" in options) {
+  if("game" in options) {
+    if(options.game != "tf6" && options.game != "mad") {
+      console.error("Unsupported game!")
+      process.exit(1);
+    }
+  }
+
+  if("format" in options && "game" in options) {
+    if(options.format === "pot" && options.game === "mad") {
+      console.log("Output format selected: POT");
+      const result = await ygoTextInstance.exportToPot(resolvedPath, YuGiOh.MAD);
+    }
+  }
+  else if("format" in options) {
     // We have format specifier added in the cli call
     if(options.format === "pot") {
       console.log("Output format selected: POT");

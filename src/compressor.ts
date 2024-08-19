@@ -11,6 +11,7 @@ enum YuGiOh {
   TF6, // Yu-Gi-Oh! 5D's: Tag Force 6, 2011, PSP (*Default)
   TFS, // Yu-Gi-Oh! Arc-V Tag Force Special, 2015, PSP
   SCB, // Yu-Gi-Oh! Saikyo Card Battle, 2016, 3DS
+  MAD, // Yu-Gi-Oh! Master Duel, 2022, Unity (Cross-platform)
 }
 
 type Entry = {
