@@ -214,7 +214,7 @@ export class YgoTexts {
           `#. type: Name\n` +
           `#. pointer: ${i}\n` +
           `#: ${i}\n` +
-          `msgid "${cardName}"\n` +
+          `msgid "${cardName.replace(/"/g, "\\\"")}"\n` +
           `msgstr ""\n` +
           `\n` +
           `#. type: Description\n` +
