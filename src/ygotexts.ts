@@ -167,8 +167,7 @@ export class YgoTexts {
         }
 
         texts.push(
-          `#. type: Name\n` +
-          `#. pointer: ${positionsTable[i]}\n` +
+          `#. type: Name | pointer: ${positionsTable[i]}\n` +
           `#: ${positionsTable[i]}\n` +
           `msgid "${cardName
             .replace(/\$CA/g, "<COR: $CA>")
@@ -181,8 +180,7 @@ export class YgoTexts {
             .replace(/"/g, "\\\"")}"\n` +
           `msgstr ""\n` +
           `\n` +
-          `#. type: Description\n` +
-          `#. pointer: ${positionsTable[i]}\n` +
+          `#. type: Description | pointer: ${positionsTable[i]}\n` +
           `#: ${positionsTable[i]}\n` +
           `msgid ""\n` +
           `"` + descriptionText[i].replace(/"/g, "\\\"").replace(/\r\n/g, "<BR>") + `"\n` +
@@ -211,14 +209,12 @@ export class YgoTexts {
 
       cardNames.forEach((cardName, i: number) => {
         texts.push(
-          `#. type: Name\n` +
-          `#. pointer: ${i}\n` +
+          `#. type: Name | pointer: ${i}\n` +
           `#: ${i}\n` +
           `msgid "${cardName.replace(/"/g, "\\\"")}"\n` +
           `msgstr ""\n` +
           `\n` +
-          `#. type: Description\n` +
-          `#. pointer: ${i}\n` +
+          `#. type: Description | pointer: ${i}\n` +
           `#: ${i}\n` +
           `msgid ""\n` +
           `"` + cardDescs[i].replace(/"/g, "\\\"").replace(/\n/g, "<BR>") + `"\n` +
