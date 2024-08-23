@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as os from 'os';
 import figlet from 'figlet';
 import { Command } from '@commander-js/extra-typings';
 import { YuGiOh, Transformer, DictionaryBuilder } from './compressor.js';
@@ -84,7 +85,40 @@ program
     else {
       console.log("Unable to find source PO: " + resolvedSource);
     }
-  })
+  });
+
+const script = program.command('script')
+  .description("Run more specific scripted actions");
+
+script
+  .command("mad2pot <source_dir>")
+  .description("Export from Master Duel installation directory to create mad.pot PO Template file")
+  .action((source_dir) => {
+    /* Game source dir e.g: "~/Library/Application Support/CrossOver/Bottles/Steam/drive_c/Program Files (x86)/Steam/steamapps/common/Yu-Gi-Oh!  Master Duel" */
+    /* Check the source directory existence */
+    if (source_dir.startsWith('~')) {
+      source_dir = path.join(os.homedir(), source_dir.slice(1));
+    }
+
+    const resolvedPath = path.resolve(source_dir);
+
+    if(fs.existsSync(resolvedPath)) {
+      console.log("Source dir: " + resolvedPath);
+    }
+    else {
+      console.log("Source dir invalid, exiting");
+      process.exit(1);
+    }
+
+    /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx containers */
+    const cardNameBundlePath = path.join(resolvedPath, "/LocalData/7c6b555/0000/cd/cde5b0ab");
+    const cardDescBundlePath = path.join(resolvedPath, "/LocalData/7c6b555/0000/98/987362f9");
+    const cardIndxBundlePath = path.join(resolvedPath, "/LocalData/7c6b555/0000/e9/e9aa18bf");
+
+    if(fs.existsSync(cardNameBundlePath) && fs.existsSync(cardDescBundlePath) && fs.existsSync(cardIndxBundlePath)) {
+      console.log("Files exist");
+    }
+  });
 
 program
   .version("0.2.0")
@@ -127,17 +161,16 @@ if ("export" in options) {
     }
   }
 
-  if("format" in options && "game" in options) {
-    if(options.format === "pot" && options.game === "mad") {
-      console.log("Output format selected: POT");
-      const result = await ygoTextInstance.exportToPot(resolvedPath, YuGiOh.MAD);
-    }
-  }
-  else if("format" in options) {
+  if("format" in options) {
     // We have format specifier added in the cli call
-    if(options.format === "pot") {
+    if(options.format === "pot" && "game" in options) {
       console.log("Output format selected: POT");
-      const result = await ygoTextInstance.exportToPot(resolvedPath, YuGiOh.TF6);
+      if("game" in options && options.game === "mad") {
+        const result = await ygoTextInstance.exportToPot(resolvedPath, YuGiOh.MAD);
+      }
+      else {
+        const result = await ygoTextInstance.exportToPot(resolvedPath, YuGiOh.TF6);
+      }
     }
     else if(options.format === "ygt") {
       console.log("Output format selected: YGTool");
