@@ -498,6 +498,9 @@ class DictionaryBuilder {
         else if (phrase.includes("●")) {
           continue;
         }
+        else if (phrase.length < 5) {
+          continue;
+        }
 
         const current = phraseCount.get(phrase);
         if (current) {
