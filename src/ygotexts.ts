@@ -203,7 +203,6 @@ export class YgoTexts {
       const cardNames: string[] = processCardAsset(cardIndxFilename, nameFilename, 0);
       const cardDescs: string[] = processCardAsset(cardIndxFilename, descFilename, 4);
 
-      Logger.enableDebug();
       Logger.log("cardNames length: " + cardNames.length);
       Logger.log("cardDescs length: " + cardDescs.length);
 

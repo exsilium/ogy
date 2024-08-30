@@ -8,6 +8,7 @@ import { YgoTexts } from './ygotexts.js';
 import { Ehp } from './ehp.js';
 import { AssetBundle } from './assetbundle.js';
 import { CABExtractor } from './cab.js';
+import { UMDISOReader } from './umdiso.js';
 
 const program = new Command();
 
@@ -87,10 +88,10 @@ program
     }
   });
 
-const script = program.command('script')
-  .description("Run more specific scripted actions");
+const chain = program.command('chain')
+  .description("Run chained actions to fulfill multiple tasks in one go");
 
-script
+chain
   .command("mad2pot <source_dir>")
   .description("Export from Master Duel installation directory to create mad.pot PO Template file")
   .action((source_dir) => {
@@ -120,8 +121,96 @@ script
     }
   });
 
+chain
+  .command("tf6-extract <source_iso> <target_dir>")
+  .description("Read Tag Force 6 .iso file to extract card information to target directory (tf6.pot)")
+  .action((source_iso, target_dir) => {
+    if(source_iso.startsWith('~')) {
+      source_iso = path.join(os.homedir(), source_iso.slice(1));
+    }
+
+    if(target_dir.startsWith('~')) {
+      target_dir = path.join(os.homedir(), target_dir.slice(1));
+    }
+
+    const resolvedISOPath = path.resolve(source_iso);
+
+    if(fs.existsSync(resolvedISOPath)) {
+      console.log("Source iso: " + resolvedISOPath);
+    }
+    else {
+      console.log("Source iso invalid, exiting");
+      process.exit(1);
+    }
+
+    /* Extract .ehp container from .iso */
+    const isoReader = new UMDISOReader(resolvedISOPath);
+    ensureDirectoryExists(target_dir);
+    isoReader.exportFile("PSP_GAME/USRDIR/duelsys/cardinfo_jpn.ehp", target_dir);
+    isoReader.close();
+
+    /* Extract card .bin files from .ehp */
+    const ehp = new Ehp(target_dir, path.join(target_dir, "/cardinfo_jpn.ehp"));
+    ehp.extract();
+
+    /* Convert .bin CARD files to tf6.pot */
+    (async () => await new YgoTexts().exportToPot(target_dir, YuGiOh.TF6).then(() => listDirContents(target_dir)))();
+  });
+
+chain
+  .command("tf6-implant <source_iso> <target_dir>")
+  .description("Produce a new ISO based on source ISO and the language asset (CARD_Desc_J.po) in target directory")
+  .action((source_iso, target_dir) => {
+    if(source_iso.startsWith('~')) {
+      source_iso = path.join(os.homedir(), source_iso.slice(1));
+    }
+
+    if(target_dir.startsWith('~')) {
+      target_dir = path.join(os.homedir(), target_dir.slice(1));
+    }
+
+    const resolvedISOPath = path.resolve(source_iso);
+    const resolvedPOPath = path.join(target_dir, "/CARD_Desc_J.po");
+    const resolvedEHPPath = path.join(target_dir, "/cardinfo_jpn.ehp");
+
+    if(fs.existsSync(resolvedISOPath)) {
+      console.log("Source iso: " + resolvedISOPath);
+    }
+    else {
+      console.log("Source iso invalid, exiting");
+      process.exit(1);
+    }
+
+    if(fs.existsSync(resolvedPOPath)) {
+      console.log("Source PO: " + resolvedPOPath);
+    }
+    else {
+      console.log("Source PO invalid, exiting");
+      process.exit(1);
+    }
+
+    /* Process the PO file and convert it to TXT */
+    const transformer = new Transformer();
+    transformer.poToTxt(resolvedPOPath);
+
+    /* Build new Dictionary */
+    const dictionaryBuilder = new DictionaryBuilder();
+    dictionaryBuilder.build(path.join(target_dir + "/DICT_J.tin"));
+
+    /* Update the .ehp in target directory */
+    const ehp = new Ehp(target_dir, resolvedEHPPath);
+    ehp.update();
+
+    /* Write a new .iso with the updated .ehp */
+    const isoReader = new UMDISOReader(resolvedISOPath);
+    isoReader.writeUpdatedISO("PSP_GAME/USRDIR/duelsys/cardinfo_jpn.ehp", resolvedEHPPath,
+      path.join(target_dir, YuGiOh[YuGiOh.TF6].toLowerCase() + ".iso"));
+
+    listDirContents(target_dir);
+  });
+
 program
-  .version("0.2.0")
+  .version("0.3.0")
   .description("A helper tool to export and import CARD texts for Yu-Gi-Oh! 5D's Tag Force 6")
   .option("-e, --export <directory>", "process and export CARD_ files in the directory for export")
   .option("-i, --import <directory>", "process and import texts to .bin files")
@@ -133,13 +222,22 @@ program
 
 const options = program.opts();
 
+function ensureDirectoryExists(directoryPath: string): void {
+  if (!fs.existsSync(directoryPath)) {
+    fs.mkdirSync(directoryPath, { recursive: true });
+    console.log(`Directory created: ${directoryPath}`);
+  } else {
+    console.log(`Directory already exists: ${directoryPath}`);
+  }
+}
+
 async function listDirContents(filepath: string) {
   try {
     const files = await fs.promises.readdir(filepath);
     const detailedFilesPromises = files.map(async (file: string) => {
       let fileDetails = await fs.promises.lstat(path.resolve(filepath, file));
       const { size, birthtime } = fileDetails;
-      return { filename: file, "size(KB)": size, created_at: birthtime };
+      return { filename: file, "size(B)": size, created_at: birthtime };
     });
     const detailedFiles = await Promise.all(detailedFilesPromises);
     console.table(detailedFiles);
@@ -148,6 +246,7 @@ async function listDirContents(filepath: string) {
   }
 }
 
+/* The below represents the default command "card" scope actions for export,import,transform and build */
 if ("export" in options) {
   const resolvedPath = path.resolve(process.cwd(), <string> options.export);
   console.log("Export Path: " + resolvedPath);
@@ -187,8 +286,7 @@ if ("export" in options) {
     listDirContents(resolvedPath);
   }
 }
-
-if ("import" in options) {
+else if ("import" in options) {
   const resolvedPath = path.resolve(process.cwd(), <string> options.import);
   console.log("Import Path: " + resolvedPath);
 
@@ -196,15 +294,13 @@ if ("import" in options) {
   const ygoTextInstance = new YgoTexts();
   ygoTextInstance.updateCardDesc(CardDesc, resolvedPath + "/CARD_Desc_J.txt", false);
 }
-
-if ("transform" in options) {
+else if ("transform" in options) {
   const resolvedPath = path.resolve(process.cwd(), <string> options.transform);
   console.log("Transform Path: " + resolvedPath);
   const transformer = new Transformer();
   transformer.poToTxt(resolvedPath + "/CARD_Desc_J.po");
 }
-
-if ("build" in options) {
+else if ("build" in options) {
   const resolvedPath = path.resolve(process.cwd(), <string> options.build);
   const dictionaryBuilder = new DictionaryBuilder();
   dictionaryBuilder.build(resolvedPath + "/DICT_J.tin");

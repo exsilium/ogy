@@ -8,9 +8,9 @@ Yu-Gi-Oh! Trading Card Game (TCG) is a collectible card game developed and publi
 
 ROM hacking is tedious process as it requires technical knowledge to build understanding of an otherwise undocumented and closed system - how the game works, where and how assets are stored and how the game engine interacts with them. All this knowledge needs to be built up prior to implementing any kind of changes and modifications to the game.
 
-The goal of this project is to provide a tool and some understanding on how TF6 keeps and handles the Yu-Gi-Oh! card descriptions. It is based mostly on other people's work  and findings but efforts are done to keep the sources referenced from where the information is gathered.
+The goal of this project is to provide a unified tool that simplifies the entire .ISO to .ISO modification workflow. Ogy integrates the extraction, conversion, and rebundling processes into a single solution, eliminating the need for separate utilities or projects. Additionally, the project offers insights into how TF6 stores and manages Yu-Gi-Oh! card descriptions. While this information is primarily based on the work and findings of others, every effort has been made to properly reference the sources from which the information is gathered.
 
-Tooling in this project is built using TypeScript for static typing and cross-platform support.
+This project is built with TypeScript, chosen for its static typing and cross-platform compatibility.
 
 ### Disclaimer
 
@@ -32,14 +32,28 @@ Assets which do not contain or include IP from Konami are licensed under the per
 #### Basic flow
 You require a modern `node` >= `v18` to build and run the tool.
 
-1. Unpack the `cardinfo_jpn.ehp` game file and store the `.bin` files in a separate folder
-2. Run `npm i`, `npm run build` to build the project
-3. `node dist/index.js -e <directory>` for exporting translations to `CARD_J.txt` and `CARD_Desc_J.txt`
+1. Run `npm i`, `npm run build` to build the project;
+2. Run `node dist/index.js chain tf6-extract ./TF6.iso export` where `./TF6.iso` is the path to the game ISO and `export` refers to the target directory where you would like the game assets to be stored;
 
-By default, the exported `.txt` format is a light mark-up language as implemented in [YGTool](https://github.com/matheuscardoso96/YGTool). As such, it is possible to cross-use the tools. For small modifications, a UTF-8 supported file editor can be used to edit the texts and import the changes back to `.bin` format.
+The `tf6-extract` chain will run multiple actions:
+  - Extract `cardinfo_jpn.ehp` from the UMD ISO;
+  - Extract the `.ehp` contents;
+  - Decode the CARD files;
+  - Create a Portable Object Template `.pot` file;
 
-- Run `node dist/index.js -i <directory>` to import translations to `CARD_J.bin` and `CARD_Desc_J.bin`
-- Re-pack `cardinfo_jpn.ehp` file and copy it to the game `.iso` file
+Now you can use the `.pot` file as the starting point to create your new `.po` file that will include your modified texts.
+
+1. Save your localized or otherwise modified `.po` file as `CARD_Desc_J.po` and store it to the same directory where assets were exported. This will be the primary input to compile the new CARD files;
+2. Run `node dist/index.js chain tf6-implant ./TF6.iso export` where `./TF6.iso` is the path to the original game ISO and `export` still refers to the target directory that includes all the previously exported game assets and the `CARD_Desc_J.po` file that you created;
+
+The `tf6-implant` chain will run multiple actions:
+  - Transform the `.po` file to `.txt` format that also YGTool uses;
+  - Builds a new dictionary;
+  - Uses the new dictionary to Encode the new `.bin` files;
+  - Updates the originally extracted `cardinfo_jpn.ehp` file;
+  - Writes a new `.iso` file based on the original;
+
+:warning: There seems to exist a hard limit for the size of `cardinfo_jpn.ehp` that the game is able to load. If the file hits `877000` bytes the game will crash on start. Ogy does not check for the size of updated `.ehp` file.
 
 #### Gettext Portable Object format
 
@@ -85,6 +99,7 @@ Commands:
   unbundle <source_bundle> <directory>  extract UnityFS AssetBundle file to destination directory (EXPERIMENTAL and SPECIFIC to MD)
   update <target_ehp> <directory>       update existing .ehp file from the same files in directory
   po2json <source_po> <target_json>     helper function to convert .PO to .JSON structure
+  chain                                 Run chained actions to fulfill multiple tasks in one go
   help [command]                        display help for command
 ```
 
