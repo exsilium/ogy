@@ -9,6 +9,7 @@ import { Ehp } from './ehp.js';
 import { AssetBundle } from './assetbundle.js';
 import { CABExtractor } from './cab.js';
 import { UMDISOReader } from './umdiso.js';
+import { decrypt } from "./decrypt.js";
 
 const program = new Command();
 
@@ -92,9 +93,9 @@ const chain = program.command('chain')
   .description("Run chained actions to fulfill multiple tasks in one go");
 
 chain
-  .command("mad2pot <source_dir>")
+  .command("mad2pot <source_dir> <target_dir>")
   .description("Export from Master Duel installation directory to create mad.pot PO Template file")
-  .action((source_dir) => {
+  .action(async (source_dir, target_dir) => {
     /* Game source dir e.g: "~/Library/Application Support/CrossOver/Bottles/Steam/drive_c/Program Files (x86)/Steam/steamapps/common/Yu-Gi-Oh!  Master Duel" */
     /* Check the source directory existence */
     if (source_dir.startsWith('~')) {
@@ -102,6 +103,7 @@ chain
     }
 
     const resolvedPath = path.resolve(source_dir);
+    const resolvedTargetPath = path.resolve(target_dir);
 
     if(fs.existsSync(resolvedPath)) {
       console.log("Source dir: " + resolvedPath);
@@ -112,13 +114,69 @@ chain
     }
 
     /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx containers */
-    const cardNameBundlePath = path.join(resolvedPath, "/LocalData/7c6b555/0000/cd/cde5b0ab");
-    const cardDescBundlePath = path.join(resolvedPath, "/LocalData/7c6b555/0000/98/987362f9");
-    const cardIndxBundlePath = path.join(resolvedPath, "/LocalData/7c6b555/0000/e9/e9aa18bf");
+    const variablePathName = await getMADVariableDir(resolvedPath);
+    const cardNameBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/cd/cde5b0ab`);
+    const cardDescBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/98/987362f9`);
+    const cardIndxBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/e9/e9aa18bf`);
+    const cryptoKey = 0x11;
 
     if(fs.existsSync(cardNameBundlePath) && fs.existsSync(cardDescBundlePath) && fs.existsSync(cardIndxBundlePath)) {
-      console.log("Files exist");
+      console.log("Correct input files found");
     }
+
+    /* cardName */
+    let assetBundle = new AssetBundle(cardNameBundlePath);
+    let extractedAssetBundle = assetBundle.extractAssetBundle(resolvedTargetPath);
+
+    for(const asset of extractedAssetBundle) {
+      const extractedFile = await CABExtractor.extract(path.join(resolvedTargetPath, asset), resolvedTargetPath);
+    }
+
+    let encryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Name.bin");
+    let decryptedData = decrypt(encryptedData, cryptoKey);
+
+    if (decryptedData.length > 0) {
+      fs.writeFileSync(resolvedTargetPath + "/CARD_Name.decrypted.bin", decryptedData);
+    } else {
+      console.error('Decryption failed for CARD_Name.');
+    }
+
+    /* cardDesc */
+    assetBundle = new AssetBundle(cardDescBundlePath);
+    extractedAssetBundle = assetBundle.extractAssetBundle(resolvedTargetPath);
+
+    for(const asset of extractedAssetBundle) {
+      await CABExtractor.extract(path.join(resolvedTargetPath, asset), resolvedTargetPath);
+    }
+
+    encryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Desc.bin");
+    decryptedData = decrypt(encryptedData, cryptoKey);
+
+    if (decryptedData.length > 0) {
+      fs.writeFileSync(resolvedTargetPath + "/CARD_Desc.decrypted.bin", decryptedData);
+    } else {
+      console.error('Decryption failed for CARD_Desc.');
+    }
+
+    /* cardIndx */
+    assetBundle = new AssetBundle(cardIndxBundlePath);
+    extractedAssetBundle = assetBundle.extractAssetBundle(resolvedTargetPath);
+
+    for(const asset of extractedAssetBundle) {
+      await CABExtractor.extract(path.join(resolvedTargetPath, asset), resolvedTargetPath);
+    }
+
+    encryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Indx.bin");
+    decryptedData = decrypt(encryptedData, cryptoKey);
+
+    if (decryptedData.length > 0) {
+      fs.writeFileSync(resolvedTargetPath + "/CARD_Indx.decrypted.bin", decryptedData);
+    } else {
+      console.error('Decryption failed for CARD_Indx.');
+    }
+
+    await new YgoTexts().exportToPot(resolvedTargetPath, YuGiOh.MAD);
+    listDirContents(resolvedTargetPath);
   });
 
 chain
@@ -243,6 +301,34 @@ async function listDirContents(filepath: string) {
     console.table(detailedFiles);
   } catch (error) {
     console.error("Error occurred while reading the directory!", error);
+  }
+}
+
+async function getMADVariableDir(resolvedPath: string): Promise<string> {
+  const localDataPath = path.join(resolvedPath, 'LocalData');
+
+  try {
+    const entries = await fs.promises.readdir(localDataPath, { withFileTypes: true });
+
+    // Filter out only directories
+    const directories = entries
+      .filter(entry => entry.isDirectory())
+      .map(entry => entry.name);
+
+    if (directories.length === 0) {
+      throw new Error('No directories found in LocalData.');
+    }
+
+    // Select the directory you need (e.g., the first one)
+    const variableDir = directories[0]; // Replace with your selection logic if needed
+
+    return variableDir;
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(`Error accessing LocalData directory: ${err.message}`);
+    } else {
+      throw new Error('Error accessing LocalData directory: An unknown error occurred.');
+    }
   }
 }
 
