@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-08-23 14:19+0000\n"
-"PO-Revision-Date: 2024-08-25 18:28+0000\n"
+"PO-Revision-Date: 2024-09-17 20:10+0000\n"
 "Last-Translator: Exile <exile@chamber.ee>\n"
 "Language-Team: \n"
 "Language: et\n"
@@ -40895,7 +40895,7 @@ msgstr "Erikutsuge 1 tase 3 või madalama tasemega psüühika-tüüpi koletis om
 #. type: Name | pointer: 28904
 #: 28904
 msgid "Lightsworn Sabre"
-msgstr "Valgusevandu Mõõk"
+msgstr "Valgusevande Mõõk"
 
 #. type: Description | pointer: 28904
 #: 28904
