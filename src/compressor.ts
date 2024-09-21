@@ -9,8 +9,10 @@ enum YuGiOh {
   TF4, // Yu-Gi-Oh! 5D's: Tag Force 4, 2009, PSP
   TF5, // Yu-Gi-Oh! 5D's: Tag Force 5, 2010, PSP
   TF6, // Yu-Gi-Oh! 5D's: Tag Force 6, 2011, PSP (*Default)
+  OTN, // Yu-Gi-Oh! 5D's World Championship 2011: Over the Nexus, 2011, DS
   TFS, // Yu-Gi-Oh! Arc-V Tag Force Special, 2015, PSP
   SCB, // Yu-Gi-Oh! Saikyo Card Battle, 2016, 3DS
+  DUL, // Yu-Gi-Oh! Duel Links, 2017, Unity (Cross-platform)
   MAD, // Yu-Gi-Oh! Master Duel, 2022, Unity (Cross-platform)
 }
 

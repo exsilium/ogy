@@ -340,7 +340,7 @@ if ("export" in options) {
   const ygoTextInstance = new YgoTexts();
 
   if("game" in options) {
-    if(options.game != "tf6" && options.game != "mad") {
+    if(options.game != "tf6" && options.game != "mad" && options.game != "otn") {
       console.error("Unsupported game!")
       process.exit(1);
     }
@@ -352,6 +352,9 @@ if ("export" in options) {
       console.log("Output format selected: POT");
       if("game" in options && options.game === "mad") {
         const result = await ygoTextInstance.exportToPot(resolvedPath, YuGiOh.MAD);
+      }
+      else if("game" in options && options.game === "otn") {
+        await ygoTextInstance.exportToPot(resolvedPath, YuGiOh.OTN);
       }
       else {
         const result = await ygoTextInstance.exportToPot(resolvedPath, YuGiOh.TF6);

@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-/* These functions are MAD specific */
+/* These functions are MAD specific but can be potentially be used for other games */
 /* Based on the https://github.com/mtamc/masterduel_readability Project logic */
 
 export function processCardAsset(cardIndxFilePath: string, dataFilePath: string, start: number): string[] {
@@ -44,4 +44,90 @@ export function solve(data: Buffer, descIndx: number[]): string[] {
     res.push(s);
   }
   return res;
+}
+
+export function restoreCardAsset(
+  cardIndxOutputPath: string,
+  nameOutputPath: string,
+  descOutputPath: string,
+  cardNames: string[],
+  cardDescs: string[]
+): void {
+  // Restore Name and Desc data with initial padding
+  const nameData = Buffer.concat([Buffer.from('0000000000000000', 'hex'), restoreData(cardNames)]);
+  const descData = Buffer.concat([Buffer.from('0000000000000000', 'hex'), restoreData(cardDescs)]);
+
+  // Save Name and Desc data to files
+  fs.writeFileSync(nameOutputPath, nameData);
+  fs.writeFileSync(descOutputPath, descData);
+
+  // Calculate indices for Name and Desc files
+  let nameIndx = calculateIndices(cardNames, 8); // Starting after 8-byte padding
+  let descIndx = calculateIndices(cardDescs, 8);
+
+  // Adjust initial offsets for Name and Desc indices
+  nameIndx = [4, 8, ...nameIndx.slice(1)];
+  descIndx = [4, 8, ...descIndx.slice(1)];
+
+  // Combine Name and Desc indices into the interleaved cardIndx
+  const cardIndx: number[] = [];
+  for (let i = 0; i < nameIndx.length; i++) {
+    cardIndx.push(nameIndx[i]);
+    cardIndx.push(descIndx[i]);
+  }
+
+  // Convert indices to binary data in little-endian format
+  const indxData = Buffer.concat(cardIndx.map(num => fourToOneReverse(num)));
+
+  // Save Indx data to file
+  fs.writeFileSync(cardIndxOutputPath, indxData);
+}
+
+function restoreData(dataArray: string[]): Buffer {
+  const buffers = dataArray.map(str => {
+    // Convert the string to a buffer using Latin-1 encoding
+    let buf = Buffer.from(str, 'latin1');
+
+    // Ensure the buffer ends with a null byte
+    if (buf[buf.length - 1] !== 0x00) {
+      buf = Buffer.concat([buf, Buffer.from('\u0000', 'latin1')]);
+    }
+
+    // Calculate padding needed to align to the 4-byte boundary
+    const paddingLength = calculatePaddingLength(buf.length);
+    const padding = Buffer.alloc(paddingLength, 0);
+    return Buffer.concat([buf, padding]);
+  });
+
+  return Buffer.concat(buffers);
+}
+
+function calculateIndices(dataArray: string[], start: number): number[] {
+  const indices: number[] = [start];
+  let currentIndex = start;
+
+  dataArray.forEach(str => {
+    // Convert string to Latin-1 buffer and ensure it ends with a null byte
+    let buf = Buffer.from(str, 'latin1');
+    if (buf[buf.length - 1] !== 0x00) {
+      buf = Buffer.concat([buf, Buffer.from('\u0000', 'latin1')]);
+    }
+
+    // Add padding to maintain 4-byte alignment
+    const lengthWithPadding = buf.length + calculatePaddingLength(buf.length);
+    currentIndex += lengthWithPadding;
+    indices.push(currentIndex);
+  });
+
+  return indices;
+}
+
+function calculatePaddingLength(length: number): number {
+  return (4 - (length % 4)) % 4;
+}
+
+function fourToOneReverse(num: number): Buffer {
+  const buf = Buffer.alloc(4);
+  buf.writeUInt32LE(num); // Ensures little-endian format
+  return buf;
 }

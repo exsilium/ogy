@@ -227,6 +227,38 @@ export class YgoTexts {
       console.log("Output file: " + outputFile);
       fs.writeFileSync(outputFile, cardTextsFinal.join('\n'));
     }
+    else if(ygoType === YuGiOh.OTN) {
+      const cardIndxFilename = dirCard + "/card_indx_e.bin";
+      const nameFilename = dirCard + "/card_name_e.bin";
+      const descFilename = dirCard + "/card_desc_e.bin";
+
+      let cardNames: string[] = processCardAsset(cardIndxFilename, nameFilename, 0);
+      const cardDescs: string[] = processCardAsset(cardIndxFilename, descFilename, 4);
+
+      Logger.log("cardNames length: " + cardNames.length);
+      Logger.log("cardDescs length: " + cardDescs.length);
+
+      cardNames.forEach((cardName, i: number) => {
+        texts.push(
+          `#. type: Name | pointer: ${i}\n` +
+          `#: ${i}\n` +
+          `msgid "${cardName.replace(/"/g, "\\\"")}"\n` +
+          `msgstr ""\n` +
+          `\n` +
+          `#. type: Description | pointer: ${i}\n` +
+          `#: ${i}\n` +
+          `msgid ""\n` +
+          `"` + cardDescs[i].replace(/"/g, "\\\"").replace(/\r\n/g, "<BR>") + `"\n` +
+          `msgstr ""\n`
+        );
+      });
+
+      texts.forEach((texto, i) => cardTextsFinal.push(texto));
+
+      const outputFile = path.dirname(nameFilename) + "/" + YuGiOh[ygoType].toLowerCase() + ".pot";
+      console.log("Output file: " + outputFile);
+      fs.writeFileSync(outputFile, cardTextsFinal.join('\n'));
+    }
   }
 
   public exportToTxtInternalPointers(binDir: string): void {
