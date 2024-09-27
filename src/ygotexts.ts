@@ -4,6 +4,7 @@ import { Dictionary, YuGiOh } from './compressor.js';
 import { Huffman } from './huffman.js';
 import { Logger } from './logger.js';
 import { processCardAsset } from './converter.js';
+import { parseStrings } from "./gba.js";
 
 export class YgoTexts {
 
@@ -232,7 +233,7 @@ export class YgoTexts {
       const nameFilename = dirCard + "/card_name_e.bin";
       const descFilename = dirCard + "/card_desc_e.bin";
 
-      let cardNames: string[] = processCardAsset(cardIndxFilename, nameFilename, 0);
+      const cardNames: string[] = processCardAsset(cardIndxFilename, nameFilename, 0);
       const cardDescs: string[] = processCardAsset(cardIndxFilename, descFilename, 4);
 
       Logger.log("cardNames length: " + cardNames.length);
@@ -256,6 +257,39 @@ export class YgoTexts {
       texts.forEach((texto, i) => cardTextsFinal.push(texto));
 
       const outputFile = path.dirname(nameFilename) + "/" + YuGiOh[ygoType].toLowerCase() + ".pot";
+      console.log("Output file: " + outputFile);
+      fs.writeFileSync(outputFile, cardTextsFinal.join('\n'));
+    }
+    else if(ygoType === YuGiOh.WC6) {
+      const cardNamesOffset = 0x015BB5A0;
+      const cardDescOffset = 0x015FFF18;
+
+      const buffer = fs.readFileSync(path.join(dirCard, '/wc6.gba'));
+
+      const cardNames: string[] = parseStrings(buffer, cardNamesOffset);
+      const cardDescs: string[] = parseStrings(buffer, cardDescOffset);
+
+      Logger.log("cardNames length: " + cardNames.length);
+      Logger.log("cardDescs length: " + cardDescs.length);
+
+      cardNames.forEach((cardName, i: number) => {
+        texts.push(
+          `#. type: Name | pointer: ${i}\n` +
+          `#: ${i}\n` +
+          `msgid "${cardName.replace(/"/g, "\\\"")}"\n` +
+          `msgstr ""\n` +
+          `\n` +
+          `#. type: Description | pointer: ${i}\n` +
+          `#: ${i}\n` +
+          `msgid ""\n` +
+          `"` + cardDescs[i].replace(/"/g, "\\\"").replace(/\r\n/g, "<BR>") + `"\n` +
+          `msgstr ""\n`
+        );
+      });
+
+      texts.forEach((texto, i) => cardTextsFinal.push(texto));
+
+      const outputFile = path.join(dirCard, "/" + YuGiOh[ygoType].toLowerCase() + ".pot");
       console.log("Output file: " + outputFile);
       fs.writeFileSync(outputFile, cardTextsFinal.join('\n'));
     }

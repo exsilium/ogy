@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as gettextParser from 'gettext-parser';
 
 enum YuGiOh {
+  WC6, // Yu-Gi-Oh! Ultimate Masters: World Championship Tournament 2006, 2006, GBA
   TF1, // Yu-Gi-Oh! GX: Tag Force, 2006, PSP
   TF2, // Yu-Gi-Oh! GX: Tag Force 2, 2007, PSP
   TF3, // Yu-Gi-Oh! GX: Tag Force 3, 2008, PSP

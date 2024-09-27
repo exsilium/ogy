@@ -9,6 +9,7 @@ import { Ehp } from './ehp.js';
 import { AssetBundle } from './assetbundle.js';
 import { CABExtractor } from './cab.js';
 import { UMDISOReader } from './umdiso.js';
+import { NDSHandler } from './nds.js';
 import { decrypt } from "./decrypt.js";
 
 const program = new Command();
@@ -177,6 +178,27 @@ chain
 
     await new YgoTexts().exportToPot(resolvedTargetPath, YuGiOh.MAD);
     listDirContents(resolvedTargetPath);
+  });
+
+chain
+  .command("otn2pot <source_nds> <target_dir>")
+  .description("Export from OTN NDS to create otn.pot PO Template file")
+  .action(async (source_nds, target_dir) => {
+    const ndsPath = source_nds;
+    const outputDir = target_dir;
+
+    const ndsHandler = new NDSHandler(ndsPath);
+    ndsHandler.extractFiles(outputDir);
+
+    ndsHandler.rebuildNDS('modified.nds');
+  });
+
+chain
+  .command("wc62pot <source_gba> <target_dir>")
+  .description("Export from WCT 2006 GBA to create wc6.pot PO Template file")
+  .action(async (source_gba, target_dir) => {
+    fs.copyFileSync(source_gba, path.join(target_dir, '/wc6.gba'));
+    (async () => await new YgoTexts().exportToPot(target_dir, YuGiOh.WC6).then(() => listDirContents(target_dir)))();
   });
 
 chain
