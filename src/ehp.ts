@@ -117,7 +117,7 @@ class Ehp {
       }
 
       if(i === 0) {
-        ehpCopy = ehpCopy.slice(0, pointerArchive);
+        ehpCopy = Buffer.from(ehpCopy.slice(0, pointerArchive));
       }
       let fileEdited = fs.readFileSync(path.join(this.destinationDirectory, filename));
 
@@ -126,12 +126,12 @@ class Ehp {
 
       // File contents offset is in the header
       ehpCopy.writeUInt32LE(ehpCopy.length, posReadingTable - 4);
-      ehpCopy = Buffer.concat([ehpCopy, fileEdited]);
+      ehpCopy = Buffer.from(Buffer.concat([ehpCopy, fileEdited]));
 
       // Padding to align to 16 bytes
       let padding = 0;
       while (ehpCopy.length % 16 !== 0) {
-        ehpCopy = Buffer.concat([ehpCopy, Buffer.from([padding])]);
+        ehpCopy = Buffer.from(Buffer.concat([ehpCopy, Buffer.from([padding])]));
       }
 
       posFilesize = ehpCopy.length;
