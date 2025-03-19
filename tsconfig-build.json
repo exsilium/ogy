@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "rootDir": "src",
+    "typeRoots": ["./@types", "./node_modules/@types"],
     "outDir": "dist",
     "strict": true,
     "target": "es2022",

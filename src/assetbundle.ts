@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import * as lz4 from 'lz4';
+import * as lz4 from '@scanreco/node-lz4';
 import { Logger } from './logger.js';
 
 class BinaryReader {
