@@ -115,11 +115,12 @@ chain
     }
 
     /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx containers */
+    /* If these files are not found, most likely the client has updated and the location of the files have moved */
     const variablePathName = await getMADVariableDir(resolvedPath);
-    const cardNameBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/cd/cde5b0ab`);
-    const cardDescBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/98/987362f9`);
-    const cardIndxBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/e9/e9aa18bf`);
-    const cryptoKey = 0x11;
+    const cardNameBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/7c/7cc714c8`);
+    const cardDescBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/29/2951c69a`);
+    const cardIndxBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/58/5888bcdc`);
+    const cryptoKey = 0xd5;
 
     if(fs.existsSync(cardNameBundlePath) && fs.existsSync(cardDescBundlePath) && fs.existsSync(cardIndxBundlePath)) {
       console.log("Correct input files found");

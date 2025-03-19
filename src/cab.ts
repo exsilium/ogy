@@ -177,8 +177,8 @@ class SerializedFile {
     reader.alignStream();
     this.fileSize = reader.readUInt32();
 
-    if(this.fileName === "e9/e9aa18bf" || this.fileName === "eb/ebaee097") {
-      // Card_Indx || Card_Part AssetBundle, we skip ahead 180 bytes and re-read
+    if(this.fileName === "7c/7cc714c8" || this.fileName === "58/5888bcdc" || this.fileName === "5a/5a8c44f4") {
+      // CARD_Name || Card_Indx || Card_Part AssetBundle, we skip ahead 180 bytes and re-read
       reader.readBytes(180);
       this.fileType = reader.readInt32();
       this.fileName = reader.readStringToNull();
