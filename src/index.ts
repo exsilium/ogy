@@ -45,7 +45,7 @@ program
     console.log("Destination directory: " + path.resolve(process.cwd(), directory));
 
     const assetBundle = new AssetBundle(source_bundle);
-    const extractedAssetBundle = assetBundle.extractAssetBundle(path.resolve(process.cwd(), directory));
+    const extractedAssetBundle = await assetBundle.extractAssetBundle(path.resolve(process.cwd(), directory));
 
     for(const asset of extractedAssetBundle) {
       const extractedFile = await CABExtractor.extract(path.join(directory, asset), directory);
@@ -128,7 +128,7 @@ chain
 
     /* cardName */
     let assetBundle = new AssetBundle(cardNameBundlePath);
-    let extractedAssetBundle = assetBundle.extractAssetBundle(resolvedTargetPath);
+    let extractedAssetBundle = await assetBundle.extractAssetBundle(resolvedTargetPath);
 
     for(const asset of extractedAssetBundle) {
       const extractedFile = await CABExtractor.extract(path.join(resolvedTargetPath, asset), resolvedTargetPath);
@@ -145,7 +145,7 @@ chain
 
     /* cardDesc */
     assetBundle = new AssetBundle(cardDescBundlePath);
-    extractedAssetBundle = assetBundle.extractAssetBundle(resolvedTargetPath);
+    extractedAssetBundle = await assetBundle.extractAssetBundle(resolvedTargetPath);
 
     for(const asset of extractedAssetBundle) {
       await CABExtractor.extract(path.join(resolvedTargetPath, asset), resolvedTargetPath);
@@ -162,7 +162,7 @@ chain
 
     /* cardIndx */
     assetBundle = new AssetBundle(cardIndxBundlePath);
-    extractedAssetBundle = assetBundle.extractAssetBundle(resolvedTargetPath);
+    extractedAssetBundle = await assetBundle.extractAssetBundle(resolvedTargetPath);
 
     for(const asset of extractedAssetBundle) {
       await CABExtractor.extract(path.join(resolvedTargetPath, asset), resolvedTargetPath);

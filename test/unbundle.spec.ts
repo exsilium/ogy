@@ -26,7 +26,7 @@ describe("ogy application level tests - unbundle", () => {
  */
   it("unbundling of CARD_Desc should work and produce a CAB file", async () => {
     const assetBundle = new AssetBundle(__dirname + "/CARD_Desc-987362f9.bundle");
-    const extractedFiles: string[] = assetBundle.extractAssetBundle(__dirname);
+    const extractedFiles: string[] = await assetBundle.extractAssetBundle(__dirname);
 
     // Assert that the array has exactly one element
     assert.strictEqual(extractedFiles.length, 1, "Array does not have exactly one element");
@@ -55,7 +55,7 @@ describe("ogy application level tests - unbundle", () => {
 
   it("unbundling of CARD_Indx should work and produce a CAB file", async () => {
     const assetBundle = new AssetBundle(__dirname + "/CARD_Indx-e9aa18bf.bundle");
-    const extractedFiles: string[] = assetBundle.extractAssetBundle(__dirname);
+    const extractedFiles: string[] = await assetBundle.extractAssetBundle(__dirname);
 
     // Assert that the array has exactly one element
     assert.strictEqual(extractedFiles.length, 1, "Array does not have exactly one element");
@@ -84,7 +84,7 @@ describe("ogy application level tests - unbundle", () => {
 
   it("unbundling of CARD_Name should work and produce a CAB file", async () => {
     const assetBundle = new AssetBundle(__dirname + "/CARD_Name-cde5b0ab.bundle");
-    const extractedFiles: string[] = assetBundle.extractAssetBundle(__dirname);
+    const extractedFiles: string[] = await assetBundle.extractAssetBundle(__dirname);
 
     // Assert that the array has exactly one element
     assert.strictEqual(extractedFiles.length, 1, "Array does not have exactly one element");
@@ -113,7 +113,7 @@ describe("ogy application level tests - unbundle", () => {
 
   it("unbundling of Card_Part should work and produce a CAB file", async () => {
     const assetBundle = new AssetBundle(__dirname + "/Card_Part-ebaee097.bundle");
-    const extractedFiles: string[] = assetBundle.extractAssetBundle(__dirname);
+    const extractedFiles: string[] = await assetBundle.extractAssetBundle(__dirname);
 
     // Assert that the array has exactly one element
     assert.strictEqual(extractedFiles.length, 1, "Array does not have exactly one element");
@@ -142,7 +142,7 @@ describe("ogy application level tests - unbundle", () => {
 
   it("unbundling of Card_Pidx should work and produce a CAB file", async () => {
     const assetBundle = new AssetBundle(__dirname + "/Card_Pidx-f09348d3.bundle");
-    const extractedFiles: string[] = assetBundle.extractAssetBundle(__dirname);
+    const extractedFiles: string[] = await assetBundle.extractAssetBundle(__dirname);
 
     // Assert that the array has exactly one element
     assert.strictEqual(extractedFiles.length, 1, "Array does not have exactly one element");

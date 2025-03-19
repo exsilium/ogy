@@ -150,7 +150,7 @@ class AssetBundle {
     Logger.log(`  Uses Asset Bundle Encryption: ${usesAssetBundleEncryption}`);
   }
 
-  private decompressData(reader: BinaryReader, compressedSize: number, decompSize: number): Buffer {
+  private async decompressData(reader: BinaryReader, compressedSize: number, decompSize: number): Promise<Buffer> {
     const rawBlockData = reader.readBytes(compressedSize);
 
     // Allocate buffer
@@ -227,7 +227,7 @@ class AssetBundle {
     return directoryInfo.path;
   }
 
-  private processAndWriteBlocks(reader: BinaryReader, outputDirectory: string): string[] {
+  private async processAndWriteBlocks(reader: BinaryReader, outputDirectory: string): Promise<string[]> {
     let filesWritten: string[] = [];
     let uncompressedData: Buffer = Buffer.alloc(0);
     this.directories.forEach((directory, dirIndex) => {
@@ -279,7 +279,7 @@ class AssetBundle {
     return filesWritten;
   }
 
-  extractAssetBundle(outputDirectory: string): string[] {
+  async extractAssetBundle(outputDirectory: string): Promise<string[]> {
     const buffer = fs.readFileSync(this.filePath);
     const reader = new BinaryReader(buffer);
     let filesWritten: string[] = [];
@@ -289,7 +289,7 @@ class AssetBundle {
       const { compressedSize, decompSize } = this.readHeader(reader);
 
       // Extract and decompress block data
-      const decompressedData = this.decompressData(reader, compressedSize, decompSize);
+      const decompressedData = await this.decompressData(reader, compressedSize, decompSize);
 
       // Use a new BinaryReader to read from the decompressed data
       const blockReader = new BinaryReader(decompressedData);
@@ -308,7 +308,7 @@ class AssetBundle {
       this.extractDirectories(blockReader);
 
       // Process each block and write the decompressed data to disk
-      filesWritten = this.processAndWriteBlocks(reader, outputDirectory);
+      filesWritten = await this.processAndWriteBlocks(reader, outputDirectory);
 
     } catch (error) {
       if (error instanceof Error) {
