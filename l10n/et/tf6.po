@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-08-23 14:19+0000\n"
-"PO-Revision-Date: 2024-09-17 20:10+0000\n"
+"PO-Revision-Date: 2024-09-28 20:14+0000\n"
 "Last-Translator: Exile <exile@chamber.ee>\n"
 "Language-Team: \n"
 "Language: et\n"
@@ -15447,7 +15447,7 @@ msgstr ""
 #. type: Name | pointer: 11544
 #: 11544
 msgid "Foolish Burial"
-msgstr "Lollakas Matmine"
+msgstr "Rumal Matmine"
 
 #. type: Description | pointer: 11544
 #: 11544
@@ -53753,7 +53753,7 @@ msgstr "Amazoonia kuninganna"
 #. type: Description | pointer: 37464
 #: 37464
 msgid "\"Amazoness\" monsters you control cannot be destroyed by battle."
-msgstr "\"Amazoness\" koletisi, mida sa kontrollid, ei saa lahingus hävitatud. "
+msgstr "\"Amazoonia\" koletisi, mida sa kontrollid, ei saa lahingus hävitada."
 
 #. type: Name | pointer: 37472
 #: 37472
