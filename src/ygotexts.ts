@@ -364,6 +364,7 @@ export class YgoTexts {
       textInString = textInString
         .replace(/\$CA/g, "<COR: $CA>")
         // ... (include all other replacements)
+        .replace(/\$R/g, "\r\n")
         .replace(/\0/g, "<NULL>");
 
       texts.push(`<PONTEIRO: ${tablePosition},${sumPointer}>\n<TEXTO>${textInString}<TEXTO/>\n<FIM/>\n\n`);

@@ -363,7 +363,7 @@ if ("export" in options) {
   const ygoTextInstance = new YgoTexts();
 
   if("game" in options) {
-    if(options.game != "tf6" && options.game != "mad" && options.game != "otn") {
+    if(!["tf6", "tfs", "mad", "otn"].includes(options.game as string)) {
       console.error("Unsupported game!")
       process.exit(1);
     }

@@ -140,6 +140,7 @@ class Dictionary {
     readCardName: CustomBinaryReader
   ): string {
     let counter = 0;
+    descriptionWithCoding = descriptionWithCoding.replace(/\$R/g, "\r\n");
 
     while (descriptionWithCoding.includes('$')) {
       if (counter === descriptionWithCoding.length) {
@@ -194,6 +195,7 @@ class Dictionary {
         }
       }
 
+      descriptionWithCoding = descriptionWithCoding.replace(/\$R/g, "\r\n");
       counter++;
     }
 
