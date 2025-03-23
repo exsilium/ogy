@@ -401,10 +401,21 @@ if ("export" in options) {
 else if ("import" in options) {
   const resolvedPath = path.resolve(process.cwd(), <string> options.import);
   console.log("Import Path: " + resolvedPath);
+  let fileName = "CARD_Desc_J.txt";
 
-  const CardDesc = fs.readFileSync(resolvedPath + "/CARD_Desc_J.txt", 'utf8');
+  if("game" in options) {
+    if(!["tf6", "tfs"].includes(options.game as string)) {
+      console.error("Unsupported game!")
+      process.exit(1);
+    }
+    
+    fileName = options.game === "tfs" ? "CARD_Desc_R.txt" : "CARD_Desc_J.txt";
+  }
+  
+  const CardDesc = fs.readFileSync(resolvedPath + '/' + fileName, 'utf8');
   const ygoTextInstance = new YgoTexts();
-  ygoTextInstance.updateCardDesc(CardDesc, resolvedPath + "/CARD_Desc_J.txt", false);
+  console.log("Processing...");
+  ygoTextInstance.updateCardDesc(CardDesc, resolvedPath + fileName, false);
 }
 else if ("transform" in options) {
   const resolvedPath = path.resolve(process.cwd(), <string> options.transform);

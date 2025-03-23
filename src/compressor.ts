@@ -305,7 +305,7 @@ class Dictionary {
       const termo = dicSplit[i].replace('<TEXTO>', '<TEXTO>|').replace('<TEXTO/>', '|<TEXTO/>').split('|')[1].replace(/<NULL>/g, '');
 
       if (termo.length === 0) {
-        throw new Error(`Texto vazio encontrado no dicionário\n${dicSplit[i]}`);
+        throw new Error(`Empty text found in dictionary\n${dicSplit[i]}`);
       }
 
       termos['$d' + contador.toString().padStart(3, '0')] = termo;
