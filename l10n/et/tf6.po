@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-08-23 14:19+0000\n"
-"PO-Revision-Date: 2024-09-28 20:14+0000\n"
+"PO-Revision-Date: 2025-03-22 19:00+0000\n"
 "Last-Translator: Exile <exile@chamber.ee>\n"
 "Language-Team: \n"
 "Language: et\n"
@@ -33,7 +33,7 @@ msgstr " "
 #. type: Name | pointer: 8
 #: 8
 msgid "Temporal Machine Angel"
-msgstr "Ajutine Masinaingel"
+msgstr "Aja Masinaingel"
 
 #. type: Description | pointer: 8
 #: 8
