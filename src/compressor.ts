@@ -352,7 +352,7 @@ class Transformer {
   printAllEntries(): void {
     console.log(this.entries);
   }
-  poToTxt(sourcePo: string) {
+  poToTxt(sourcePo: string, ygoType: YuGiOh = YuGiOh.TF6) {
     const po = gettextParser.po.parse(fs.readFileSync(sourcePo));
     console.log("Starting work on: " + sourcePo);
 
@@ -392,8 +392,8 @@ class Transformer {
       count++;
     }
     console.log("Entries processed: " + count);
-    this.writeDictBuilderInput(sourcePo);
-    fs.writeFileSync(sourcePo.replace(".po", ".txt"), this.entriesToTxt(path.dirname(sourcePo)));
+    this.writeDictBuilderInput(sourcePo, ygoType);
+    fs.writeFileSync(sourcePo.replace(".po", ".txt"), this.entriesToTxt(path.dirname(sourcePo), ygoType));
     console.log("Files written, task complete.");
   }
 
@@ -409,8 +409,9 @@ class Transformer {
   Here we generate the TXT based on the Entries, instead of going through all the entries, we follow
   The known pattern from 0 in increments of 8 until 43144
    */
-  private entriesToTxt(directory: string): string {
-    let txtOutput: string = "<Tipo de Ponteiro=Informação de Cartas=" + directory + "/CARD_Indx_J.bin = " + directory + "/DICT_J.bin>";
+  private entriesToTxt(directory: string, ygoType: YuGiOh = YuGiOh.TF6): string {
+    const extension = ygoType == YuGiOh.TFS ? "R" : "J";
+    let txtOutput: string = "<Tipo de Ponteiro=Informação de Cartas=" + directory + "/CARD_Indx_" + extension + ".bin = " + directory + "/DICT_" + extension + ".bin>";
     let pointer = 0;
 
     while(pointer <= 43144) {
@@ -425,7 +426,7 @@ class Transformer {
   /*
   Here we generate the main input file for DICT generation
    */
-  private writeDictBuilderInput(sourcePo: string): void {
+  private writeDictBuilderInput(sourcePo: string, ygoType: YuGiOh = YuGiOh.TF6): void {
     let txtOutput: string = "";
     let pointer = 8;
 
@@ -433,7 +434,8 @@ class Transformer {
       txtOutput += this.entries[pointer].Description.replace(/<BR>/g, "\r\n") + "\r\n";
       pointer += 8;
     }
-    fs.writeFileSync(path.dirname(sourcePo) + "/DICT_J.tin", txtOutput);
+    const fileName = ygoType == YuGiOh.TFS ? 'DICT_R.tin' : 'DICT_J.tin';
+    fs.writeFileSync(path.dirname(sourcePo) + '/' + fileName, txtOutput);
   }
 
   private parseDecimalNumbers(inputString: string): number[] {

@@ -114,7 +114,7 @@ export class YgoTexts {
       "\"Content-Transfer-Encoding: 8bit\\n\"\n"
     ];
 
-    if(ygoType === YuGiOh.TF6) {
+    if(ygoType === YuGiOh.TF6 || ygoType === YuGiOh.TFS) {
       const sourceFiles = this.requiredFiles(dirCard).sort();
       const cardDesc = sourceFiles[0];
       const cardHuff = sourceFiles[1];

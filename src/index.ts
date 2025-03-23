@@ -278,6 +278,12 @@ chain
     const dictionaryBuilder = new DictionaryBuilder();
     dictionaryBuilder.build(path.join(target_dir + "/DICT_J.tin"));
 
+    /* Update .bin */
+    const CardDesc = fs.readFileSync(path.join(target_dir + "/CARD_Desc_J.txt"), 'utf8');
+    const ygoTextInstance = new YgoTexts();
+    console.log("Processing...");
+    ygoTextInstance.updateCardDesc(CardDesc, path.join(target_dir + "/CARD_Desc_J.txt"), false);
+
     /* Update the .ehp in target directory */
     const ehp = new Ehp(target_dir, resolvedEHPPath);
     ehp.update();
@@ -290,13 +296,91 @@ chain
     listDirContents(target_dir);
   });
 
+chain
+  .command("tfs-extract <source_iso> <target_dir>")
+  .description("Read Tag Force Special .iso file to extract card information to target directory (.txt)")
+  .action((source_iso, target_dir) => {
+    if(source_iso.startsWith('~')) {
+      source_iso = path.join(os.homedir(), source_iso.slice(1));
+    }
+
+    if(target_dir.startsWith('~')) {
+      target_dir = path.join(os.homedir(), target_dir.slice(1));
+    }
+
+    const resolvedISOPath = path.resolve(source_iso);
+
+    if(fs.existsSync(resolvedISOPath)) {
+      console.log("Source iso: " + resolvedISOPath);
+    }
+    else {
+      console.log("Source iso invalid, exiting");
+      process.exit(1);
+    }
+
+    /* Extract .ehp container from .iso */
+    const isoReader = new UMDISOReader(resolvedISOPath);
+    ensureDirectoryExists(target_dir);
+    isoReader.exportFile("PSP_GAME/USRDIR/duelsys/cardinfo_jpn.ehp", target_dir);
+    isoReader.close();
+
+    /* Extract card .bin files from .ehp */
+    const ehp = new Ehp(target_dir, path.join(target_dir, "/cardinfo_jpn.ehp"));
+    ehp.extract();
+
+    /* Convert .bin CARD files to .txt */
+    (async () => await new YgoTexts().exportToTxt(target_dir, YuGiOh.TFS).then(() => listDirContents(target_dir)))();
+  });
+
+chain
+  .command("tfs-implant <source_iso> <target_dir>")
+  .description("Produce a new ISO based on source ISO and the language assets in target directory [NOT WORKING]")
+  .action((source_iso, target_dir) => {
+    if(source_iso.startsWith('~')) {
+      source_iso = path.join(os.homedir(), source_iso.slice(1));
+    }
+
+    if(target_dir.startsWith('~')) {
+      target_dir = path.join(os.homedir(), target_dir.slice(1));
+    }
+
+    const resolvedISOPath = path.resolve(source_iso);
+    const resolvedPOPath = path.join(target_dir, "/CARD_Desc_R.po");
+    const resolvedEHPPath = path.join(target_dir, "/cardinfo_jpn.ehp");
+
+    if(fs.existsSync(resolvedISOPath)) {
+      console.log("Source iso: " + resolvedISOPath);
+    }
+    else {
+      console.log("Source iso invalid, exiting");
+      process.exit(1);
+    }
+
+    /* Update .bin */
+    const CardDesc = fs.readFileSync(path.join(target_dir + "/CARD_Desc_R.txt"), 'utf8');
+    const ygoTextInstance = new YgoTexts();
+    console.log("Processing...");
+    ygoTextInstance.updateCardDesc(CardDesc, path.join(target_dir + "/CARD_Desc_R.txt"), false);
+
+    /* Update the .ehp in target directory */
+    const ehp = new Ehp(target_dir, resolvedEHPPath);
+    ehp.update();
+
+    /* Write a new .iso with the updated .ehp */
+    const isoReader = new UMDISOReader(resolvedISOPath);
+    isoReader.writeUpdatedISO("PSP_GAME/USRDIR/duelsys/cardinfo_jpn.ehp", resolvedEHPPath,
+      path.join(target_dir, YuGiOh[YuGiOh.TFS].toLowerCase() + ".iso"));
+
+    listDirContents(target_dir);
+  });
+
 program
   .version("0.3.0")
   .description("A helper tool to export and import CARD texts for Yu-Gi-Oh! 5D's Tag Force 6")
   .option("-e, --export <directory>", "process and export CARD_ files in the directory for export")
   .option("-i, --import <directory>", "process and import texts to .bin files")
   .option("-f, --format <format>", "specify the export format: pot|ygt, default: ygt")
-  .option("-g, --game <game>", "specify the game: tf6|mad, default: tf6")
+  .option("-g, --game <game>", "specify the game: tf6|tfs|mad, default: tf6")
   .option("-t, --transform <directory>", "transform CARD_Desc_J.po to CARD_Desc_J.txt")
   .option("-b, --build <directory>", "build a new Dictionary (slow)")
   .parse(process.argv);
@@ -415,7 +499,7 @@ else if ("import" in options) {
   const CardDesc = fs.readFileSync(resolvedPath + '/' + fileName, 'utf8');
   const ygoTextInstance = new YgoTexts();
   console.log("Processing...");
-  ygoTextInstance.updateCardDesc(CardDesc, resolvedPath + fileName, false);
+  ygoTextInstance.updateCardDesc(CardDesc, resolvedPath + '/' + fileName, false);
 }
 else if ("transform" in options) {
   const resolvedPath = path.resolve(process.cwd(), <string> options.transform);
