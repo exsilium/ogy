@@ -150,7 +150,7 @@ export class UMDISOReader {
       // Write the new file content
       fs.writeSync(outFd, newFileBuffer, 0, newFileBuffer.length);
       totalBytesWritten += newFileBuffer.length;
-      position += targetFile.size;
+      position = targetFile.offset + newFileBuffer.length;
       progressBar.tick(newFileBuffer.length);
 
       // Update the directory record with the new file size

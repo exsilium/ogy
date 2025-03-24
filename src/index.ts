@@ -241,7 +241,7 @@ chain
 chain
   .command("tf6-implant <source_iso> <target_dir>")
   .description("Produce a new ISO based on source ISO and the language asset (CARD_Desc_J.po) in target directory")
-  .action((source_iso, target_dir) => {
+  .action(async (source_iso, target_dir) => {
     if(source_iso.startsWith('~')) {
       source_iso = path.join(os.homedir(), source_iso.slice(1));
     }
@@ -283,6 +283,11 @@ chain
     const ygoTextInstance = new YgoTexts();
     console.log("Processing...");
     ygoTextInstance.updateCardDesc(CardDesc, path.join(target_dir + "/CARD_Desc_J.txt"), false);
+
+    /* It seems that without delay an incorrect .ehp gets compiled in the next step which may lead to missing card
+       descriptions. Needs further investigation why exactly that happens.
+     */
+    await delay(1000);
 
     /* Update the .ehp in target directory */
     const ehp = new Ehp(target_dir, resolvedEHPPath);
@@ -335,7 +340,7 @@ chain
 chain
   .command("tfs-implant <source_iso> <target_dir>")
   .description("Produce a new ISO based on source ISO and the language assets in target directory [NOT WORKING]")
-  .action((source_iso, target_dir) => {
+  .action(async (source_iso, target_dir) => {
     if(source_iso.startsWith('~')) {
       source_iso = path.join(os.homedir(), source_iso.slice(1));
     }
@@ -361,6 +366,11 @@ chain
     const ygoTextInstance = new YgoTexts();
     console.log("Processing...");
     ygoTextInstance.updateCardDesc(CardDesc, path.join(target_dir + "/CARD_Desc_R.txt"), false);
+
+    /* It seems that without delay an incorrect .ehp gets compiled in the next step which may lead to missing card
+       descriptions. Needs further investigation why exactly that happens.
+     */
+    await delay(1000);
 
     /* Update the .ehp in target directory */
     const ehp = new Ehp(target_dir, resolvedEHPPath);
@@ -439,6 +449,10 @@ async function getMADVariableDir(resolvedPath: string): Promise<string> {
   }
 }
 
+function delay(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 /* The below represents the default command "card" scope actions for export,import,transform and build */
 if ("export" in options) {
   const resolvedPath = path.resolve(process.cwd(), <string> options.export);
@@ -492,10 +506,10 @@ else if ("import" in options) {
       console.error("Unsupported game!")
       process.exit(1);
     }
-    
+
     fileName = options.game === "tfs" ? "CARD_Desc_R.txt" : "CARD_Desc_J.txt";
   }
-  
+
   const CardDesc = fs.readFileSync(resolvedPath + '/' + fileName, 'utf8');
   const ygoTextInstance = new YgoTexts();
   console.log("Processing...");
