@@ -334,7 +334,7 @@ chain
     ehp.extract();
 
     /* Convert .bin CARD files to .txt */
-    (async () => await new YgoTexts().exportToTxt(target_dir, YuGiOh.TFS).then(() => listDirContents(target_dir)))();
+    (async () => await new YgoTexts().exportToPot(target_dir, YuGiOh.TFS).then(() => listDirContents(target_dir)))();
   });
 
 chain
@@ -360,6 +360,22 @@ chain
       console.log("Source iso invalid, exiting");
       process.exit(1);
     }
+
+    if(fs.existsSync(resolvedPOPath)) {
+      console.log("Source PO: " + resolvedPOPath);
+    }
+    else {
+      console.log("Source PO invalid, exiting");
+      process.exit(1);
+    }
+
+    /* Process the PO file and convert it to TXT */
+    const transformer = new Transformer();
+    transformer.poToTxt(resolvedPOPath, YuGiOh.TFS);
+
+    /* Build new Dictionary */
+    const dictionaryBuilder = new DictionaryBuilder();
+    dictionaryBuilder.build(path.join(target_dir + "/DICT_R.tin"));
 
     /* Update .bin */
     const CardDesc = fs.readFileSync(path.join(target_dir + "/CARD_Desc_R.txt"), 'utf8');

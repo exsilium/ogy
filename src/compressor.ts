@@ -407,17 +407,31 @@ class Transformer {
 
   /*
   Here we generate the TXT based on the Entries, instead of going through all the entries, we follow
-  The known pattern from 0 in increments of 8 until 43144
+  The known pattern from 0 in increments of 8 until 43144 (TF6), 58040 (TFS)
    */
   private entriesToTxt(directory: string, ygoType: YuGiOh = YuGiOh.TF6): string {
     const extension = ygoType == YuGiOh.TFS ? "R" : "J";
+    const limiter = ygoType == YuGiOh.TFS ? 58040 : 43144;
     let txtOutput: string = "<Tipo de Ponteiro=Informação de Cartas=" + directory + "/CARD_Indx_" + extension + ".bin = " + directory + "/DICT_" + extension + ".bin>";
     let pointer = 0;
 
-    while(pointer <= 43144) {
-      txtOutput += `\n<PONTEIRO: ${pointer},0>\n` +
-        `<NOME>` + this.entries[pointer].Name + `<NULL><NOME/>\n` +
-        `<DESCRICAO>` + this.entries[pointer].Description.replace(/<BR>/g, String.fromCharCode(13,10)) + `<NULL><DESCRICAO/><FIM/>\n\n`;
+    while(pointer <= limiter) {
+      try {
+        const entry = this.entries[pointer];
+        if(entry === undefined && pointer == limiter) {
+          txtOutput += `\n<PONTEIRO: ${pointer},0>\n` +
+            `<NOME><NULL><NOME/>\n` +
+            `<DESCRICAO><NULL><DESCRICAO/><FIM/>\n\n`;
+        }
+        else {
+          txtOutput += `\n<PONTEIRO: ${pointer},0>\n` +
+            `<NOME>` + entry.Name + `<NULL><NOME/>\n` +
+            `<DESCRICAO>` + entry.Description.replace(/<BR>/g, String.fromCharCode(13, 10)) + `<NULL><DESCRICAO/><FIM/>\n\n`;
+        }
+      } catch (err) {
+        console.error(`Error processing pointer ${pointer}:`, err);
+        console.error(`this.entries[${pointer}]:`, this.entries[pointer]);
+      }
       pointer += 8;
     }
     return txtOutput;
