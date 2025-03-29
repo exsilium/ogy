@@ -23,3 +23,18 @@ export function decrypt(data: Buffer, cryptoKey: number): Buffer {
     return Buffer.alloc(0); // Return an empty buffer on failure
   }
 }
+
+export function encrypt(data: Buffer, cryptoKey: number): Buffer {
+  // First, compress the data
+  const compressedData = zlib.deflateSync(data);
+  const encryptedData = Buffer.from(compressedData); // Copy to modify
+
+  for (let i = 0; i < encryptedData.length; i++) {
+    let v = i + cryptoKey + 0x23D;
+    v *= cryptoKey;
+    v ^= i % 7;
+    encryptedData[i] ^= v & 0xFF; // Apply the encryption
+  }
+
+  return encryptedData;
+}
