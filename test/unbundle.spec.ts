@@ -24,7 +24,7 @@ describe("ogy application level tests - unbundle", () => {
   The most simple test is to extract the Card files from the packaged UnityFS asset bundle file:
     - CAB
  */
-  it("unbundling of CARD_Desc should work and produce a CAB file", async () => {
+  it("unbundling of CARD_Desc should work and produce a CAB and a meta file", async () => {
     const assetBundle = new AssetBundle(__dirname + "/CARD_Desc-987362f9.bundle");
     const extractedFiles: string[] = await assetBundle.extractAssetBundle(__dirname);
 
@@ -34,8 +34,9 @@ describe("ogy application level tests - unbundle", () => {
     // Assert that the element matches the expected string
     assert.strictEqual(extractedFiles[0], "CAB-a8c0ceacfc16220e07816e269e33cb5a", "Element does not match the expected string");
 
-    // Assert that the file was written to disk
+    // Assert that the files were written to disk
     assert.equal(fs.existsSync(__dirname + "/CAB-a8c0ceacfc16220e07816e269e33cb5a"), true);
+    assert.equal(fs.existsSync(__dirname + "/CAB-a8c0ceacfc16220e07816e269e33cb5a.meta.json"), true);
   });
 
   it("unbundled CAB of CARD_Desc should be possible to be written out",  async () => {
@@ -53,7 +54,7 @@ describe("ogy application level tests - unbundle", () => {
     assert.equal(Buffer.compare(dataName, compareDataName), 0);
   });
 
-  it("unbundling of CARD_Indx should work and produce a CAB file", async () => {
+  it("unbundling of CARD_Indx should work and produce a CAB and a meta file", async () => {
     const assetBundle = new AssetBundle(__dirname + "/CARD_Indx-e9aa18bf.bundle");
     const extractedFiles: string[] = await assetBundle.extractAssetBundle(__dirname);
 
@@ -65,6 +66,7 @@ describe("ogy application level tests - unbundle", () => {
 
     // Assert that the file was written to disk
     assert.equal(fs.existsSync(__dirname + "/CAB-3edab2009c2927c0c55132bf9a3b0a53"), true);
+    assert.equal(fs.existsSync(__dirname + "/CAB-3edab2009c2927c0c55132bf9a3b0a53.meta.json"), true);
   });
 
   it("unbundled CAB of CARD_Indx should be possible to be written out",  async () => {
@@ -82,7 +84,7 @@ describe("ogy application level tests - unbundle", () => {
     assert.equal(Buffer.compare(dataName, compareDataName), 0);
   });
 
-  it("unbundling of CARD_Name should work and produce a CAB file", async () => {
+  it("unbundling of CARD_Name should work and produce a CAB and a meta file", async () => {
     const assetBundle = new AssetBundle(__dirname + "/CARD_Name-cde5b0ab.bundle");
     const extractedFiles: string[] = await assetBundle.extractAssetBundle(__dirname);
 
@@ -94,6 +96,7 @@ describe("ogy application level tests - unbundle", () => {
 
     // Assert that the file was written to disk
     assert.equal(fs.existsSync(__dirname + "/CAB-b15dec2777dad9f13353696821e3ecfc"), true);
+    assert.equal(fs.existsSync(__dirname + "/CAB-b15dec2777dad9f13353696821e3ecfc.meta.json"), true);
   });
 
   it("unbundled CAB of CARD_Name should be possible to be written out",  async () => {
@@ -111,7 +114,7 @@ describe("ogy application level tests - unbundle", () => {
     assert.equal(Buffer.compare(dataName, compareDataName), 0);
   });
 
-  it("unbundling of Card_Part should work and produce a CAB file", async () => {
+  it("unbundling of Card_Part should work and produce a CAB and a meta file", async () => {
     const assetBundle = new AssetBundle(__dirname + "/Card_Part-ebaee097.bundle");
     const extractedFiles: string[] = await assetBundle.extractAssetBundle(__dirname);
 
@@ -123,6 +126,7 @@ describe("ogy application level tests - unbundle", () => {
 
     // Assert that the file was written to disk
     assert.equal(fs.existsSync(__dirname + "/CAB-d775896c9bbf867ea2a06f6d9d9d638e"), true);
+    assert.equal(fs.existsSync(__dirname + "/CAB-d775896c9bbf867ea2a06f6d9d9d638e.meta.json"), true);
   });
 
   it("unbundled CAB of Card_Part should be possible to be written out",  async () => {
@@ -140,7 +144,7 @@ describe("ogy application level tests - unbundle", () => {
     assert.equal(Buffer.compare(dataName, compareDataName), 0);
   });
 
-  it("unbundling of Card_Pidx should work and produce a CAB file", async () => {
+  it("unbundling of Card_Pidx should work and produce a CAB and a meta file", async () => {
     const assetBundle = new AssetBundle(__dirname + "/Card_Pidx-f09348d3.bundle");
     const extractedFiles: string[] = await assetBundle.extractAssetBundle(__dirname);
 
@@ -152,6 +156,7 @@ describe("ogy application level tests - unbundle", () => {
 
     // Assert that the file was written to disk
     assert.equal(fs.existsSync(__dirname + "/CAB-7ee66e49a29b3d2f2bf1104c66bf106d"), true);
+    assert.equal(fs.existsSync(__dirname + "/CAB-7ee66e49a29b3d2f2bf1104c66bf106d.meta.json"), true);
   });
 
   it("unbundled CAB of Card_Pidx should be possible to be written out",  async () => {
@@ -263,6 +268,11 @@ describe("ogy application level tests - unbundle", () => {
     fs.unlinkSync(__dirname + "/CAB-a8c0ceacfc16220e07816e269e33cb5a");
     fs.unlinkSync(__dirname + "/CAB-b15dec2777dad9f13353696821e3ecfc");
     fs.unlinkSync(__dirname + "/CAB-d775896c9bbf867ea2a06f6d9d9d638e");
+    fs.unlinkSync(__dirname + "/CAB-3edab2009c2927c0c55132bf9a3b0a53.meta.json");
+    fs.unlinkSync(__dirname + "/CAB-7ee66e49a29b3d2f2bf1104c66bf106d.meta.json");
+    fs.unlinkSync(__dirname + "/CAB-a8c0ceacfc16220e07816e269e33cb5a.meta.json");
+    fs.unlinkSync(__dirname + "/CAB-b15dec2777dad9f13353696821e3ecfc.meta.json");
+    fs.unlinkSync(__dirname + "/CAB-d775896c9bbf867ea2a06f6d9d9d638e.meta.json");
     fs.unlinkSync(__dirname + "/CARD_Desc.bin");
     fs.unlinkSync(__dirname + "/CARD_Indx.bin");
     fs.unlinkSync(__dirname + "/CARD_Name.bin");
