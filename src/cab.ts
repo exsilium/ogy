@@ -226,4 +226,72 @@ export class CABExtractor {
       });
     });
   }
+
+  static update(
+    originalCabPath: string,
+    originalExtractedAssetPath: string,
+    newFilePath: string,
+    outputCabPath: string
+  ): void {
+    Logger.log(`Updating CAB: ${originalCabPath}`);
+
+    const originalBuffer = fs.readFileSync(originalCabPath);
+    const originalExtracted = fs.readFileSync(originalExtractedAssetPath);
+    const newAssetBuffer = fs.readFileSync(newFilePath);
+
+    const reader = new EndianBinaryReader(originalBuffer);
+    const header = new SerializedFileHeader(reader);
+
+    reader.switchToLittle();
+    reader.readInt32(); // targetPlatform
+    reader.readBoolean(); // typeTreeEnabled
+    reader.readInt32(); // typeCount
+
+    reader.setPosition(Number(header.dataOffset));
+
+    reader.readInt32();        // fileType
+    reader.readStringToNull(); // fileName
+    reader.alignStream();
+
+    const sizeOffset = reader.getPosition();
+    const oldFileSize = reader.readUInt32();
+    const scanStart = reader.getPosition(); // this is our lower bound
+
+    Logger.log(`🔍 Scanning for original encrypted asset (${originalExtracted.length} bytes)...`);
+
+    // Scan original CAB for exact match of extracted asset
+    let assetOffset = -1;
+    for (let i = scanStart; i <= originalBuffer.length - originalExtracted.length; i++) {
+      if (originalBuffer.slice(i, i + originalExtracted.length).equals(originalExtracted)) {
+        assetOffset = i;
+        break;
+      }
+    }
+
+    if (assetOffset === -1) {
+      throw new Error("❌ Failed to locate original asset in CAB.");
+    }
+
+    const assetEnd = assetOffset + originalExtracted.length;
+
+    Logger.log(`✅ Found original asset at offset 0x${assetOffset.toString(16)} (${assetOffset})`);
+    Logger.log(`Old asset size: ${oldFileSize}, new asset size: ${newAssetBuffer.length}`);
+
+    // Build new buffer with updated asset
+    const newTotalSize = originalBuffer.length - originalExtracted.length + newAssetBuffer.length;
+    const finalBuffer = Buffer.alloc(newTotalSize);
+
+    originalBuffer.copy(finalBuffer, 0, 0, assetOffset); // before asset
+    newAssetBuffer.copy(finalBuffer, assetOffset);       // new asset
+    originalBuffer.copy(finalBuffer, assetOffset + newAssetBuffer.length, assetEnd); // after asset
+
+    // Patch fileSize
+    finalBuffer.writeUInt32LE(newAssetBuffer.length, sizeOffset);
+
+    // Patch total CAB size
+    finalBuffer.writeBigUInt64LE(BigInt(finalBuffer.length), 20);
+
+    fs.writeFileSync(outputCabPath, finalBuffer);
+    Logger.log(`✅ CAB updated and saved to: ${outputCabPath}`);
+  }
 }
