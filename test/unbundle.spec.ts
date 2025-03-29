@@ -4,7 +4,7 @@ import { assert } from "chai";
 import { fileURLToPath } from "url";
 import { AssetBundle } from '../src/assetbundle.js';
 import { CABExtractor } from '../src/cab.js';
-import { decrypt } from '../src/decrypt.js';
+import { decrypt } from '../src/crypt.js';
 import { processCardAsset } from '../src/converter.js';
 
 const __filename = fileURLToPath(import.meta.url);

@@ -10,7 +10,7 @@ import { AssetBundle } from './assetbundle.js';
 import { CABExtractor } from './cab.js';
 import { UMDISOReader } from './umdiso.js';
 import { NDSHandler } from './nds.js';
-import { decrypt } from "./decrypt.js";
+import { decrypt } from "./crypt.js";
 
 const program = new Command();
 
