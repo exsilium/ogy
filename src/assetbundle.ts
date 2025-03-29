@@ -1,4 +1,5 @@
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 import path from 'path';
 import * as lz4 from '@scanreco/node-lz4';
 import { Logger } from './logger.js';
@@ -73,6 +74,33 @@ interface DirectoryInfo {
   size: bigint;
   flags: number;
   path: string;
+}
+
+interface CABMeta {
+  assetBundle: string;
+  fileVersion: number;
+  playerVersion: string;
+  engineVersion: string;
+  guid: string;
+  blockInfo: {
+    count: number;
+    entries: Array<{
+      uncompressedSize: number;
+      compressedSize: number;
+      flags: number;
+      compressed: boolean;
+      compression: string;
+    }>;
+  };
+  directoryInfo: {
+    size: number;
+    entries: Array<{
+      offset: string;
+      size: string;
+      flags: number;
+      path: string;
+    }>;
+  };
 }
 
 class AssetBundle {
@@ -391,6 +419,203 @@ class AssetBundle {
       }
     }
     return filesWritten;
+  }
+
+  async rebuildAssetBundle(updatedCABPath: string, outputBundlePath: string): Promise<void> {
+    const bundleDir = path.dirname(updatedCABPath);
+    const metaPath = `${updatedCABPath}.meta.json`;
+    const meta: CABMeta = JSON.parse(await fsPromises.readFile(metaPath, "utf-8"));
+
+    const cabData = await fsPromises.readFile(updatedCABPath);
+    Logger.log("Original CAB file size:", cabData.length);
+    Logger.log("First 16 bytes of original CAB (hex):", cabData.slice(0, 16).toString("hex"));
+
+    // Compress the CAB data
+    const compressedCabBuffer = Buffer.alloc(lz4.encodeBound(cabData.length));
+    const compressedCabSize = lz4.encodeBlock(cabData, compressedCabBuffer);
+    const compressedCab = compressedCabBuffer.slice(0, compressedCabSize);
+    Logger.log("Compressed CAB size:", compressedCabSize);
+    Logger.log("First 16 bytes of compressed CAB (hex):", compressedCab.slice(0, 16).toString("hex"));
+
+    // Verify compression worked
+    const testDecompressed = Buffer.alloc(cabData.length);
+    const decompressedSize = lz4.decodeBlock(compressedCab, testDecompressed);
+    Logger.log("Test decompression size:", decompressedSize);
+    Logger.log("First 16 bytes of decompressed CAB (hex):", testDecompressed.slice(0, 16).toString("hex"));
+    Logger.log("Compression ratio:", (compressedCabSize / cabData.length * 100).toFixed(2) + "%");
+
+    // UnityFS Header Constants
+    const signature = Buffer.from("UnityFS\0", "utf-8"); // 8 bytes
+    const playerVersion = Buffer.from(`${meta.playerVersion}\0`, "utf-8");
+    const engineVersion = Buffer.from(`${meta.engineVersion}\0`, "utf-8");
+
+    const compressionMode = 3; // LZ4/LZ4HC
+    const blockInfoFlags = 0x200 | 0x40 | compressionMode; // Padding, Directory, LZ4
+
+    // Build fullBlockInfo structure
+    const blockCount = Buffer.alloc(4); // 4 bytes for uint32
+    blockCount.writeUInt32BE(meta.blockInfo.count); // Use count from meta
+
+    // Add the GUID from meta
+    const guid = Buffer.from(meta.guid, 'hex');
+
+    // Create block info buffer - exactly 10 bytes per block entry (4 + 4 + 2)
+    const firstBlock = meta.blockInfo.entries[0];
+    Logger.log("Block info values:");
+    Logger.log("  Uncompressed size:", firstBlock.uncompressedSize);
+    Logger.log("  Original compressed size from meta:", firstBlock.compressedSize);
+    Logger.log("  New compressed size:", compressedCabSize);
+    Logger.log("  Flags:", firstBlock.flags);
+
+    const blockInfo = Buffer.alloc(10); // 10 bytes total (no padding)
+    blockInfo.writeUInt32BE(firstBlock.uncompressedSize, 0); // 4 bytes: uncompressed size
+    blockInfo.writeUInt32BE(compressedCabSize, 4);  // 4 bytes: compressed size - use new compressed size
+    blockInfo.writeUInt16BE(firstBlock.flags, 8); // 2 bytes: flags
+
+    Logger.log("Block info buffer (hex):", blockInfo.toString("hex"));
+
+    // Create directory count buffer
+    const dirCount = Buffer.alloc(4);
+    dirCount.writeUInt32BE(meta.directoryInfo.size); // Use size from meta
+    Logger.log("Directory count buffer (hex):", dirCount.toString("hex"));
+
+    // Build directory entry buffer
+    const dirOffsetBuffer = Buffer.alloc(8);
+    dirOffsetBuffer.writeBigUInt64BE(BigInt(meta.directoryInfo.entries[0].offset)); // Use original offset from meta
+    Logger.log("Offset buffer (hex):", dirOffsetBuffer.toString("hex"));
+
+    const dirSizeBuffer = Buffer.alloc(8);
+    dirSizeBuffer.writeBigUInt64BE(BigInt(cabData.length)); // Use BE for size
+    Logger.log("Size buffer (hex):", dirSizeBuffer.toString("hex"));
+
+    const dirFlagsBuffer = Buffer.alloc(4);
+    dirFlagsBuffer.writeUInt32BE(meta.directoryInfo.entries[0].flags); // Use BE for flags
+    Logger.log("Flags buffer (hex):", dirFlagsBuffer.toString("hex"));
+
+    const pathBuffer = Buffer.concat([
+      Buffer.from(meta.directoryInfo.entries[0].path, "utf-8"),
+      Buffer.from([0]) // Null terminator
+    ]);
+    Logger.log("Path buffer (hex):", pathBuffer.toString("hex"));
+
+    const fullBlockInfo = Buffer.concat([
+      guid,              // 16 bytes: GUID
+      blockCount,        // 4 bytes: block count
+      blockInfo,         // 10 bytes: block info (uncompressed size, compressed size, flags)
+      dirCount,          // 4 bytes: directory count
+      dirOffsetBuffer,   // 8 bytes: offset (BE)
+      dirSizeBuffer,     // 8 bytes: size (BE)
+      dirFlagsBuffer,    // 4 bytes: flags (BE)
+      pathBuffer         // variable length: path + null terminator
+    ]);
+
+    // Debug: Print each component's position
+    let pos = 0;
+    Logger.log("Component positions:");
+    Logger.log(`  GUID: ${pos} (${guid.length} bytes)`);
+    pos += guid.length;
+    Logger.log(`  Block count: ${pos} (${blockCount.length} bytes)`);
+    pos += blockCount.length;
+    Logger.log(`  Block info: ${pos} (${blockInfo.length} bytes)`);
+    pos += blockInfo.length;
+    Logger.log(`  Directory count: ${pos} (${dirCount.length} bytes)`);
+    pos += dirCount.length;
+    Logger.log(`  Offset: ${pos} (${dirOffsetBuffer.length} bytes)`);
+    pos += dirOffsetBuffer.length;
+    Logger.log(`  Size: ${pos} (${dirSizeBuffer.length} bytes)`);
+    pos += dirSizeBuffer.length;
+    Logger.log(`  Flags: ${pos} (${dirFlagsBuffer.length} bytes)`);
+    pos += dirFlagsBuffer.length;
+    Logger.log(`  Path: ${pos} (${pathBuffer.length} bytes)`);
+
+    Logger.log("Full block info size (before compression):", fullBlockInfo.length);
+    Logger.log("FullBlockInfo (hex):", fullBlockInfo.toString("hex"));
+
+    const compressedBlockInfo = Buffer.alloc(lz4.encodeBound(fullBlockInfo.length));
+    const compressedBlockInfoSize = lz4.encodeBlock(fullBlockInfo, compressedBlockInfo);
+    const finalBlockInfo = compressedBlockInfo.slice(0, compressedBlockInfoSize);
+
+    Logger.log("Compressed block info size:", finalBlockInfo.length);
+    Logger.log("Expected CABCompressedSize from meta:", meta.blockInfo.entries[0].compressedSize);
+    Logger.log("Actual encoded compressed size:", compressedBlockInfoSize);
+    Logger.log("CompressedBlockInfo (hex):", finalBlockInfo.toString("hex"));
+
+    // Try once more to uncompress the finalBlockInfo
+    const testUncompressed = Buffer.alloc(fullBlockInfo.length);
+    const testSizeUncompressed = lz4.decodeBlock(finalBlockInfo, testUncompressed);
+    Logger.log("Test uncompressed size: ", testSizeUncompressed);
+
+    // Build header manually
+    const versionStrings = Buffer.concat([playerVersion, engineVersion]);
+    const headerLength = signature.length + 4 + versionStrings.length + 8 + 4 + 4 + 4;
+    const header = Buffer.alloc(headerLength);
+
+    let offset = 0;
+    signature.copy(header, offset); offset += signature.length;
+    header.writeUInt32BE(meta.fileVersion, offset);
+    Logger.log("fileVersion written bytes (BE):", header.slice(offset, offset + 4).toString("hex"));
+    offset += 4;
+    playerVersion.copy(header, offset); offset += playerVersion.length;
+    engineVersion.copy(header, offset); offset += engineVersion.length;
+
+    const fileSizeOffset = offset;
+    const totalSize = ((header.length + finalBlockInfo.length + 15) & ~15) + compressedCab.length;
+    const startCAB = (header.length + finalBlockInfo.length + 15) & ~15;
+
+    header.writeBigUInt64BE(BigInt(totalSize), fileSizeOffset);
+    header.writeUInt32BE(finalBlockInfo.length, fileSizeOffset + 8);
+    header.writeUInt32BE(fullBlockInfo.length, fileSizeOffset + 12);
+    header.writeUInt32BE(blockInfoFlags, fileSizeOffset + 16);
+
+    // Add header padding to ensure 16-byte alignment
+    const headerPaddingSize = ((header.length + 15) & ~15) - header.length;
+    const headerPadding = Buffer.alloc(headerPaddingSize);
+
+    // Calculate padding to ensure total size up to CAB is 16-byte aligned
+    const sizeUpToCab = header.length + headerPaddingSize + finalBlockInfo.length;
+    const nextAlignedPosition = (sizeUpToCab + 15) & ~15;
+    const expectedPadding = nextAlignedPosition - sizeUpToCab;
+
+    Logger.log("Header length:", header.length);
+    Logger.log("CAB start offset (aligned):", startCAB);
+    Logger.log("BlockInfo ends at:", header.length + finalBlockInfo.length);
+    Logger.log("Padding length before CAB:", expectedPadding);
+    Logger.log("Total AssetBundle size:", totalSize);
+
+    Logger.log("Header fields:");
+    Logger.log("  FinalBlockInfoLength:", header.readUInt32BE(fileSizeOffset + 8));
+    Logger.log("  FullBlockInfoLength:", header.readUInt32BE(fileSizeOffset + 12));
+    Logger.log("  Flags:", header.readUInt32BE(fileSizeOffset + 16));
+
+    Logger.log("Raw header bytes:", header.toString("hex"));
+
+    const padding = Buffer.alloc(expectedPadding);
+
+    const finalBundle = Buffer.concat([
+      header,
+      headerPadding,
+      finalBlockInfo,
+      padding,
+      compressedCab
+    ]);
+
+    Logger.log("Header length:", header.length);
+    Logger.log("Header padding size:", headerPaddingSize);
+    Logger.log("finalBlockInfo starts at byte:", header.length + headerPaddingSize);
+    Logger.log("finalBlockInfo ends at byte:", header.length + headerPaddingSize + finalBlockInfo.length);
+    Logger.log("Is finalBlockInfo at 16-byte aligned position?", (header.length + headerPaddingSize) % 16 === 0);
+
+    // Record actual CAB file position in final bundle
+    const actualCabStart = header.length + headerPaddingSize + finalBlockInfo.length + padding.length;
+    Logger.log("\nCAB File Information:");
+    Logger.log("Actual CAB start position in final bundle:", actualCabStart);
+    Logger.log("Is CAB at 16-byte aligned position?", actualCabStart % 16 === 0);
+    Logger.log("First 16 bytes of CAB in final bundle (hex):", finalBundle.slice(actualCabStart, actualCabStart + 16).toString("hex"));
+
+    Logger.log("Final bundle size:", finalBundle.length);
+
+    await fsPromises.writeFile(outputBundlePath, finalBundle);
+    Logger.log("Wrote rebuilt AssetBundle to:", outputBundlePath);
   }
 }
 
