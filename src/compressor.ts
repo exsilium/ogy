@@ -441,11 +441,14 @@ class Transformer {
   Here we generate the main input file for DICT generation
    */
   private writeDictBuilderInput(sourcePo: string, ygoType: YuGiOh = YuGiOh.TF6): void {
+    const limiter = ygoType == YuGiOh.TFS ? 58040 : 43144;
     let txtOutput: string = "";
     let pointer = 8;
 
-    while(pointer <= 43144) {
-      txtOutput += this.entries[pointer].Description.replace(/<BR>/g, "\r\n") + "\r\n";
+    while(pointer <= limiter) {
+      if(this.entries[pointer] !== undefined) {
+        txtOutput += this.entries[pointer].Description.replace(/<BR>/g, "\r\n") + "\r\n";
+      }
       pointer += 8;
     }
     const fileName = ygoType == YuGiOh.TFS ? 'DICT_R.tin' : 'DICT_J.tin';
