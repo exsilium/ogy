@@ -92,6 +92,21 @@ class EndianBinaryReader {
   }
 }
 
+/*
+ * Offset    Field                    Type (size)
+ * ------    -----------------------  ------------
+ * 0x00      [placeholder 1]          UInt32
+ * 0x04      [placeholder 2]          UInt32
+ * 0x08      version                  Int32
+ * 0x0C      [placeholder 3]          UInt32
+ * 0x10      swapEndianess            Boolean (1 byte)
+ * 0x11-0x13 align
+ * 0x14      metadataSize             UInt32 (4 bytes)
+ * 0x18      fileSize                 Int64 (8 bytes)
+ * 0x20      dataOffset               Int64 (8 bytes)
+ * 0x28      unknown22                Int64 (8 bytes)
+ * 0x30      unityVersion             null-terminated string
+ */
 class SerializedFileHeader {
   version: number;
   swapEndianess: boolean;
@@ -269,7 +284,7 @@ export class CABExtractor {
     }
 
     if (assetOffset === -1) {
-      throw new Error("❌ Failed to locate original asset in CAB.");
+      throw new Error("❌ Failed to locate original asset in CAB, is the reference provided correct?");
     }
 
     const assetEnd = assetOffset + originalExtracted.length;
@@ -289,7 +304,7 @@ export class CABExtractor {
     finalBuffer.writeUInt32LE(newAssetBuffer.length, sizeOffset);
 
     // Patch total CAB size
-    finalBuffer.writeBigUInt64LE(BigInt(finalBuffer.length), 20);
+    finalBuffer.writeBigUInt64BE(BigInt(finalBuffer.length), 24);
 
     fs.writeFileSync(outputCabPath, finalBuffer);
     Logger.log(`✅ CAB updated and saved to: ${outputCabPath}`);
