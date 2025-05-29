@@ -192,8 +192,9 @@ class SerializedFile {
     reader.alignStream();
     this.fileSize = reader.readUInt32();
 
-    // CARD_Name || Card_Indx || Card_Part AssetBundle, we skip ahead 180 bytes and re-read
-    if(this.fileName === "7c/7cc714c8" || this.fileName === "58/5888bcdc" || this.fileName === "5a/5a8c44f4" ||
+    // CARD_Name || Card_Indx || CARD_Desc || Card_Part AssetBundle, we skip ahead 180 bytes and re-read
+    if(this.fileName === "f6/f67aab7c" || this.fileName === "d2/d2350368" || this.fileName === "a3/a3ec792e" ||
+      this.fileName === "5a/5a8c44f4" ||
       // Test files Card_Indx and Card_Part
       this.fileName === "e9/e9aa18bf" || this.fileName === "eb/ebaee097"
       ) {

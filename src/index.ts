@@ -94,37 +94,46 @@ const chain = program.command('chain')
   .description("Run chained actions to fulfill multiple tasks in one go");
 
 chain
-  .command("mad2pot <source_dir> <target_dir>")
+  .command("mad2pot <game_dir> <target_dir>")
   .description("Export from Master Duel installation directory to create mad.pot PO Template file")
-  .action(async (source_dir, target_dir) => {
+  .action(async (game_dir, target_dir) => {
     /* Game source dir e.g: "~/Library/Application Support/CrossOver/Bottles/Steam/drive_c/Program Files (x86)/Steam/steamapps/common/Yu-Gi-Oh!  Master Duel" */
     /* Check the source directory existence */
-    if (source_dir.startsWith('~')) {
-      source_dir = path.join(os.homedir(), source_dir.slice(1));
+    if (game_dir.startsWith('~')) {
+      game_dir = path.join(os.homedir(), game_dir.slice(1));
     }
 
-    const resolvedPath = path.resolve(source_dir);
+    const resolvedPath = path.resolve(game_dir);
     const resolvedTargetPath = path.resolve(target_dir);
 
     if(fs.existsSync(resolvedPath)) {
-      console.log("Source dir: " + resolvedPath);
+      console.log("Game dir: " + resolvedPath);
     }
     else {
-      console.log("Source dir invalid, exiting");
+      console.log("Game dir invalid, exiting");
       process.exit(1);
     }
 
-    /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx containers */
+    /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx bundles */
     /* If these files are not found, most likely the client has updated and the location of the files have moved */
     const variablePathName = await getMADVariableDir(resolvedPath);
-    const cardNameBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/7c/7cc714c8`);
-    const cardDescBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/29/2951c69a`);
-    const cardIndxBundlePath = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/58/5888bcdc`);
-    const cryptoKey = 0xd5;
+    const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/f6/f67aab7c`);
+    const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/a3/a3ec792e`);
+    const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/d2/d2350368`);
+    const cryptoKey = 0x2d;
 
-    if(fs.existsSync(cardNameBundlePath) && fs.existsSync(cardDescBundlePath) && fs.existsSync(cardIndxBundlePath)) {
+    if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc)) {
       console.log("Correct input files found");
     }
+
+    const cardNameBundlePath = resolvedTargetPath + "/f67aab7c.orig";
+    const cardDescBundlePath = resolvedTargetPath + "/a3ec792e.orig";
+    const cardIndxBundlePath = resolvedTargetPath + "/d2350368.orig";
+
+    /* Copy the original files to the target directory */
+    copyFileSync(cardNameBundlePathSrc, cardNameBundlePath);
+    copyFileSync(cardDescBundlePathSrc, cardDescBundlePath);
+    copyFileSync(cardIndxBundlePathSrc, cardIndxBundlePath);
 
     /* cardName */
     let assetBundle = new AssetBundle(cardNameBundlePath);
@@ -266,7 +275,7 @@ chain
       console.log("Source PO: " + resolvedPOPath);
     }
     else {
-      console.log("Source PO invalid, exiting");
+      console.log("Source PO invalid. Cannot find CARD_Desc_J.po, exiting");
       process.exit(1);
     }
 
@@ -297,8 +306,6 @@ chain
     const isoReader = new UMDISOReader(resolvedISOPath);
     isoReader.writeUpdatedISO("PSP_GAME/USRDIR/duelsys/cardinfo_jpn.ehp", resolvedEHPPath,
       path.join(target_dir, YuGiOh[YuGiOh.TF6].toLowerCase() + ".iso"));
-
-    listDirContents(target_dir);
   });
 
 chain
@@ -365,7 +372,7 @@ chain
       console.log("Source PO: " + resolvedPOPath);
     }
     else {
-      console.log("Source PO invalid, exiting");
+      console.log("Source PO invalid. Cannot find CARD_Desc_R.po, exiting");
       process.exit(1);
     }
 
@@ -467,6 +474,37 @@ async function getMADVariableDir(resolvedPath: string): Promise<string> {
 
 function delay(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/**
+ * Copies a file synchronously from source to destination
+ * @param sourcePath The path to the source file
+ * @param destinationPath The path to the destination file
+ * @throws Error if the source file doesn't exist or if the copy operation fails
+ */
+function copyFileSync(sourcePath: string, destinationPath: string): void {
+  try {
+    // Ensure the source file exists
+    if (!fs.existsSync(sourcePath)) {
+      throw new Error(`Source file does not exist: ${sourcePath}`);
+    }
+
+    // Ensure the destination directory exists
+    const destDir = path.dirname(destinationPath);
+    if (!fs.existsSync(destDir)) {
+      fs.mkdirSync(destDir, { recursive: true });
+    }
+
+    // Copy the file
+    fs.copyFileSync(sourcePath, destinationPath);
+    console.log(`File copied successfully from ${sourcePath} to ${destinationPath}`);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to copy file: ${error.message}`);
+    } else {
+      throw new Error('Failed to copy file: Unknown error occurred');
+    }
+  }
 }
 
 /* The below represents the default command "card" scope actions for export,import,transform and build */
