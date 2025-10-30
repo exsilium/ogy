@@ -292,7 +292,11 @@ class AssetBundle {
     return directoryInfo.path;
   }
 
-  private writeMetadataFile(outputPath: string, directoryInfo: DirectoryInfo, block: BlockInfo, unityfsInfo: { fileVersion: number; playerVersion: string; engineVersion: string; }): void {
+  private writeMetadataFile(outputPath: string, directoryInfo: DirectoryInfo, block: BlockInfo, unityfsInfo: {
+    fileVersion: number;
+    playerVersion: string;
+    engineVersion: string;
+  }): void {
     const meta = {
       assetBundle: path.basename(this.filePath),
       fileVersion: unityfsInfo.fileVersion,
@@ -426,196 +430,273 @@ class AssetBundle {
     const metaPath = `${updatedCABPath}.meta.json`;
     const meta: CABMeta = JSON.parse(await fsPromises.readFile(metaPath, "utf-8"));
 
+    // Read the updated CAB data from disk
     const cabData = await fsPromises.readFile(updatedCABPath);
     Logger.log("Original CAB file size:", cabData.length);
     Logger.log("First 16 bytes of original CAB (hex):", cabData.slice(0, 16).toString("hex"));
 
-    // Compress the CAB data
-    const compressedCabBuffer = Buffer.alloc(lz4.encodeBound(cabData.length));
-    const compressedCabSize = lz4.encodeBlock(cabData, compressedCabBuffer);
-    const compressedCab = compressedCabBuffer.slice(0, compressedCabSize);
-    Logger.log("Compressed CAB size:", compressedCabSize);
-    Logger.log("First 16 bytes of compressed CAB (hex):", compressedCab.slice(0, 16).toString("hex"));
+    //
+    // ─────────────────────────────────────────────────────────────────────
+    // STEP 1: Build the new block data by iterating all blocks in meta
+    // ─────────────────────────────────────────────────────────────────────
+    //
 
-    // Verify compression worked
-    const testDecompressed = Buffer.alloc(cabData.length);
-    const decompressedSize = lz4.decodeBlock(compressedCab, testDecompressed);
-    Logger.log("Test decompression size:", decompressedSize);
-    Logger.log("First 16 bytes of decompressed CAB (hex):", testDecompressed.slice(0, 16).toString("hex"));
-    Logger.log("Compression ratio:", (compressedCabSize / cabData.length * 100).toFixed(2) + "%");
+    let offsetInCAB = 0;
+    const blockBuffers: Buffer[] = [];     // Each block's final (compressed or uncompressed) data
+    const blockInfoEntries: Buffer[] = []; // Each block's 10-byte info record
 
-    // UnityFS Header Constants
-    const signature = Buffer.from("UnityFS\0", "utf-8"); // 8 bytes
-    const playerVersion = Buffer.from(`${meta.playerVersion}\0`, "utf-8");
-    const engineVersion = Buffer.from(`${meta.engineVersion}\0`, "utf-8");
+    // Go through each block from meta
+    for (let i = 0; i < meta.blockInfo.entries.length; i++) {
+      const b = meta.blockInfo.entries[i];
+      const uncompressedSize = b.uncompressedSize;
+      const flags = b.flags;
 
-    const compressionMode = 3; // LZ4/LZ4HC
-    const blockInfoFlags = 0x200 | 0x40 | compressionMode; // Padding, Directory, LZ4
+      // Slice the updatedCAB data for this block's uncompressed payload
+      const chunk = cabData.slice(offsetInCAB, offsetInCAB + uncompressedSize);
+      offsetInCAB += uncompressedSize;
 
-    // Build fullBlockInfo structure
-    const blockCount = Buffer.alloc(4); // 4 bytes for uint32
-    blockCount.writeUInt32BE(meta.blockInfo.count); // Use count from meta
+      Logger.log(`\nBlock ${i + 1} from meta:`);
+      Logger.log(`  Uncompressed Size (meta): ${uncompressedSize}`);
+      Logger.log(`  Flags (meta): 0x${flags.toString(16)} (${flags})`);
 
-    // Add the GUID from meta
-    const guid = Buffer.from(meta.guid, 'hex');
+      // Check if we need LZ4 compression
+      // The "compression mode" is stored in `flags & 0x3F` for Unity blocks.
+      // For example, 2 or 3 => LZ4. 0 => uncompressed. 1 => LZMA, etc.
+      const blockCompressionMode = flags & 0x3F;
+      const needsLZ4 = (blockCompressionMode === 2 || blockCompressionMode === 3);
 
-    // Create block info buffer - exactly 10 bytes per block entry (4 + 4 + 2)
-    const firstBlock = meta.blockInfo.entries[0];
-    Logger.log("Block info values:");
-    Logger.log("  Uncompressed size:", firstBlock.uncompressedSize);
-    Logger.log("  Original compressed size from meta:", firstBlock.compressedSize);
-    Logger.log("  New compressed size:", compressedCabSize);
-    Logger.log("  Flags:", firstBlock.flags);
+      let finalChunk: Buffer;
+      let compressedSize: number;
 
-    const blockInfo = Buffer.alloc(10); // 10 bytes total (no padding)
-    blockInfo.writeUInt32BE(firstBlock.uncompressedSize, 0); // 4 bytes: uncompressed size
-    blockInfo.writeUInt32BE(compressedCabSize, 4);  // 4 bytes: compressed size - use new compressed size
-    blockInfo.writeUInt16BE(firstBlock.flags, 8); // 2 bytes: flags
+      if (needsLZ4) {
+        // Compress the chunk with LZ4
+        const maxCompressedLen = lz4.encodeBound(uncompressedSize);
+        const temp = Buffer.allocUnsafe(maxCompressedLen);
+        const encodedSize = lz4.encodeBlock(chunk, temp);
+        finalChunk = temp.slice(0, encodedSize);
+        compressedSize = encodedSize;
 
-    Logger.log("Block info buffer (hex):", blockInfo.toString("hex"));
+        // Debug logging
+        Logger.log(`  Compressing block with LZ4.`);
+        Logger.log(`  Original uncompressed block size: ${uncompressedSize}`);
+        Logger.log(`  Compressed block size: ${compressedSize}`);
+        Logger.log(`  Compression ratio: ${((compressedSize / uncompressedSize) * 100).toFixed(2)}%`);
 
-    // Create directory count buffer
+        // Verify by decompressing
+        const testDecompressed = Buffer.alloc(uncompressedSize);
+        const decompressedSize = lz4.decodeBlock(finalChunk, testDecompressed);
+        Logger.log(`  Test decompression size: ${decompressedSize}`);
+        if (decompressedSize !== uncompressedSize) {
+          throw new Error(`Block ${i + 1} test decompression mismatch!`);
+        }
+      } else {
+        // No compression
+        finalChunk = chunk;
+        compressedSize = uncompressedSize;
+        Logger.log(`  This block is uncompressed (flags = 0)`);
+      }
+
+      // Build the 10-byte block info: [uncompressedSize (4), compressedSize (4), flags (2)]
+      const info = Buffer.alloc(10);
+      info.writeUInt32BE(uncompressedSize, 0);
+      info.writeUInt32BE(compressedSize, 4);
+      info.writeUInt16BE(flags, 8);
+
+      blockBuffers.push(finalChunk);
+      blockInfoEntries.push(info);
+    }
+
+    // Concatenate all block-info records
+    const allBlockInfo = Buffer.concat(blockInfoEntries);
+
+    //
+    // ─────────────────────────────────────────────────────────────────────
+    // STEP 2: Build the directory info area (same logic as your existing code)
+    // ─────────────────────────────────────────────────────────────────────
+    //
+
     const dirCount = Buffer.alloc(4);
-    dirCount.writeUInt32BE(meta.directoryInfo.size); // Use size from meta
-    Logger.log("Directory count buffer (hex):", dirCount.toString("hex"));
+    dirCount.writeUInt32BE(meta.directoryInfo.size); // number of directory entries
+    Logger.log("\nDirectory count buffer (hex):", dirCount.toString("hex"));
 
-    // Build directory entry buffer
+    // For simplicity, we’ll just handle the first directory entry.
+    // If you have more, you can loop similarly.
+    const d = meta.directoryInfo.entries[0];
+
     const dirOffsetBuffer = Buffer.alloc(8);
-    dirOffsetBuffer.writeBigUInt64BE(BigInt(meta.directoryInfo.entries[0].offset)); // Use original offset from meta
+    dirOffsetBuffer.writeBigUInt64BE(BigInt(d.offset));
     Logger.log("Offset buffer (hex):", dirOffsetBuffer.toString("hex"));
 
+    // If the original asset had multiple blocks, the "size" field is usually the total uncompressed length
+    // of all blocks. For a single-file CAB, it can be sum of block uncompressed sizes:
+    let totalUncompressed = 0;
+    for (let i = 0; i < meta.blockInfo.entries.length; i++) {
+      totalUncompressed += meta.blockInfo.entries[i].uncompressedSize;
+    }
+
     const dirSizeBuffer = Buffer.alloc(8);
-    dirSizeBuffer.writeBigUInt64BE(BigInt(cabData.length)); // Use BE for size
+    dirSizeBuffer.writeBigUInt64BE(BigInt(totalUncompressed));
     Logger.log("Size buffer (hex):", dirSizeBuffer.toString("hex"));
 
     const dirFlagsBuffer = Buffer.alloc(4);
-    dirFlagsBuffer.writeUInt32BE(meta.directoryInfo.entries[0].flags); // Use BE for flags
+    dirFlagsBuffer.writeUInt32BE(d.flags);
     Logger.log("Flags buffer (hex):", dirFlagsBuffer.toString("hex"));
 
     const pathBuffer = Buffer.concat([
-      Buffer.from(meta.directoryInfo.entries[0].path, "utf-8"),
+      Buffer.from(d.path, "utf-8"),
       Buffer.from([0]) // Null terminator
     ]);
     Logger.log("Path buffer (hex):", pathBuffer.toString("hex"));
 
-    const fullBlockInfo = Buffer.concat([
-      guid,              // 16 bytes: GUID
-      blockCount,        // 4 bytes: block count
-      blockInfo,         // 10 bytes: block info (uncompressed size, compressed size, flags)
-      dirCount,          // 4 bytes: directory count
-      dirOffsetBuffer,   // 8 bytes: offset (BE)
-      dirSizeBuffer,     // 8 bytes: size (BE)
-      dirFlagsBuffer,    // 4 bytes: flags (BE)
-      pathBuffer         // variable length: path + null terminator
+    const directoryInfo = Buffer.concat([
+      dirCount,
+      dirOffsetBuffer,
+      dirSizeBuffer,
+      dirFlagsBuffer,
+      pathBuffer
     ]);
 
-    // Debug: Print each component's position
-    let pos = 0;
-    Logger.log("Component positions:");
-    Logger.log(`  GUID: ${pos} (${guid.length} bytes)`);
-    pos += guid.length;
-    Logger.log(`  Block count: ${pos} (${blockCount.length} bytes)`);
-    pos += blockCount.length;
-    Logger.log(`  Block info: ${pos} (${blockInfo.length} bytes)`);
-    pos += blockInfo.length;
-    Logger.log(`  Directory count: ${pos} (${dirCount.length} bytes)`);
-    pos += dirCount.length;
-    Logger.log(`  Offset: ${pos} (${dirOffsetBuffer.length} bytes)`);
-    pos += dirOffsetBuffer.length;
-    Logger.log(`  Size: ${pos} (${dirSizeBuffer.length} bytes)`);
-    pos += dirSizeBuffer.length;
-    Logger.log(`  Flags: ${pos} (${dirFlagsBuffer.length} bytes)`);
-    pos += dirFlagsBuffer.length;
-    Logger.log(`  Path: ${pos} (${pathBuffer.length} bytes)`);
+    //
+    // ─────────────────────────────────────────────────────────────────────
+    // STEP 3: Build "GUID + block count + block info + directory info"
+    // ─────────────────────────────────────────────────────────────────────
+    //
 
-    Logger.log("Full block info size (before compression):", fullBlockInfo.length);
-    Logger.log("FullBlockInfo (hex):", fullBlockInfo.toString("hex"));
+    const guid = Buffer.from(meta.guid, 'hex');
+    const blockCount = Buffer.alloc(4);
+    blockCount.writeUInt32BE(meta.blockInfo.count);
 
-    const compressedBlockInfo = Buffer.alloc(lz4.encodeBound(fullBlockInfo.length));
-    const compressedBlockInfoSize = lz4.encodeBlock(fullBlockInfo, compressedBlockInfo);
-    const finalBlockInfo = compressedBlockInfo.slice(0, compressedBlockInfoSize);
+    // Combine them all into uncompressed block info data
+    const uncompressedBlockInfoData = Buffer.concat([
+      guid,              // 16 bytes
+      blockCount,        // 4 bytes
+      allBlockInfo,      // all block info records (10 bytes each)
+      directoryInfo      // directory data
+    ]);
+
+    // Debug logs
+    Logger.log("\nConstructing uncompressed block info data:");
+    Logger.log(`  GUID length: ${guid.length}`);
+    Logger.log(`  blockCount length: ${blockCount.length}`);
+    Logger.log(`  allBlockInfo length: ${allBlockInfo.length}`);
+    Logger.log(`  directoryInfo length: ${directoryInfo.length}`);
+    Logger.log("Full block info size (before compression):", uncompressedBlockInfoData.length);
+    Logger.log("FullBlockInfo (hex):", uncompressedBlockInfoData.toString("hex"));
+
+    // Now compress the block info as LZ4 (because your top-level flags mention LZ4)
+    const compressedBlockInfoBuf = Buffer.alloc(lz4.encodeBound(uncompressedBlockInfoData.length));
+    const compressedBlockInfoSize = lz4.encodeBlock(uncompressedBlockInfoData, compressedBlockInfoBuf);
+    const finalBlockInfo = compressedBlockInfoBuf.slice(0, compressedBlockInfoSize);
 
     Logger.log("Compressed block info size:", finalBlockInfo.length);
-    Logger.log("Expected CABCompressedSize from meta:", meta.blockInfo.entries[0].compressedSize);
-    Logger.log("Actual encoded compressed size:", compressedBlockInfoSize);
     Logger.log("CompressedBlockInfo (hex):", finalBlockInfo.toString("hex"));
 
-    // Try once more to uncompress the finalBlockInfo
-    const testUncompressed = Buffer.alloc(fullBlockInfo.length);
+    // Test decompress
+    const testUncompressed = Buffer.alloc(uncompressedBlockInfoData.length);
     const testSizeUncompressed = lz4.decodeBlock(finalBlockInfo, testUncompressed);
-    Logger.log("Test uncompressed size: ", testSizeUncompressed);
+    Logger.log("Test uncompressed size:", testSizeUncompressed);
+    if (testSizeUncompressed !== uncompressedBlockInfoData.length) {
+      throw new Error("Block info test decompression mismatch!");
+    }
 
-    // Build header manually
+    //
+    // ─────────────────────────────────────────────────────────────────────
+    // STEP 4: Build the UnityFS header
+    // ─────────────────────────────────────────────────────────────────────
+    //
+
+    // You already have this logic, we just replicate it with the new finalBlockInfo
+    const signature = Buffer.from("UnityFS\0", "utf-8");
+    const playerVersion = Buffer.from(`${meta.playerVersion}\0`, "utf-8");
+    const engineVersion = Buffer.from(`${meta.engineVersion}\0`, "utf-8");
+
+    // In your logs: 579 => 0x243 => 0x200 (padding) + 0x40 (dir) + 3 (LZ4)
+    // We'll replicate that. Or do a direct build:
+    const blockInfoFlags = 0x200 | 0x40 | 3; // LZ4 + Dir + blockInfoNeedsPadding
+
     const versionStrings = Buffer.concat([playerVersion, engineVersion]);
     const headerLength = signature.length + 4 + versionStrings.length + 8 + 4 + 4 + 4;
     const header = Buffer.alloc(headerLength);
 
     let offset = 0;
-    signature.copy(header, offset); offset += signature.length;
+    signature.copy(header, offset);
+    offset += signature.length;
+
     header.writeUInt32BE(meta.fileVersion, offset);
     Logger.log("fileVersion written bytes (BE):", header.slice(offset, offset + 4).toString("hex"));
     offset += 4;
-    playerVersion.copy(header, offset); offset += playerVersion.length;
-    engineVersion.copy(header, offset); offset += engineVersion.length;
+
+    versionStrings.copy(header, offset);
+    offset += versionStrings.length;
 
     const fileSizeOffset = offset;
-    const totalSize = ((header.length + finalBlockInfo.length + 15) & ~15) + compressedCab.length;
-    const startCAB = (header.length + finalBlockInfo.length + 15) & ~15;
+    // We must place the blocks after finalBlockInfo, so let's compute total file size.
 
-    header.writeBigUInt64BE(BigInt(totalSize), fileSizeOffset);
-    header.writeUInt32BE(finalBlockInfo.length, fileSizeOffset + 8);
-    header.writeUInt32BE(fullBlockInfo.length, fileSizeOffset + 12);
-    header.writeUInt32BE(blockInfoFlags, fileSizeOffset + 16);
+    // Sum of all compressed blocks:
+    let blocksTotalCompressedSize = 0;
+    for (const bb of blockBuffers) {
+      blocksTotalCompressedSize += bb.length;
+    }
 
-    // Add header padding to ensure 16-byte alignment
-    const headerPaddingSize = ((header.length + 15) & ~15) - header.length;
+    // 1) header + alignment to 16
+    const afterHeaderUnaligned = headerLength;
+    const afterHeaderAligned = (afterHeaderUnaligned + 15) & ~15;
+    // 2) finalBlockInfo + alignment
+    const afterBlockInfo = afterHeaderAligned + finalBlockInfo.length;
+    const afterBlockInfoAligned = (afterBlockInfo + 15) & ~15;
+    // 3) blocks
+    const blocksStart = afterBlockInfoAligned;
+    const totalSize = blocksStart + blocksTotalCompressedSize;
+
+    // Write size info
+    header.writeBigUInt64BE(BigInt(totalSize), fileSizeOffset);                // totalFileSize
+    header.writeUInt32BE(finalBlockInfo.length, fileSizeOffset + 8);           // compressedSize
+    header.writeUInt32BE(uncompressedBlockInfoData.length, fileSizeOffset + 12); // decompSize
+    header.writeUInt32BE(blockInfoFlags, fileSizeOffset + 16);                 // flags
+
+    //
+    // ─────────────────────────────────────────────────────────────────────
+    // STEP 5: Concatenate everything with correct alignment
+    // ─────────────────────────────────────────────────────────────────────
+    //
+
+    // Align from header to block info
+    const headerPaddingSize = afterHeaderAligned - headerLength;
     const headerPadding = Buffer.alloc(headerPaddingSize);
 
-    // Calculate padding to ensure total size up to CAB is 16-byte aligned
-    const sizeUpToCab = header.length + headerPaddingSize + finalBlockInfo.length;
-    const nextAlignedPosition = (sizeUpToCab + 15) & ~15;
-    const expectedPadding = nextAlignedPosition - sizeUpToCab;
+    // Align from block info to block data
+    const blockInfoPaddingSize = afterBlockInfoAligned - afterBlockInfo;
+    const blockInfoPadding = Buffer.alloc(blockInfoPaddingSize);
 
+    Logger.log("\nAlignment and final assembly:");
     Logger.log("Header length:", header.length);
-    Logger.log("CAB start offset (aligned):", startCAB);
-    Logger.log("BlockInfo ends at:", header.length + finalBlockInfo.length);
-    Logger.log("Padding length before CAB:", expectedPadding);
+    Logger.log("Header padding size:", headerPaddingSize);
+    Logger.log("FinalBlockInfo length:", finalBlockInfo.length);
+    Logger.log("BlockInfo padding size:", blockInfoPaddingSize);
+    Logger.log("Number of block data buffers:", blockBuffers.length);
+    Logger.log("Sum of compressed block data lengths:", blocksTotalCompressedSize);
     Logger.log("Total AssetBundle size:", totalSize);
-
-    Logger.log("Header fields:");
-    Logger.log("  FinalBlockInfoLength:", header.readUInt32BE(fileSizeOffset + 8));
-    Logger.log("  FullBlockInfoLength:", header.readUInt32BE(fileSizeOffset + 12));
-    Logger.log("  Flags:", header.readUInt32BE(fileSizeOffset + 16));
-
-    Logger.log("Raw header bytes:", header.toString("hex"));
-
-    const padding = Buffer.alloc(expectedPadding);
 
     const finalBundle = Buffer.concat([
       header,
       headerPadding,
       finalBlockInfo,
-      padding,
-      compressedCab
+      blockInfoPadding,
+      ...blockBuffers  // all the block data
     ]);
 
-    Logger.log("Header length:", header.length);
-    Logger.log("Header padding size:", headerPaddingSize);
-    Logger.log("finalBlockInfo starts at byte:", header.length + headerPaddingSize);
-    Logger.log("finalBlockInfo ends at byte:", header.length + headerPaddingSize + finalBlockInfo.length);
-    Logger.log("Is finalBlockInfo at 16-byte aligned position?", (header.length + headerPaddingSize) % 16 === 0);
-
-    // Record actual CAB file position in final bundle
-    const actualCabStart = header.length + headerPaddingSize + finalBlockInfo.length + padding.length;
-    Logger.log("\nCAB File Information:");
-    Logger.log("Actual CAB start position in final bundle:", actualCabStart);
-    Logger.log("Is CAB at 16-byte aligned position?", actualCabStart % 16 === 0);
-    Logger.log("First 16 bytes of CAB in final bundle (hex):", finalBundle.slice(actualCabStart, actualCabStart + 16).toString("hex"));
-
+    // Final debug
+    const actualCabStart = afterBlockInfoAligned; // blocksStart
+    Logger.log("\nCAB File(s) Information:");
+    Logger.log("Actual first block start in final bundle:", actualCabStart);
+    Logger.log("Is that 16-byte aligned?", actualCabStart % 16 === 0);
+    Logger.log("First 16 bytes of first block in final bundle (hex):",
+      finalBundle.slice(actualCabStart, actualCabStart + 16).toString("hex"));
     Logger.log("Final bundle size:", finalBundle.length);
 
+    // Write to disk
     await fsPromises.writeFile(outputBundlePath, finalBundle);
-    Logger.log("Wrote rebuilt AssetBundle to:", outputBundlePath);
+    Logger.log("Wrote rebuilt multi-block AssetBundle to:", outputBundlePath);
   }
 }
 

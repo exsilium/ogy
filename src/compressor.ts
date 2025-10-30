@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as gettextParser from 'gettext-parser';
+import { restoreCardAsset } from './converter.js';
 
 enum YuGiOh {
   WC6, // Yu-Gi-Oh! Ultimate Masters: World Championship Tournament 2006, 2006, GBA
@@ -392,9 +393,11 @@ class Transformer {
       count++;
     }
     console.log("Entries processed: " + count);
-    this.writeDictBuilderInput(sourcePo, ygoType);
-    fs.writeFileSync(sourcePo.replace(".po", ".txt"), this.entriesToTxt(path.dirname(sourcePo), ygoType));
-    console.log("Files written, task complete.");
+    if(ygoType === YuGiOh.TF6 || ygoType === YuGiOh.TFS) {
+      this.writeDictBuilderInput(sourcePo, ygoType);
+      fs.writeFileSync(sourcePo.replace(".po", ".txt"), this.entriesToTxt(path.dirname(sourcePo), ygoType));
+      console.log("Files written, task complete.");
+    }
   }
 
   /*
@@ -403,6 +406,31 @@ class Transformer {
   poToJson(sourcePo: string, targetJson: string) {
     const po = gettextParser.po.parse(fs.readFileSync(sourcePo));
     fs.writeFileSync(targetJson, JSON.stringify(po, null, 2));
+  }
+
+  entriesToBin(directory: string, ygoType: YuGiOh = YuGiOh.MAD): void {
+    const limiter = 13392;
+    const cardNames: string[] = [];
+    const cardDescs: string[] = [];
+
+    let pointer = 0;
+
+    while(pointer <= limiter) {
+      try {
+        cardNames.push(this.entries[pointer].Name);
+        cardDescs.push(this.entries[pointer].Description);
+      } catch (err) {
+        console.error(`Error processing pointer ${pointer}:`, err);
+        console.error(`this.entries[${pointer}]:`, this.entries[pointer]);
+      }
+      pointer++;
+    }
+
+    console.log("Entries in cardNames: ", cardNames.length);
+    console.log("Entries in cardDescs: ", cardDescs.length);
+    restoreCardAsset(directory + "/CARD_Indx_New.decrypted.bin", directory + "/CARD_Name_New.decrypted.bin",
+      directory + "/CARD_Desc_New.decrypted.bin", cardNames, cardDescs);
+    console.log("MAD");
   }
 
   /*

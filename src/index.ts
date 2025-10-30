@@ -10,7 +10,7 @@ import { AssetBundle } from './assetbundle.js';
 import { CABExtractor } from './cab.js';
 import { UMDISOReader } from './umdiso.js';
 import { NDSHandler } from './nds.js';
-import { decrypt } from "./crypt.js";
+import { decrypt, encrypt } from "./crypt.js";
 
 const program = new Command();
 
@@ -187,6 +187,117 @@ chain
     }
 
     await new YgoTexts().exportToPot(resolvedTargetPath, YuGiOh.MAD);
+    listDirContents(resolvedTargetPath);
+  });
+
+chain
+  .command("mad-implant <game_dir> <target_dir>")
+  .description("Repack MAD resources (TESTING SPACE, DOES NOT WORK, DO NOT USE!)")
+  .action(async (game_dir, target_dir) => {
+    const resolvedPath = path.resolve(game_dir);
+    const resolvedTargetPath = path.resolve(target_dir);
+
+    if(fs.existsSync(resolvedPath)) {
+      console.log("Game dir: " + resolvedPath);
+    }
+    else {
+      console.log("Game dir invalid, exiting");
+      process.exit(1);
+    }
+
+    const resolvedPOPath = path.join(target_dir, "/mad.po");
+
+    if(fs.existsSync(resolvedPOPath)) {
+      console.log("Source PO: " + resolvedPOPath);
+    }
+    else {
+      console.log("Source PO invalid. Cannot find mad.po, exiting");
+      process.exit(1);
+    }
+
+    /* Process the PO file and convert it to TXT */
+    const transformer = new Transformer();
+    /* We don't actually need the Txt output, nor any file for DICT, so I think for MAD we need alternative logic */
+    transformer.poToTxt(resolvedPOPath, YuGiOh.MAD);
+    transformer.entriesToBin(resolvedTargetPath, YuGiOh.MAD);
+
+    /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx bundles */
+    /* If these files are not found, most likely the client has updated and the location of the files have moved */
+    const variablePathName = await getMADVariableDir(resolvedPath);
+    const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/f6/f67aab7c`);
+    const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/a3/a3ec792e`);
+    const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/d2/d2350368`);
+    const cryptoKey = 0x2d;
+
+    if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc)) {
+      console.log("Correct source files found for replacement");
+    }
+
+    const cardNameBundlePath = resolvedTargetPath + "/f67aab7c";
+    const cardDescBundlePath = resolvedTargetPath + "/a3ec792e";
+    const cardIndxBundlePath = resolvedTargetPath + "/d2350368";
+
+    /* cardName */
+    let decryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Name_New.decrypted.bin");
+    let encryptedData = encrypt(decryptedData, cryptoKey);
+
+    /* cardDesc */
+    decryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Desc_New.decrypted.bin");
+    encryptedData = encrypt(decryptedData, cryptoKey);
+
+    /* cardIndx */
+    decryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Indx_New.decrypted.bin");
+    encryptedData = encrypt(decryptedData, cryptoKey);
+
+    /* Create or modify the CAB file for CARD_Name   */
+    copyFileSync(resolvedTargetPath + "/CAB-260ccd1ac572eb90ac7e11a7d19da5c8",
+      resolvedTargetPath + "/CAB-260ccd1ac572eb90ac7e11a7d19da5c8.orig");
+    CABExtractor.update(resolvedTargetPath + "/CAB-260ccd1ac572eb90ac7e11a7d19da5c8.orig",
+      resolvedTargetPath + "/CARD_Name.bin",
+      resolvedTargetPath + "/CARD_Name.repack.bin",
+      resolvedTargetPath + "/CAB-260ccd1ac572eb90ac7e11a7d19da5c8");
+
+    /* Create the new AssetBundle for CARD_Name */
+    let assetBundle = new AssetBundle(resolvedTargetPath + "/f67aab7c.orig");
+    await assetBundle.rebuildAssetBundle(
+      resolvedTargetPath + "/CAB-260ccd1ac572eb90ac7e11a7d19da5c8", // updated CAB file
+      resolvedTargetPath + "/f67aab7c"
+    );
+
+    /* Create or modify the CAB file for CARD_Desc */
+    copyFileSync(resolvedTargetPath + "/CAB-8c0887c885a382ccdbebde6074497517",
+      resolvedTargetPath + "/CAB-8c0887c885a382ccdbebde6074497517.orig");
+    CABExtractor.update(resolvedTargetPath + "/CAB-8c0887c885a382ccdbebde6074497517.orig",
+      resolvedTargetPath + "/CARD_Desc.bin",
+      resolvedTargetPath + "/CARD_Desc.repack.bin",
+      resolvedTargetPath + "/CAB-8c0887c885a382ccdbebde6074497517");
+
+    /* Create the new AssetBundle for CARD_Desc */
+    assetBundle = new AssetBundle(resolvedTargetPath + "/a3ec792e.orig");
+    await assetBundle.rebuildAssetBundle(
+      resolvedTargetPath + "/CAB-8c0887c885a382ccdbebde6074497517", // updated CAB file
+      resolvedTargetPath + "/a3ec792e"
+    );
+
+    /* Create or modify the CAB file for CARD_Indx */
+    copyFileSync(resolvedTargetPath + "/CAB-e01e19d89734ca1ba7ddbcc5e02cd7b2",
+      resolvedTargetPath + "/CAB-e01e19d89734ca1ba7ddbcc5e02cd7b2.orig");
+    CABExtractor.update(resolvedTargetPath + "/CAB-e01e19d89734ca1ba7ddbcc5e02cd7b2.orig",
+      resolvedTargetPath + "/CARD_Indx.bin",
+      resolvedTargetPath + "/CARD_Indx.repack.bin",
+      resolvedTargetPath + "/CAB-e01e19d89734ca1ba7ddbcc5e02cd7b2");
+
+    /* Create the new AssetBundle for CARD_Indx */
+    assetBundle = new AssetBundle(resolvedTargetPath + "/d2350368.orig");
+    await assetBundle.rebuildAssetBundle(
+      resolvedTargetPath + "/CAB-e01e19d89734ca1ba7ddbcc5e02cd7b2", // updated CAB file
+      resolvedTargetPath + "/d2350368"
+    );
+
+    copyFileSync(cardNameBundlePath, cardNameBundlePathSrc);
+    copyFileSync(cardDescBundlePath, cardDescBundlePathSrc);
+    copyFileSync(cardIndxBundlePath, cardIndxBundlePathSrc);
+
     listDirContents(resolvedTargetPath);
   });
 
