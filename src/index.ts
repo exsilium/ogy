@@ -95,7 +95,7 @@ const chain = program.command('chain')
 
 chain
   .command("mad2pot <game_dir> <target_dir>")
-  .description("Export from Master Duel installation directory to create mad.pot PO Template file")
+  .description("Export from Master Duel installation directory to create PO Template file (mad.pot)")
   .action(async (game_dir, target_dir) => {
     /* Game source dir e.g: "~/Library/Application Support/CrossOver/Bottles/Steam/drive_c/Program Files (x86)/Steam/steamapps/common/Yu-Gi-Oh!  Master Duel" */
     /* Check the source directory existence */
@@ -366,7 +366,7 @@ chain
 
 chain
   .command("tf6-implant <source_iso> <target_dir>")
-  .description("Produce a new ISO based on source ISO and the language asset (CARD_Desc_J.po) in target directory")
+  .description("Produce a new ISO based on source ISO and the language asset (CARD_Desc_J.po) in target directory. A new ISO will be written to <target_dir> as tf6.iso")
   .action(async (source_iso, target_dir) => {
     if(source_iso.startsWith('~')) {
       source_iso = path.join(os.homedir(), source_iso.slice(1));
@@ -463,7 +463,7 @@ chain
 
 chain
   .command("tfs-implant <source_iso> <target_dir>")
-  .description("Produce a new ISO based on source ISO and the language assets in target directory [NOT WORKING]")
+  .description("Produce a new ISO based on source ISO and the language asset (CARD_Desc_R.po) in target directory. A new ISO will be written to <target_dir> as tfs.iso")
   .action(async (source_iso, target_dir) => {
     if(source_iso.startsWith('~')) {
       source_iso = path.join(os.homedir(), source_iso.slice(1));
