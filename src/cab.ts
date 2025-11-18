@@ -152,6 +152,14 @@ class SerializedFileHeader {
   }
 }
 
+interface UnityObject {
+  pathId: bigint;
+  byteStart: bigint;
+  byteSize: number;
+  typeId: number;
+  container?: string;
+}
+
 class SerializedFile {
   reader: EndianBinaryReader;
   header: SerializedFileHeader;
@@ -163,6 +171,8 @@ class SerializedFile {
   fileType: number;
   fileName: string;
   fileSize: number;
+  
+  objects: UnityObject[] = [];
 
   constructor(reader: EndianBinaryReader) {
     this.reader = reader;
@@ -220,6 +230,110 @@ class SerializedFile {
     Logger.log("Position: " + this.reader.getPosition());
     return this.fileName;
   }
+  
+  getFileName(): string {
+    return this.fileName;
+  }
+
+  parseObjects(): UnityObject[] {
+    // Save current position
+    const currentPos = this.reader.getPosition();
+    
+    // Go back to after header to read metadata
+    this.reader.setPosition(Number(this.header.metadataSize) + 0x14);
+    
+    // Read objects count
+    const objectCount = this.reader.readInt32();
+    Logger.log(`Object count: ${objectCount}`);
+    
+    for (let i = 0; i < objectCount; i++) {
+      const pathId = this.reader.readInt64();
+      const byteStart = this.reader.readInt64();
+      const byteSize = this.reader.readUInt32();
+      const typeId = this.reader.readInt32();
+      
+      this.objects.push({
+        pathId,
+        byteStart,
+        byteSize,
+        typeId
+      });
+    }
+    
+    // Read container information if available
+    // Container data is typically at the end of the metadata section
+    try {
+      const containerCount = this.reader.readInt32();
+      if (containerCount > 0 && containerCount < 10000) {
+        for (let i = 0; i < containerCount; i++) {
+          const containerPath = this.reader.readStringToNull();
+          this.reader.alignStream();
+          const preloadIndex = this.reader.readInt32();
+          const preloadSize = this.reader.readInt32();
+          const assetPathId = this.reader.readInt64();
+          
+          // Find the object and add container path
+          const obj = this.objects.find(o => o.pathId === assetPathId);
+          if (obj) {
+            obj.container = containerPath;
+          }
+        }
+      }
+    } catch (e) {
+      // Container information might not be present
+      Logger.log("No container information available");
+    }
+    
+    // Restore position
+    this.reader.setPosition(currentPos);
+    
+    return this.objects;
+  }
+  
+  getTextAssetObjects(): UnityObject[] {
+    // TextAsset type ID is typically 49
+    return this.objects.filter(obj => obj.typeId === 49);
+  }
+  
+  static scanForTextAssets(cabData: Buffer, targetSuffixes: string[]): string[] {
+    const matches: string[] = [];
+    
+    try {
+      // Convert buffer to string to search for container paths
+      // Search the entire buffer or up to a reasonable limit
+      const cabString = cabData.toString('utf8');
+      
+      // Look for each target suffix in the data
+      for (const suffix of targetSuffixes) {
+        // Search for the suffix in the string
+        const index = cabString.toLowerCase().indexOf(suffix.toLowerCase());
+        if (index !== -1) {
+          // Found a match, try to extract the full path
+          // Look backwards from the match to find the start of the path
+          let startIndex = index;
+          // Paths typically start with "assets/" or similar
+          while (startIndex > 0 && cabString[startIndex - 1] !== '\0' && startIndex > index - 200) {
+            startIndex--;
+          }
+          
+          // Extract the path
+          let endIndex = index + suffix.length;
+          const containerPath = cabString.substring(startIndex, endIndex);
+          
+          // Clean up the path (remove any leading null bytes or non-printable characters)
+          const cleanPath = containerPath.replace(/[\x00-\x1F]/g, '').trim();
+          
+          if (cleanPath.length > 0) {
+            matches.push(cleanPath);
+          }
+        }
+      }
+    } catch (error) {
+      // Silently fail - not a valid CAB or doesn't match
+    }
+    
+    return matches;
+  }
 }
 
 export class CABExtractor {
@@ -241,6 +355,10 @@ export class CABExtractor {
         }
       });
     });
+  }
+  
+  static scanForTextAssets(cabData: Buffer, targetSuffixes: string[]): string[] {
+    return SerializedFile.scanForTextAssets(cabData, targetSuffixes);
   }
 
   static update(
