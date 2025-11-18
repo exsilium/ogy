@@ -10,7 +10,7 @@ import { AssetBundle } from './assetbundle.js';
 import { CABExtractor } from './cab.js';
 import { UMDISOReader } from './umdiso.js';
 import { NDSHandler } from './nds.js';
-import { decrypt, encrypt } from "./crypt.js";
+import { decrypt, encrypt, findKey } from "./crypt.js";
 
 const program = new Command();
 
@@ -117,18 +117,18 @@ chain
     /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx bundles */
     /* If these files are not found, most likely the client has updated and the location of the files have moved */
     const variablePathName = await getMADVariableDir(resolvedPath);
-    const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/f6/f67aab7c`);
-    const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/a3/a3ec792e`);
-    const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/d2/d2350368`);
-    const cryptoKey = 0x2d;
+    const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/74/7438cca8`);
+    const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/21/21ae1efa`);
+    const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/50/507764bc`);
+    const cryptoKey = 0xe3;
 
     if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc)) {
       console.log("Correct input files found");
     }
 
-    const cardNameBundlePath = resolvedTargetPath + "/f67aab7c.orig";
-    const cardDescBundlePath = resolvedTargetPath + "/a3ec792e.orig";
-    const cardIndxBundlePath = resolvedTargetPath + "/d2350368.orig";
+    const cardNameBundlePath = resolvedTargetPath + "/7438cca8.orig";
+    const cardDescBundlePath = resolvedTargetPath + "/21ae1efa.orig";
+    const cardIndxBundlePath = resolvedTargetPath + "/507764bc.orig";
 
     /* Copy the original files to the target directory */
     copyFileSync(cardNameBundlePathSrc, cardNameBundlePath);
@@ -150,6 +150,10 @@ chain
       fs.writeFileSync(resolvedTargetPath + "/CARD_Name.decrypted.bin", decryptedData);
     } else {
       console.error('Decryption failed for CARD_Name.');
+      console.info('Attempting to find the correct crypto key...');
+      const newCryptoKey = findKey(encryptedData);
+      console.info('Found crypto key: 0x' + newCryptoKey.toString(16));
+      process.exit(1);
     }
 
     /* cardDesc */
@@ -167,6 +171,7 @@ chain
       fs.writeFileSync(resolvedTargetPath + "/CARD_Desc.decrypted.bin", decryptedData);
     } else {
       console.error('Decryption failed for CARD_Desc.');
+      process.exit(1);
     }
 
     /* cardIndx */
@@ -184,6 +189,7 @@ chain
       fs.writeFileSync(resolvedTargetPath + "/CARD_Indx.decrypted.bin", decryptedData);
     } else {
       console.error('Decryption failed for CARD_Indx.');
+      process.exit(1);
     }
 
     await new YgoTexts().exportToPot(resolvedTargetPath, YuGiOh.MAD);

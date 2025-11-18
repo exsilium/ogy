@@ -24,6 +24,39 @@ export function decrypt(data: Buffer, cryptoKey: number): Buffer {
   }
 }
 
+/**
+ * Brute-force helper to discover the correct crypto key.
+ *
+ * Starts at 0x00 and tries each key up to 0xFF. For each candidate key it
+ * applies the same decryption algorithm used in `decrypt()` and attempts
+ * to inflate the result with zlib. The first key for which inflation
+ * succeeds is returned.
+ *
+ * If no key succeeds, this function throws an Error.
+ */
+export function findKey(data: Buffer): number {
+  for (let cryptoKey = 0x00; cryptoKey <= 0xFF; cryptoKey++) {
+    const decryptedData = Buffer.from(data);
+
+    try {
+      for (let i = 0; i < decryptedData.length; i++) {
+        let v = i + cryptoKey + 0x23D;
+        v *= cryptoKey;
+        v ^= i % 7;
+        decryptedData[i] ^= v & 0xFF;
+      }
+
+      // If inflateSync doesn't throw, we've likely found a valid key.
+      zlib.inflateSync(decryptedData);
+      return cryptoKey;
+    } catch {
+      // Ignore and try the next key.
+    }
+  }
+
+  throw new Error('No valid crypto key found in range 0x00–0xFF for the provided data.');
+}
+
 export function encrypt(data: Buffer, cryptoKey: number): Buffer {
   // First, compress the data
   const compressedData = zlib.deflateSync(data);
