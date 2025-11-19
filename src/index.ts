@@ -308,6 +308,70 @@ chain
   });
 
 chain
+  .command("mad-locate <game_dir>")
+  .description("Locate MAD AssetBundles containing CARD files (card_name.bytes, card_desc.bytes, card_indx.bytes)")
+  .action(async (game_dir) => {
+    /* Expand tilde in path */
+    if (game_dir.startsWith('~')) {
+      game_dir = path.join(os.homedir(), game_dir.slice(1));
+    }
+
+    const resolvedPath = path.resolve(game_dir);
+
+    if(!fs.existsSync(resolvedPath)) {
+      console.log("Game directory invalid, exiting");
+      process.exit(1);
+    }
+
+    console.log("Scanning directory: " + resolvedPath);
+    
+    const TARGET_SUFFIXES = [
+      "card_desc.bytes",
+      "card_name.bytes",
+      "card_indx.bytes",
+    ];
+
+    // Find LocalData directory
+    const localDataPath = path.join(resolvedPath, 'LocalData');
+    if (!fs.existsSync(localDataPath)) {
+      console.log("LocalData directory not found in game directory");
+      process.exit(1);
+    }
+
+    console.log("Traversing LocalData AssetBundles...\n");
+
+    // Recursively walk all files in LocalData
+    async function walkFiles(dir: string): Promise<void> {
+      const entries = await fs.promises.readdir(dir, { withFileTypes: true });
+      
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        
+        if (entry.isDirectory()) {
+          await walkFiles(fullPath);
+        } else if (entry.isFile()) {
+          // Try to scan this file as an AssetBundle
+          const assetBundle = new AssetBundle(fullPath);
+          const matches = await assetBundle.scanForTextAssets(TARGET_SUFFIXES);
+          
+          if (matches.length > 0) {
+            for (const match of matches) {
+              console.log("--------------------------------------------------");
+              console.log("FOUND MATCH:");
+              console.log(`  Asset Path : ${match.assetPath}`);
+              console.log(`  In Bundle  : ${match.bundlePath}`);
+              console.log("--------------------------------------------------");
+            }
+          }
+        }
+      }
+    }
+
+    await walkFiles(localDataPath);
+    console.log("\nScan complete.");
+  });
+
+chain
   .command("otn2pot <source_nds> <target_dir>")
   .description("Export from OTN NDS to create otn.pot PO Template file")
   .action(async (source_nds, target_dir) => {
