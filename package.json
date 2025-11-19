@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "npx tsc -p tsconfig-build.json",
-    "test": "node --import=./test/register.js node_modules/mocha/bin/mocha.js --require ts-node/register -S --bail --reporter mochawesome --timeout 10000 --exit test/*.spec.ts"
+    "test": "node --import=./test/register.js node_modules/mocha/bin/mocha.js --require ts-node/register -S --bail --reporter mochawesome --timeout 10000 --exit 'test/*.spec.ts' 'test/**/*.spec.ts'"
   },
   "keywords": [],
   "author": "Sten Feldman <exile@chamber.ee>",
