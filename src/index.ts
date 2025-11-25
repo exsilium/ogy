@@ -200,6 +200,12 @@ chain
   .command("mad-implant <game_dir> <target_dir>")
   .description("Repack MAD resources using in-memory AssetBundle updates")
   .action(async (game_dir, target_dir) => {
+    /* Game source dir e.g: "~/Library/Application Support/CrossOver/Bottles/Steam/drive_c/Program Files (x86)/Steam/steamapps/common/Yu-Gi-Oh!  Master Duel" */
+    /* Check the source directory existence */
+    if (game_dir.startsWith('~')) {
+      game_dir = path.join(os.homedir(), game_dir.slice(1));
+    }
+
     const resolvedPath = path.resolve(game_dir);
     const resolvedTargetPath = path.resolve(target_dir);
 
