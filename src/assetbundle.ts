@@ -56,6 +56,10 @@ class BinaryReader {
   getPosition(): number {
     return this.position;
   }
+
+  setPosition(position: number): void {
+    this.position = position;
+  }
 }
 
 interface HeaderInfo {
@@ -769,6 +773,313 @@ class AssetBundle {
     // Write to disk
     await fsPromises.writeFile(outputBundlePath, finalBundle);
     Logger.log("Wrote rebuilt multi-block AssetBundle to:", outputBundlePath);
+  }
+
+  /**
+   * Update an AssetBundle in-place using the UnityPy.load() approach.
+   * This method loads the original bundle, extracts the CAB internally,
+   * updates it with new asset data, and rebuilds the bundle.
+   * 
+   * @param originalAssetPath Path to the original encrypted asset (e.g., CARD_Name.bin)
+   * @param newAssetPath Path to the new encrypted asset to replace with
+   * @param outputBundlePath Path where the updated AssetBundle will be written
+   */
+  async updateAssetBundle(originalAssetPath: string, newAssetPath: string, outputBundlePath: string): Promise<void> {
+    Logger.log("\n🔄 Starting in-place AssetBundle update (UnityPy.load() approach)");
+    Logger.log(`  Original bundle: ${this.filePath}`);
+    Logger.log(`  Original asset: ${originalAssetPath}`);
+    Logger.log(`  New asset: ${newAssetPath}`);
+    Logger.log(`  Output bundle: ${outputBundlePath}`);
+
+    // Read the original and new asset data
+    const originalAssetData = await fsPromises.readFile(originalAssetPath);
+    const newAssetData = await fsPromises.readFile(newAssetPath);
+    
+    Logger.log(`\n📊 Asset sizes:`);
+    Logger.log(`  Original asset size: ${originalAssetData.length} bytes`);
+    Logger.log(`  New asset size: ${newAssetData.length} bytes`);
+    Logger.log(`  Size difference: ${newAssetData.length - originalAssetData.length} bytes`);
+
+    // Load the original bundle
+    const buffer = fs.readFileSync(this.filePath);
+    const reader = new BinaryReader(buffer);
+
+    // Read and process the header
+    const { compressedSize, decompSize } = this.readHeader(reader);
+
+    // Extract and decompress block data
+    const decompressedData = await this.decompressData(reader, compressedSize, decompSize);
+
+    // Use a new BinaryReader to read from the decompressed data
+    const blockReader = new BinaryReader(decompressedData);
+
+    // Read GUID
+    const guidBytes = blockReader.readBytes(16);
+    this.guid = guidBytes.toString('hex');
+    Logger.log(`\n🔑 GUID: ${this.guid}`);
+
+    // Read block count
+    const blockSize = blockReader.readBigEndianUInt32();
+    Logger.log(`\n📦 Block count: ${blockSize}`);
+
+    // Extract block information
+    this.extractBlocks(blockReader, blockSize);
+
+    // Extract directory information
+    this.extractDirectories(blockReader);
+
+    // Now we need to extract the CAB data, update it, and rebuild
+    reader.alignToBoundary(16);
+    
+    Logger.log("\n🔍 Extracting CAB data from bundle...");
+    
+    // Process the first directory (typically the CAB file)
+    const directory = this.directories[0];
+    let uncompressedCABData: Buffer = Buffer.alloc(0);
+
+    // Decompress all blocks into one buffer
+    for (const block of this.blocks) {
+      if (block.compressedSize !== block.uncompressedSize) {
+        const compressedData = reader.readBytes(block.compressedSize);
+        const decompressedData = Buffer.alloc(block.uncompressedSize);
+        const decompressedSize = lz4.decodeBlock(compressedData, decompressedData);
+        
+        if (decompressedSize !== block.uncompressedSize) {
+          throw new Error(`Block decompression size mismatch`);
+        }
+        
+        uncompressedCABData = Buffer.concat([uncompressedCABData, decompressedData]);
+      } else {
+        uncompressedCABData = Buffer.concat([uncompressedCABData, reader.readBytes(block.uncompressedSize)]);
+      }
+    }
+
+    Logger.log(`  Extracted CAB size: ${uncompressedCABData.length} bytes`);
+
+    // Now update the CAB data with the new asset
+    Logger.log("\n🔧 Updating CAB data with new asset...");
+    
+    // Scan the CAB for the original asset
+    let assetOffset = -1;
+    for (let i = 0; i <= uncompressedCABData.length - originalAssetData.length; i++) {
+      if (uncompressedCABData.slice(i, i + originalAssetData.length).equals(originalAssetData)) {
+        assetOffset = i;
+        break;
+      }
+    }
+
+    if (assetOffset === -1) {
+      throw new Error("❌ Failed to locate original asset in CAB");
+    }
+
+    Logger.log(`  ✅ Found original asset at offset 0x${assetOffset.toString(16)} (${assetOffset})`);
+
+    // Build new CAB with updated asset
+    const assetEnd = assetOffset + originalAssetData.length;
+    const newCABSize = uncompressedCABData.length - originalAssetData.length + newAssetData.length;
+    const updatedCABData = Buffer.alloc(newCABSize);
+
+    uncompressedCABData.copy(updatedCABData, 0, 0, assetOffset); // before asset
+    newAssetData.copy(updatedCABData, assetOffset);               // new asset
+    uncompressedCABData.copy(updatedCABData, assetOffset + newAssetData.length, assetEnd); // after asset
+
+    // Update the fileSize field in the CAB header
+    // The CAB has a SerializedFile structure. We need to patch the fileSize field.
+    // Parse the CAB header to find the fileSize offset
+    const cabReader = new BinaryReader(updatedCABData);
+    cabReader.readBytes(4); // placeholder 1
+    cabReader.readBytes(4); // placeholder 2
+    cabReader.readBytes(4); // version
+    cabReader.readBytes(4); // placeholder 3
+    cabReader.readBytes(1); // swapEndianess
+    cabReader.alignToBoundary(4); // align
+    cabReader.readBytes(4); // metadataSize
+    const cabHeaderFileSizeOffset = cabReader.getPosition(); // This is where fileSize is stored (0x18)
+    
+    // Skip to dataOffset to find where we need to locate the asset fileSize field
+    cabReader.readBytes(8); // skip fileSize
+    const dataOffsetValue = Number(cabReader.readBigEndianUInt64()); // dataOffset
+    cabReader.readBytes(8); // unknown22
+    
+    // Read the unityVersion string to get past it
+    while (updatedCABData[cabReader.getPosition()] !== 0) {
+      cabReader.readBytes(1);
+    }
+    cabReader.readBytes(1); // skip null terminator
+    
+    // Now we're at the metadata section, need to skip to dataOffset
+    cabReader.setPosition(dataOffsetValue);
+    
+    cabReader.readBytes(4); // fileType
+    // Read fileName (null-terminated)
+    while (updatedCABData[cabReader.getPosition()] !== 0) {
+      cabReader.readBytes(1);
+    }
+    cabReader.readBytes(1); // skip null terminator
+    cabReader.alignToBoundary(4); // align
+    
+    const assetFileSizeOffset = cabReader.getPosition(); // This is where the asset's fileSize is stored
+    
+    // Patch the asset fileSize (32-bit little-endian)
+    updatedCABData.writeUInt32LE(newAssetData.length, assetFileSizeOffset);
+    Logger.log(`  ✅ Patched asset fileSize at offset 0x${assetFileSizeOffset.toString(16)} to ${newAssetData.length}`);
+    
+    // Patch the total CAB fileSize in the header (64-bit big-endian at offset 0x18)
+    updatedCABData.writeBigUInt64BE(BigInt(updatedCABData.length), 0x18);
+    Logger.log(`  ✅ Patched CAB header fileSize to ${updatedCABData.length}`);
+    
+    Logger.log(`  Updated CAB size: ${updatedCABData.length} bytes`);
+
+    // Now rebuild the AssetBundle with the updated CAB
+    Logger.log("\n🏗️  Rebuilding AssetBundle...");
+    
+    // We'll use the same approach as rebuildAssetBundle but with in-memory CAB data
+    const blockBuffers: Buffer[] = [];
+    const blockInfoEntries: Buffer[] = [];
+
+    let offsetInCAB = 0;
+    for (let i = 0; i < this.blocks.length; i++) {
+      const b = this.blocks[i];
+      const uncompressedSize = i === this.blocks.length - 1 
+        ? updatedCABData.length - offsetInCAB 
+        : b.uncompressedSize;
+      const flags = b.flags;
+
+      const chunk = updatedCABData.slice(offsetInCAB, offsetInCAB + uncompressedSize);
+      offsetInCAB += uncompressedSize;
+
+      const blockCompressionMode = flags & 0x3F;
+      const needsLZ4 = (blockCompressionMode === 2 || blockCompressionMode === 3);
+
+      let finalChunk: Buffer;
+      let compressedSize: number;
+
+      if (needsLZ4) {
+        const maxCompressedLen = lz4.encodeBound(uncompressedSize);
+        const temp = Buffer.allocUnsafe(maxCompressedLen);
+        const encodedSize = lz4.encodeBlock(chunk, temp);
+        finalChunk = temp.slice(0, encodedSize);
+        compressedSize = encodedSize;
+      } else {
+        finalChunk = chunk;
+        compressedSize = uncompressedSize;
+      }
+
+      const info = Buffer.alloc(10);
+      info.writeUInt32BE(uncompressedSize, 0);
+      info.writeUInt32BE(compressedSize, 4);
+      info.writeUInt16BE(flags, 8);
+
+      blockBuffers.push(finalChunk);
+      blockInfoEntries.push(info);
+    }
+
+    const allBlockInfo = Buffer.concat(blockInfoEntries);
+
+    // Build directory info
+    const dirCount = Buffer.alloc(4);
+    dirCount.writeUInt32BE(this.directories.length);
+
+    const d = this.directories[0];
+    const dirOffsetBuffer = Buffer.alloc(8);
+    dirOffsetBuffer.writeBigUInt64BE(BigInt(d.offset));
+
+    const dirSizeBuffer = Buffer.alloc(8);
+    dirSizeBuffer.writeBigUInt64BE(BigInt(updatedCABData.length));
+
+    const dirFlagsBuffer = Buffer.alloc(4);
+    dirFlagsBuffer.writeUInt32BE(d.flags);
+
+    const pathBuffer = Buffer.concat([
+      Buffer.from(d.path, "utf-8"),
+      Buffer.from([0])
+    ]);
+
+    const directoryInfo = Buffer.concat([
+      dirCount,
+      dirOffsetBuffer,
+      dirSizeBuffer,
+      dirFlagsBuffer,
+      pathBuffer
+    ]);
+
+    // Build GUID + block count + block info + directory info
+    const guid = Buffer.from(this.guid, 'hex');
+    const blockCount = Buffer.alloc(4);
+    blockCount.writeUInt32BE(this.blocks.length);
+
+    const uncompressedBlockInfoData = Buffer.concat([
+      guid,
+      blockCount,
+      allBlockInfo,
+      directoryInfo
+    ]);
+
+    // Compress the block info as LZ4
+    const compressedBlockInfoBuf = Buffer.alloc(lz4.encodeBound(uncompressedBlockInfoData.length));
+    const compressedBlockInfoSize = lz4.encodeBlock(uncompressedBlockInfoData, compressedBlockInfoBuf);
+    const finalBlockInfo = compressedBlockInfoBuf.slice(0, compressedBlockInfoSize);
+
+    // Build the UnityFS header
+    const signature = Buffer.from("UnityFS\0", "utf-8");
+    const playerVersion = Buffer.from(`${this.playerVersion}\0`, "utf-8");
+    const engineVersion = Buffer.from(`${this.engineVersion}\0`, "utf-8");
+    const blockInfoFlags = 0x200 | 0x40 | 3; // LZ4 + Dir + blockInfoNeedsPadding
+
+    const versionStrings = Buffer.concat([playerVersion, engineVersion]);
+    const headerLength = signature.length + 4 + versionStrings.length + 8 + 4 + 4 + 4;
+    const header = Buffer.alloc(headerLength);
+
+    let offset = 0;
+    signature.copy(header, offset);
+    offset += signature.length;
+
+    header.writeUInt32BE(this.fileVersion, offset);
+    offset += 4;
+
+    versionStrings.copy(header, offset);
+    offset += versionStrings.length;
+
+    const fileSizeOffset = offset;
+
+    // Calculate total file size
+    let blocksTotalCompressedSize = 0;
+    for (const bb of blockBuffers) {
+      blocksTotalCompressedSize += bb.length;
+    }
+
+    const afterHeaderUnaligned = headerLength;
+    const afterHeaderAligned = (afterHeaderUnaligned + 15) & ~15;
+    const afterBlockInfo = afterHeaderAligned + finalBlockInfo.length;
+    const afterBlockInfoAligned = (afterBlockInfo + 15) & ~15;
+    const blocksStart = afterBlockInfoAligned;
+    const totalSize = blocksStart + blocksTotalCompressedSize;
+
+    header.writeBigUInt64BE(BigInt(totalSize), fileSizeOffset);
+    header.writeUInt32BE(finalBlockInfo.length, fileSizeOffset + 8);
+    header.writeUInt32BE(uncompressedBlockInfoData.length, fileSizeOffset + 12);
+    header.writeUInt32BE(blockInfoFlags, fileSizeOffset + 16);
+
+    // Calculate padding
+    const headerPaddingSize = afterHeaderAligned - headerLength;
+    const headerPadding = Buffer.alloc(headerPaddingSize);
+
+    const blockInfoPaddingSize = afterBlockInfoAligned - afterBlockInfo;
+    const blockInfoPadding = Buffer.alloc(blockInfoPaddingSize);
+
+    // Concatenate everything
+    const finalBundle = Buffer.concat([
+      header,
+      headerPadding,
+      finalBlockInfo,
+      blockInfoPadding,
+      ...blockBuffers
+    ]);
+
+    // Write to disk
+    await fsPromises.writeFile(outputBundlePath, finalBundle);
+    Logger.log(`\n✅ Successfully wrote updated AssetBundle to: ${outputBundlePath}`);
+    Logger.log(`   Final bundle size: ${finalBundle.length} bytes`);
   }
 }
 

@@ -11,6 +11,7 @@ import { CABExtractor } from './cab.js';
 import { UMDISOReader } from './umdiso.js';
 import { NDSHandler } from './nds.js';
 import { decrypt, encrypt, findKey } from "./crypt.js";
+import { MAD_BUNDLE_FILES, MAD_BUNDLE_PATHS, MAD_CRYPTO_KEY } from './mad-constants.js';
 
 const program = new Command();
 
@@ -117,18 +118,17 @@ chain
     /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx bundles */
     /* If these files are not found, most likely the client has updated and the location of the files have moved */
     const variablePathName = await getMADVariableDir(resolvedPath);
-    const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/74/7438cca8`);
-    const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/21/21ae1efa`);
-    const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/50/507764bc`);
-    const cryptoKey = 0xe3;
+    const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_NAME}/${MAD_BUNDLE_FILES.CARD_NAME}`);
+    const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_DESC}/${MAD_BUNDLE_FILES.CARD_DESC}`);
+    const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_INDX}/${MAD_BUNDLE_FILES.CARD_INDX}`);
 
     if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc)) {
       console.log("Correct input files found");
     }
 
-    const cardNameBundlePath = resolvedTargetPath + "/7438cca8.orig";
-    const cardDescBundlePath = resolvedTargetPath + "/21ae1efa.orig";
-    const cardIndxBundlePath = resolvedTargetPath + "/507764bc.orig";
+    const cardNameBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_NAME}.orig`;
+    const cardDescBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_DESC}.orig`;
+    const cardIndxBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_INDX}.orig`;
 
     /* Copy the original files to the target directory */
     copyFileSync(cardNameBundlePathSrc, cardNameBundlePath);
@@ -144,7 +144,7 @@ chain
     }
 
     let encryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Name.bin");
-    let decryptedData = decrypt(encryptedData, cryptoKey);
+    let decryptedData = decrypt(encryptedData, MAD_CRYPTO_KEY);
 
     if (decryptedData.length > 0) {
       fs.writeFileSync(resolvedTargetPath + "/CARD_Name.decrypted.bin", decryptedData);
@@ -165,7 +165,7 @@ chain
     }
 
     encryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Desc.bin");
-    decryptedData = decrypt(encryptedData, cryptoKey);
+    decryptedData = decrypt(encryptedData, MAD_CRYPTO_KEY);
 
     if (decryptedData.length > 0) {
       fs.writeFileSync(resolvedTargetPath + "/CARD_Desc.decrypted.bin", decryptedData);
@@ -183,7 +183,7 @@ chain
     }
 
     encryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Indx.bin");
-    decryptedData = decrypt(encryptedData, cryptoKey);
+    decryptedData = decrypt(encryptedData, MAD_CRYPTO_KEY);
 
     if (decryptedData.length > 0) {
       fs.writeFileSync(resolvedTargetPath + "/CARD_Indx.decrypted.bin", decryptedData);
@@ -198,8 +198,14 @@ chain
 
 chain
   .command("mad-implant <game_dir> <target_dir>")
-  .description("Repack MAD resources (TESTING SPACE, DOES NOT WORK, DO NOT USE!)")
+  .description("Repack MAD resources using in-memory AssetBundle updates")
   .action(async (game_dir, target_dir) => {
+    /* Game source dir e.g: "~/Library/Application Support/CrossOver/Bottles/Steam/drive_c/Program Files (x86)/Steam/steamapps/common/Yu-Gi-Oh!  Master Duel" */
+    /* Check the source directory existence */
+    if (game_dir.startsWith('~')) {
+      game_dir = path.join(os.homedir(), game_dir.slice(1));
+    }
+
     const resolvedPath = path.resolve(game_dir);
     const resolvedTargetPath = path.resolve(target_dir);
 
@@ -221,89 +227,95 @@ chain
       process.exit(1);
     }
 
+    console.log("\n=== Processing PO file and generating new CARD data ===");
+    
     /* Process the PO file and convert it to TXT */
     const transformer = new Transformer();
-    /* We don't actually need the Txt output, nor any file for DICT, so I think for MAD we need alternative logic */
     transformer.poToTxt(resolvedPOPath, YuGiOh.MAD);
     transformer.entriesToBin(resolvedTargetPath, YuGiOh.MAD);
 
     /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx bundles */
     /* If these files are not found, most likely the client has updated and the location of the files have moved */
     const variablePathName = await getMADVariableDir(resolvedPath);
-    const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/74/7438cca8`);
-    const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/21/21ae1efa`);
-    const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/50/507764bc`);
-    const cryptoKey = 0xe3;
+    const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_NAME}/${MAD_BUNDLE_FILES.CARD_NAME}`);
+    const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_DESC}/${MAD_BUNDLE_FILES.CARD_DESC}`);
+    const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_INDX}/${MAD_BUNDLE_FILES.CARD_INDX}`);
 
     if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc)) {
-      console.log("Correct source files found for replacement");
+      console.log("✅ Correct source files found for replacement");
+    }
+    else {
+      console.error("❌ Source AssetBundle files not found. Game may have been updated.");
+      process.exit(1);
     }
 
-    const cardNameBundlePath = resolvedTargetPath + "/7438cca8";
-    const cardDescBundlePath = resolvedTargetPath + "/21ae1efa";
-    const cardIndxBundlePath = resolvedTargetPath + "/507764bc";
+    console.log("\n=== Encrypting new CARD data ===");
 
-    /* cardName */
+    /* Encrypt the new decrypted data */
     let decryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Name_New.decrypted.bin");
-    let encryptedData = encrypt(decryptedData, cryptoKey);
+    let encryptedData = encrypt(decryptedData, MAD_CRYPTO_KEY);
+    fs.writeFileSync(resolvedTargetPath + "/CARD_Name_New.bin", encryptedData);
+    console.log("✅ CARD_Name encrypted");
 
-    /* cardDesc */
     decryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Desc_New.decrypted.bin");
-    encryptedData = encrypt(decryptedData, cryptoKey);
+    encryptedData = encrypt(decryptedData, MAD_CRYPTO_KEY);
+    fs.writeFileSync(resolvedTargetPath + "/CARD_Desc_New.bin", encryptedData);
+    console.log("✅ CARD_Desc encrypted");
 
-    /* cardIndx */
     decryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Indx_New.decrypted.bin");
-    encryptedData = encrypt(decryptedData, cryptoKey);
+    encryptedData = encrypt(decryptedData, MAD_CRYPTO_KEY);
+    fs.writeFileSync(resolvedTargetPath + "/CARD_Indx_New.bin", encryptedData);
+    console.log("✅ CARD_Indx encrypted");
 
-    /* Create or modify the CAB file for CARD_Name   */
-    copyFileSync(resolvedTargetPath + "/CAB-a6d8f4f42198f77b297bd6bdb7a258e3",
-      resolvedTargetPath + "/CAB-a6d8f4f42198f77b297bd6bdb7a258e3.orig");
-    CABExtractor.update(resolvedTargetPath + "/CAB-a6d8f4f42198f77b297bd6bdb7a258e3.orig",
-      resolvedTargetPath + "/CARD_Name.bin",
-      resolvedTargetPath + "/CARD_Name.repack.bin",
-      resolvedTargetPath + "/CAB-a6d8f4f42198f77b297bd6bdb7a258e3");
+    console.log("\n=== Repackaging AssetBundles using in-memory update ===");
 
-    /* Create the new AssetBundle for CARD_Name */
-    let assetBundle = new AssetBundle(resolvedTargetPath + "/7438cca8.orig");
-    await assetBundle.rebuildAssetBundle(
-      resolvedTargetPath + "/CAB-a6d8f4f42198f77b297bd6bdb7a258e3", // updated CAB file
-      resolvedTargetPath + "/7438cca8"
-    );
+    /* Update CARD_Name AssetBundle */
+    console.log("\n📦 Processing CARD_Name...");
+    const cardNameBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_NAME}.orig`);
+    const cardNameBundleNew = path.join(resolvedTargetPath, MAD_BUNDLE_FILES.CARD_NAME);
+    const originalNameAsset = path.join(resolvedTargetPath, "CARD_Name.bin");
+    const newNameAsset = path.join(resolvedTargetPath, "CARD_Name_New.bin");
 
-    /* Create or modify the CAB file for CARD_Desc */
-    copyFileSync(resolvedTargetPath + "/CAB-8498f8ef7e7d40147d79843691c73a38",
-      resolvedTargetPath + "/CAB-8498f8ef7e7d40147d79843691c73a38.orig");
-    CABExtractor.update(resolvedTargetPath + "/CAB-8498f8ef7e7d40147d79843691c73a38.orig",
-      resolvedTargetPath + "/CARD_Desc.bin",
-      resolvedTargetPath + "/CARD_Desc.repack.bin",
-      resolvedTargetPath + "/CAB-8498f8ef7e7d40147d79843691c73a38");
+    let assetBundle = new AssetBundle(cardNameBundleOrig);
+    await assetBundle.updateAssetBundle(originalNameAsset, newNameAsset, cardNameBundleNew);
+    console.log("✅ CARD_Name AssetBundle updated");
 
-    /* Create the new AssetBundle for CARD_Desc */
-    assetBundle = new AssetBundle(resolvedTargetPath + "/21ae1efa.orig");
-    await assetBundle.rebuildAssetBundle(
-      resolvedTargetPath + "/CAB-8498f8ef7e7d40147d79843691c73a38", // updated CAB file
-      resolvedTargetPath + "/21ae1efa"
-    );
+    /* Update CARD_Desc AssetBundle */
+    console.log("\n📦 Processing CARD_Desc...");
+    const cardDescBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_DESC}.orig`);
+    const cardDescBundleNew = path.join(resolvedTargetPath, MAD_BUNDLE_FILES.CARD_DESC);
+    const originalDescAsset = path.join(resolvedTargetPath, "CARD_Desc.bin");
+    const newDescAsset = path.join(resolvedTargetPath, "CARD_Desc_New.bin");
 
-    /* Create or modify the CAB file for CARD_Indx */
-    copyFileSync(resolvedTargetPath + "/CAB-103bc9061e47e31db180ec1ca6d5e74f",
-      resolvedTargetPath + "/CAB-103bc9061e47e31db180ec1ca6d5e74f.orig");
-    CABExtractor.update(resolvedTargetPath + "/CAB-103bc9061e47e31db180ec1ca6d5e74f.orig",
-      resolvedTargetPath + "/CARD_Indx.bin",
-      resolvedTargetPath + "/CARD_Indx.repack.bin",
-      resolvedTargetPath + "/CAB-103bc9061e47e31db180ec1ca6d5e74f");
+    assetBundle = new AssetBundle(cardDescBundleOrig);
+    await assetBundle.updateAssetBundle(originalDescAsset, newDescAsset, cardDescBundleNew);
+    console.log("✅ CARD_Desc AssetBundle updated");
 
-    /* Create the new AssetBundle for CARD_Indx */
-    assetBundle = new AssetBundle(resolvedTargetPath + "/507764bc.orig");
-    await assetBundle.rebuildAssetBundle(
-      resolvedTargetPath + "/CAB-103bc9061e47e31db180ec1ca6d5e74f", // updated CAB file
-      resolvedTargetPath + "/507764bc"
-    );
+    /* Update CARD_Indx AssetBundle */
+    console.log("\n📦 Processing CARD_Indx...");
+    const cardIndxBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_INDX}.orig`);
+    const cardIndxBundleNew = path.join(resolvedTargetPath, MAD_BUNDLE_FILES.CARD_INDX);
+    const originalIndxAsset = path.join(resolvedTargetPath, "CARD_Indx.bin");
+    const newIndxAsset = path.join(resolvedTargetPath, "CARD_Indx_New.bin");
 
-    copyFileSync(cardNameBundlePath, cardNameBundlePathSrc);
-    copyFileSync(cardDescBundlePath, cardDescBundlePathSrc);
-    copyFileSync(cardIndxBundlePath, cardIndxBundlePathSrc);
+    assetBundle = new AssetBundle(cardIndxBundleOrig);
+    await assetBundle.updateAssetBundle(originalIndxAsset, newIndxAsset, cardIndxBundleNew);
+    console.log("✅ CARD_Indx AssetBundle updated");
 
+    console.log("\n=== Copying updated AssetBundles back to game directory ===");
+
+    /* Copy the updated bundles back to the game directory */
+    copyFileSync(cardNameBundleNew, cardNameBundlePathSrc);
+    console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_NAME} to game directory`);
+    
+    copyFileSync(cardDescBundleNew, cardDescBundlePathSrc);
+    console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_DESC} to game directory`);
+    
+    copyFileSync(cardIndxBundleNew, cardIndxBundlePathSrc);
+    console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_INDX} to game directory`);
+
+    console.log("\n=== mad-implant completed successfully! ===");
+    console.log("\nTarget directory contents:");
     listDirContents(resolvedTargetPath);
   });
 
