@@ -56,6 +56,10 @@ class BinaryReader {
   getPosition(): number {
     return this.position;
   }
+
+  setPosition(position: number): void {
+    this.position = position;
+  }
 }
 
 interface HeaderInfo {
@@ -880,8 +884,51 @@ class AssetBundle {
     uncompressedCABData.copy(updatedCABData, assetOffset + newAssetData.length, assetEnd); // after asset
 
     // Update the fileSize field in the CAB header
-    // The fileSize is typically at a known offset after the fileName in the SerializedFile structure
-    // We need to find and update this value
+    // The CAB has a SerializedFile structure. We need to patch the fileSize field.
+    // Parse the CAB header to find the fileSize offset
+    const cabReader = new BinaryReader(updatedCABData);
+    cabReader.readBytes(4); // placeholder 1
+    cabReader.readBytes(4); // placeholder 2
+    cabReader.readBytes(4); // version
+    cabReader.readBytes(4); // placeholder 3
+    cabReader.readBytes(1); // swapEndianess
+    cabReader.alignToBoundary(4); // align
+    cabReader.readBytes(4); // metadataSize
+    const cabHeaderFileSizeOffset = cabReader.getPosition(); // This is where fileSize is stored (0x18)
+    
+    // Skip to dataOffset to find where we need to locate the asset fileSize field
+    cabReader.readBytes(8); // skip fileSize
+    const dataOffsetValue = Number(cabReader.readBigEndianUInt64()); // dataOffset
+    cabReader.readBytes(8); // unknown22
+    
+    // Read the unityVersion string to get past it
+    while (updatedCABData[cabReader.getPosition()] !== 0) {
+      cabReader.getPosition();
+      cabReader.readBytes(1);
+    }
+    cabReader.readBytes(1); // skip null terminator
+    
+    // Now we're at the metadata section, need to skip to dataOffset
+    cabReader.setPosition(dataOffsetValue);
+    
+    cabReader.readBytes(4); // fileType
+    // Read fileName (null-terminated)
+    while (updatedCABData[cabReader.getPosition()] !== 0) {
+      cabReader.readBytes(1);
+    }
+    cabReader.readBytes(1); // skip null terminator
+    cabReader.alignToBoundary(4); // align
+    
+    const assetFileSizeOffset = cabReader.getPosition(); // This is where the asset's fileSize is stored
+    
+    // Patch the asset fileSize (32-bit little-endian)
+    updatedCABData.writeUInt32LE(newAssetData.length, assetFileSizeOffset);
+    Logger.log(`  ✅ Patched asset fileSize at offset 0x${assetFileSizeOffset.toString(16)} to ${newAssetData.length}`);
+    
+    // Patch the total CAB fileSize in the header (64-bit big-endian at offset 0x18)
+    updatedCABData.writeBigUInt64BE(BigInt(updatedCABData.length), 0x18);
+    Logger.log(`  ✅ Patched CAB header fileSize to ${updatedCABData.length}`);
+    
     Logger.log(`  Updated CAB size: ${updatedCABData.length} bytes`);
 
     // Now rebuild the AssetBundle with the updated CAB
