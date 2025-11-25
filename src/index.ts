@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
+import * as crypto from 'crypto';
 import figlet from 'figlet';
 import { Command } from '@commander-js/extra-typings';
 import { YuGiOh, Transformer, DictionaryBuilder } from './compressor.js';
@@ -374,20 +375,46 @@ chain
 
     console.log("✅ Game AssetBundle files found");
 
+    console.log("\n=== Checking if revert is necessary ===");
+
+    /* Check if files are already identical to the backups */
+    const nameIdentical = areFilesIdentical(cardNameBundleOrig, cardNameBundlePathDest);
+    const descIdentical = areFilesIdentical(cardDescBundleOrig, cardDescBundlePathDest);
+    const indxIdentical = areFilesIdentical(cardIndxBundleOrig, cardIndxBundlePathDest);
+
+    if (nameIdentical && descIdentical && indxIdentical) {
+      console.log("✅ All game files are already identical to the original backups");
+      console.log("   No action needed - game directory already has the reverted files");
+      console.log("\n=== mad-revert completed ===");
+      return;
+    }
+
     console.log("\n=== Reverting AssetBundles to original backups ===");
 
-    /* Copy the original backup files back to the game directory */
-    copyFileSync(cardNameBundleOrig, cardNameBundlePathDest);
-    console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_NAME} to original`);
+    /* Copy the original backup files back to the game directory only if different */
+    if (!nameIdentical) {
+      copyFileSync(cardNameBundleOrig, cardNameBundlePathDest);
+      console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_NAME} to original`);
+    } else {
+      console.log(`⏭️  Skipped ${MAD_BUNDLE_FILES.CARD_NAME} (already matches original)`);
+    }
     
-    copyFileSync(cardDescBundleOrig, cardDescBundlePathDest);
-    console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_DESC} to original`);
+    if (!descIdentical) {
+      copyFileSync(cardDescBundleOrig, cardDescBundlePathDest);
+      console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_DESC} to original`);
+    } else {
+      console.log(`⏭️  Skipped ${MAD_BUNDLE_FILES.CARD_DESC} (already matches original)`);
+    }
     
-    copyFileSync(cardIndxBundleOrig, cardIndxBundlePathDest);
-    console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_INDX} to original`);
+    if (!indxIdentical) {
+      copyFileSync(cardIndxBundleOrig, cardIndxBundlePathDest);
+      console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_INDX} to original`);
+    } else {
+      console.log(`⏭️  Skipped ${MAD_BUNDLE_FILES.CARD_INDX} (already matches original)`);
+    }
 
     console.log("\n=== mad-revert completed successfully! ===");
-    console.log("All AssetBundles have been reverted to their original state.");
+    console.log("AssetBundles have been reverted to their original state.");
   });
 
 chain
@@ -827,6 +854,47 @@ function copyFileIfNotExists(sourcePath: string, destinationPath: string): boole
     } else {
       throw new Error('Failed to copy file: Unknown error occurred');
     }
+  }
+}
+
+/**
+ * Compares two files by size and SHA-256 checksum to determine if they are identical
+ * @param filePath1 Path to the first file
+ * @param filePath2 Path to the second file
+ * @returns true if files are identical (same size and checksum), false otherwise
+ */
+function areFilesIdentical(filePath1: string, filePath2: string): boolean {
+  try {
+    // Check if both files exist
+    if (!fs.existsSync(filePath1) || !fs.existsSync(filePath2)) {
+      return false;
+    }
+
+    // Quick check: compare file sizes first
+    const stats1 = fs.statSync(filePath1);
+    const stats2 = fs.statSync(filePath2);
+    
+    if (stats1.size !== stats2.size) {
+      return false;
+    }
+
+    // If sizes match, compare checksums
+    const hash1 = crypto.createHash('sha256');
+    const hash2 = crypto.createHash('sha256');
+    
+    const data1 = fs.readFileSync(filePath1);
+    const data2 = fs.readFileSync(filePath2);
+    
+    hash1.update(data1);
+    hash2.update(data2);
+    
+    const checksum1 = hash1.digest('hex');
+    const checksum2 = hash2.digest('hex');
+    
+    return checksum1 === checksum2;
+  } catch (error) {
+    // If any error occurs during comparison, assume files are different
+    return false;
   }
 }
 
