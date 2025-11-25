@@ -791,11 +791,12 @@ function copyFileSync(sourcePath: string, destinationPath: string): void {
 }
 
 /**
- * Copies a file synchronously from source to destination only if destination doesn't exist
+ * Copies a file synchronously from source to destination only if destination doesn't exist.
+ * This function is useful for preserving original backup files that should not be overwritten.
  * @param sourcePath The path to the source file
  * @param destinationPath The path to the destination file
- * @returns boolean indicating whether the file was copied (true) or skipped (false)
- * @throws Error if the source file doesn't exist or if the copy operation fails
+ * @returns boolean indicating whether the file was copied (true) or skipped because destination exists (false)
+ * @throws Error if the source file doesn't exist (missing source) or if the copy operation fails
  */
 function copyFileIfNotExists(sourcePath: string, destinationPath: string): boolean {
   try {

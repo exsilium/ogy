@@ -10,6 +10,7 @@ describe("ogy mad2pot backup tests", () => {
   const testDir = path.join(__dirname, "backup-test");
   const dataDir = path.join(__dirname, "../data/mad");
   
+  // Small delay to ensure file system operations complete between tests
   beforeEach(done => setTimeout(done, 200));
 
   before(() => {
