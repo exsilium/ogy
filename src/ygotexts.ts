@@ -193,7 +193,7 @@ export class YgoTexts {
       texts.forEach((texto, i) => cardTextsFinal.push(texto));
 
       const outputFile = path.dirname(cardDesc) + "/" + YuGiOh[ygoType].toLowerCase() + ".pot";
-      console.log("Output file: " + outputFile);
+      Logger.log("Output file: " + outputFile);
       fs.writeFileSync(outputFile, cardTextsFinal.join('\n'));
     }
     else if(ygoType === YuGiOh.MAD) {
@@ -225,7 +225,7 @@ export class YgoTexts {
       texts.forEach((texto, i) => cardTextsFinal.push(texto));
 
       const outputFile = path.dirname(nameFilename) + "/" + YuGiOh[ygoType].toLowerCase() + ".pot";
-      console.log("Output file: " + outputFile);
+      Logger.log("Output file: " + outputFile);
       fs.writeFileSync(outputFile, cardTextsFinal.join('\n'));
     }
     else if(ygoType === YuGiOh.OTN) {
@@ -257,7 +257,7 @@ export class YgoTexts {
       texts.forEach((texto, i) => cardTextsFinal.push(texto));
 
       const outputFile = path.dirname(nameFilename) + "/" + YuGiOh[ygoType].toLowerCase() + ".pot";
-      console.log("Output file: " + outputFile);
+      Logger.log("Output file: " + outputFile);
       fs.writeFileSync(outputFile, cardTextsFinal.join('\n'));
     }
     else if(ygoType === YuGiOh.WC6) {
@@ -290,7 +290,7 @@ export class YgoTexts {
       texts.forEach((texto, i) => cardTextsFinal.push(texto));
 
       const outputFile = path.join(dirCard, "/" + YuGiOh[ygoType].toLowerCase() + ".pot");
-      console.log("Output file: " + outputFile);
+      Logger.log("Output file: " + outputFile);
       fs.writeFileSync(outputFile, cardTextsFinal.join('\n'));
     }
   }

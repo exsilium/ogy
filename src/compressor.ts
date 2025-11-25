@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as gettextParser from 'gettext-parser';
 import { restoreCardAsset } from './converter.js';
+import { Logger } from './logger.js';
 
 enum YuGiOh {
   WC6, // Yu-Gi-Oh! Ultimate Masters: World Championship Tournament 2006, 2006, GBA
@@ -351,19 +352,19 @@ class Transformer {
   }
 
   printAllEntries(): void {
-    console.log(this.entries);
+    Logger.log(this.entries);
   }
   poToTxt(sourcePo: string, ygoType: YuGiOh = YuGiOh.TF6) {
     const po = gettextParser.po.parse(fs.readFileSync(sourcePo));
-    console.log("Starting work on: " + sourcePo);
+    Logger.log("Starting work on: " + sourcePo);
 
     // Initialize a counter
     let count = 0;
 
     // Access translations
     for (const [msgid, translation] of Object.entries(po.translations[''])) {
-      console.log('Original:', msgid);
-      console.log('Translation:', translation.msgstr[0]);
+      Logger.log('Original:', msgid);
+      Logger.log('Translation:', translation.msgstr[0]);
 
       // Access comments add an Entry based on pointer
       if (translation.comments) {
@@ -379,24 +380,24 @@ class Transformer {
               const pointer = parseInt(pointerStr, 10);
 
               if (label.startsWith('Name')) {
-                console.log(`Processing Name at Pointer: ${pointer}`);
+                Logger.log(`Processing Name at Pointer: ${pointer}`);
                 this.addEntry(pointer, textToAdd)
               } else if (label.startsWith('Description')) {
-                console.log(`Processing Description at Pointer: ${pointer}`);
+                Logger.log(`Processing Description at Pointer: ${pointer}`);
                 this.addEntry(pointer, undefined, textToAdd);
               }
             });
           }
         }
       }
-      console.log('---------------------------');
+      Logger.log('---------------------------');
       count++;
     }
-    console.log("Entries processed: " + count);
+    Logger.log("Entries processed: " + count);
     if(ygoType === YuGiOh.TF6 || ygoType === YuGiOh.TFS) {
       this.writeDictBuilderInput(sourcePo, ygoType);
       fs.writeFileSync(sourcePo.replace(".po", ".txt"), this.entriesToTxt(path.dirname(sourcePo), ygoType));
-      console.log("Files written, task complete.");
+      Logger.log("Files written, task complete.");
     }
   }
 
@@ -420,17 +421,17 @@ class Transformer {
         cardNames.push(this.entries[pointer].Name);
         cardDescs.push(this.entries[pointer].Description);
       } catch (err) {
-        console.error(`Error processing pointer ${pointer}:`, err);
-        console.error(`this.entries[${pointer}]:`, this.entries[pointer]);
+        Logger.log(`Error processing pointer ${pointer}:`, err);
+        Logger.log(`this.entries[${pointer}]:`, this.entries[pointer]);
       }
       pointer++;
     }
 
-    console.log("Entries in cardNames: ", cardNames.length);
-    console.log("Entries in cardDescs: ", cardDescs.length);
+    Logger.log("Entries in cardNames: ", cardNames.length);
+    Logger.log("Entries in cardDescs: ", cardDescs.length);
     restoreCardAsset(directory + "/CARD_Indx_New.decrypted.bin", directory + "/CARD_Name_New.decrypted.bin",
       directory + "/CARD_Desc_New.decrypted.bin", cardNames, cardDescs);
-    console.log("MAD");
+    Logger.log("MAD");
   }
 
   /*
@@ -457,8 +458,8 @@ class Transformer {
             `<DESCRICAO>` + entry.Description.replace(/<BR>/g, String.fromCharCode(13, 10)) + `<NULL><DESCRICAO/><FIM/>\n\n`;
         }
       } catch (err) {
-        console.error(`Error processing pointer ${pointer}:`, err);
-        console.error(`this.entries[${pointer}]:`, this.entries[pointer]);
+        Logger.log(`Error processing pointer ${pointer}:`, err);
+        Logger.log(`this.entries[${pointer}]:`, this.entries[pointer]);
       }
       pointer += 8;
     }
@@ -524,12 +525,12 @@ class DictionaryBuilder {
         }
       });
 
-      console.log(tempMap);
-      console.log("Remaining text size for processing: " + processingText.length);
+      Logger.log(tempMap);
+      Logger.log("Remaining text size for processing: " + processingText.length);
     }
 
     fs.writeFileSync(dictInputFile.replace(".tin", ".txt"), this.DICT);
-    console.log("Output written");
+    Logger.log("Output written");
   }
 
   private escapeRegExp(string: string) {

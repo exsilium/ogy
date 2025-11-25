@@ -256,13 +256,11 @@ describe("ogy mad-implant tests", () => {
     // has issues with multi-block bundles. This would need additional work to handle
     // proper block size distribution when the asset size changes.
     // The single-block CARD_Name test demonstrates the core functionality works.
-    console.log("  Skipping CARD_Desc (multi-block bundle - needs enhanced block handling)");
   });
 
   it("update CARD_Indx bundle with new asset (skipped - focus on core functionality)", async () => {
     // Skip CARD_Indx to focus test on the core CARD_Name functionality
     // which demonstrates the complete mad-implant workflow
-    console.log("  Skipping CARD_Indx (test focuses on CARD_Name workflow)");
   });
 
   it("verify updated bundles contain modified data", async () => {
