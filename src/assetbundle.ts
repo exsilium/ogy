@@ -903,7 +903,6 @@ class AssetBundle {
     
     // Read the unityVersion string to get past it
     while (updatedCABData[cabReader.getPosition()] !== 0) {
-      cabReader.getPosition();
       cabReader.readBytes(1);
     }
     cabReader.readBytes(1); // skip null terminator
