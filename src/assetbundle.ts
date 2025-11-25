@@ -425,6 +425,78 @@ class AssetBundle {
     return filesWritten;
   }
 
+  async scanForTextAssets(targetSuffixes: string[]): Promise<Array<{assetPath: string, bundlePath: string}>> {
+    const results: Array<{assetPath: string, bundlePath: string}> = [];
+    
+    try {
+      const buffer = fs.readFileSync(this.filePath);
+      const reader = new BinaryReader(buffer);
+      
+      // Read and process the header
+      const { compressedSize, decompSize } = this.readHeader(reader);
+      
+      // Extract and decompress block data
+      const decompressedData = await this.decompressData(reader, compressedSize, decompSize);
+      
+      // Use a new BinaryReader to read from the decompressed data
+      const blockReader = new BinaryReader(decompressedData);
+      
+      // Read GUID
+      const guidBytes = blockReader.readBytes(16);
+      this.guid = guidBytes.toString('hex');
+      
+      // Read block count
+      const blockSize = blockReader.readBigEndianUInt32();
+      
+      // Extract block information
+      this.extractBlocks(blockReader, blockSize);
+      
+      // Extract directory information
+      this.extractDirectories(blockReader);
+      
+      // Process each block to extract CAB data and scan it
+      reader.alignToBoundary(16);
+      
+      for (const directory of this.directories) {
+        let uncompressedData: Buffer = Buffer.alloc(0);
+        
+        // Decompress all blocks into one buffer
+        for (const block of this.blocks) {
+          if (block.compressedSize !== block.uncompressedSize) {
+            const compressedData = reader.readBytes(block.compressedSize);
+            const decompressedData = Buffer.alloc(block.uncompressedSize);
+            const decompressedSize = lz4.decodeBlock(compressedData, decompressedData);
+            
+            if (decompressedSize !== block.uncompressedSize) {
+              throw new Error(`Block decompression size mismatch`);
+            }
+            
+            uncompressedData = Buffer.concat([uncompressedData, decompressedData]);
+          } else {
+            uncompressedData = Buffer.concat([uncompressedData, reader.readBytes(block.uncompressedSize)]);
+          }
+        }
+        
+        // Now scan the CAB data for TextAssets with matching container paths
+        const { CABExtractor } = await import('./cab.js');
+        const matches = CABExtractor.scanForTextAssets(uncompressedData, targetSuffixes);
+        
+        if (matches && matches.length > 0) {
+          for (const match of matches) {
+            results.push({
+              assetPath: match,
+              bundlePath: this.filePath
+            });
+          }
+        }
+      }
+    } catch (error) {
+      // Silently fail - this might not be a valid bundle or doesn't contain what we're looking for
+    }
+    
+    return results;
+  }
+
   async rebuildAssetBundle(updatedCABPath: string, outputBundlePath: string): Promise<void> {
     const bundleDir = path.dirname(updatedCABPath);
     const metaPath = `${updatedCABPath}.meta.json`;
