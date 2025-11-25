@@ -130,10 +130,11 @@ chain
     const cardDescBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_DESC}.orig`;
     const cardIndxBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_INDX}.orig`;
 
-    /* Copy the original files to the target directory */
-    copyFileSync(cardNameBundlePathSrc, cardNameBundlePath);
-    copyFileSync(cardDescBundlePathSrc, cardDescBundlePath);
-    copyFileSync(cardIndxBundlePathSrc, cardIndxBundlePath);
+    /* Copy the original files to the target directory only if they don't already exist */
+    console.log("\n=== Backing up original AssetBundles ===");
+    copyFileIfNotExists(cardNameBundlePathSrc, cardNameBundlePath);
+    copyFileIfNotExists(cardDescBundlePathSrc, cardDescBundlePath);
+    copyFileIfNotExists(cardIndxBundlePathSrc, cardIndxBundlePath);
 
     /* cardName */
     let assetBundle = new AssetBundle(cardNameBundlePath);
@@ -317,6 +318,76 @@ chain
     console.log("\n=== mad-implant completed successfully! ===");
     console.log("\nTarget directory contents:");
     listDirContents(resolvedTargetPath);
+  });
+
+chain
+  .command("mad-revert <game_dir> <target_dir>")
+  .description("Revert modified AssetBundles in game directory to original backups from target directory")
+  .action(async (game_dir, target_dir) => {
+    /* Game source dir e.g: "~/Library/Application Support/CrossOver/Bottles/Steam/drive_c/Program Files (x86)/Steam/steamapps/common/Yu-Gi-Oh!  Master Duel" */
+    /* Check the source directory existence */
+    if (game_dir.startsWith('~')) {
+      game_dir = path.join(os.homedir(), game_dir.slice(1));
+    }
+
+    const resolvedPath = path.resolve(game_dir);
+    const resolvedTargetPath = path.resolve(target_dir);
+
+    if(fs.existsSync(resolvedPath)) {
+      console.log("Game dir: " + resolvedPath);
+    }
+    else {
+      console.log("Game dir invalid, exiting");
+      process.exit(1);
+    }
+
+    if(!fs.existsSync(resolvedTargetPath)) {
+      console.log("Target directory invalid, exiting");
+      process.exit(1);
+    }
+
+    console.log("Target dir: " + resolvedTargetPath);
+
+    /* Check for the existence of .orig backup files */
+    const cardNameBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_NAME}.orig`);
+    const cardDescBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_DESC}.orig`);
+    const cardIndxBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_INDX}.orig`);
+
+    if(!fs.existsSync(cardNameBundleOrig) || !fs.existsSync(cardDescBundleOrig) || !fs.existsSync(cardIndxBundleOrig)) {
+      console.error("❌ Original backup files (.orig) not found in target directory.");
+      console.error("   Make sure you have run 'mad2pot' first to create the backups.");
+      process.exit(1);
+    }
+
+    console.log("✅ Found all original backup files");
+
+    /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx bundles in game directory */
+    const variablePathName = await getMADVariableDir(resolvedPath);
+    const cardNameBundlePathDest = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_NAME}/${MAD_BUNDLE_FILES.CARD_NAME}`);
+    const cardDescBundlePathDest = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_DESC}/${MAD_BUNDLE_FILES.CARD_DESC}`);
+    const cardIndxBundlePathDest = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_INDX}/${MAD_BUNDLE_FILES.CARD_INDX}`);
+
+    if(!fs.existsSync(cardNameBundlePathDest) || !fs.existsSync(cardDescBundlePathDest) || !fs.existsSync(cardIndxBundlePathDest)) {
+      console.error("❌ Game AssetBundle files not found. Game may have been moved or updated.");
+      process.exit(1);
+    }
+
+    console.log("✅ Game AssetBundle files found");
+
+    console.log("\n=== Reverting AssetBundles to original backups ===");
+
+    /* Copy the original backup files back to the game directory */
+    copyFileSync(cardNameBundleOrig, cardNameBundlePathDest);
+    console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_NAME} to original`);
+    
+    copyFileSync(cardDescBundleOrig, cardDescBundlePathDest);
+    console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_DESC} to original`);
+    
+    copyFileSync(cardIndxBundleOrig, cardIndxBundlePathDest);
+    console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_INDX} to original`);
+
+    console.log("\n=== mad-revert completed successfully! ===");
+    console.log("All AssetBundles have been reverted to their original state.");
   });
 
 chain
@@ -710,6 +781,45 @@ function copyFileSync(sourcePath: string, destinationPath: string): void {
     // Copy the file
     fs.copyFileSync(sourcePath, destinationPath);
     console.log(`File copied successfully from ${sourcePath} to ${destinationPath}`);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to copy file: ${error.message}`);
+    } else {
+      throw new Error('Failed to copy file: Unknown error occurred');
+    }
+  }
+}
+
+/**
+ * Copies a file synchronously from source to destination only if destination doesn't exist
+ * @param sourcePath The path to the source file
+ * @param destinationPath The path to the destination file
+ * @returns boolean indicating whether the file was copied (true) or skipped (false)
+ * @throws Error if the source file doesn't exist or if the copy operation fails
+ */
+function copyFileIfNotExists(sourcePath: string, destinationPath: string): boolean {
+  try {
+    // Check if destination already exists
+    if (fs.existsSync(destinationPath)) {
+      console.log(`Skipping copy - destination already exists: ${destinationPath}`);
+      return false;
+    }
+
+    // Ensure the source file exists
+    if (!fs.existsSync(sourcePath)) {
+      throw new Error(`Source file does not exist: ${sourcePath}`);
+    }
+
+    // Ensure the destination directory exists
+    const destDir = path.dirname(destinationPath);
+    if (!fs.existsSync(destDir)) {
+      fs.mkdirSync(destDir, { recursive: true });
+    }
+
+    // Copy the file
+    fs.copyFileSync(sourcePath, destinationPath);
+    console.log(`File copied successfully from ${sourcePath} to ${destinationPath}`);
+    return true;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`Failed to copy file: ${error.message}`);
