@@ -340,15 +340,19 @@ chain
 
     console.log("Traversing LocalData AssetBundles...\n");
 
+    // Track which target files have been found
+    const foundFiles = new Set<string>();
+
     // Recursively walk all files in LocalData
-    async function walkFiles(dir: string): Promise<void> {
+    async function walkFiles(dir: string): Promise<boolean> {
       const entries = await fs.promises.readdir(dir, { withFileTypes: true });
       
       for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
         
         if (entry.isDirectory()) {
-          await walkFiles(fullPath);
+          const shouldStop = await walkFiles(fullPath);
+          if (shouldStop) return true;
         } else if (entry.isFile()) {
           // Try to scan this file as an AssetBundle
           const assetBundle = new AssetBundle(fullPath);
@@ -361,10 +365,25 @@ chain
               console.log(`  Asset Path : ${match.assetPath}`);
               console.log(`  In Bundle  : ${match.bundlePath}`);
               console.log("--------------------------------------------------");
+              
+              // Track which target file was found
+              for (const suffix of TARGET_SUFFIXES) {
+                if (match.assetPath.toLowerCase().endsWith(suffix.toLowerCase())) {
+                  foundFiles.add(suffix);
+                  break;
+                }
+              }
+              
+              // Check if all target files have been found
+              if (foundFiles.size === TARGET_SUFFIXES.length) {
+                console.log("\nAll target files located. Exiting...");
+                return true;
+              }
             }
           }
         }
       }
+      return false;
     }
 
     await walkFiles(localDataPath);
