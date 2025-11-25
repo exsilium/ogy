@@ -230,18 +230,18 @@ chain
     /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx bundles */
     /* If these files are not found, most likely the client has updated and the location of the files have moved */
     const variablePathName = await getMADVariableDir(resolvedPath);
-    const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/f6/f67aab7c`);
-    const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/a3/a3ec792e`);
-    const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/d2/d2350368`);
-    const cryptoKey = 0x2d;
+    const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/74/7438cca8`);
+    const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/21/21ae1efa`);
+    const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/50/507764bc`);
+    const cryptoKey = 0xe3;
 
     if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc)) {
       console.log("Correct source files found for replacement");
     }
 
-    const cardNameBundlePath = resolvedTargetPath + "/f67aab7c";
-    const cardDescBundlePath = resolvedTargetPath + "/a3ec792e";
-    const cardIndxBundlePath = resolvedTargetPath + "/d2350368";
+    const cardNameBundlePath = resolvedTargetPath + "/7438cca8";
+    const cardDescBundlePath = resolvedTargetPath + "/21ae1efa";
+    const cardIndxBundlePath = resolvedTargetPath + "/507764bc";
 
     /* cardName */
     let decryptedData = fs.readFileSync(resolvedTargetPath + "/CARD_Name_New.decrypted.bin");
@@ -256,48 +256,48 @@ chain
     encryptedData = encrypt(decryptedData, cryptoKey);
 
     /* Create or modify the CAB file for CARD_Name   */
-    copyFileSync(resolvedTargetPath + "/CAB-260ccd1ac572eb90ac7e11a7d19da5c8",
-      resolvedTargetPath + "/CAB-260ccd1ac572eb90ac7e11a7d19da5c8.orig");
-    CABExtractor.update(resolvedTargetPath + "/CAB-260ccd1ac572eb90ac7e11a7d19da5c8.orig",
+    copyFileSync(resolvedTargetPath + "/CAB-a6d8f4f42198f77b297bd6bdb7a258e3",
+      resolvedTargetPath + "/CAB-a6d8f4f42198f77b297bd6bdb7a258e3.orig");
+    CABExtractor.update(resolvedTargetPath + "/CAB-a6d8f4f42198f77b297bd6bdb7a258e3.orig",
       resolvedTargetPath + "/CARD_Name.bin",
       resolvedTargetPath + "/CARD_Name.repack.bin",
-      resolvedTargetPath + "/CAB-260ccd1ac572eb90ac7e11a7d19da5c8");
+      resolvedTargetPath + "/CAB-a6d8f4f42198f77b297bd6bdb7a258e3");
 
     /* Create the new AssetBundle for CARD_Name */
-    let assetBundle = new AssetBundle(resolvedTargetPath + "/f67aab7c.orig");
+    let assetBundle = new AssetBundle(resolvedTargetPath + "/7438cca8.orig");
     await assetBundle.rebuildAssetBundle(
-      resolvedTargetPath + "/CAB-260ccd1ac572eb90ac7e11a7d19da5c8", // updated CAB file
-      resolvedTargetPath + "/f67aab7c"
+      resolvedTargetPath + "/CAB-a6d8f4f42198f77b297bd6bdb7a258e3", // updated CAB file
+      resolvedTargetPath + "/7438cca8"
     );
 
     /* Create or modify the CAB file for CARD_Desc */
-    copyFileSync(resolvedTargetPath + "/CAB-8c0887c885a382ccdbebde6074497517",
-      resolvedTargetPath + "/CAB-8c0887c885a382ccdbebde6074497517.orig");
-    CABExtractor.update(resolvedTargetPath + "/CAB-8c0887c885a382ccdbebde6074497517.orig",
+    copyFileSync(resolvedTargetPath + "/CAB-8498f8ef7e7d40147d79843691c73a38",
+      resolvedTargetPath + "/CAB-8498f8ef7e7d40147d79843691c73a38.orig");
+    CABExtractor.update(resolvedTargetPath + "/CAB-8498f8ef7e7d40147d79843691c73a38.orig",
       resolvedTargetPath + "/CARD_Desc.bin",
       resolvedTargetPath + "/CARD_Desc.repack.bin",
-      resolvedTargetPath + "/CAB-8c0887c885a382ccdbebde6074497517");
+      resolvedTargetPath + "/CAB-8498f8ef7e7d40147d79843691c73a38");
 
     /* Create the new AssetBundle for CARD_Desc */
-    assetBundle = new AssetBundle(resolvedTargetPath + "/a3ec792e.orig");
+    assetBundle = new AssetBundle(resolvedTargetPath + "/21ae1efa.orig");
     await assetBundle.rebuildAssetBundle(
-      resolvedTargetPath + "/CAB-8c0887c885a382ccdbebde6074497517", // updated CAB file
-      resolvedTargetPath + "/a3ec792e"
+      resolvedTargetPath + "/CAB-8498f8ef7e7d40147d79843691c73a38", // updated CAB file
+      resolvedTargetPath + "/21ae1efa"
     );
 
     /* Create or modify the CAB file for CARD_Indx */
-    copyFileSync(resolvedTargetPath + "/CAB-e01e19d89734ca1ba7ddbcc5e02cd7b2",
-      resolvedTargetPath + "/CAB-e01e19d89734ca1ba7ddbcc5e02cd7b2.orig");
-    CABExtractor.update(resolvedTargetPath + "/CAB-e01e19d89734ca1ba7ddbcc5e02cd7b2.orig",
+    copyFileSync(resolvedTargetPath + "/CAB-103bc9061e47e31db180ec1ca6d5e74f",
+      resolvedTargetPath + "/CAB-103bc9061e47e31db180ec1ca6d5e74f.orig");
+    CABExtractor.update(resolvedTargetPath + "/CAB-103bc9061e47e31db180ec1ca6d5e74f.orig",
       resolvedTargetPath + "/CARD_Indx.bin",
       resolvedTargetPath + "/CARD_Indx.repack.bin",
-      resolvedTargetPath + "/CAB-e01e19d89734ca1ba7ddbcc5e02cd7b2");
+      resolvedTargetPath + "/CAB-103bc9061e47e31db180ec1ca6d5e74f");
 
     /* Create the new AssetBundle for CARD_Indx */
-    assetBundle = new AssetBundle(resolvedTargetPath + "/d2350368.orig");
+    assetBundle = new AssetBundle(resolvedTargetPath + "/507764bc.orig");
     await assetBundle.rebuildAssetBundle(
-      resolvedTargetPath + "/CAB-e01e19d89734ca1ba7ddbcc5e02cd7b2", // updated CAB file
-      resolvedTargetPath + "/d2350368"
+      resolvedTargetPath + "/CAB-103bc9061e47e31db180ec1ca6d5e74f", // updated CAB file
+      resolvedTargetPath + "/507764bc"
     );
 
     copyFileSync(cardNameBundlePath, cardNameBundlePathSrc);
