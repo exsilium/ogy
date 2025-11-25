@@ -255,34 +255,137 @@ describe("ogy application level tests - unbundle", () => {
     processCardAsset(cardIndxFilename, filename, start);
   });
 
+  it("repackaging CARD_Name bundle should work and produce identical output", async () => {
+    // Use the updateAssetBundle method to repackage CARD_Name
+    const originalBundle = __dirname + "/CARD_Name-cde5b0ab.bundle";
+    const originalAsset = __dirname + "/CARD_Name.bin";
+    const newAsset = __dirname + "/CARD_Name.bin"; // Use same file for testing
+    const repackagedBundle = __dirname + "/CARD_Name-repackaged.bundle";
+
+    const assetBundle = new AssetBundle(originalBundle);
+    await assetBundle.updateAssetBundle(originalAsset, newAsset, repackagedBundle);
+
+    // Verify the repackaged bundle exists
+    assert.equal(fs.existsSync(repackagedBundle), true, "Repackaged bundle should exist");
+
+    // Extract from the repackaged bundle
+    const repackagedAssetBundle = new AssetBundle(repackagedBundle);
+    const extractedFiles = await repackagedAssetBundle.extractAssetBundle(__dirname);
+
+    // Extract the CAB to get the asset
+    const cabFile = path.join(__dirname, extractedFiles[0]);
+    const extractedFileName = await CABExtractor.extract(cabFile, __dirname);
+
+    // Verify the extracted file matches the original
+    const reextractedAsset = fs.readFileSync(__dirname + "/" + extractedFileName + ".bin");
+    const originalAssetData = fs.readFileSync(originalAsset);
+    
+    assert.equal(Buffer.compare(reextractedAsset, originalAssetData), 0, 
+      "Repackaged asset should match original");
+
+    // Clean up repackaged files
+    fs.unlinkSync(repackagedBundle);
+    fs.unlinkSync(cabFile);
+    fs.unlinkSync(cabFile + ".meta.json");
+    fs.unlinkSync(__dirname + "/" + extractedFileName + ".bin");
+  });
+
+  it("repackaging CARD_Desc bundle should work and produce identical output", async () => {
+    const originalBundle = __dirname + "/CARD_Desc-987362f9.bundle";
+    const originalAsset = __dirname + "/CARD_Desc.bin";
+    const newAsset = __dirname + "/CARD_Desc.bin";
+    const repackagedBundle = __dirname + "/CARD_Desc-repackaged.bundle";
+
+    const assetBundle = new AssetBundle(originalBundle);
+    await assetBundle.updateAssetBundle(originalAsset, newAsset, repackagedBundle);
+
+    assert.equal(fs.existsSync(repackagedBundle), true, "Repackaged bundle should exist");
+
+    const repackagedAssetBundle = new AssetBundle(repackagedBundle);
+    const extractedFiles = await repackagedAssetBundle.extractAssetBundle(__dirname);
+
+    const cabFile = path.join(__dirname, extractedFiles[0]);
+    const extractedFileName = await CABExtractor.extract(cabFile, __dirname);
+
+    const reextractedAsset = fs.readFileSync(__dirname + "/" + extractedFileName + ".bin");
+    const originalAssetData = fs.readFileSync(originalAsset);
+    
+    assert.equal(Buffer.compare(reextractedAsset, originalAssetData), 0,
+      "Repackaged asset should match original");
+
+    fs.unlinkSync(repackagedBundle);
+    fs.unlinkSync(cabFile);
+    fs.unlinkSync(cabFile + ".meta.json");
+    fs.unlinkSync(__dirname + "/" + extractedFileName + ".bin");
+  });
+
+  it("repackaging CARD_Indx bundle should work and produce identical output", async () => {
+    const originalBundle = __dirname + "/CARD_Indx-e9aa18bf.bundle";
+    const originalAsset = __dirname + "/CARD_Indx.bin";
+    const newAsset = __dirname + "/CARD_Indx.bin";
+    const repackagedBundle = __dirname + "/CARD_Indx-repackaged.bundle";
+
+    const assetBundle = new AssetBundle(originalBundle);
+    await assetBundle.updateAssetBundle(originalAsset, newAsset, repackagedBundle);
+
+    assert.equal(fs.existsSync(repackagedBundle), true, "Repackaged bundle should exist");
+
+    const repackagedAssetBundle = new AssetBundle(repackagedBundle);
+    const extractedFiles = await repackagedAssetBundle.extractAssetBundle(__dirname);
+
+    const cabFile = path.join(__dirname, extractedFiles[0]);
+    const extractedFileName = await CABExtractor.extract(cabFile, __dirname);
+
+    const reextractedAsset = fs.readFileSync(__dirname + "/" + extractedFileName + ".bin");
+    const originalAssetData = fs.readFileSync(originalAsset);
+    
+    assert.equal(Buffer.compare(reextractedAsset, originalAssetData), 0,
+      "Repackaged asset should match original");
+
+    fs.unlinkSync(repackagedBundle);
+    fs.unlinkSync(cabFile);
+    fs.unlinkSync(cabFile + ".meta.json");
+    fs.unlinkSync(__dirname + "/" + extractedFileName + ".bin");
+  });
+
   it("clean up", () => {
-    // Base test data
-    fs.unlinkSync(__dirname + "/CARD_Desc-987362f9.bundle");
-    fs.unlinkSync(__dirname + "/CARD_Indx-e9aa18bf.bundle");
-    fs.unlinkSync(__dirname + "/CARD_Name-cde5b0ab.bundle");
-    fs.unlinkSync(__dirname + "/Card_Part-ebaee097.bundle");
-    fs.unlinkSync(__dirname + "/Card_Pidx-f09348d3.bundle");
-    // Produced test data
-    fs.unlinkSync(__dirname + "/CAB-3edab2009c2927c0c55132bf9a3b0a53");
-    fs.unlinkSync(__dirname + "/CAB-7ee66e49a29b3d2f2bf1104c66bf106d");
-    fs.unlinkSync(__dirname + "/CAB-a8c0ceacfc16220e07816e269e33cb5a");
-    fs.unlinkSync(__dirname + "/CAB-b15dec2777dad9f13353696821e3ecfc");
-    fs.unlinkSync(__dirname + "/CAB-d775896c9bbf867ea2a06f6d9d9d638e");
-    fs.unlinkSync(__dirname + "/CAB-3edab2009c2927c0c55132bf9a3b0a53.meta.json");
-    fs.unlinkSync(__dirname + "/CAB-7ee66e49a29b3d2f2bf1104c66bf106d.meta.json");
-    fs.unlinkSync(__dirname + "/CAB-a8c0ceacfc16220e07816e269e33cb5a.meta.json");
-    fs.unlinkSync(__dirname + "/CAB-b15dec2777dad9f13353696821e3ecfc.meta.json");
-    fs.unlinkSync(__dirname + "/CAB-d775896c9bbf867ea2a06f6d9d9d638e.meta.json");
-    fs.unlinkSync(__dirname + "/CARD_Desc.bin");
-    fs.unlinkSync(__dirname + "/CARD_Indx.bin");
-    fs.unlinkSync(__dirname + "/CARD_Name.bin");
-    fs.unlinkSync(__dirname + "/Card_Part.bin");
-    fs.unlinkSync(__dirname + "/Card_Pidx.bin");
-    // Decrypted test files
-    fs.unlinkSync(__dirname + "/CARD_Desc.decrypted.bin");
-    fs.unlinkSync(__dirname + "/CARD_Indx.decrypted.bin");
-    fs.unlinkSync(__dirname + "/CARD_Name.decrypted.bin");
-    fs.unlinkSync(__dirname + "/Card_Part.decrypted.bin");
-    fs.unlinkSync(__dirname + "/Card_Pidx.decrypted.bin");
+    const filesToCleanup = [
+      // Base test data
+      "/CARD_Desc-987362f9.bundle",
+      "/CARD_Indx-e9aa18bf.bundle",
+      "/CARD_Name-cde5b0ab.bundle",
+      "/Card_Part-ebaee097.bundle",
+      "/Card_Pidx-f09348d3.bundle",
+      // Produced test data
+      "/CAB-3edab2009c2927c0c55132bf9a3b0a53",
+      "/CAB-7ee66e49a29b3d2f2bf1104c66bf106d",
+      "/CAB-a8c0ceacfc16220e07816e269e33cb5a",
+      "/CAB-b15dec2777dad9f13353696821e3ecfc",
+      "/CAB-d775896c9bbf867ea2a06f6d9d9d638e",
+      "/CAB-3edab2009c2927c0c55132bf9a3b0a53.meta.json",
+      "/CAB-7ee66e49a29b3d2f2bf1104c66bf106d.meta.json",
+      "/CAB-a8c0ceacfc16220e07816e269e33cb5a.meta.json",
+      "/CAB-b15dec2777dad9f13353696821e3ecfc.meta.json",
+      "/CAB-d775896c9bbf867ea2a06f6d9d9d638e.meta.json",
+      "/CARD_Desc.bin",
+      "/CARD_Indx.bin",
+      "/CARD_Name.bin",
+      "/Card_Part.bin",
+      "/Card_Pidx.bin",
+      // Decrypted test files
+      "/CARD_Desc.decrypted.bin",
+      "/CARD_Indx.decrypted.bin",
+      "/CARD_Name.decrypted.bin",
+      "/Card_Part.decrypted.bin",
+      "/Card_Pidx.decrypted.bin"
+    ];
+
+    // Clean up only files that exist
+    filesToCleanup.forEach(file => {
+      const fullPath = __dirname + file;
+      if (fs.existsSync(fullPath)) {
+        fs.unlinkSync(fullPath);
+      }
+    });
   });
 });
