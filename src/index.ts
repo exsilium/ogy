@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
+import * as crypto from 'crypto';
 import figlet from 'figlet';
 import { Command } from '@commander-js/extra-typings';
 import { YuGiOh, Transformer, DictionaryBuilder } from './compressor.js';
@@ -130,10 +131,11 @@ chain
     const cardDescBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_DESC}.orig`;
     const cardIndxBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_INDX}.orig`;
 
-    /* Copy the original files to the target directory */
-    copyFileSync(cardNameBundlePathSrc, cardNameBundlePath);
-    copyFileSync(cardDescBundlePathSrc, cardDescBundlePath);
-    copyFileSync(cardIndxBundlePathSrc, cardIndxBundlePath);
+    /* Copy the original files to the target directory only if they don't already exist */
+    console.log("\n=== Backing up original AssetBundles ===");
+    copyFileIfNotExists(cardNameBundlePathSrc, cardNameBundlePath);
+    copyFileIfNotExists(cardDescBundlePathSrc, cardDescBundlePath);
+    copyFileIfNotExists(cardIndxBundlePathSrc, cardIndxBundlePath);
 
     /* cardName */
     let assetBundle = new AssetBundle(cardNameBundlePath);
@@ -317,6 +319,102 @@ chain
     console.log("\n=== mad-implant completed successfully! ===");
     console.log("\nTarget directory contents:");
     listDirContents(resolvedTargetPath);
+  });
+
+chain
+  .command("mad-revert <game_dir> <target_dir>")
+  .description("Revert modified AssetBundles in game directory to original backups from target directory")
+  .action(async (game_dir, target_dir) => {
+    /* Game source dir e.g: "~/Library/Application Support/CrossOver/Bottles/Steam/drive_c/Program Files (x86)/Steam/steamapps/common/Yu-Gi-Oh!  Master Duel" */
+    /* Check the source directory existence */
+    if (game_dir.startsWith('~')) {
+      game_dir = path.join(os.homedir(), game_dir.slice(1));
+    }
+
+    const resolvedPath = path.resolve(game_dir);
+    const resolvedTargetPath = path.resolve(target_dir);
+
+    if(fs.existsSync(resolvedPath)) {
+      console.log("Game dir: " + resolvedPath);
+    }
+    else {
+      console.log("Game dir invalid, exiting");
+      process.exit(1);
+    }
+
+    if(!fs.existsSync(resolvedTargetPath)) {
+      console.log("Target directory invalid, exiting");
+      process.exit(1);
+    }
+
+    console.log("Target dir: " + resolvedTargetPath);
+
+    /* Check for the existence of .orig backup files */
+    const cardNameBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_NAME}.orig`);
+    const cardDescBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_DESC}.orig`);
+    const cardIndxBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_INDX}.orig`);
+
+    if(!fs.existsSync(cardNameBundleOrig) || !fs.existsSync(cardDescBundleOrig) || !fs.existsSync(cardIndxBundleOrig)) {
+      console.error("❌ Original backup files (.orig) not found in target directory.");
+      console.error("   Make sure you have run 'mad2pot' first to create the backups.");
+      process.exit(1);
+    }
+
+    console.log("✅ Found all original backup files");
+
+    /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx bundles in game directory */
+    const variablePathName = await getMADVariableDir(resolvedPath);
+    const cardNameBundlePathDest = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_NAME}/${MAD_BUNDLE_FILES.CARD_NAME}`);
+    const cardDescBundlePathDest = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_DESC}/${MAD_BUNDLE_FILES.CARD_DESC}`);
+    const cardIndxBundlePathDest = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_INDX}/${MAD_BUNDLE_FILES.CARD_INDX}`);
+
+    if(!fs.existsSync(cardNameBundlePathDest) || !fs.existsSync(cardDescBundlePathDest) || !fs.existsSync(cardIndxBundlePathDest)) {
+      console.error("❌ Game AssetBundle files not found. Game may have been moved or updated.");
+      process.exit(1);
+    }
+
+    console.log("✅ Game AssetBundle files found");
+
+    console.log("\n=== Checking if revert is necessary ===");
+
+    /* Check if files are already identical to the backups */
+    const nameIdentical = areFilesIdentical(cardNameBundleOrig, cardNameBundlePathDest);
+    const descIdentical = areFilesIdentical(cardDescBundleOrig, cardDescBundlePathDest);
+    const indxIdentical = areFilesIdentical(cardIndxBundleOrig, cardIndxBundlePathDest);
+
+    if (nameIdentical && descIdentical && indxIdentical) {
+      console.log("✅ All game files are already identical to the original backups");
+      console.log("   No action needed - game directory already has the reverted files");
+      console.log("\n=== mad-revert completed ===");
+      return;
+    }
+
+    console.log("\n=== Reverting AssetBundles to original backups ===");
+
+    /* Copy the original backup files back to the game directory only if different */
+    if (!nameIdentical) {
+      copyFileSync(cardNameBundleOrig, cardNameBundlePathDest);
+      console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_NAME} to original`);
+    } else {
+      console.log(`⏭️  Skipped ${MAD_BUNDLE_FILES.CARD_NAME} (already matches original)`);
+    }
+    
+    if (!descIdentical) {
+      copyFileSync(cardDescBundleOrig, cardDescBundlePathDest);
+      console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_DESC} to original`);
+    } else {
+      console.log(`⏭️  Skipped ${MAD_BUNDLE_FILES.CARD_DESC} (already matches original)`);
+    }
+    
+    if (!indxIdentical) {
+      copyFileSync(cardIndxBundleOrig, cardIndxBundlePathDest);
+      console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_INDX} to original`);
+    } else {
+      console.log(`⏭️  Skipped ${MAD_BUNDLE_FILES.CARD_INDX} (already matches original)`);
+    }
+
+    console.log("\n=== mad-revert completed successfully! ===");
+    console.log("AssetBundles have been reverted to their original state.");
   });
 
 chain
@@ -716,6 +814,87 @@ function copyFileSync(sourcePath: string, destinationPath: string): void {
     } else {
       throw new Error('Failed to copy file: Unknown error occurred');
     }
+  }
+}
+
+/**
+ * Copies a file synchronously from source to destination only if destination doesn't exist.
+ * This function is useful for preserving original backup files that should not be overwritten.
+ * @param sourcePath The path to the source file
+ * @param destinationPath The path to the destination file
+ * @returns boolean indicating whether the file was copied (true) or skipped because destination exists (false)
+ * @throws Error if the source file doesn't exist (missing source) or if the copy operation fails
+ */
+function copyFileIfNotExists(sourcePath: string, destinationPath: string): boolean {
+  try {
+    // Check if destination already exists
+    if (fs.existsSync(destinationPath)) {
+      console.log(`Skipping copy - destination already exists: ${destinationPath}`);
+      return false;
+    }
+
+    // Ensure the source file exists
+    if (!fs.existsSync(sourcePath)) {
+      throw new Error(`Source file does not exist: ${sourcePath}`);
+    }
+
+    // Ensure the destination directory exists
+    const destDir = path.dirname(destinationPath);
+    if (!fs.existsSync(destDir)) {
+      fs.mkdirSync(destDir, { recursive: true });
+    }
+
+    // Copy the file
+    fs.copyFileSync(sourcePath, destinationPath);
+    console.log(`File copied successfully from ${sourcePath} to ${destinationPath}`);
+    return true;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to copy file: ${error.message}`);
+    } else {
+      throw new Error('Failed to copy file: Unknown error occurred');
+    }
+  }
+}
+
+/**
+ * Compares two files by size and SHA-256 checksum to determine if they are identical
+ * @param filePath1 Path to the first file
+ * @param filePath2 Path to the second file
+ * @returns true if files are identical (same size and checksum), false otherwise
+ */
+function areFilesIdentical(filePath1: string, filePath2: string): boolean {
+  try {
+    // Check if both files exist
+    if (!fs.existsSync(filePath1) || !fs.existsSync(filePath2)) {
+      return false;
+    }
+
+    // Quick check: compare file sizes first
+    const stats1 = fs.statSync(filePath1);
+    const stats2 = fs.statSync(filePath2);
+    
+    if (stats1.size !== stats2.size) {
+      return false;
+    }
+
+    // If sizes match, compare checksums
+    const hash1 = crypto.createHash('sha256');
+    const hash2 = crypto.createHash('sha256');
+    
+    const data1 = fs.readFileSync(filePath1);
+    const data2 = fs.readFileSync(filePath2);
+    
+    hash1.update(data1);
+    hash2.update(data2);
+    
+    const checksum1 = hash1.digest('hex');
+    const checksum2 = hash2.digest('hex');
+    
+    return checksum1 === checksum2;
+  } catch (error) {
+    // If any error occurs during comparison, assume files are different
+    return false;
   }
 }
 
