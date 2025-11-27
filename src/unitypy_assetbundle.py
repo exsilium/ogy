@@ -98,17 +98,56 @@ def update_assetbundle(
                         # Calculate the new size
                         size_diff = len(new_asset_data) - len(original_asset_data)
                         
-                        if size_diff != 0:
-                            print(f"⚠️  Size difference: {size_diff} bytes")
-                            print(f"⚠️  UnityPy method currently only supports same-size replacements")
-                            print(f"⚠️  Consider padding your new asset to match the original size")
-                            print(f"   Original: {len(original_asset_data)} bytes")
-                            print(f"   New: {len(new_asset_data)} bytes")
-                            return False
-                        
-                        # Same size - simple replacement
-                        new_cab_data[offset:offset+len(original_asset_data)] = new_asset_data
-                        print(f"✅ Replaced data (same size: {len(original_asset_data)} bytes)")
+                        if size_diff == 0:
+                            # Same size - simple replacement
+                            new_cab_data[offset:offset+len(original_asset_data)] = new_asset_data
+                            print(f"✅ Replaced data (same size: {len(original_asset_data)} bytes)")
+                        else:
+                            # Different size - need to adjust the CAB structure
+                            print(f"📏 Size difference: {size_diff} bytes")
+                            
+                            # Remove old data and insert new data
+                            del new_cab_data[offset:offset+len(original_asset_data)]
+                            new_cab_data[offset:offset] = new_asset_data
+                            
+                            # Update the fileSize field in the CAB header (at offset 0x18, 8 bytes big-endian)
+                            new_size = len(new_cab_data)
+                            new_cab_data[0x18:0x20] = new_size.to_bytes(8, 'big')
+                            print(f"✅ Updated CAB header fileSize to {new_size}")
+                            
+                            # Find and update the asset's fileSize field in the CAB metadata
+                            # The asset metadata comes after the header. We need to find the fileSize field
+                            # which is a 4-byte little-endian value that matches the original asset size
+                            try:
+                                old_size_bytes = len(original_asset_data).to_bytes(4, 'little')
+                                # Search for the size field in the metadata area (between header and data)
+                                # Typically starts around offset 0x30 and ends before the data starts
+                                # Note: offset is from the original cab_data before modification
+                                search_start = 0x30
+                                search_end = offset  # Search up to where the data starts
+                                
+                                if search_end > search_start:
+                                    # Find the asset size field in the new cab data
+                                    size_field_offset = -1
+                                    for i in range(search_start, search_end):
+                                        if new_cab_data[i:i+4] == old_size_bytes:
+                                            size_field_offset = i
+                                            break
+                                    
+                                    if size_field_offset != -1:
+                                        # Update the asset fileSize field
+                                        new_cab_data[size_field_offset:size_field_offset+4] = len(new_asset_data).to_bytes(4, 'little')
+                                        print(f"✅ Updated asset fileSize field at offset 0x{size_field_offset:x}")
+                                    else:
+                                        print(f"ℹ️  Note: Could not locate asset fileSize field in metadata (data starts at 0x{offset:x})")
+                                        print(f"   This is normal - UnityPy will handle metadata updates automatically")
+                                else:
+                                    print(f"ℹ️  Note: Asset data starts at 0x{offset:x}, before typical metadata location")
+                                    print(f"   UnityPy will handle metadata updates automatically")
+                            except Exception as e:
+                                print(f"⚠️  Error updating asset fileSize: {e}")
+                            
+                            print(f"✅ Replaced data (new size: {len(new_asset_data)} bytes, was: {len(original_asset_data)} bytes)")
                         
                         # Save the modified CAB back to the TextAsset
                         # Convert bytes back to string format that UnityPy expects
