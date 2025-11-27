@@ -2,6 +2,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import * as crypto from 'crypto';
+import { spawn } from 'child_process';
+import { fileURLToPath } from 'url';
 import figlet from 'figlet';
 import { Command } from '@commander-js/extra-typings';
 import { YuGiOh, Transformer, DictionaryBuilder } from './compressor.js';
@@ -13,6 +15,65 @@ import { UMDISOReader } from './umdiso.js';
 import { NDSHandler } from './nds.js';
 import { decrypt, encrypt, findKey } from "./crypt.js";
 import { MAD_BUNDLE_FILES, MAD_BUNDLE_PATHS, MAD_CRYPTO_KEY } from './mad-constants.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+/**
+ * Update an AssetBundle using UnityPy Python script
+ * @param originalBundlePath Path to the original AssetBundle
+ * @param originalAssetPath Path to the original asset data
+ * @param newAssetPath Path to the new asset data
+ * @param outputBundlePath Path where the updated AssetBundle will be written
+ * @returns Promise that resolves when the update is complete
+ */
+async function updateAssetBundleWithUnityPy(
+  originalBundlePath: string,
+  originalAssetPath: string,
+  newAssetPath: string,
+  outputBundlePath: string
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const pythonScriptPath = path.join(__dirname, 'unitypy_assetbundle.py');
+    
+    console.log(`🐍 Using UnityPy for AssetBundle update`);
+    
+    const pythonProcess = spawn('python3', [
+      pythonScriptPath,
+      originalBundlePath,
+      originalAssetPath,
+      newAssetPath,
+      outputBundlePath
+    ]);
+
+    let stdout = '';
+    let stderr = '';
+
+    pythonProcess.stdout.on('data', (data) => {
+      const text = data.toString();
+      stdout += text;
+      process.stdout.write(text);
+    });
+
+    pythonProcess.stderr.on('data', (data) => {
+      const text = data.toString();
+      stderr += text;
+      process.stderr.write(text);
+    });
+
+    pythonProcess.on('close', (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`UnityPy script failed with exit code ${code}\nStderr: ${stderr}`));
+      }
+    });
+
+    pythonProcess.on('error', (err) => {
+      reject(new Error(`Failed to spawn Python process: ${err.message}`));
+    });
+  });
+}
 
 const program = new Command();
 
@@ -201,7 +262,8 @@ chain
 chain
   .command("mad-implant <game_dir> <target_dir>")
   .description("Repack MAD resources using in-memory AssetBundle updates")
-  .action(async (game_dir, target_dir) => {
+  .option("--unitypy", "Use UnityPy for AssetBundle replacement instead of built-in method")
+  .action(async (game_dir, target_dir, options) => {
     /* Game source dir e.g: "~/Library/Application Support/CrossOver/Bottles/Steam/drive_c/Program Files (x86)/Steam/steamapps/common/Yu-Gi-Oh!  Master Duel" */
     /* Check the source directory existence */
     if (game_dir.startsWith('~')) {
@@ -269,7 +331,13 @@ chain
     fs.writeFileSync(resolvedTargetPath + "/CARD_Indx_New.bin", encryptedData);
     console.log("✅ CARD_Indx encrypted");
 
-    console.log("\n=== Repackaging AssetBundles using in-memory update ===");
+    const useUnityPy = options.unitypy || false;
+    
+    if (useUnityPy) {
+      console.log("\n=== Repackaging AssetBundles using UnityPy ===");
+    } else {
+      console.log("\n=== Repackaging AssetBundles using in-memory update ===");
+    }
 
     /* Update CARD_Name AssetBundle */
     console.log("\n📦 Processing CARD_Name...");
@@ -278,8 +346,12 @@ chain
     const originalNameAsset = path.join(resolvedTargetPath, "CARD_Name.bin");
     const newNameAsset = path.join(resolvedTargetPath, "CARD_Name_New.bin");
 
-    let assetBundle = new AssetBundle(cardNameBundleOrig);
-    await assetBundle.updateAssetBundle(originalNameAsset, newNameAsset, cardNameBundleNew);
+    if (useUnityPy) {
+      await updateAssetBundleWithUnityPy(cardNameBundleOrig, originalNameAsset, newNameAsset, cardNameBundleNew);
+    } else {
+      let assetBundle = new AssetBundle(cardNameBundleOrig);
+      await assetBundle.updateAssetBundle(originalNameAsset, newNameAsset, cardNameBundleNew);
+    }
     console.log("✅ CARD_Name AssetBundle updated");
 
     /* Update CARD_Desc AssetBundle */
@@ -289,8 +361,12 @@ chain
     const originalDescAsset = path.join(resolvedTargetPath, "CARD_Desc.bin");
     const newDescAsset = path.join(resolvedTargetPath, "CARD_Desc_New.bin");
 
-    assetBundle = new AssetBundle(cardDescBundleOrig);
-    await assetBundle.updateAssetBundle(originalDescAsset, newDescAsset, cardDescBundleNew);
+    if (useUnityPy) {
+      await updateAssetBundleWithUnityPy(cardDescBundleOrig, originalDescAsset, newDescAsset, cardDescBundleNew);
+    } else {
+      let assetBundle = new AssetBundle(cardDescBundleOrig);
+      await assetBundle.updateAssetBundle(originalDescAsset, newDescAsset, cardDescBundleNew);
+    }
     console.log("✅ CARD_Desc AssetBundle updated");
 
     /* Update CARD_Indx AssetBundle */
@@ -300,8 +376,12 @@ chain
     const originalIndxAsset = path.join(resolvedTargetPath, "CARD_Indx.bin");
     const newIndxAsset = path.join(resolvedTargetPath, "CARD_Indx_New.bin");
 
-    assetBundle = new AssetBundle(cardIndxBundleOrig);
-    await assetBundle.updateAssetBundle(originalIndxAsset, newIndxAsset, cardIndxBundleNew);
+    if (useUnityPy) {
+      await updateAssetBundleWithUnityPy(cardIndxBundleOrig, originalIndxAsset, newIndxAsset, cardIndxBundleNew);
+    } else {
+      let assetBundle = new AssetBundle(cardIndxBundleOrig);
+      await assetBundle.updateAssetBundle(originalIndxAsset, newIndxAsset, cardIndxBundleNew);
+    }
     console.log("✅ CARD_Indx AssetBundle updated");
 
     console.log("\n=== Copying updated AssetBundles back to game directory ===");
