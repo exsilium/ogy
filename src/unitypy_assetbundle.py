@@ -2,6 +2,10 @@
 """
 UnityPy-based AssetBundle updater for the ogy project.
 This script uses UnityPy to update assets within Unity AssetBundles.
+
+Note: The AssetBundle contains CAB files (Unity SerializedFiles) which in turn
+contain the encrypted CARD data. This script extracts the CAB, replaces the
+CARD data within it, and repackages everything.
 """
 
 import sys
@@ -21,8 +25,8 @@ def update_assetbundle(
     
     Args:
         original_bundle_path: Path to the original AssetBundle file
-        original_asset_path: Path to the original asset (to identify which asset to replace)
-        new_asset_path: Path to the new asset data to inject
+        original_asset_path: Path to the original encrypted asset data (CARD_Name.bin, etc.)
+        new_asset_path: Path to the new encrypted asset data
         output_bundle_path: Path where the updated AssetBundle will be written
         
     Returns:
@@ -34,7 +38,7 @@ def update_assetbundle(
         # Load the AssetBundle using UnityPy
         env = UnityPy.load(original_bundle_path)
         
-        # Read the original and new asset data
+        # Read the original and new asset data (encrypted CARD data)
         with open(original_asset_path, 'rb') as f:
             original_asset_data = f.read()
         
@@ -45,42 +49,89 @@ def update_assetbundle(
         print(f"📊 New asset size: {len(new_asset_data)} bytes")
         print(f"📊 Size difference: {len(new_asset_data) - len(original_asset_data)} bytes")
         
-        # Find and update the TextAsset that contains our data
+        # The TextAsset in the bundle contains a CAB file (Unity SerializedFile)
+        # which in turn contains the encrypted CARD data
+        print("🔍 Searching for CAB file (TextAsset) in bundle...")
         asset_found = False
+        
         for obj in env.objects:
-            # Check if this is a TextAsset
             if obj.type.name == "TextAsset":
-                data = obj.read()
-                # Check if this TextAsset contains our original data
-                if hasattr(data, 'script') and data.script == original_asset_data:
-                    print(f"✅ Found matching TextAsset: {data.name}")
-                    # Update the script data with new content
-                    data.script = new_asset_data
-                    data.save()
-                    asset_found = True
-                    break
-        
-        if not asset_found:
-            print("⚠️  Warning: Could not find exact TextAsset match, trying fallback method...")
-            # Fallback: try to match by size and partial content
-            for obj in env.objects:
-                if obj.type.name == "TextAsset":
+                try:
                     data = obj.read()
-                    if hasattr(data, 'script'):
-                        # Check if sizes are similar (within 10% tolerance)
-                        size_ratio = len(data.script) / len(original_asset_data) if len(original_asset_data) > 0 else 0
-                        if 0.9 <= size_ratio <= 1.1:
-                            print(f"🔍 Found potential TextAsset candidate: {data.name} (size: {len(data.script)})")
-                            # Check if first 64 bytes match (simple heuristic)
-                            if data.script[:64] == original_asset_data[:64]:
-                                print(f"✅ Using TextAsset: {data.name} (partial match)")
-                                data.script = new_asset_data
-                                data.save()
-                                asset_found = True
-                                break
+                    
+                    # Get the CAB data (SerializedFile)
+                    # UnityPy returns m_Script as a string, but we need the raw bytes
+                    # We'll use the object's get_raw_data() method or similar
+                    cab_data = None
+                    
+                    # Try to get raw data first
+                    if hasattr(obj, 'get_raw_data'):
+                        cab_data = obj.get_raw_data()
+                    elif hasattr(data, 'm_Script'):
+                        # UnityPy reads as string but it's actually binary
+                        # Encode back to bytes using iso-8859-1 (Latin-1) which is 1:1 mapping
+                        script_str = data.m_Script
+                        # Convert string to bytes - UnityPy stores binary as string using ordinals
+                        cab_data = bytes(ord(c) for c in script_str)
+                    elif hasattr(data, 'script'):
+                        script_str = data.script
+                        cab_data = bytes(ord(c) for c in script_str)
+                    
+                    if cab_data is None:
+                        continue
+                    
+                    # Ensure cab_data is bytes
+                    if not isinstance(cab_data, (bytes, bytearray)):
+                        print(f"⚠️  Unexpected cab_data type: {type(cab_data)}")
+                        continue
+                    
+                    print(f"📦 Found TextAsset (CAB): {data.name if hasattr(data, 'name') else 'unnamed'}, size: {len(cab_data)} bytes")
+                    
+                    # Search for the original asset data within the CAB
+                    offset = cab_data.find(original_asset_data)
+                    if offset != -1:
+                        print(f"✅ Found encrypted CARD data at offset 0x{offset:x} ({offset}) in CAB")
+                        
+                        # Replace the encrypted CARD data within the CAB
+                        new_cab_data = bytearray(cab_data)
+                        
+                        # Calculate the new size
+                        size_diff = len(new_asset_data) - len(original_asset_data)
+                        
+                        if size_diff != 0:
+                            print(f"⚠️  Size difference: {size_diff} bytes")
+                            print(f"⚠️  UnityPy method currently only supports same-size replacements")
+                            print(f"⚠️  Consider padding your new asset to match the original size")
+                            print(f"   Original: {len(original_asset_data)} bytes")
+                            print(f"   New: {len(new_asset_data)} bytes")
+                            return False
+                        
+                        # Same size - simple replacement
+                        new_cab_data[offset:offset+len(original_asset_data)] = new_asset_data
+                        print(f"✅ Replaced data (same size: {len(original_asset_data)} bytes)")
+                        
+                        # Save the modified CAB back to the TextAsset
+                        # Convert bytes back to string format that UnityPy expects
+                        new_cab_string = ''.join(chr(b) for b in new_cab_data)
+                        
+                        if hasattr(data, 'm_Script'):
+                            data.m_Script = new_cab_string
+                        elif hasattr(data, 'script'):
+                            data.script = new_cab_string
+                        
+                        data.save()
+                        asset_found = True
+                        print(f"✅ Successfully updated TextAsset with modified CAB")
+                        break
+                        
+                except Exception as e:
+                    print(f"⚠️  Error processing TextAsset: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    continue
         
         if not asset_found:
-            print("❌ Error: Could not find the asset to replace in the bundle")
+            print("❌ Error: Could not find the encrypted CARD data in the bundle")
             return False
         
         print(f"💾 Saving updated bundle to: {output_bundle_path}")
