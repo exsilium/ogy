@@ -103,6 +103,46 @@ Commands:
   help [command]                        display help for command
 ```
 
+#### Yu-Gi-Oh! Master Duel support
+
+Ogy also supports modifying card translations in Yu-Gi-Oh! Master Duel (MAD). The workflow is similar to TF6 but uses Unity AssetBundles instead of EHP containers.
+
+##### Extracting from Master Duel
+```bash
+node dist/index.js chain mad2pot <game_dir> <target_dir>
+```
+
+This will:
+- Extract CARD_Name, CARD_Desc, and CARD_Indx AssetBundles from the game directory
+- Decrypt and extract the card data
+- Create a `mad.pot` file for translation
+
+##### Implanting translations back to Master Duel
+```bash
+node dist/index.js chain mad-implant <game_dir> <target_dir>
+```
+
+This will:
+- Process your `mad.po` file with translations
+- Encrypt the new card data
+- Repackage the AssetBundles
+- Copy the modified bundles back to the game directory
+
+**--unitypy option**: If you experience game crashes after modifying AssetBundles, you can use the `--unitypy` flag to use UnityPy (Python library) for AssetBundle replacement instead of the built-in method. This helps debug whether issues are caused by the AssetBundle structure or the asset files themselves.
+
+```bash
+node dist/index.js chain mad-implant --unitypy <game_dir> <target_dir>
+```
+
+Note: The `--unitypy` option requires Python 3 and the UnityPy package to be installed (`pip3 install UnityPy`).
+
+##### Reverting changes
+```bash
+node dist/index.js chain mad-revert <game_dir> <target_dir>
+```
+
+This will restore the original AssetBundles from the backup files.
+
 ## Structure
 ### 5D's Tag Force 6 `.iso`
 - cardinfo_jpn.ehp - Located in `PSP_GAME/USRDIR/duelsys/`
