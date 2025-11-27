@@ -6,4 +6,5 @@ mochawesome-report/
 test/*.bin
 test/*.txt
 test/*.tin
-test/*.po
+test/*.po__pycache__/
+*.pyc
