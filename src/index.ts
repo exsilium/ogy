@@ -201,7 +201,8 @@ chain
 chain
   .command("mad-implant <game_dir> <target_dir>")
   .description("Repack MAD resources using in-memory AssetBundle updates")
-  .action(async (game_dir, target_dir) => {
+  .option("--skip-replace", "Skip copying updated AssetBundles back to the game directory")
+  .action(async (game_dir, target_dir, options) => {
     /* Game source dir e.g: "~/Library/Application Support/CrossOver/Bottles/Steam/drive_c/Program Files (x86)/Steam/steamapps/common/Yu-Gi-Oh!  Master Duel" */
     /* Check the source directory existence */
     if (game_dir.startsWith('~')) {
@@ -304,17 +305,21 @@ chain
     await assetBundle.updateAssetBundle(originalIndxAsset, newIndxAsset, cardIndxBundleNew);
     console.log("✅ CARD_Indx AssetBundle updated");
 
-    console.log("\n=== Copying updated AssetBundles back to game directory ===");
+    if (!options?.skipReplace) {
+      console.log("\n=== Copying updated AssetBundles back to game directory ===");
 
-    /* Copy the updated bundles back to the game directory */
-    copyFileSync(cardNameBundleNew, cardNameBundlePathSrc);
-    console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_NAME} to game directory`);
-    
-    copyFileSync(cardDescBundleNew, cardDescBundlePathSrc);
-    console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_DESC} to game directory`);
-    
-    copyFileSync(cardIndxBundleNew, cardIndxBundlePathSrc);
-    console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_INDX} to game directory`);
+      /* Copy the updated bundles back to the game directory */
+      copyFileSync(cardNameBundleNew, cardNameBundlePathSrc);
+      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_NAME} to game directory`);
+      
+      copyFileSync(cardDescBundleNew, cardDescBundlePathSrc);
+      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_DESC} to game directory`);
+      
+      copyFileSync(cardIndxBundleNew, cardIndxBundlePathSrc);
+      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_INDX} to game directory`);
+    } else {
+      console.log("\n⏭️  Skipping replacement step (--skip-replace enabled). Updated bundles left in target directory.");
+    }
 
     console.log("\n=== mad-implant completed successfully! ===");
     console.log("\nTarget directory contents:");
