@@ -410,7 +410,7 @@ class Transformer {
   }
 
   entriesToBin(directory: string, ygoType: YuGiOh = YuGiOh.MAD): void {
-    const limiter = 13392;
+    const limiter = 13659;
     const cardNames: string[] = [];
     const cardDescs: string[] = [];
 
