@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import { Buffer } from 'buffer';
 import path from "path";
 import { Logger } from './logger.js';
+import { MAD_BUNDLE_FILES, MAD_BUNDLE_PATHS } from './mad-constants.js';
 
 class EndianBinaryReader {
   private buffer: Buffer;
@@ -202,9 +203,10 @@ class SerializedFile {
     reader.alignStream();
     this.fileSize = reader.readUInt32();
 
-    // CARD_Name || Card_Indx || CARD_Desc || Card_Part AssetBundle, we skip ahead 180 bytes and re-read
-    if(this.fileName === "f6/f67aab7c" || this.fileName === "d2/d2350368" || this.fileName === "a3/a3ec792e" ||
-      this.fileName === "5a/5a8c44f4" ||
+    // CARD_Name || Card_Indx || CARD_Desc || AssetBundle, we skip ahead 180 bytes and re-read
+    if(this.fileName === `${MAD_BUNDLE_PATHS.CARD_NAME}/${MAD_BUNDLE_FILES.CARD_NAME}` ||
+      this.fileName === `${MAD_BUNDLE_PATHS.CARD_INDX}/${MAD_BUNDLE_FILES.CARD_INDX}` ||
+      this.fileName === `${MAD_BUNDLE_PATHS.CARD_DESC}/${MAD_BUNDLE_FILES.CARD_DESC}` ||
       // Test files Card_Indx and Card_Part
       this.fileName === "e9/e9aa18bf" || this.fileName === "eb/ebaee097"
       ) {
