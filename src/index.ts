@@ -237,6 +237,86 @@ chain
     transformer.poToTxt(resolvedPOPath, YuGiOh.MAD);
     transformer.entriesToBin(resolvedTargetPath, YuGiOh.MAD);
 
+    console.log("\n=== Sanity check: comparing entry counts ===");
+
+    function countNullTerminatedStrings(buf: Buffer): number {
+      let count = 0;
+      let inString = false;
+      for (let i = 0; i < buf.length; i++) {
+        const b = buf[i];
+        if (b !== 0) {
+          if (!inString) inString = true;
+        } else {
+          if (inString) {
+            count++;
+            inString = false;
+          }
+        }
+      }
+      // If buffer doesn't end with NUL but had characters, count trailing string
+      if (inString) count++;
+      return count;
+    }
+
+    // Load original name/desc (prefer decrypted if present, else decrypt from .bin)
+    const origNameDecryptedPath = path.join(resolvedTargetPath, "CARD_Name.decrypted.bin");
+    const origDescDecryptedPath = path.join(resolvedTargetPath, "CARD_Desc.decrypted.bin");
+    const origNameBinPath = path.join(resolvedTargetPath, "CARD_Name.bin");
+    const origDescBinPath = path.join(resolvedTargetPath, "CARD_Desc.bin");
+
+    let origNameBuf: Buffer;
+    let origDescBuf: Buffer;
+
+    if (fs.existsSync(origNameDecryptedPath)) {
+      origNameBuf = fs.readFileSync(origNameDecryptedPath);
+    } else {
+      const enc = fs.readFileSync(origNameBinPath);
+      origNameBuf = decrypt(enc, MAD_CRYPTO_KEY);
+    }
+
+    if (fs.existsSync(origDescDecryptedPath)) {
+      origDescBuf = fs.readFileSync(origDescDecryptedPath);
+    } else {
+      const enc = fs.readFileSync(origDescBinPath);
+      origDescBuf = decrypt(enc, MAD_CRYPTO_KEY);
+    }
+
+    // Load newly generated decrypted files
+    const newNameDecryptedPath = path.join(resolvedTargetPath, "CARD_Name_New.decrypted.bin");
+    const newDescDecryptedPath = path.join(resolvedTargetPath, "CARD_Desc_New.decrypted.bin");
+
+    if (!fs.existsSync(newNameDecryptedPath) || !fs.existsSync(newDescDecryptedPath)) {
+      console.error("❌ Missing newly generated decrypted files for sanity check.");
+      console.error("   Expected CARD_Name_New.decrypted.bin and CARD_Desc_New.decrypted.bin in target directory.");
+      process.exit(1);
+    }
+
+    const newNameBuf = fs.readFileSync(newNameDecryptedPath);
+    const newDescBuf = fs.readFileSync(newDescDecryptedPath);
+
+    const origNameCount = countNullTerminatedStrings(origNameBuf);
+    const origDescCount = countNullTerminatedStrings(origDescBuf);
+    const newNameCount = countNullTerminatedStrings(newNameBuf);
+    const newDescCount = countNullTerminatedStrings(newDescBuf);
+
+    console.log(`   Original CARD_Name entries: ${origNameCount}`);
+    console.log(`   New CARD_Name entries     : ${newNameCount}`);
+    console.log(`   Original CARD_Desc entries: ${origDescCount}`);
+    console.log(`   New CARD_Desc entries     : ${newDescCount}`);
+
+    if (origNameCount !== newNameCount || origDescCount !== newDescCount) {
+      console.error("\n❌ Sanity check failed: entry count mismatch.");
+      if (origNameCount !== newNameCount) {
+        console.error(`   CARD_Name mismatch: original=${origNameCount}, new=${newNameCount}`);
+      }
+      if (origDescCount !== newDescCount) {
+        console.error(`   CARD_Desc mismatch: original=${origDescCount}, new=${newDescCount}`);
+      }
+      console.error("   Aborting implant to prevent corrupt game data.");
+      process.exit(1);
+    }
+    console.log("✅ Sanity check passed: entry counts match.");
+
     /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx bundles */
     /* If these files are not found, most likely the client has updated and the location of the files have moved */
     const variablePathName = await getMADVariableDir(resolvedPath);
