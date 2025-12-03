@@ -14,7 +14,7 @@ import { CABExtractor } from './cab.js';
 import { UMDISOReader } from './umdiso.js';
 import { NDSHandler } from './nds.js';
 import { decrypt, encrypt, findKey } from "./crypt.js";
-import { MAD_BUNDLE_FILES, MAD_BUNDLE_PATHS, MAD_CRYPTO_KEY } from './mad-constants.js';
+import { MAD_BUNDLE_FILES, MAD_BUNDLE_PATHS, MAD_CRYPTO_KEY, MAD_CAB_FILES } from './mad-constants.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,20 +31,28 @@ async function updateAssetBundleWithUnityPy(
   originalBundlePath: string,
   originalAssetPath: string,
   newAssetPath: string,
-  outputBundlePath: string
+  outputBundlePath: string,
+  expectedCABName?: string
 ): Promise<void> {
   return new Promise((resolve, reject) => {
     const pythonScriptPath = path.join(__dirname, 'unitypy_assetbundle.py');
     
     console.log(`🐍 Using UnityPy for AssetBundle update`);
     
-    const pythonProcess = spawn('python3', [
+    const args = [
       pythonScriptPath,
       originalBundlePath,
       originalAssetPath,
       newAssetPath,
       outputBundlePath
-    ]);
+    ];
+    
+    // Add expected CAB name if provided
+    if (expectedCABName) {
+      args.push(expectedCABName);
+    }
+    
+    const pythonProcess = spawn('python3', args);
 
     let stdout = '';
     let stderr = '';
@@ -428,7 +436,7 @@ chain
     const newNameAsset = path.join(resolvedTargetPath, "CARD_Name_New.bin");
 
     if (useUnityPy) {
-      await updateAssetBundleWithUnityPy(cardNameBundleOrig, originalNameAsset, newNameAsset, cardNameBundleNew);
+      await updateAssetBundleWithUnityPy(cardNameBundleOrig, originalNameAsset, newNameAsset, cardNameBundleNew, MAD_CAB_FILES.CARD_NAME);
     } else {
       let assetBundle = new AssetBundle(cardNameBundleOrig);
       await assetBundle.updateAssetBundle(originalNameAsset, newNameAsset, cardNameBundleNew);
@@ -443,7 +451,7 @@ chain
     const newDescAsset = path.join(resolvedTargetPath, "CARD_Desc_New.bin");
 
     if (useUnityPy) {
-      await updateAssetBundleWithUnityPy(cardDescBundleOrig, originalDescAsset, newDescAsset, cardDescBundleNew);
+      await updateAssetBundleWithUnityPy(cardDescBundleOrig, originalDescAsset, newDescAsset, cardDescBundleNew, MAD_CAB_FILES.CARD_DESC);
     } else {
       let assetBundle = new AssetBundle(cardDescBundleOrig);
       await assetBundle.updateAssetBundle(originalDescAsset, newDescAsset, cardDescBundleNew);
@@ -458,7 +466,7 @@ chain
     const newIndxAsset = path.join(resolvedTargetPath, "CARD_Indx_New.bin");
 
     if (useUnityPy) {
-      await updateAssetBundleWithUnityPy(cardIndxBundleOrig, originalIndxAsset, newIndxAsset, cardIndxBundleNew);
+      await updateAssetBundleWithUnityPy(cardIndxBundleOrig, originalIndxAsset, newIndxAsset, cardIndxBundleNew, MAD_CAB_FILES.CARD_INDX);
     } else {
       let assetBundle = new AssetBundle(cardIndxBundleOrig);
       await assetBundle.updateAssetBundle(originalIndxAsset, newIndxAsset, cardIndxBundleNew);

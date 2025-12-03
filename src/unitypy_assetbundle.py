@@ -18,7 +18,8 @@ def update_assetbundle(
     original_bundle_path: str,
     original_asset_path: str,
     new_asset_path: str,
-    output_bundle_path: str
+    output_bundle_path: str,
+    expected_cab_name: str = None
 ) -> bool:
     """
     Update an AssetBundle using UnityPy.
@@ -28,6 +29,7 @@ def update_assetbundle(
         original_asset_path: Path to the original encrypted asset data (CARD_Name.bin, etc.)
         new_asset_path: Path to the new encrypted asset data
         output_bundle_path: Path where the updated AssetBundle will be written
+        expected_cab_name: Expected CAB filename (e.g., 'CAB-a6d8f4f42198f77b297bd6bdb7a258e3')
         
     Returns:
         True if successful, False otherwise
@@ -86,11 +88,15 @@ def update_assetbundle(
                         continue
                     
                     # Get the TextAsset name (CAB container name)
-                    cab_name = "unnamed"
-                    if hasattr(data, 'm_Name'):
+                    # Use expected CAB name if provided, otherwise try to get from Unity
+                    if expected_cab_name:
+                        cab_name = expected_cab_name
+                    elif hasattr(data, 'm_Name'):
                         cab_name = data.m_Name
                     elif hasattr(data, 'name'):
                         cab_name = data.name
+                    else:
+                        cab_name = "unnamed"
                     
                     print(f"📦 Found TextAsset (CAB): {cab_name}, size: {len(cab_data)} bytes")
                     
@@ -286,14 +292,15 @@ def update_assetbundle(
 
 def main():
     """Main entry point for the script."""
-    if len(sys.argv) != 5:
-        print("Usage: python3 unitypy_assetbundle.py <original_bundle> <original_asset> <new_asset> <output_bundle>")
+    if len(sys.argv) < 5:
+        print("Usage: python3 unitypy_assetbundle.py <original_bundle> <original_asset> <new_asset> <output_bundle> [expected_cab_name]")
         sys.exit(1)
     
     original_bundle = sys.argv[1]
     original_asset = sys.argv[2]
     new_asset = sys.argv[3]
     output_bundle = sys.argv[4]
+    expected_cab_name = sys.argv[5] if len(sys.argv) > 5 else None
     
     # Validate input files exist
     if not os.path.exists(original_bundle):
@@ -309,7 +316,7 @@ def main():
         sys.exit(1)
     
     # Run the update
-    success = update_assetbundle(original_bundle, original_asset, new_asset, output_bundle)
+    success = update_assetbundle(original_bundle, original_asset, new_asset, output_bundle, expected_cab_name)
     
     sys.exit(0 if success else 1)
 
