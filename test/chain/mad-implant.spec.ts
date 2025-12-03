@@ -575,6 +575,7 @@ describe("ogy mad-implant tests - UnityPy integration", () => {
   const testDir = __dirname;
   const dataDir = path.join(__dirname, "../data/mad");
   const TEST_CRYPTO_KEY = 0x11;
+  let expectedCABName: string | null = null;
   
   beforeEach(done => setTimeout(done, 200));
   
@@ -594,6 +595,10 @@ describe("ogy mad-implant tests - UnityPy integration", () => {
     const extractedFiles = await assetBundle.extractAssetBundle(testDir);
     
     assert.strictEqual(extractedFiles.length, 1);
+    
+    // Store the CAB filename for later use
+    expectedCABName = extractedFiles[0];
+    console.log(`  Extracted CAB filename: ${expectedCABName}`);
     
     const cabFile = path.join(testDir, extractedFiles[0]);
     const extractedFileName = await CABExtractor.extract(cabFile, testDir);
@@ -694,14 +699,22 @@ describe("ogy mad-implant tests - UnityPy integration", () => {
     const srcDir = path.join(__dirname, '../../src');
     const pythonScript = path.join(srcDir, 'unitypy_assetbundle.py');
     
-    // Call the UnityPy script
-    const pythonProcess = spawn('python3', [
+    // Prepare arguments
+    const args = [
       pythonScript,
       originalBundle,
       originalAsset,
       newAsset,
       updatedBundle
-    ]);
+    ];
+    
+    // Add expected CAB name if available
+    if (expectedCABName) {
+      args.push(expectedCABName);
+    }
+    
+    // Call the UnityPy script
+    const pythonProcess = spawn('python3', args);
     
     await new Promise<void>((resolve, reject) => {
       let stdout = '';
