@@ -85,7 +85,39 @@ def update_assetbundle(
                         print(f"⚠️  Unexpected cab_data type: {type(cab_data)}")
                         continue
                     
-                    print(f"📦 Found TextAsset (CAB): {data.name if hasattr(data, 'name') else 'unnamed'}, size: {len(cab_data)} bytes")
+                    # Get the TextAsset name (CAB container name)
+                    cab_name = "unnamed"
+                    if hasattr(data, 'm_Name'):
+                        cab_name = data.m_Name
+                    elif hasattr(data, 'name'):
+                        cab_name = data.name
+                    
+                    print(f"📦 Found TextAsset (CAB): {cab_name}, size: {len(cab_data)} bytes")
+                    
+                    # Try to detect asset path within the CAB
+                    try:
+                        cab_string = cab_data.decode('utf-8', errors='ignore')
+                        # Look for common asset path patterns
+                        for pattern in ['card_name.bytes', 'card_desc.bytes', 'card_indx.bytes']:
+                            idx = cab_string.lower().find(pattern)
+                            if idx != -1:
+                                # Try to extract the full path
+                                start_idx = max(0, idx - 200)
+                                # Find the start of the path (look for null byte before it)
+                                while start_idx < idx and cab_string[start_idx] != '\0':
+                                    start_idx += 1
+                                if cab_string[start_idx] == '\0':
+                                    start_idx += 1
+                                
+                                end_idx = idx + len(pattern)
+                                asset_path = cab_string[start_idx:end_idx]
+                                # Clean up the path
+                                asset_path = asset_path.replace('\0', '').replace('\n', '').replace('\r', '')
+                                if 'assets/' in asset_path.lower():
+                                    print(f"📍 Detected asset path: {asset_path}")
+                                    break
+                    except Exception as e:
+                        pass  # Silently ignore if we can't detect the path
                     
                     # Search for the original asset data within the CAB
                     offset = cab_data.find(original_asset_data)
@@ -179,7 +211,70 @@ def update_assetbundle(
         with open(output_bundle_path, 'wb') as f:
             f.write(env.file.save())
         
-        print("✅ AssetBundle updated successfully using UnityPy!")
+        # Verify the saved bundle
+        print("\n🔍 Verifying saved bundle...")
+        try:
+            verify_env = UnityPy.load(output_bundle_path)
+            verified = False
+            for obj in verify_env.objects:
+                if obj.type.name == "TextAsset":
+                    verify_data = obj.read()
+                    
+                    # Check CAB name
+                    verify_cab_name = "unnamed"
+                    if hasattr(verify_data, 'm_Name'):
+                        verify_cab_name = verify_data.m_Name
+                    elif hasattr(verify_data, 'name'):
+                        verify_cab_name = verify_data.name
+                    
+                    print(f"   CAB name in saved bundle: {verify_cab_name}")
+                    
+                    # Check if we can still find asset paths
+                    if hasattr(verify_data, 'm_Script'):
+                        verify_script = verify_data.m_Script
+                        verify_cab_bytes = bytes(ord(c) for c in verify_script)
+                    elif hasattr(verify_data, 'script'):
+                        verify_script = verify_data.script
+                        verify_cab_bytes = bytes(ord(c) for c in verify_script)
+                    else:
+                        continue
+                    
+                    try:
+                        verify_string = verify_cab_bytes.decode('utf-8', errors='ignore')
+                        for pattern in ['card_name.bytes', 'card_desc.bytes', 'card_indx.bytes']:
+                            if pattern in verify_string.lower():
+                                # Try to extract path
+                                idx = verify_string.lower().find(pattern)
+                                start_idx = max(0, idx - 200)
+                                while start_idx < idx and verify_string[start_idx] != '\0':
+                                    start_idx += 1
+                                if verify_string[start_idx] == '\0':
+                                    start_idx += 1
+                                end_idx = idx + len(pattern)
+                                asset_path = verify_string[start_idx:end_idx]
+                                asset_path = asset_path.replace('\0', '').replace('\n', '').replace('\r', '')
+                                if 'assets/' in asset_path.lower():
+                                    print(f"   Asset path in saved bundle: {asset_path}")
+                                    verified = True
+                                    break
+                    except:
+                        pass
+                    break
+            
+            if not verified:
+                print("   ⚠️  Warning: Could not verify asset paths in saved bundle")
+                print("   ⚠️  The bundle may not load correctly in the game")
+        except Exception as e:
+            print(f"   ⚠️  Error verifying saved bundle: {e}")
+        
+        print("\n✅ AssetBundle updated successfully using UnityPy!")
+        print("\n⚠️  IMPORTANT: UnityPy's save() method may not preserve all Unity metadata correctly.")
+        print("   If the game client fails to load the bundle, this is likely due to:")
+        print("   1. CAB container names not being preserved")
+        print("   2. Asset paths within the SerializedFile being corrupted")
+        print("   3. Unity metadata structure not being maintained")
+        print("\n   Consider using the built-in method (without --unitypy) which directly")
+        print("   manipulates the AssetBundle structure at a lower level.")
         return True
         
     except Exception as e:
