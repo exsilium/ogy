@@ -465,6 +465,146 @@ chain
     }
     console.log("✅ CARD_Indx AssetBundle updated");
 
+    // Verification step: Check that the created bundles are valid
+    console.log("\n=== Verifying created AssetBundles ===");
+    
+    let verificationPassed = true;
+    
+    // Helper function to extract directory path from bundle
+    async function getDirectoryPath(bundlePath: string): Promise<string | null> {
+      try {
+        // Extract to a temp directory to get the CAB filename
+        const tempDir = path.join(resolvedTargetPath, '.verify_temp');
+        if (!fs.existsSync(tempDir)) {
+          fs.mkdirSync(tempDir, { recursive: true });
+        }
+        
+        const bundle = new AssetBundle(bundlePath);
+        const extracted = await bundle.extractAssetBundle(tempDir);
+        
+        // The extracted filename is the CAB name
+        const cabName = extracted.length > 0 ? extracted[0] : null;
+        
+        // Clean up temp files
+        extracted.forEach(file => {
+          const filePath = path.join(tempDir, file);
+          if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+          }
+          const metaPath = filePath + '.meta.json';
+          if (fs.existsSync(metaPath)) {
+            fs.unlinkSync(metaPath);
+          }
+        });
+        
+        return cabName;
+      } catch (error) {
+        return null;
+      }
+    }
+    
+    // Verify CARD_Name bundle
+    console.log("\n🔍 Verifying CARD_Name AssetBundle...");
+    try {
+      // Check CAB filename
+      const origCABName = await getDirectoryPath(cardNameBundleOrig);
+      const newCABName = await getDirectoryPath(cardNameBundleNew);
+      
+      if (origCABName && newCABName) {
+        if (origCABName !== newCABName) {
+          console.log(`❌ CAB filename mismatch: original="${origCABName}", new="${newCABName}"`);
+          verificationPassed = false;
+        } else {
+          console.log(`✅ CAB filename preserved: "${origCABName}"`);
+        }
+      }
+      
+      // Check asset path is readable
+      const nameNewBundle = new AssetBundle(cardNameBundleNew);
+      const nameMatches = await nameNewBundle.scanForTextAssets(["card_name.bytes"]);
+      if (nameMatches.length === 0) {
+        console.log(`❌ Asset path not readable in new bundle (card_name.bytes not found)`);
+        verificationPassed = false;
+      } else {
+        console.log(`✅ Asset path readable: "${nameMatches[0].assetPath}"`);
+      }
+    } catch (error) {
+      console.log(`❌ Error verifying CARD_Name bundle: ${error instanceof Error ? error.message : String(error)}`);
+      verificationPassed = false;
+    }
+    
+    // Verify CARD_Desc bundle
+    console.log("\n🔍 Verifying CARD_Desc AssetBundle...");
+    try {
+      const origCABName = await getDirectoryPath(cardDescBundleOrig);
+      const newCABName = await getDirectoryPath(cardDescBundleNew);
+      
+      if (origCABName && newCABName) {
+        if (origCABName !== newCABName) {
+          console.log(`❌ CAB filename mismatch: original="${origCABName}", new="${newCABName}"`);
+          verificationPassed = false;
+        } else {
+          console.log(`✅ CAB filename preserved: "${origCABName}"`);
+        }
+      }
+      
+      const descNewBundle = new AssetBundle(cardDescBundleNew);
+      const descMatches = await descNewBundle.scanForTextAssets(["card_desc.bytes"]);
+      if (descMatches.length === 0) {
+        console.log(`❌ Asset path not readable in new bundle (card_desc.bytes not found)`);
+        verificationPassed = false;
+      } else {
+        console.log(`✅ Asset path readable: "${descMatches[0].assetPath}"`);
+      }
+    } catch (error) {
+      console.log(`❌ Error verifying CARD_Desc bundle: ${error instanceof Error ? error.message : String(error)}`);
+      verificationPassed = false;
+    }
+    
+    // Verify CARD_Indx bundle
+    console.log("\n🔍 Verifying CARD_Indx AssetBundle...");
+    try {
+      const origCABName = await getDirectoryPath(cardIndxBundleOrig);
+      const newCABName = await getDirectoryPath(cardIndxBundleNew);
+      
+      if (origCABName && newCABName) {
+        if (origCABName !== newCABName) {
+          console.log(`❌ CAB filename mismatch: original="${origCABName}", new="${newCABName}"`);
+          verificationPassed = false;
+        } else {
+          console.log(`✅ CAB filename preserved: "${origCABName}"`);
+        }
+      }
+      
+      const indxNewBundle = new AssetBundle(cardIndxBundleNew);
+      const indxMatches = await indxNewBundle.scanForTextAssets(["card_indx.bytes"]);
+      if (indxMatches.length === 0) {
+        console.log(`❌ Asset path not readable in new bundle (card_indx.bytes not found)`);
+        verificationPassed = false;
+      } else {
+        console.log(`✅ Asset path readable: "${indxMatches[0].assetPath}"`);
+      }
+    } catch (error) {
+      console.log(`❌ Error verifying CARD_Indx bundle: ${error instanceof Error ? error.message : String(error)}`);
+      verificationPassed = false;
+    }
+    
+    // Clean up temp directory
+    const tempDir = path.join(resolvedTargetPath, '.verify_temp');
+    if (fs.existsSync(tempDir)) {
+      fs.rmSync(tempDir, { recursive: true, force: true });
+    }
+    
+    if (!verificationPassed) {
+      console.log("\n❌ Verification failed! Created AssetBundles may not work correctly in the game.");
+      console.log("   Please review the errors above before continuing.");
+      if (!options?.skipReplace) {
+        console.log("   Recommendation: Use --skip-replace to prevent copying potentially broken bundles.");
+      }
+    } else {
+      console.log("\n✅ All verification checks passed!");
+    }
+
     if (!options?.skipReplace) {
       console.log("\n=== Copying updated AssetBundles back to game directory ===");
 
