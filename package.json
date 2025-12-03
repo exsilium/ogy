@@ -25,6 +25,7 @@
     "@types/node": "^24.0.1",
     "@types/progress": "^2.0.7",
     "chai": "^6.0.1",
+    "fill-pot-po": "^4.0.2",
     "gettext-parser": "^8.0.0",
     "mocha": "^11.0.1",
     "mochawesome": "^7.1.3",
