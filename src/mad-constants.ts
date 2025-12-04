@@ -51,6 +51,27 @@ export const MAD_CAB_FILES = {
 } as const;
 
 /**
+ * Unity object names for the encrypted text assets inside each MAD AssetBundle.
+ * These are used when we rebuild bundles via UnityPy.
+ */
+export const MAD_ASSET_OBJECT_NAMES = {
+  CARD_NAME: 'CARD_Name',
+  CARD_DESC: 'CARD_Desc',
+  CARD_INDX: 'CARD_Indx',
+  CARD_PART: 'Card_Part',
+} as const;
+
+/**
+ * Unity container paths for each MAD TextAsset inside its AssetBundle.
+ */
+export const MAD_CONTAINER_PATHS = {
+  CARD_NAME: 'assets/resourcesassetbundle/card/data/1d985b8c743240fd/en-us/card_name.bytes',
+  CARD_DESC: 'assets/resourcesassetbundle/card/data/1d985b8c743240fd/en-us/card_desc.bytes',
+  CARD_INDX: 'assets/resourcesassetbundle/card/data/1d985b8c743240fd/en-us/card_indx.bytes',
+  CARD_PART: 'assets/resourcesassetbundle/card/data/1d985b8c743240fd/en-us/card_part.bytes',
+} as const;
+
+/**
  * Encryption key used for Master Duel CARD files
  */
 export const MAD_CRYPTO_KEY = 0xe3;

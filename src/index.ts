@@ -13,8 +13,9 @@ import { CABExtractor } from './cab.js';
 import { UMDISOReader } from './umdiso.js';
 import { NDSHandler } from './nds.js';
 import { decrypt, encrypt, findKey } from "./crypt.js";
-import { MAD_BUNDLE_FILES, MAD_BUNDLE_PATHS, MAD_CRYPTO_KEY } from './mad-constants.js';
+import { MAD_BUNDLE_FILES, MAD_BUNDLE_PATHS, MAD_CONTAINER_PATHS, MAD_CRYPTO_KEY } from './mad-constants.js';
 import { rebuildCardPartAsset, ensureCardPidxAvailable } from './mad-part.js';
+import { rebuildAssetBundleWithUnityPy } from './unitypy.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -236,6 +237,7 @@ chain
   .command("mad-implant <game_dir> <target_dir>")
   .description("Repack MAD resources using in-memory AssetBundle updates")
   .option("--skip-replace", "Skip copying updated AssetBundles back to the game directory")
+  .option("--unitypy", "Additionally rebuild AssetBundles using UnityPy and prefer those outputs")
   .action(async (game_dir, target_dir, options) => {
     /* Game source dir e.g: "~/Library/Application Support/CrossOver/Bottles/Steam/drive_c/Program Files (x86)/Steam/steamapps/common/Yu-Gi-Oh!  Master Duel" */
     /* Check the source directory existence */
@@ -245,6 +247,7 @@ chain
 
     const resolvedPath = path.resolve(game_dir);
     const resolvedTargetPath = path.resolve(target_dir);
+    const useUnityPy = Boolean((options as { unitypy?: boolean }).unitypy);
 
     if(fs.existsSync(resolvedPath)) {
       console.log("Game dir: " + resolvedPath);
@@ -425,12 +428,13 @@ chain
     fs.writeFileSync(resolvedTargetPath + "/Card_Part_New.bin", encryptedData);
     console.log("✅ Card_Part encrypted");
 
-    console.log("\n=== Repackaging AssetBundles using in-memory update ===");
+    console.log(`\n=== Repackaging AssetBundles using in-memory update${useUnityPy ? " (baseline)" : ""} ===`);
 
     /* Update CARD_Name AssetBundle */
     console.log("\n📦 Processing CARD_Name...");
     const cardNameBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_NAME}.orig`);
     const cardNameBundleNew = path.join(resolvedTargetPath, MAD_BUNDLE_FILES.CARD_NAME);
+    const cardNameBundleUnity = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_NAME}.unity`);
     const originalNameAsset = path.join(resolvedTargetPath, "CARD_Name.bin");
     const newNameAsset = path.join(resolvedTargetPath, "CARD_Name_New.bin");
 
@@ -442,6 +446,7 @@ chain
     console.log("\n📦 Processing CARD_Desc...");
     const cardDescBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_DESC}.orig`);
     const cardDescBundleNew = path.join(resolvedTargetPath, MAD_BUNDLE_FILES.CARD_DESC);
+    const cardDescBundleUnity = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_DESC}.unity`);
     const originalDescAsset = path.join(resolvedTargetPath, "CARD_Desc.bin");
     const newDescAsset = path.join(resolvedTargetPath, "CARD_Desc_New.bin");
 
@@ -453,6 +458,7 @@ chain
     console.log("\n📦 Processing CARD_Indx...");
     const cardIndxBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_INDX}.orig`);
     const cardIndxBundleNew = path.join(resolvedTargetPath, MAD_BUNDLE_FILES.CARD_INDX);
+    const cardIndxBundleUnity = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_INDX}.unity`);
     const originalIndxAsset = path.join(resolvedTargetPath, "CARD_Indx.bin");
     const newIndxAsset = path.join(resolvedTargetPath, "CARD_Indx_New.bin");
 
@@ -464,6 +470,7 @@ chain
     console.log("\n📦 Processing Card_Part...");
     const cardPartBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_PART}.orig`);
     const cardPartBundleNew = path.join(resolvedTargetPath, MAD_BUNDLE_FILES.CARD_PART);
+    const cardPartBundleUnity = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_PART}.unity`);
     const originalPartAsset = path.join(resolvedTargetPath, "Card_Part.bin");
     const newPartAsset = path.join(resolvedTargetPath, "Card_Part_New.bin");
 
@@ -471,21 +478,73 @@ chain
     await assetBundle.updateAssetBundle(originalPartAsset, newPartAsset, cardPartBundleNew);
     console.log("✅ Card_Part AssetBundle updated");
 
+    if (useUnityPy) {
+      console.log("\n=== Rebuilding AssetBundles using UnityPy ===");
+
+      const unityJobs = [
+        {
+          label: "CARD_Name",
+          bundle: cardNameBundleOrig,
+          output: cardNameBundleUnity,
+          asset: newNameAsset,
+          container: MAD_CONTAINER_PATHS.CARD_NAME,
+        },
+        {
+          label: "CARD_Desc",
+          bundle: cardDescBundleOrig,
+          output: cardDescBundleUnity,
+          asset: newDescAsset,
+          container: MAD_CONTAINER_PATHS.CARD_DESC,
+        },
+        {
+          label: "CARD_Indx",
+          bundle: cardIndxBundleOrig,
+          output: cardIndxBundleUnity,
+          asset: newIndxAsset,
+          container: MAD_CONTAINER_PATHS.CARD_INDX,
+        },
+        {
+          label: "Card_Part",
+          bundle: cardPartBundleOrig,
+          output: cardPartBundleUnity,
+          asset: newPartAsset,
+          container: MAD_CONTAINER_PATHS.CARD_PART,
+        },
+      ];
+
+      for (const job of unityJobs) {
+        console.log(`\n🧰 [UnityPy] Processing ${job.label}...`);
+        await rebuildAssetBundleWithUnityPy({
+          bundlePath: job.bundle,
+          newAssetPath: job.asset,
+          containerPath: job.container,
+          outputPath: job.output,
+        });
+
+        if (!fs.existsSync(job.output)) {
+          console.error(`❌ UnityPy output missing for ${job.label}. Expected at ${job.output}`);
+          process.exit(1);
+        }
+
+        console.log(`✅ UnityPy rebuilt ${job.label}`);
+      }
+    }
+
     if (!options?.skipReplace) {
       console.log("\n=== Copying updated AssetBundles back to game directory ===");
 
       /* Copy the updated bundles back to the game directory */
-      copyFileSync(cardNameBundleNew, cardNameBundlePathSrc);
-      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_NAME} to game directory`);
+      copyFileSync(useUnityPy ? cardNameBundleUnity : cardNameBundleNew, cardNameBundlePathSrc);
+      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_NAME} to game directory${useUnityPy ? " (UnityPy)" : ""}`);
       
-      copyFileSync(cardDescBundleNew, cardDescBundlePathSrc);
-      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_DESC} to game directory`);
+      copyFileSync(useUnityPy ? cardDescBundleUnity : cardDescBundleNew, cardDescBundlePathSrc);
+      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_DESC} to game directory${useUnityPy ? " (UnityPy)" : ""}`);
       
-      copyFileSync(cardIndxBundleNew, cardIndxBundlePathSrc);
-      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_INDX} to game directory`);
+      copyFileSync(useUnityPy ? cardIndxBundleUnity : cardIndxBundleNew, cardIndxBundlePathSrc);
+      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_INDX} to game directory${useUnityPy ? " (UnityPy)" : ""}`);
 
-      copyFileSync(cardPartBundleNew, cardPartBundlePathSrc);
-      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_PART} to game directory`);
+      copyFileSync(useUnityPy ? cardPartBundleUnity : cardPartBundleNew, cardPartBundlePathSrc);
+      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_PART} to game directory${useUnityPy ? " (UnityPy)" : ""}`);
     } else {
       console.log("\n⏭️  Skipping replacement step (--skip-replace enabled). Updated bundles left in target directory.");
     }
