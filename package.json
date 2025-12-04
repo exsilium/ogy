@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "commander": "^14.0.0",
-    "figlet": "^1.7.0"
+    "figlet": "^1.7.0",
+    "diff-match-patch": "^1.0.5"
   }
 }

@@ -7,6 +7,8 @@ import { CABExtractor } from '../../src/cab.js';
 import { decrypt, encrypt } from '../../src/crypt.js';
 import { YgoTexts } from '../../src/ygotexts.js';
 import { YuGiOh, Transformer } from '../../src/compressor.js';
+import { expect } from "chai";
+import { rebuildCardPartAsset } from "../../src/mad-part.js";
 import * as gettextParser from 'gettext-parser';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -568,5 +570,53 @@ describe("ogy mad-implant tests - production bundles (0xe3 crypto key)", () => {
         fs.unlinkSync(fullPath);
       }
     });
+  });
+});
+
+describe("rebuildCardPartAsset", () => {
+  function buildIndex(descLength: number): Buffer {
+    const buffer = Buffer.alloc(16);
+    buffer.writeUInt32LE(0, 0);     // name pointer placeholder
+    buffer.writeUInt32LE(0, 4);     // first description pointer
+    buffer.writeUInt32LE(0, 8);     // unused placeholder for name pointer of next entry
+    buffer.writeUInt32LE(descLength, 12); // sentinel pointer for description length
+    return buffer;
+  }
+
+  it("should remap offsets when description length changes", () => {
+    const originalDesc = Buffer.from("Effect text.", "utf8");
+    const newDesc = Buffer.from("Updated effect text.", "utf8");
+
+    const originalIndex = buildIndex(originalDesc.length);
+    const newIndex = buildIndex(newDesc.length);
+
+    const originalPart = Buffer.alloc(8);
+    originalPart.writeUInt16LE(0, 0); // header start
+    originalPart.writeUInt16LE(0, 2); // header end
+    originalPart.writeUInt16LE(0, 4); // effect start
+    originalPart.writeUInt16LE(originalDesc.length, 6); // effect end
+
+    const pidx = Buffer.alloc(8);
+    // header remains zeroed
+    pidx.writeUInt16LE(1, 4); // firstEffectIndex points to second entry (skip header)
+    pidx.writeUInt8(0, 6);    // effect flags unused in this context
+    pidx.writeUInt8(16, 7);   // effectCount=1, pendulumEffectCount=0
+
+    const rebuilt = rebuildCardPartAsset(
+      originalIndex,
+      originalDesc,
+      newIndex,
+      newDesc,
+      originalPart,
+      pidx
+    );
+
+    expect(rebuilt.length).to.equal(originalPart.length);
+
+    const remappedStart = rebuilt.readUInt16LE(4);
+    const remappedEnd = rebuilt.readUInt16LE(6);
+
+    expect(remappedStart).to.equal(0);
+    expect(remappedEnd).to.equal(newDesc.length);
   });
 });

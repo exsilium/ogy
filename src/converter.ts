@@ -86,11 +86,11 @@ export function restoreCardAsset(
 function restoreData(dataArray: string[]): Buffer {
   const buffers = dataArray.map(str => {
     // Convert the string to a buffer using Latin-1 encoding
-    let buf = Buffer.from(str, 'latin1');
+    let buf = Buffer.from(str, 'utf8');
 
     // Ensure the buffer ends with a null byte
     if (buf[buf.length - 1] !== 0x00) {
-      buf = Buffer.concat([buf, Buffer.from('\u0000', 'latin1')]);
+      buf = Buffer.concat([buf, Buffer.from('\u0000', 'utf8')]);
     }
 
     // Calculate padding needed to align to the 4-byte boundary
@@ -108,9 +108,9 @@ function calculateIndices(dataArray: string[], start: number): number[] {
 
   dataArray.forEach(str => {
     // Convert string to Latin-1 buffer and ensure it ends with a null byte
-    let buf = Buffer.from(str, 'latin1');
+    let buf = Buffer.from(str, 'utf8');
     if (buf[buf.length - 1] !== 0x00) {
-      buf = Buffer.concat([buf, Buffer.from('\u0000', 'latin1')]);
+      buf = Buffer.concat([buf, Buffer.from('\u0000', 'utf8')]);
     }
 
     // Add padding to maintain 4-byte alignment

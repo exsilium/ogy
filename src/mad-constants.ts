@@ -17,6 +17,9 @@ export const MAD_BUNDLE_FILES = {
   
   /** CARD_Indx AssetBundle - Contains card index data */
   CARD_INDX: '507764bc',
+
+  /** Card_Part AssetBundle - Contains effect segment metadata */
+  CARD_PART: '52739c94',
 } as const;
 
 /**
@@ -26,6 +29,7 @@ export const MAD_BUNDLE_PATHS = {
   CARD_NAME: '74',
   CARD_DESC: '21',
   CARD_INDX: '50',
+  CARD_PART: '52',
 } as const;
 
 /**
@@ -41,6 +45,9 @@ export const MAD_CAB_FILES = {
   
   /** CAB file containing CARD_Indx data */
   CARD_INDX: 'CAB-103bc9061e47e31db180ec1ca6d5e74f',
+
+  /** CAB file containing Card_Part data */
+  CARD_PART: 'CAB-54275887d3203d3b4655ba82e613ecd8',
 } as const;
 
 /**

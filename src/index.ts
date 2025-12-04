@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import * as crypto from 'crypto';
+import { fileURLToPath } from 'url';
 import figlet from 'figlet';
 import { Command } from '@commander-js/extra-typings';
 import { YuGiOh, Transformer, DictionaryBuilder } from './compressor.js';
@@ -13,6 +14,12 @@ import { UMDISOReader } from './umdiso.js';
 import { NDSHandler } from './nds.js';
 import { decrypt, encrypt, findKey } from "./crypt.js";
 import { MAD_BUNDLE_FILES, MAD_BUNDLE_PATHS, MAD_CRYPTO_KEY } from './mad-constants.js';
+import { rebuildCardPartAsset, ensureCardPidxAvailable } from './mad-part.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.resolve(__dirname, '..');
+const CARD_PIDX_SOURCE = path.join(projectRoot, 'test', 'Card_Pidx.bytes.dec');
 
 const program = new Command();
 
@@ -116,26 +123,35 @@ chain
       process.exit(1);
     }
 
-    /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx bundles */
+    /* We check for the existence of CARD_Name, CARD_Desc, CARD_Indx and Card_Part bundles */
     /* If these files are not found, most likely the client has updated and the location of the files have moved */
     const variablePathName = await getMADVariableDir(resolvedPath);
     const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_NAME}/${MAD_BUNDLE_FILES.CARD_NAME}`);
     const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_DESC}/${MAD_BUNDLE_FILES.CARD_DESC}`);
     const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_INDX}/${MAD_BUNDLE_FILES.CARD_INDX}`);
+    const cardPartBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_PART}/${MAD_BUNDLE_FILES.CARD_PART}`);
 
-    if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc)) {
+    if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc) && fs.existsSync(cardPartBundlePathSrc)) {
       console.log("Correct input files found");
+    } else {
+      console.error("❌ Required CARD bundles not found. Game assets may have moved or been updated.");
+      process.exit(1);
     }
 
     const cardNameBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_NAME}.orig`;
     const cardDescBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_DESC}.orig`;
     const cardIndxBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_INDX}.orig`;
+    const cardPartBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_PART}.orig`;
 
     /* Copy the original files to the target directory only if they don't already exist */
     console.log("\n=== Backing up original AssetBundles ===");
     copyFileIfNotExists(cardNameBundlePathSrc, cardNameBundlePath);
     copyFileIfNotExists(cardDescBundlePathSrc, cardDescBundlePath);
     copyFileIfNotExists(cardIndxBundlePathSrc, cardIndxBundlePath);
+    copyFileIfNotExists(cardPartBundlePathSrc, cardPartBundlePath);
+
+    ensureCardPidxAvailable(resolvedTargetPath, 'Card_Pidx.decrypted.bin', CARD_PIDX_SOURCE);
+    console.log('✅ Ensured Card_Pidx.decrypted.bin is available in target directory');
 
     /* cardName */
     let assetBundle = new AssetBundle(cardNameBundlePath);
@@ -191,6 +207,24 @@ chain
       fs.writeFileSync(resolvedTargetPath + "/CARD_Indx.decrypted.bin", decryptedData);
     } else {
       console.error('Decryption failed for CARD_Indx.');
+      process.exit(1);
+    }
+
+    /* Card_Part */
+    assetBundle = new AssetBundle(cardPartBundlePath);
+    extractedAssetBundle = await assetBundle.extractAssetBundle(resolvedTargetPath);
+
+    for(const asset of extractedAssetBundle) {
+      await CABExtractor.extract(path.join(resolvedTargetPath, asset), resolvedTargetPath);
+    }
+
+    encryptedData = fs.readFileSync(resolvedTargetPath + "/Card_Part.bin");
+    decryptedData = decrypt(encryptedData, MAD_CRYPTO_KEY);
+
+    if (decryptedData.length > 0) {
+      fs.writeFileSync(resolvedTargetPath + "/Card_Part.decrypted.bin", decryptedData);
+    } else {
+      console.error('Decryption failed for Card_Part.');
       process.exit(1);
     }
 
@@ -317,14 +351,50 @@ chain
     }
     console.log("✅ Sanity check passed: entry counts match.");
 
+    console.log("\n=== Rebuilding Card_Part offsets ===");
+
+    const originalIndxPath = path.join(resolvedTargetPath, "CARD_Indx.decrypted.bin");
+    const newIndxPath = path.join(resolvedTargetPath, "CARD_Indx_New.decrypted.bin");
+    const originalPartPath = path.join(resolvedTargetPath, "Card_Part.decrypted.bin");
+    const newPartPath = path.join(resolvedTargetPath, "Card_Part_New.decrypted.bin");
+    const cardPidxPath = ensureCardPidxAvailable(resolvedTargetPath, 'Card_Pidx.decrypted.bin', CARD_PIDX_SOURCE);
+
+    if (!fs.existsSync(originalIndxPath) || !fs.existsSync(originalPartPath)) {
+      console.error("❌ Missing original CARD_Indx or Card_Part decrypted files in target directory.");
+      process.exit(1);
+    }
+
+    const originalIndxBuf = fs.readFileSync(originalIndxPath);
+    const newIndxBuf = fs.readFileSync(newIndxPath);
+    const originalPartBuf = fs.readFileSync(originalPartPath);
+    const cardPidxBuf = fs.readFileSync(cardPidxPath);
+
+    const rebuiltPartBuf = rebuildCardPartAsset(
+      originalIndxBuf,
+      origDescBuf,
+      newIndxBuf,
+      newDescBuf,
+      originalPartBuf,
+      cardPidxBuf
+    );
+
+    if (rebuiltPartBuf.length !== originalPartBuf.length) {
+      console.error("❌ Rebuilt Card_Part size mismatch. Aborting to keep data safe.");
+      process.exit(1);
+    }
+
+    fs.writeFileSync(newPartPath, rebuiltPartBuf);
+    console.log("✅ Card_Part offsets rebuilt");
+
     /* We check for the existence of CARD_Name, CARD_Desc and CARD_Indx bundles */
     /* If these files are not found, most likely the client has updated and the location of the files have moved */
     const variablePathName = await getMADVariableDir(resolvedPath);
     const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_NAME}/${MAD_BUNDLE_FILES.CARD_NAME}`);
     const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_DESC}/${MAD_BUNDLE_FILES.CARD_DESC}`);
     const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_INDX}/${MAD_BUNDLE_FILES.CARD_INDX}`);
+    const cardPartBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_PART}/${MAD_BUNDLE_FILES.CARD_PART}`);
 
-    if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc)) {
+    if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc) && fs.existsSync(cardPartBundlePathSrc)) {
       console.log("✅ Correct source files found for replacement");
     }
     else {
@@ -349,6 +419,11 @@ chain
     encryptedData = encrypt(decryptedData, MAD_CRYPTO_KEY);
     fs.writeFileSync(resolvedTargetPath + "/CARD_Indx_New.bin", encryptedData);
     console.log("✅ CARD_Indx encrypted");
+
+    decryptedData = fs.readFileSync(resolvedTargetPath + "/Card_Part_New.decrypted.bin");
+    encryptedData = encrypt(decryptedData, MAD_CRYPTO_KEY);
+    fs.writeFileSync(resolvedTargetPath + "/Card_Part_New.bin", encryptedData);
+    console.log("✅ Card_Part encrypted");
 
     console.log("\n=== Repackaging AssetBundles using in-memory update ===");
 
@@ -385,6 +460,17 @@ chain
     await assetBundle.updateAssetBundle(originalIndxAsset, newIndxAsset, cardIndxBundleNew);
     console.log("✅ CARD_Indx AssetBundle updated");
 
+    /* Update Card_Part AssetBundle */
+    console.log("\n📦 Processing Card_Part...");
+    const cardPartBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_PART}.orig`);
+    const cardPartBundleNew = path.join(resolvedTargetPath, MAD_BUNDLE_FILES.CARD_PART);
+    const originalPartAsset = path.join(resolvedTargetPath, "Card_Part.bin");
+    const newPartAsset = path.join(resolvedTargetPath, "Card_Part_New.bin");
+
+    assetBundle = new AssetBundle(cardPartBundleOrig);
+    await assetBundle.updateAssetBundle(originalPartAsset, newPartAsset, cardPartBundleNew);
+    console.log("✅ Card_Part AssetBundle updated");
+
     if (!options?.skipReplace) {
       console.log("\n=== Copying updated AssetBundles back to game directory ===");
 
@@ -397,6 +483,9 @@ chain
       
       copyFileSync(cardIndxBundleNew, cardIndxBundlePathSrc);
       console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_INDX} to game directory`);
+
+      copyFileSync(cardPartBundleNew, cardPartBundlePathSrc);
+      console.log(`✅ Copied ${MAD_BUNDLE_FILES.CARD_PART} to game directory`);
     } else {
       console.log("\n⏭️  Skipping replacement step (--skip-replace enabled). Updated bundles left in target directory.");
     }
@@ -438,8 +527,9 @@ chain
     const cardNameBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_NAME}.orig`);
     const cardDescBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_DESC}.orig`);
     const cardIndxBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_INDX}.orig`);
+    const cardPartBundleOrig = path.join(resolvedTargetPath, `${MAD_BUNDLE_FILES.CARD_PART}.orig`);
 
-    if(!fs.existsSync(cardNameBundleOrig) || !fs.existsSync(cardDescBundleOrig) || !fs.existsSync(cardIndxBundleOrig)) {
+    if(!fs.existsSync(cardNameBundleOrig) || !fs.existsSync(cardDescBundleOrig) || !fs.existsSync(cardIndxBundleOrig) || !fs.existsSync(cardPartBundleOrig)) {
       console.error("❌ Original backup files (.orig) not found in target directory.");
       console.error("   Make sure you have run 'mad2pot' first to create the backups.");
       process.exit(1);
@@ -452,8 +542,9 @@ chain
     const cardNameBundlePathDest = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_NAME}/${MAD_BUNDLE_FILES.CARD_NAME}`);
     const cardDescBundlePathDest = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_DESC}/${MAD_BUNDLE_FILES.CARD_DESC}`);
     const cardIndxBundlePathDest = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_INDX}/${MAD_BUNDLE_FILES.CARD_INDX}`);
+    const cardPartBundlePathDest = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_PART}/${MAD_BUNDLE_FILES.CARD_PART}`);
 
-    if(!fs.existsSync(cardNameBundlePathDest) || !fs.existsSync(cardDescBundlePathDest) || !fs.existsSync(cardIndxBundlePathDest)) {
+    if(!fs.existsSync(cardNameBundlePathDest) || !fs.existsSync(cardDescBundlePathDest) || !fs.existsSync(cardIndxBundlePathDest) || !fs.existsSync(cardPartBundlePathDest)) {
       console.error("❌ Game AssetBundle files not found. Game may have been moved or updated.");
       process.exit(1);
     }
@@ -466,8 +557,9 @@ chain
     const nameIdentical = areFilesIdentical(cardNameBundleOrig, cardNameBundlePathDest);
     const descIdentical = areFilesIdentical(cardDescBundleOrig, cardDescBundlePathDest);
     const indxIdentical = areFilesIdentical(cardIndxBundleOrig, cardIndxBundlePathDest);
+    const partIdentical = areFilesIdentical(cardPartBundleOrig, cardPartBundlePathDest);
 
-    if (nameIdentical && descIdentical && indxIdentical) {
+    if (nameIdentical && descIdentical && indxIdentical && partIdentical) {
       console.log("✅ All game files are already identical to the original backups");
       console.log("   No action needed - game directory already has the reverted files");
       console.log("\n=== mad-revert completed ===");
@@ -496,6 +588,13 @@ chain
       console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_INDX} to original`);
     } else {
       console.log(`⏭️  Skipped ${MAD_BUNDLE_FILES.CARD_INDX} (already matches original)`);
+    }
+
+    if (!partIdentical) {
+      copyFileSync(cardPartBundleOrig, cardPartBundlePathDest);
+      console.log(`✅ Reverted ${MAD_BUNDLE_FILES.CARD_PART} to original`);
+    } else {
+      console.log(`⏭️  Skipped ${MAD_BUNDLE_FILES.CARD_PART} (already matches original)`);
     }
 
     console.log("\n=== mad-revert completed successfully! ===");
