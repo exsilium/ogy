@@ -160,23 +160,38 @@ chain
     if (!fs.existsSync(cardPidxDecryptedPath)) {
       console.log("Extracting and decrypting Card_Pidx...");
       
-      /* Extract Card_Pidx AssetBundle */
-      let assetBundle = new AssetBundle(cardPidxBundlePath);
-      let extractedAssetBundle = await assetBundle.extractAssetBundle(resolvedTargetPath);
+      try {
+        /* Extract Card_Pidx AssetBundle */
+        let assetBundle = new AssetBundle(cardPidxBundlePath);
+        let extractedAssetBundle = await assetBundle.extractAssetBundle(resolvedTargetPath);
 
-      for(const asset of extractedAssetBundle) {
-        await CABExtractor.extract(path.join(resolvedTargetPath, asset), resolvedTargetPath);
-      }
+        if (extractedAssetBundle.length === 0) {
+          throw new Error('No assets extracted from Card_Pidx bundle');
+        }
 
-      /* Decrypt Card_Pidx.bin */
-      let encryptedData = fs.readFileSync(resolvedTargetPath + "/Card_Pidx.bin");
-      let decryptedData = decrypt(encryptedData, MAD_CRYPTO_KEY);
+        for(const asset of extractedAssetBundle) {
+          await CABExtractor.extract(path.join(resolvedTargetPath, asset), resolvedTargetPath);
+        }
 
-      if (decryptedData.length > 0) {
-        fs.writeFileSync(cardPidxDecryptedPath, decryptedData);
-        console.log('✅ Card_Pidx.decrypted.bin created successfully');
-      } else {
-        console.error('Decryption failed for Card_Pidx.');
+        /* Verify Card_Pidx.bin exists after extraction */
+        const cardPidxBinPath = path.join(resolvedTargetPath, "Card_Pidx.bin");
+        if (!fs.existsSync(cardPidxBinPath)) {
+          throw new Error(`Card_Pidx.bin not found after extraction at ${cardPidxBinPath}`);
+        }
+
+        /* Decrypt Card_Pidx.bin */
+        let encryptedData = fs.readFileSync(cardPidxBinPath);
+        let decryptedData = decrypt(encryptedData, MAD_CRYPTO_KEY);
+
+        if (decryptedData.length > 0) {
+          fs.writeFileSync(cardPidxDecryptedPath, decryptedData);
+          console.log('✅ Card_Pidx.decrypted.bin created successfully');
+        } else {
+          console.error('Decryption failed for Card_Pidx.');
+          process.exit(1);
+        }
+      } catch (error) {
+        console.error('❌ Failed to process Card_Pidx bundle:', error instanceof Error ? error.message : error);
         process.exit(1);
       }
     } else {
