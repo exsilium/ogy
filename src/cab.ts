@@ -208,6 +208,7 @@ class SerializedFile {
       this.fileName === `${MAD_BUNDLE_PATHS.CARD_INDX}/${MAD_BUNDLE_FILES.CARD_INDX}` ||
       this.fileName === `${MAD_BUNDLE_PATHS.CARD_DESC}/${MAD_BUNDLE_FILES.CARD_DESC}` ||
       this.fileName === `${MAD_BUNDLE_PATHS.CARD_PART}/${MAD_BUNDLE_FILES.CARD_PART}` ||
+      this.fileName === `${MAD_BUNDLE_PATHS.CARD_PIDX}/${MAD_BUNDLE_FILES.CARD_PIDX}` ||
       // Test files Card_Indx, Card_Part, Card_Pidx
       this.fileName === "e9/e9aa18bf" || this.fileName === "eb/ebaee097" || this.fileName === "49/494e34d0"
       ) {

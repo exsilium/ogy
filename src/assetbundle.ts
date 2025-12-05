@@ -429,8 +429,8 @@ class AssetBundle {
     return filesWritten;
   }
 
-  async scanForTextAssets(targetSuffixes: string[]): Promise<Array<{assetPath: string, bundlePath: string}>> {
-    const results: Array<{assetPath: string, bundlePath: string}> = [];
+  async scanForTextAssets(targetSuffixes: string[]): Promise<Array<{assetPath: string, bundlePath: string, cabPath: string}>> {
+    const results: Array<{assetPath: string, bundlePath: string, cabPath: string}> = [];
     
     try {
       const buffer = fs.readFileSync(this.filePath);
@@ -489,7 +489,8 @@ class AssetBundle {
           for (const match of matches) {
             results.push({
               assetPath: match,
-              bundlePath: this.filePath
+              bundlePath: this.filePath,
+              cabPath: directory.path
             });
           }
         }

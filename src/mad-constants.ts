@@ -20,6 +20,9 @@ export const MAD_BUNDLE_FILES = {
 
   /** Card_Part AssetBundle - Contains effect segment metadata */
   CARD_PART: '52739c94',
+
+  /** Card_Pidx AssetBundle - Contains pointer index data */
+  CARD_PIDX: '494e34d0',
 } as const;
 
 /**
@@ -30,6 +33,7 @@ export const MAD_BUNDLE_PATHS = {
   CARD_DESC: '21',
   CARD_INDX: '50',
   CARD_PART: '52',
+  CARD_PIDX: '49',
 } as const;
 
 /**
@@ -48,6 +52,9 @@ export const MAD_CAB_FILES = {
 
   /** CAB file containing Card_Part data */
   CARD_PART: 'CAB-54275887d3203d3b4655ba82e613ecd8',
+
+  /** CAB file containing Card_Pidx data */
+  CARD_PIDX: 'CAB-e2d422b099a8044fe09bcca800b0378a',
 } as const;
 
 /**
@@ -59,6 +66,7 @@ export const MAD_ASSET_OBJECT_NAMES = {
   CARD_DESC: 'CARD_Desc',
   CARD_INDX: 'CARD_Indx',
   CARD_PART: 'Card_Part',
+  CARD_PIDX: 'Card_Pidx',
 } as const;
 
 /**
@@ -69,6 +77,7 @@ export const MAD_CONTAINER_PATHS = {
   CARD_DESC: 'assets/resourcesassetbundle/card/data/1d985b8c743240fd/en-us/card_desc.bytes',
   CARD_INDX: 'assets/resourcesassetbundle/card/data/1d985b8c743240fd/en-us/card_indx.bytes',
   CARD_PART: 'assets/resourcesassetbundle/card/data/1d985b8c743240fd/en-us/card_part.bytes',
+  CARD_PIDX: 'assets/resourcesassetbundle/card/data/1d985b8c743240fd/en-us/card_pidx.bytes',
 } as const;
 
 /**

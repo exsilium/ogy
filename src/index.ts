@@ -662,7 +662,7 @@ chain
 
 chain
   .command("mad-locate <game_dir>")
-  .description("Locate MAD AssetBundles containing CARD files (card_name.bytes, card_desc.bytes, card_indx.bytes)")
+  .description("Locate MAD AssetBundles containing CARD files (card_name.bytes, card_desc.bytes, card_indx.bytes, card_part.bytes, card_pidx.bytes)")
   .action(async (game_dir) => {
     /* Expand tilde in path */
     if (game_dir.startsWith('~')) {
@@ -682,6 +682,8 @@ chain
       "card_desc.bytes",
       "card_name.bytes",
       "card_indx.bytes",
+      "card_part.bytes",
+      "card_pidx.bytes",
     ];
 
     // Find LocalData directory
@@ -695,6 +697,85 @@ chain
 
     // Track which target files have been found
     const foundFiles = new Set<string>();
+    const locatedData = new Map<string, { assetPath: string; bundlePath: string; cabPath: string }>();
+
+    async function syncMadConstants(matches: Map<string, { assetPath: string; bundlePath: string; cabPath: string }>): Promise<void> {
+      const suffixToKey: Record<string, keyof typeof MAD_BUNDLE_FILES> = {
+        "card_name.bytes": "CARD_NAME",
+        "card_desc.bytes": "CARD_DESC",
+        "card_indx.bytes": "CARD_INDX",
+        "card_part.bytes": "CARD_PART",
+        "card_pidx.bytes": "CARD_PIDX",
+      };
+
+      const constantsPath = path.join(projectRoot, 'src', 'mad-constants.ts');
+      let fileContents: string;
+
+      try {
+        fileContents = await fs.promises.readFile(constantsPath, 'utf8');
+      } catch (err) {
+        console.error(`⚠️ Unable to read mad-constants.ts at ${constantsPath}:`, err);
+        return;
+      }
+
+      const changes: string[] = [];
+
+      function updateLiteral(
+        content: string,
+        objectName: string,
+        propertyName: string,
+        newValue: string
+      ): string {
+        const regex = new RegExp(`(${objectName}\\s*=\\s*{[\\s\\S]*?${propertyName}:\\s*')([^']*)(')`);
+        const match = regex.exec(content);
+
+        if (!match) {
+          console.warn(`⚠️ Could not locate ${objectName}.${propertyName} in mad-constants.ts`);
+          return content;
+        }
+
+        const currentValue = match[2];
+        if (currentValue === newValue) {
+          return content;
+        }
+
+        changes.push(`${objectName}.${propertyName}`);
+        return content.replace(regex, `$1${newValue}$3`);
+      }
+
+      for (const [suffix, data] of matches.entries()) {
+        const key = suffixToKey[suffix.toLowerCase()];
+        if (!key) {
+          continue;
+        }
+
+        const normalizedBundlePath = path.normalize(data.bundlePath);
+        const bundleFile = path.basename(normalizedBundlePath);
+        const bundleDir = path.basename(path.dirname(normalizedBundlePath));
+        const cabName = data.cabPath;
+        const containerPath = data.assetPath;
+
+        fileContents = updateLiteral(fileContents, 'MAD_BUNDLE_FILES', key, bundleFile);
+        fileContents = updateLiteral(fileContents, 'MAD_BUNDLE_PATHS', key, bundleDir);
+        fileContents = updateLiteral(fileContents, 'MAD_CAB_FILES', key, cabName);
+        fileContents = updateLiteral(fileContents, 'MAD_CONTAINER_PATHS', key, containerPath);
+      }
+
+      if (changes.length === 0) {
+        console.log("\nmad-constants.ts already up to date with located assets.");
+        return;
+      }
+
+      try {
+        await fs.promises.writeFile(constantsPath, fileContents, 'utf8');
+        console.log("\nUpdated mad-constants.ts entries:");
+        for (const entry of changes) {
+          console.log(`  - ${entry}`);
+        }
+      } catch (err) {
+        console.error(`⚠️ Failed to write updated mad-constants.ts at ${constantsPath}:`, err);
+      }
+    }
 
     // Recursively walk all files in LocalData
     async function walkFiles(dir: string): Promise<boolean> {
@@ -717,18 +798,21 @@ chain
               console.log("FOUND MATCH:");
               console.log(`  Asset Path : ${match.assetPath}`);
               console.log(`  In Bundle  : ${match.bundlePath}`);
+              console.log(`  CAB File   : ${match.cabPath}`);
               console.log("--------------------------------------------------");
               
               // Track which target file was found
               for (const suffix of TARGET_SUFFIXES) {
                 if (match.assetPath.toLowerCase().endsWith(suffix.toLowerCase())) {
                   foundFiles.add(suffix);
+                  locatedData.set(suffix, match);
                   break;
                 }
               }
               
               // Check if all target files have been found
               if (foundFiles.size === TARGET_SUFFIXES.length) {
+                await syncMadConstants(locatedData);
                 console.log("\nAll target files located. Exiting...");
                 return true;
               }
