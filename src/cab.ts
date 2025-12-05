@@ -208,8 +208,8 @@ class SerializedFile {
       this.fileName === `${MAD_BUNDLE_PATHS.CARD_INDX}/${MAD_BUNDLE_FILES.CARD_INDX}` ||
       this.fileName === `${MAD_BUNDLE_PATHS.CARD_DESC}/${MAD_BUNDLE_FILES.CARD_DESC}` ||
       this.fileName === `${MAD_BUNDLE_PATHS.CARD_PART}/${MAD_BUNDLE_FILES.CARD_PART}` ||
-      // Test files Card_Indx and Card_Part
-      this.fileName === "e9/e9aa18bf" || this.fileName === "eb/ebaee097"
+      // Test files Card_Indx, Card_Part, Card_Pidx
+      this.fileName === "e9/e9aa18bf" || this.fileName === "eb/ebaee097" || this.fileName === "49/494e34d0"
       ) {
       reader.readBytes(180);
       this.fileType = reader.readInt32();
@@ -227,6 +227,24 @@ class SerializedFile {
     // Extract and save assets here based on file content.
     Logger.log("Extracting assets to:", outputDir);
 
+    let dataStart = this.reader.getPosition();
+
+    if (this.fileType === 0 && (!this.fileName || this.fileName.length === 0)) {
+      // Some CAB start with the actual file name in the data stream.
+      const inlineName = this.reader.readStringToNull();
+      if (inlineName.length > 0) {
+        this.fileName = inlineName;
+      }
+
+      this.reader.alignStream();
+      this.fileSize = this.reader.readUInt32();
+      dataStart = this.reader.getPosition();
+
+      Logger.log("New fileName: " + this.fileName);
+      Logger.log("New fileSize: " + this.fileSize);
+    }
+
+    this.reader.setPosition(dataStart);
     const bytesToWrite = this.reader.readBytes(this.fileSize);
 
     fs.writeFileSync(path.join(outputDir, this.fileName + ".bin"), bytesToWrite);

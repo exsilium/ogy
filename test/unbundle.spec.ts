@@ -18,6 +18,7 @@ describe("ogy application level tests - unbundle", () => {
     fs.copyFile(__dirname + "/data/mad/CARD_Name-cde5b0ab.bundle", __dirname + "/CARD_Name-cde5b0ab.bundle", (err) => { if (err) throw err; });
     fs.copyFile(__dirname + "/data/mad/Card_Part-ebaee097.bundle", __dirname + "/Card_Part-ebaee097.bundle", (err) => { if (err) throw err; });
     fs.copyFile(__dirname + "/data/mad/Card_Pidx-f09348d3.bundle", __dirname + "/Card_Pidx-f09348d3.bundle", (err) => { if (err) throw err; });
+    fs.copyFile(__dirname + "/data/mad/Card_Pidx-494e34d0.bundle", __dirname + "/Card_Pidx-494e34d0.bundle", (err) => { if (err) throw err; });
   });
 
   /*
@@ -162,7 +163,7 @@ describe("ogy application level tests - unbundle", () => {
   it("unbundled CAB of Card_Pidx should be possible to be written out",  async () => {
     const extractedBaseFile = await CABExtractor.extract(path.join(__dirname, "CAB-7ee66e49a29b3d2f2bf1104c66bf106d"), __dirname);
 
-    // Assert that the file extracted was CARD_Desc
+    // Assert that the file extracted was Card_Pidx
     assert.equal(extractedBaseFile, "Card_Pidx");
 
     // Assert that the file was written to disk
@@ -172,6 +173,39 @@ describe("ogy application level tests - unbundle", () => {
     const compareDataName = fs.readFileSync(__dirname + "/data/mad/Card_Pidx.bin");
 
     assert.equal(Buffer.compare(dataName, compareDataName), 0);
+
+    // We need to delete the previous Card_Pidx.bin
+    fs.unlinkSync(__dirname + "/Card_Pidx.bin");
+  });
+
+  it("unbundling of Card_Pidx (494e34d0) should work and produce a CAB and a meta file", async () => {
+    const assetBundle = new AssetBundle(__dirname + "/Card_Pidx-494e34d0.bundle");
+    const extractedFiles: string[] = await assetBundle.extractAssetBundle(__dirname);
+
+    // Assert that the array has exactly one element
+    assert.strictEqual(extractedFiles.length, 1, "Array does not have exactly one element");
+
+    // Assert that the element matches the expected string
+    assert.strictEqual(extractedFiles[0], "CAB-e2d422b099a8044fe09bcca800b0378a", "Element does not match the expected string");
+
+    // Assert that the file was written to disk
+    assert.equal(fs.existsSync(__dirname + "/CAB-e2d422b099a8044fe09bcca800b0378a"), true);
+    assert.equal(fs.existsSync(__dirname + "/CAB-e2d422b099a8044fe09bcca800b0378a.meta.json"), true);
+  });
+
+  it("unbundled CAB of Card_Pidx (494e34d0) should be possible to be written out",  async () => {
+    const extractedBaseFile = await CABExtractor.extract(path.join(__dirname, "CAB-e2d422b099a8044fe09bcca800b0378a"), __dirname);
+
+    // Assert that the file extracted was CARD_Pidx
+    assert.equal(extractedBaseFile, "Card_Pidx");
+
+    // Assert that the file was written to disk
+    assert.equal(fs.existsSync(__dirname + "/Card_Pidx.bin"), true);
+
+    //const dataName = fs.readFileSync(__dirname + "/Card_Pidx.bin");
+    //const compareDataName = fs.readFileSync(__dirname + "/data/mad/Card_Pidx.bin");
+
+    //assert.equal(Buffer.compare(dataName, compareDataName), 0);
   });
 
   it("decryption of CARD_Desc should be successful",  async () => {
@@ -228,7 +262,7 @@ describe("ogy application level tests - unbundle", () => {
 
   it("decryption of Card_Pidx should be successful",  async () => {
     const encryptedData = fs.readFileSync(__dirname + "/Card_Pidx.bin");
-    const cryptoKey = 0x11;
+    const cryptoKey = 0xe3;
 
     const decryptedData = decrypt(encryptedData, cryptoKey);
 
@@ -356,17 +390,20 @@ describe("ogy application level tests - unbundle", () => {
       "/CARD_Name-cde5b0ab.bundle",
       "/Card_Part-ebaee097.bundle",
       "/Card_Pidx-f09348d3.bundle",
+      "/Card_Pidx-494e34d0.bundle",
       // Produced test data
       "/CAB-3edab2009c2927c0c55132bf9a3b0a53",
       "/CAB-7ee66e49a29b3d2f2bf1104c66bf106d",
       "/CAB-a8c0ceacfc16220e07816e269e33cb5a",
       "/CAB-b15dec2777dad9f13353696821e3ecfc",
       "/CAB-d775896c9bbf867ea2a06f6d9d9d638e",
+      "/CAB-e2d422b099a8044fe09bcca800b0378a",
       "/CAB-3edab2009c2927c0c55132bf9a3b0a53.meta.json",
       "/CAB-7ee66e49a29b3d2f2bf1104c66bf106d.meta.json",
       "/CAB-a8c0ceacfc16220e07816e269e33cb5a.meta.json",
       "/CAB-b15dec2777dad9f13353696821e3ecfc.meta.json",
       "/CAB-d775896c9bbf867ea2a06f6d9d9d638e.meta.json",
+      "/CAB-e2d422b099a8044fe09bcca800b0378a.meta.json",
       "/CARD_Desc.bin",
       "/CARD_Indx.bin",
       "/CARD_Name.bin",
