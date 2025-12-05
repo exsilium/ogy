@@ -242,15 +242,11 @@ export function rebuildCardPartAsset(
   return toBuffer(updatedPartEntries);
 }
 
-export function ensureCardPidxAvailable(targetDir: string, destinationName: string, projectRelativeSource: string): string {
+export function ensureCardPidxAvailable(targetDir: string, destinationName: string): string {
   const destinationPath = `${targetDir}/${destinationName}`;
 
   if (!fs.existsSync(destinationPath)) {
-    if (!fs.existsSync(projectRelativeSource)) {
-      throw new Error(`Card_Pidx source not found at ${projectRelativeSource}`);
-    }
-
-    fs.copyFileSync(projectRelativeSource, destinationPath);
+    throw new Error(`Card_Pidx file not found at ${destinationPath}. Please run mad2pot first to extract and decrypt the Pidx bundle.`);
   }
 
   return destinationPath;
