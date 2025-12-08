@@ -1,0 +1,12 @@
+# Pontoon configuration for this repository
+
+# Locales enabled in Pontoon
+locales = [
+    "en",
+    "et",
+]
+
+# Map all POT templates in l10n/templates/ to PO files in l10n/<locale>/
+[[paths]]
+reference = "l10n/templates/**.pot"
+l10n      = "l10n/{locale}/**.po"
