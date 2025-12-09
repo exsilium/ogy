@@ -1,0 +1,9 @@
+basepath = "."
+locales = [
+  "en",
+  "et",
+]
+
+[[paths]]
+  reference = "l10n/templates/*.pot"
+  l10n = "l10n/{locale}/*.po"
