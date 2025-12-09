@@ -20,7 +20,6 @@ import { rebuildAssetBundleWithUnityPy } from './unitypy.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
-const CARD_PIDX_SOURCE = path.join(projectRoot, 'test', 'Card_Pidx.bytes.dec');
 
 const program = new Command();
 
@@ -124,15 +123,16 @@ chain
       process.exit(1);
     }
 
-    /* We check for the existence of CARD_Name, CARD_Desc, CARD_Indx and Card_Part bundles */
+    /* We check for the existence of CARD_Name, CARD_Desc, CARD_Indx, Card_Part, and Card_Pidx bundles */
     /* If these files are not found, most likely the client has updated and the location of the files have moved */
     const variablePathName = await getMADVariableDir(resolvedPath);
     const cardNameBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_NAME}/${MAD_BUNDLE_FILES.CARD_NAME}`);
     const cardDescBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_DESC}/${MAD_BUNDLE_FILES.CARD_DESC}`);
     const cardIndxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_INDX}/${MAD_BUNDLE_FILES.CARD_INDX}`);
     const cardPartBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_PART}/${MAD_BUNDLE_FILES.CARD_PART}`);
+    const cardPidxBundlePathSrc = path.join(resolvedPath, `/LocalData/${variablePathName}/0000/${MAD_BUNDLE_PATHS.CARD_PIDX}/${MAD_BUNDLE_FILES.CARD_PIDX}`);
 
-    if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc) && fs.existsSync(cardPartBundlePathSrc)) {
+    if(fs.existsSync(cardNameBundlePathSrc) && fs.existsSync(cardDescBundlePathSrc) && fs.existsSync(cardIndxBundlePathSrc) && fs.existsSync(cardPartBundlePathSrc) && fs.existsSync(cardPidxBundlePathSrc)) {
       console.log("Correct input files found");
     } else {
       console.error("❌ Required CARD bundles not found. Game assets may have moved or been updated.");
@@ -143,6 +143,7 @@ chain
     const cardDescBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_DESC}.orig`;
     const cardIndxBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_INDX}.orig`;
     const cardPartBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_PART}.orig`;
+    const cardPidxBundlePath = resolvedTargetPath + `/${MAD_BUNDLE_FILES.CARD_PIDX}.orig`;
 
     /* Copy the original files to the target directory only if they don't already exist */
     console.log("\n=== Backing up original AssetBundles ===");
@@ -150,9 +151,52 @@ chain
     copyFileIfNotExists(cardDescBundlePathSrc, cardDescBundlePath);
     copyFileIfNotExists(cardIndxBundlePathSrc, cardIndxBundlePath);
     copyFileIfNotExists(cardPartBundlePathSrc, cardPartBundlePath);
+    copyFileIfNotExists(cardPidxBundlePathSrc, cardPidxBundlePath);
 
-    ensureCardPidxAvailable(resolvedTargetPath, 'Card_Pidx.decrypted.bin', CARD_PIDX_SOURCE);
-    console.log('✅ Ensured Card_Pidx.decrypted.bin is available in target directory');
+    /* Process Card_Pidx bundle: extract, decrypt, and prepare for use */
+    console.log("\n=== Processing Card_Pidx AssetBundle ===");
+    const cardPidxDecryptedPath = path.join(resolvedTargetPath, 'Card_Pidx.decrypted.bin');
+    
+    if (!fs.existsSync(cardPidxDecryptedPath)) {
+      console.log("Extracting and decrypting Card_Pidx...");
+      
+      try {
+        /* Extract Card_Pidx AssetBundle */
+        let assetBundle = new AssetBundle(cardPidxBundlePath);
+        let extractedAssetBundle = await assetBundle.extractAssetBundle(resolvedTargetPath);
+
+        if (extractedAssetBundle.length === 0) {
+          throw new Error('No assets extracted from Card_Pidx bundle');
+        }
+
+        for(const asset of extractedAssetBundle) {
+          await CABExtractor.extract(path.join(resolvedTargetPath, asset), resolvedTargetPath);
+        }
+
+        /* Verify Card_Pidx.bin exists after extraction */
+        const cardPidxBinPath = path.join(resolvedTargetPath, "Card_Pidx.bin");
+        if (!fs.existsSync(cardPidxBinPath)) {
+          throw new Error(`Card_Pidx.bin not found after extraction at ${cardPidxBinPath}`);
+        }
+
+        /* Decrypt Card_Pidx.bin */
+        let encryptedData = fs.readFileSync(cardPidxBinPath);
+        let decryptedData = decrypt(encryptedData, MAD_CRYPTO_KEY);
+
+        if (decryptedData.length > 0) {
+          fs.writeFileSync(cardPidxDecryptedPath, decryptedData);
+          console.log('✅ Card_Pidx.decrypted.bin created successfully');
+        } else {
+          console.error('Decryption failed for Card_Pidx.');
+          process.exit(1);
+        }
+      } catch (error) {
+        console.error('❌ Failed to process Card_Pidx bundle:', error instanceof Error ? error.message : error);
+        process.exit(1);
+      }
+    } else {
+      console.log('✅ Card_Pidx.decrypted.bin already exists in target directory');
+    }
 
     /* cardName */
     let assetBundle = new AssetBundle(cardNameBundlePath);
@@ -360,7 +404,7 @@ chain
     const newIndxPath = path.join(resolvedTargetPath, "CARD_Indx_New.decrypted.bin");
     const originalPartPath = path.join(resolvedTargetPath, "Card_Part.decrypted.bin");
     const newPartPath = path.join(resolvedTargetPath, "Card_Part_New.decrypted.bin");
-    const cardPidxPath = ensureCardPidxAvailable(resolvedTargetPath, 'Card_Pidx.decrypted.bin', CARD_PIDX_SOURCE);
+    const cardPidxPath = ensureCardPidxAvailable(resolvedTargetPath, 'Card_Pidx.decrypted.bin');
 
     if (!fs.existsSync(originalIndxPath) || !fs.existsSync(originalPartPath)) {
       console.error("❌ Missing original CARD_Indx or Card_Part decrypted files in target directory.");
