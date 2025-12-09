@@ -960,8 +960,15 @@ class AssetBundle {
     // We know metadataSize tells us the total size of metadata
     // Let's position ourselves based on that
     
+    // Constants for SerializedFile object table structure
+    const OBJECT_ENTRY_SIZE = 24; // pathId (8) + byteStart (8) + byteSize (4) + typeId (4)
+    const OBJECT_ENTRY_PATHID_SIZE = 8;
+    const OBJECT_ENTRY_BYTESTART_SIZE = 8;
+    const MAX_OBJECT_COUNT = 1000; // Reasonable upper bound for object count
+    const MAX_OBJECT_BYTESIZE = 50 * 1024 * 1024; // 50MB - reasonable max for a single object
+    
     // Try to find object count by searching for a sensible value
-    // Object counts are typically small (< 100 for most bundles)
+    // Object counts are typically small (< 100 for most bundles, but can be larger)
     let objectCountOffset = -1;
     let objectCount = 0;
     
@@ -972,15 +979,16 @@ class AssetBundle {
     Logger.log(`  Searching for object table between offset ${searchStart} and ${searchEnd}`);
     
     // Look for object count (should be a small positive integer followed by object data)
-    for (let pos = searchStart; pos < searchEnd - 24; pos += 4) {
+    for (let pos = searchStart; pos < searchEnd - OBJECT_ENTRY_SIZE; pos += 4) {
       const potentialCount = updatedCABData.readInt32LE(pos);
-      // Object count should be small and positive
-      if (potentialCount > 0 && potentialCount < 100) {
+      // Object count should be positive and within reasonable bounds
+      if (potentialCount > 0 && potentialCount < MAX_OBJECT_COUNT) {
         // Verify this looks like an object table by checking the next entry
-        // Object entry: pathId (8), byteStart (8), byteSize (4), typeId (4) = 24 bytes
-        const nextByteSize = updatedCABData.readUInt32LE(pos + 4 + 8 + 8);
-        // Byte size should be reasonable (not huge, not negative)
-        if (nextByteSize > 0 && nextByteSize < 10000000) {
+        // Calculate offset to byteSize field in first object entry
+        const byteSizeOffset = pos + 4 + OBJECT_ENTRY_PATHID_SIZE + OBJECT_ENTRY_BYTESTART_SIZE;
+        const nextByteSize = updatedCABData.readUInt32LE(byteSizeOffset);
+        // Byte size should be reasonable (positive and not exceeding max)
+        if (nextByteSize > 0 && nextByteSize < MAX_OBJECT_BYTESIZE) {
           objectCountOffset = pos;
           objectCount = potentialCount;
           Logger.log(`  Found potential object table at offset ${pos} with count ${potentialCount}`);
@@ -998,13 +1006,13 @@ class AssetBundle {
     Logger.log(`  Object count: ${objectCount}`);
     
     // Read and update object information
-    // Each object entry is 24 bytes: pathId (8) + byteStart (8) + byteSize (4) + typeId (4)
+    // Each object entry is OBJECT_ENTRY_SIZE bytes
     for (let i = 0; i < objectCount; i++) {
       const objOffset = cabReader.getPosition();
       const pathId = updatedCABData.readBigInt64LE(objOffset);
-      const byteStart = Number(updatedCABData.readBigInt64LE(objOffset + 8));
-      const byteSize = updatedCABData.readUInt32LE(objOffset + 16);
-      const typeId = updatedCABData.readInt32LE(objOffset + 20);
+      const byteStart = Number(updatedCABData.readBigInt64LE(objOffset + OBJECT_ENTRY_PATHID_SIZE));
+      const byteSize = updatedCABData.readUInt32LE(objOffset + OBJECT_ENTRY_PATHID_SIZE + OBJECT_ENTRY_BYTESTART_SIZE);
+      const typeId = updatedCABData.readInt32LE(objOffset + OBJECT_ENTRY_PATHID_SIZE + OBJECT_ENTRY_BYTESTART_SIZE + 4);
       
       Logger.log(`  Object ${i}: pathId=${pathId}, byteStart=${byteStart}, byteSize=${byteSize}, typeId=${typeId}`);
       
@@ -1014,16 +1022,16 @@ class AssetBundle {
       
       if (objectDataOffset === assetOffset) {
         // This is the object we're modifying - update its byteSize
-        updatedCABData.writeUInt32LE(newAssetData.length, objOffset + 16);
+        updatedCABData.writeUInt32LE(newAssetData.length, objOffset + OBJECT_ENTRY_PATHID_SIZE + OBJECT_ENTRY_BYTESTART_SIZE);
         Logger.log(`  ✅ Updated object ${i} byteSize from ${byteSize} to ${newAssetData.length}`);
       } else if (objectDataOffset > assetOffset) {
         // This object comes after our modified asset - update its byteStart
         const newByteStart = byteStart + sizeDelta;
-        updatedCABData.writeBigInt64LE(BigInt(newByteStart), objOffset + 8);
+        updatedCABData.writeBigInt64LE(BigInt(newByteStart), objOffset + OBJECT_ENTRY_PATHID_SIZE);
         Logger.log(`  ✅ Updated object ${i} byteStart from ${byteStart} to ${newByteStart}`);
       }
       
-      cabReader.readBytes(24); // Move to next object
+      cabReader.readBytes(OBJECT_ENTRY_SIZE); // Move to next object
     }
     
     // Patch the total CAB fileSize in the header (64-bit big-endian at offset 0x18)
