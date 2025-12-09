@@ -877,57 +877,121 @@ class AssetBundle {
 
     // Build new CAB with updated asset
     const assetEnd = assetOffset + originalAssetData.length;
-    const newCABSize = uncompressedCABData.length - originalAssetData.length + newAssetData.length;
+    const sizeDelta = newAssetData.length - originalAssetData.length;
+    const newCABSize = uncompressedCABData.length + sizeDelta;
     const updatedCABData = Buffer.alloc(newCABSize);
 
     uncompressedCABData.copy(updatedCABData, 0, 0, assetOffset); // before asset
     newAssetData.copy(updatedCABData, assetOffset);               // new asset
     uncompressedCABData.copy(updatedCABData, assetOffset + newAssetData.length, assetEnd); // after asset
 
-    // Update the fileSize field in the CAB header
-    // The CAB has a SerializedFile structure. We need to patch the fileSize field.
-    // Parse the CAB header to find the fileSize offset
+    Logger.log(`  Size delta: ${sizeDelta} bytes`);
+    Logger.log(`  New CAB size: ${updatedCABData.length} bytes`);
+
+    // Now we need to update the SerializedFile metadata
+    // Parse the CAB header to understand the structure
     const cabReader = new BinaryReader(updatedCABData);
     cabReader.readBytes(4); // placeholder 1
     cabReader.readBytes(4); // placeholder 2
-    cabReader.readBytes(4); // version
+    const version = cabReader.readBigEndianUInt32(); // version
     cabReader.readBytes(4); // placeholder 3
     cabReader.readBytes(1); // swapEndianess
     cabReader.alignToBoundary(4); // align
-    cabReader.readBytes(4); // metadataSize
-    const cabHeaderFileSizeOffset = cabReader.getPosition(); // This is where fileSize is stored (0x18)
     
-    // Skip to dataOffset to find where we need to locate the asset fileSize field
-    cabReader.readBytes(8); // skip fileSize
+    const metadataSizeOffset = cabReader.getPosition();
+    const metadataSize = cabReader.readBigEndianUInt32(); // metadataSize
+    const cabFileSizeOffset = cabReader.getPosition();
+    const fileSize = cabReader.readBigEndianUInt64(); // fileSize (old value)
     const dataOffsetValue = Number(cabReader.readBigEndianUInt64()); // dataOffset
-    cabReader.readBytes(8); // unknown22
+    const unknown22 = cabReader.readBigEndianUInt64(); // unknown22
     
-    // Read the unityVersion string to get past it
+    // Read the unityVersion string
+    const unityVersionStart = cabReader.getPosition();
     while (updatedCABData[cabReader.getPosition()] !== 0) {
       cabReader.readBytes(1);
     }
     cabReader.readBytes(1); // skip null terminator
     
-    // Now we're at the metadata section, need to skip to dataOffset
-    cabReader.setPosition(dataOffsetValue);
+    // Now we're at the metadata section
+    // Switch to little endian for metadata
+    const metadataStart = cabReader.getPosition();
     
-    cabReader.readBytes(4); // fileType
-    // Read fileName (null-terminated)
-    while (updatedCABData[cabReader.getPosition()] !== 0) {
+    // Read target platform, type tree enabled, type count
+    const targetPlatform = updatedCABData.readInt32LE(cabReader.getPosition());
+    cabReader.readBytes(4);
+    const typeTreeEnabled = updatedCABData.readUInt8(cabReader.getPosition());
+    cabReader.readBytes(1);
+    const typeCount = updatedCABData.readInt32LE(cabReader.getPosition());
+    cabReader.readBytes(4);
+    
+    Logger.log(`\n📋 SerializedFile metadata:`);
+    Logger.log(`  Version: ${version}`);
+    Logger.log(`  Metadata size: ${metadataSize}`);
+    Logger.log(`  Data offset: ${dataOffsetValue}`);
+    Logger.log(`  Target platform: ${targetPlatform}`);
+    Logger.log(`  Type tree enabled: ${typeTreeEnabled}`);
+    Logger.log(`  Type count: ${typeCount}`);
+    
+    // Skip type information
+    for (let i = 0; i < typeCount; i++) {
+      const classId = updatedCABData.readInt32LE(cabReader.getPosition());
+      cabReader.readBytes(4);
+      const isStrippedType = updatedCABData.readUInt8(cabReader.getPosition());
       cabReader.readBytes(1);
+      const scriptTypeIndex = updatedCABData.readInt16LE(cabReader.getPosition());
+      cabReader.readBytes(2);
+      
+      if (version >= 17) {
+        // TypeHash
+        cabReader.readBytes(16);
+      }
+      
+      if (typeTreeEnabled) {
+        // Skip type tree data - this is complex, so we'll skip the whole block
+        // For now, we'll assume type tree is not enabled or we need to handle it differently
+        throw new Error("Type tree enabled - this case is not fully handled yet");
+      }
     }
-    cabReader.readBytes(1); // skip null terminator
-    cabReader.alignToBoundary(4); // align
     
-    const assetFileSizeOffset = cabReader.getPosition(); // This is where the asset's fileSize is stored
+    // Now read object count and object information
+    const objectCountOffset = cabReader.getPosition();
+    const objectCount = updatedCABData.readInt32LE(objectCountOffset);
+    cabReader.readBytes(4);
     
-    // Patch the asset fileSize (32-bit little-endian)
-    updatedCABData.writeUInt32LE(newAssetData.length, assetFileSizeOffset);
-    Logger.log(`  ✅ Patched asset fileSize at offset 0x${assetFileSizeOffset.toString(16)} to ${newAssetData.length}`);
+    Logger.log(`  Object count: ${objectCount}`);
+    
+    // Read and update object information
+    // Each object entry is 24 bytes: pathId (8) + byteStart (8) + byteSize (4) + typeId (4)
+    for (let i = 0; i < objectCount; i++) {
+      const objOffset = cabReader.getPosition();
+      const pathId = updatedCABData.readBigInt64LE(objOffset);
+      const byteStart = Number(updatedCABData.readBigInt64LE(objOffset + 8));
+      const byteSize = updatedCABData.readUInt32LE(objOffset + 16);
+      const typeId = updatedCABData.readInt32LE(objOffset + 20);
+      
+      Logger.log(`  Object ${i}: pathId=${pathId}, byteStart=${byteStart}, byteSize=${byteSize}, typeId=${typeId}`);
+      
+      // Check if this object's data starts at or after our modified asset
+      // If it starts exactly at the asset offset (relative to dataOffset), this is our target object
+      const objectDataOffset = dataOffsetValue + byteStart;
+      
+      if (objectDataOffset === assetOffset) {
+        // This is the object we're modifying - update its byteSize
+        updatedCABData.writeUInt32LE(newAssetData.length, objOffset + 16);
+        Logger.log(`  ✅ Updated object ${i} byteSize from ${byteSize} to ${newAssetData.length}`);
+      } else if (objectDataOffset > assetOffset) {
+        // This object comes after our modified asset - update its byteStart
+        const newByteStart = byteStart + sizeDelta;
+        updatedCABData.writeBigInt64LE(BigInt(newByteStart), objOffset + 8);
+        Logger.log(`  ✅ Updated object ${i} byteStart from ${byteStart} to ${newByteStart}`);
+      }
+      
+      cabReader.readBytes(24); // Move to next object
+    }
     
     // Patch the total CAB fileSize in the header (64-bit big-endian at offset 0x18)
-    updatedCABData.writeBigUInt64BE(BigInt(updatedCABData.length), 0x18);
-    Logger.log(`  ✅ Patched CAB header fileSize to ${updatedCABData.length}`);
+    updatedCABData.writeBigUInt64BE(BigInt(updatedCABData.length), cabFileSizeOffset);
+    Logger.log(`  ✅ Patched CAB header fileSize from ${fileSize} to ${updatedCABData.length}`);
     
     Logger.log(`  Updated CAB size: ${updatedCABData.length} bytes`);
 
