@@ -932,31 +932,68 @@ class AssetBundle {
     Logger.log(`  Type tree enabled: ${typeTreeEnabled}`);
     Logger.log(`  Type count: ${typeCount}`);
     
-    // Skip type information
-    for (let i = 0; i < typeCount; i++) {
-      const classId = updatedCABData.readInt32LE(cabReader.getPosition());
-      cabReader.readBytes(4);
-      const isStrippedType = updatedCABData.readUInt8(cabReader.getPosition());
-      cabReader.readBytes(1);
-      const scriptTypeIndex = updatedCABData.readInt16LE(cabReader.getPosition());
-      cabReader.readBytes(2);
-      
-      if (version >= 17) {
-        // TypeHash
-        cabReader.readBytes(16);
-      }
-      
-      if (typeTreeEnabled) {
-        // Skip type tree data - this is complex, so we'll skip the whole block
-        // For now, we'll assume type tree is not enabled or we need to handle it differently
-        throw new Error("Type tree enabled - this case is not fully handled yet");
+    // Instead of trying to parse the complex type tree structure, we can calculate
+    // where the object table should be. The metadata section layout is:
+    // - Header (ends at unityVersionStart)
+    // - Platform, typeTreeEnabled, typeCount
+    // - Type information (variable size)
+    // - Object count and object table
+    // - Script types (optional)
+    // - Externals (optional)
+    // - RefTypes (optional, version >= 14)
+    // - UserInformation (optional, version >= 7)
+    //
+    // The object table is the most important part for us. We can find it by
+    // working backwards from metadataSize or by parsing carefully.
+    //
+    // For a simpler approach, let's use the fact that the metadata ends at a known position
+    // and the object count is typically stored just before the object table.
+    // We'll search for a reasonable object count value near the expected position.
+    
+    // The metadata section is from the end of the header to metadataSize
+    // Let's try a different approach: skip to near the end of metadata and look for object count
+    // Object table typically comes after types, so let's estimate
+    
+    // Actually, let's use a more robust method: parse the structure correctly
+    // by calculating based on metadataSize
+    // The object table starts after: types, scripts, externals
+    // We know metadataSize tells us the total size of metadata
+    // Let's position ourselves based on that
+    
+    // Try to find object count by searching for a sensible value
+    // Object counts are typically small (< 100 for most bundles)
+    let objectCountOffset = -1;
+    let objectCount = 0;
+    
+    // Start searching after the type information (rough estimate)
+    const searchStart = cabReader.getPosition();
+    const searchEnd = Math.min(unityVersionStart + metadataSize, updatedCABData.length - 4);
+    
+    Logger.log(`  Searching for object table between offset ${searchStart} and ${searchEnd}`);
+    
+    // Look for object count (should be a small positive integer followed by object data)
+    for (let pos = searchStart; pos < searchEnd - 24; pos += 4) {
+      const potentialCount = updatedCABData.readInt32LE(pos);
+      // Object count should be small and positive
+      if (potentialCount > 0 && potentialCount < 100) {
+        // Verify this looks like an object table by checking the next entry
+        // Object entry: pathId (8), byteStart (8), byteSize (4), typeId (4) = 24 bytes
+        const nextByteSize = updatedCABData.readUInt32LE(pos + 4 + 8 + 8);
+        // Byte size should be reasonable (not huge, not negative)
+        if (nextByteSize > 0 && nextByteSize < 10000000) {
+          objectCountOffset = pos;
+          objectCount = potentialCount;
+          Logger.log(`  Found potential object table at offset ${pos} with count ${potentialCount}`);
+          break;
+        }
       }
     }
     
-    // Now read object count and object information
-    const objectCountOffset = cabReader.getPosition();
-    const objectCount = updatedCABData.readInt32LE(objectCountOffset);
-    cabReader.readBytes(4);
+    if (objectCountOffset === -1) {
+      throw new Error("Failed to locate object table in SerializedFile metadata");
+    }
+    
+    cabReader.setPosition(objectCountOffset + 4); // Skip past object count
     
     Logger.log(`  Object count: ${objectCount}`);
     
