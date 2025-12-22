@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as gettextParser from 'gettext-parser';
 import { restoreCardAsset } from './converter.js';
 import { Logger } from './logger.js';
+import { MAD_MAX_CARDS } from './mad-constants.js';
 
 enum YuGiOh {
   WC6, // Yu-Gi-Oh! Ultimate Masters: World Championship Tournament 2006, 2006, GBA
@@ -410,13 +411,12 @@ class Transformer {
   }
 
   entriesToBin(directory: string, ygoType: YuGiOh = YuGiOh.MAD): void {
-    const limiter = 13630;
     const cardNames: string[] = [];
     const cardDescs: string[] = [];
 
     let pointer = 0;
 
-    while(pointer <= limiter) {
+    while(pointer <= MAD_MAX_CARDS) {
       try {
         cardNames.push(this.entries[pointer].Name);
         cardDescs.push(this.entries[pointer].Description);

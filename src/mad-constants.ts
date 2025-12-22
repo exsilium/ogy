@@ -84,3 +84,8 @@ export const MAD_CONTAINER_PATHS = {
  * Encryption key used for Master Duel CARD files
  */
 export const MAD_CRYPTO_KEY = 0xe3;
+
+/**
+ * Maximum number of cards supported in Master Duel (Indexed from 0)
+ */
+export const MAD_MAX_CARDS = 13706;
