@@ -1046,25 +1046,36 @@ class AssetBundle {
       //   fileName (null-terminated string)
       //   alignment to 4 bytes
       //   fileSize (4 bytes LE) <- THIS needs updating!
+      //   [For MAD: 180 bytes + repeat above structure]
       //   [actual data]
-      // For MAD files, this structure appears TWICE with 180 bytes in between
       
       Logger.log(`\n🔧 Updating fileSize in data section (sizeDelta: ${sizeDelta})...`);
-      const dataReader = new BinaryReader(updatedCABData);
-      dataReader.setPosition(dataOffsetValue);
+      Logger.log(`  Asset was found at offset: 0x${assetOffset.toString(16)}`);
+      Logger.log(`  Data section starts at: 0x${dataOffsetValue.toString(16)}`);
       
-      const dataFileType = updatedCABData.readInt32LE(dataReader.getPosition());
-      dataReader.readBytes(4);
-      const dataFileName = dataReader.readAsciiNullTerminatedString(256);
-      dataReader.alignToBoundary(4);
-      const dataFileSizeOffset = dataReader.getPosition();
-      const oldDataFileSize = updatedCABData.readUInt32LE(dataFileSizeOffset);
-      dataReader.readBytes(4);
+      // IMPORTANT: We need to read from the ORIGINAL CAB data to get the old fileSize values,
+      // because the updatedCABData has already had the asset replaced and offsets may have shifted
+      const originalDataReader = new BinaryReader(uncompressedCABData);
+      originalDataReader.setPosition(dataOffsetValue);
+      
+      const dataFileType = uncompressedCABData.readInt32LE(originalDataReader.getPosition());
+      originalDataReader.readBytes(4);
+      const dataFileName = originalDataReader.readAsciiNullTerminatedString(256);
+      originalDataReader.alignToBoundary(4);
+      const dataFileSizeOffset = originalDataReader.getPosition();
+      const oldDataFileSize = uncompressedCABData.readUInt32LE(dataFileSizeOffset);
+      originalDataReader.readBytes(4);
       
       Logger.log(`  Data section fileType: ${dataFileType}`);
       Logger.log(`  Data section fileName: ${dataFileName}`);
       Logger.log(`  Data section fileSize offset: 0x${dataFileSizeOffset.toString(16)}`);
       Logger.log(`  Data section old fileSize: ${oldDataFileSize}`);
+      
+      // Sanity check: dataFileSizeOffset should be less than assetOffset
+      if (dataFileSizeOffset >= assetOffset) {
+        Logger.log(`  ⚠️  WARNING: First fileSize offset (0x${dataFileSizeOffset.toString(16)}) is >= asset offset (0x${assetOffset.toString(16)})`);
+        Logger.log(`  This suggests the asset was found in an unexpected location!`);
+      }
       
       // Check if this is a MAD file that needs special handling
       const isMadFile = dataFileName.includes('CARD_Name') || 
@@ -1079,27 +1090,34 @@ class AssetBundle {
       if (isMadFile) {
         Logger.log(`  Detected MAD file - updating both fileSize fields`);
         
-        // Update the first fileSize field
+        // Update the first fileSize field (in the updatedCABData, not original!)
         const newDataFileSize = oldDataFileSize + sizeDelta;
         updatedCABData.writeUInt32LE(newDataFileSize, dataFileSizeOffset);
-        Logger.log(`  ✅ Updated first fileSize from ${oldDataFileSize} to ${newDataFileSize}`);
+        Logger.log(`  ✅ Updated first fileSize from ${oldDataFileSize} to ${newDataFileSize} at offset 0x${dataFileSizeOffset.toString(16)}`);
         
         // For MAD files, skip 180 bytes and re-read the structure for the second fileSize
-        dataReader.readBytes(180);
-        const madFileType = updatedCABData.readInt32LE(dataReader.getPosition());
-        dataReader.readBytes(4);
-        const madFileName = dataReader.readAsciiNullTerminatedString(256);
-        dataReader.alignToBoundary(4);
-        const madFileSizeOffset = dataReader.getPosition();
-        const madOldFileSize = updatedCABData.readUInt32LE(madFileSizeOffset);
+        // Again, read from ORIGINAL to get correct offset
+        originalDataReader.readBytes(180);
+        const madFileType = uncompressedCABData.readInt32LE(originalDataReader.getPosition());
+        originalDataReader.readBytes(4);
+        const madFileName = originalDataReader.readAsciiNullTerminatedString(256);
+        originalDataReader.alignToBoundary(4);
+        const madFileSizeOffset = originalDataReader.getPosition();
+        const madOldFileSize = uncompressedCABData.readUInt32LE(madFileSizeOffset);
         
         Logger.log(`  MAD section fileSize offset: 0x${madFileSizeOffset.toString(16)}`);
         Logger.log(`  MAD section old fileSize: ${madOldFileSize}`);
         
-        // Update the MAD section fileSize
+        // Sanity check: madFileSizeOffset should also be less than assetOffset
+        if (madFileSizeOffset >= assetOffset) {
+          Logger.log(`  ⚠️  WARNING: Second fileSize offset (0x${madFileSizeOffset.toString(16)}) is >= asset offset (0x${assetOffset.toString(16)})`);
+          Logger.log(`  This suggests the asset was found in the 180-byte padding or earlier!`);
+        }
+        
+        // Update the MAD section fileSize (in the updatedCABData)
         const newMadFileSize = madOldFileSize + sizeDelta;
         updatedCABData.writeUInt32LE(newMadFileSize, madFileSizeOffset);
-        Logger.log(`  ✅ Updated second fileSize from ${madOldFileSize} to ${newMadFileSize}`);
+        Logger.log(`  ✅ Updated second fileSize from ${madOldFileSize} to ${newMadFileSize} at offset 0x${madFileSizeOffset.toString(16)}`);
       } else {
         // Update the regular fileSize
         const newDataFileSize = oldDataFileSize + sizeDelta;
