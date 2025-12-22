@@ -1007,11 +1007,13 @@ class AssetBundle {
       Logger.log(`  Data section fileSize offset: 0x${dataFileSizeOffset.toString(16)}`);
       Logger.log(`  Data section old fileSize: ${oldDataFileSize}`);
       
-      // Sanity check: dataFileSizeOffset should be less than assetOffset
+      // Sanity check: dataFileSizeOffset should be less than assetOffset for correctness
       if (dataFileSizeOffset >= assetOffset) {
         Logger.log(`  ⚠️  WARNING: First fileSize offset (0x${dataFileSizeOffset.toString(16)}) is >= asset offset (0x${assetOffset.toString(16)})`);
         Logger.log(`  This suggests the asset was found in an unexpected location!`);
       }
+      
+      const assetEnd = assetOffset + originalAssetData.length;
       
       // Check if this is a MAD file that needs special handling
       const isMadFile = dataFileName.includes('CARD_Name') || 
@@ -1026,10 +1028,12 @@ class AssetBundle {
       if (isMadFile) {
         Logger.log(`  Detected MAD file - updating both fileSize fields`);
         
-        // Update the first fileSize field (in the updatedCABData, not original!)
+        // Update the first fileSize field
+        // IMPORTANT: If this offset is AFTER the asset, we need to adjust it in the updated buffer
         const newDataFileSize = oldDataFileSize + sizeDelta;
-        updatedCABData.writeUInt32LE(newDataFileSize, dataFileSizeOffset);
-        Logger.log(`  ✅ Updated first fileSize from ${oldDataFileSize} to ${newDataFileSize} at offset 0x${dataFileSizeOffset.toString(16)}`);
+        const adjustedDataOffset = dataFileSizeOffset >= assetEnd ? dataFileSizeOffset + sizeDelta : dataFileSizeOffset;
+        updatedCABData.writeUInt32LE(newDataFileSize, adjustedDataOffset);
+        Logger.log(`  ✅ Updated first fileSize from ${oldDataFileSize} to ${newDataFileSize} at adjusted offset 0x${adjustedDataOffset.toString(16)} (original: 0x${dataFileSizeOffset.toString(16)})`);
         
         // For MAD files, skip 180 bytes and re-read the structure for the second fileSize
         // Again, read from ORIGINAL to get correct offset
@@ -1044,21 +1048,24 @@ class AssetBundle {
         Logger.log(`  MAD section fileSize offset: 0x${madFileSizeOffset.toString(16)}`);
         Logger.log(`  MAD section old fileSize: ${madOldFileSize}`);
         
-        // Sanity check: madFileSizeOffset should also be less than assetOffset
-        if (madFileSizeOffset >= assetOffset) {
-          Logger.log(`  ⚠️  WARNING: Second fileSize offset (0x${madFileSizeOffset.toString(16)}) is >= asset offset (0x${assetOffset.toString(16)})`);
-          Logger.log(`  This suggests the asset was found in the 180-byte padding or earlier!`);
+        // Sanity check: madFileSizeOffset should ideally be less than assetOffset
+        if (madFileSizeOffset >= assetOffset && madFileSizeOffset < assetEnd) {
+          Logger.log(`  ⚠️  WARNING: Second fileSize offset (0x${madFileSizeOffset.toString(16)}) is within the asset region [0x${assetOffset.toString(16)}, 0x${assetEnd.toString(16)})`);
+          Logger.log(`  This is problematic - the fileSize field is being overwritten by asset data!`);
         }
         
         // Update the MAD section fileSize (in the updatedCABData)
+        // IMPORTANT: If this offset is AFTER the asset, we need to adjust it in the updated buffer
         const newMadFileSize = madOldFileSize + sizeDelta;
-        updatedCABData.writeUInt32LE(newMadFileSize, madFileSizeOffset);
-        Logger.log(`  ✅ Updated second fileSize from ${madOldFileSize} to ${newMadFileSize} at offset 0x${madFileSizeOffset.toString(16)}`);
+        const adjustedMadOffset = madFileSizeOffset >= assetEnd ? madFileSizeOffset + sizeDelta : madFileSizeOffset;
+        updatedCABData.writeUInt32LE(newMadFileSize, adjustedMadOffset);
+        Logger.log(`  ✅ Updated second fileSize from ${madOldFileSize} to ${newMadFileSize} at adjusted offset 0x${adjustedMadOffset.toString(16)} (original: 0x${madFileSizeOffset.toString(16)})`);
       } else {
         // Update the regular fileSize
         const newDataFileSize = oldDataFileSize + sizeDelta;
-        updatedCABData.writeUInt32LE(newDataFileSize, dataFileSizeOffset);
-        Logger.log(`  ✅ Updated data section fileSize from ${oldDataFileSize} to ${newDataFileSize}`);
+        const adjustedDataOffset = dataFileSizeOffset >= assetEnd ? dataFileSizeOffset + sizeDelta : dataFileSizeOffset;
+        updatedCABData.writeUInt32LE(newDataFileSize, adjustedDataOffset);
+        Logger.log(`  ✅ Updated data section fileSize from ${oldDataFileSize} to ${newDataFileSize} at adjusted offset 0x${adjustedDataOffset.toString(16)} (original: 0x${dataFileSizeOffset.toString(16)})`);
       }
     }
     
