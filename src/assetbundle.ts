@@ -1048,18 +1048,21 @@ class AssetBundle {
         Logger.log(`  MAD section fileSize offset: 0x${madFileSizeOffset.toString(16)}`);
         Logger.log(`  MAD section old fileSize: ${madOldFileSize}`);
         
-        // Sanity check: madFileSizeOffset should ideally be less than assetOffset
+        // Sanity check: madFileSizeOffset should NOT be within the asset region
+        // If it is, it means the 180-byte skip landed us in the middle of the asset data,
+        // and the "fileSize" we read is just garbage from the encrypted asset, not a real field
         if (madFileSizeOffset >= assetOffset && madFileSizeOffset < assetEnd) {
           Logger.log(`  ⚠️  WARNING: Second fileSize offset (0x${madFileSizeOffset.toString(16)}) is within the asset region [0x${assetOffset.toString(16)}, 0x${assetEnd.toString(16)})`);
-          Logger.log(`  This is problematic - the fileSize field is being overwritten by asset data!`);
+          Logger.log(`  Skipping second fileSize update - it doesn't actually exist at this location!`);
+          Logger.log(`  The MAD file structure doesn't have a duplicate fileSize field for this asset.`);
+        } else {
+          // Only update if the second fileSize field actually exists outside the asset region
+          // IMPORTANT: If this offset is AFTER the asset, we need to adjust it in the updated buffer
+          const newMadFileSize = madOldFileSize + sizeDelta;
+          const adjustedMadOffset = madFileSizeOffset >= assetEnd ? madFileSizeOffset + sizeDelta : madFileSizeOffset;
+          updatedCABData.writeUInt32LE(newMadFileSize, adjustedMadOffset);
+          Logger.log(`  ✅ Updated second fileSize from ${madOldFileSize} to ${newMadFileSize} at adjusted offset 0x${adjustedMadOffset.toString(16)} (original: 0x${madFileSizeOffset.toString(16)})`);
         }
-        
-        // Update the MAD section fileSize (in the updatedCABData)
-        // IMPORTANT: If this offset is AFTER the asset, we need to adjust it in the updated buffer
-        const newMadFileSize = madOldFileSize + sizeDelta;
-        const adjustedMadOffset = madFileSizeOffset >= assetEnd ? madFileSizeOffset + sizeDelta : madFileSizeOffset;
-        updatedCABData.writeUInt32LE(newMadFileSize, adjustedMadOffset);
-        Logger.log(`  ✅ Updated second fileSize from ${madOldFileSize} to ${newMadFileSize} at adjusted offset 0x${adjustedMadOffset.toString(16)} (original: 0x${madFileSizeOffset.toString(16)})`);
       } else {
         // Update the regular fileSize
         const newDataFileSize = oldDataFileSize + sizeDelta;
