@@ -1077,8 +1077,14 @@ class AssetBundle {
                         dataFileName.includes('494e34d0');
       
       if (isMadFile) {
-        Logger.log(`  Detected MAD file - skipping 180 bytes to find actual fileSize`);
-        // For MAD files, skip 180 bytes and re-read the structure
+        Logger.log(`  Detected MAD file - updating both fileSize fields`);
+        
+        // Update the first fileSize field
+        const newDataFileSize = oldDataFileSize + sizeDelta;
+        updatedCABData.writeUInt32LE(newDataFileSize, dataFileSizeOffset);
+        Logger.log(`  ✅ Updated first fileSize from ${oldDataFileSize} to ${newDataFileSize}`);
+        
+        // For MAD files, skip 180 bytes and re-read the structure for the second fileSize
         dataReader.readBytes(180);
         const madFileType = updatedCABData.readInt32LE(dataReader.getPosition());
         dataReader.readBytes(4);
@@ -1093,7 +1099,7 @@ class AssetBundle {
         // Update the MAD section fileSize
         const newMadFileSize = madOldFileSize + sizeDelta;
         updatedCABData.writeUInt32LE(newMadFileSize, madFileSizeOffset);
-        Logger.log(`  ✅ Updated MAD section fileSize from ${madOldFileSize} to ${newMadFileSize}`);
+        Logger.log(`  ✅ Updated second fileSize from ${madOldFileSize} to ${newMadFileSize}`);
       } else {
         // Update the regular fileSize
         const newDataFileSize = oldDataFileSize + sizeDelta;
