@@ -1038,6 +1038,70 @@ class AssetBundle {
     updatedCABData.writeBigUInt64BE(BigInt(updatedCABData.length), cabFileSizeOffset);
     Logger.log(`  ✅ Patched CAB header fileSize from ${fileSize} to ${updatedCABData.length}`);
     
+    // Only update the data section fileSize if the asset size actually changed
+    if (sizeDelta !== 0) {
+      // Now we need to update the fileSize field in the data section
+      // The data section starts at dataOffset and has structure:
+      //   fileType (4 bytes LE)
+      //   fileName (null-terminated string)
+      //   alignment to 4 bytes
+      //   fileSize (4 bytes LE) <- THIS needs updating!
+      //   [actual data]
+      // For MAD files, this structure appears TWICE with 180 bytes in between
+      
+      Logger.log(`\n🔧 Updating fileSize in data section (sizeDelta: ${sizeDelta})...`);
+      const dataReader = new BinaryReader(updatedCABData);
+      dataReader.setPosition(dataOffsetValue);
+      
+      const dataFileType = updatedCABData.readInt32LE(dataReader.getPosition());
+      dataReader.readBytes(4);
+      const dataFileName = dataReader.readAsciiNullTerminatedString(256);
+      dataReader.alignToBoundary(4);
+      const dataFileSizeOffset = dataReader.getPosition();
+      const oldDataFileSize = updatedCABData.readUInt32LE(dataFileSizeOffset);
+      dataReader.readBytes(4);
+      
+      Logger.log(`  Data section fileType: ${dataFileType}`);
+      Logger.log(`  Data section fileName: ${dataFileName}`);
+      Logger.log(`  Data section fileSize offset: 0x${dataFileSizeOffset.toString(16)}`);
+      Logger.log(`  Data section old fileSize: ${oldDataFileSize}`);
+      
+      // Check if this is a MAD file that needs special handling
+      const isMadFile = dataFileName.includes('CARD_Name') || 
+                        dataFileName.includes('CARD_Desc') || 
+                        dataFileName.includes('CARD_Indx') ||
+                        dataFileName.includes('Card_Part') ||
+                        dataFileName.includes('Card_Pidx') ||
+                        dataFileName.includes('e9aa18bf') ||
+                        dataFileName.includes('ebaee097') ||
+                        dataFileName.includes('494e34d0');
+      
+      if (isMadFile) {
+        Logger.log(`  Detected MAD file - skipping 180 bytes to find actual fileSize`);
+        // For MAD files, skip 180 bytes and re-read the structure
+        dataReader.readBytes(180);
+        const madFileType = updatedCABData.readInt32LE(dataReader.getPosition());
+        dataReader.readBytes(4);
+        const madFileName = dataReader.readAsciiNullTerminatedString(256);
+        dataReader.alignToBoundary(4);
+        const madFileSizeOffset = dataReader.getPosition();
+        const madOldFileSize = updatedCABData.readUInt32LE(madFileSizeOffset);
+        
+        Logger.log(`  MAD section fileSize offset: 0x${madFileSizeOffset.toString(16)}`);
+        Logger.log(`  MAD section old fileSize: ${madOldFileSize}`);
+        
+        // Update the MAD section fileSize
+        const newMadFileSize = madOldFileSize + sizeDelta;
+        updatedCABData.writeUInt32LE(newMadFileSize, madFileSizeOffset);
+        Logger.log(`  ✅ Updated MAD section fileSize from ${madOldFileSize} to ${newMadFileSize}`);
+      } else {
+        // Update the regular fileSize
+        const newDataFileSize = oldDataFileSize + sizeDelta;
+        updatedCABData.writeUInt32LE(newDataFileSize, dataFileSizeOffset);
+        Logger.log(`  ✅ Updated data section fileSize from ${oldDataFileSize} to ${newDataFileSize}`);
+      }
+    }
+    
     Logger.log(`  Updated CAB size: ${updatedCABData.length} bytes`);
 
     // Now rebuild the AssetBundle with the updated CAB
