@@ -1227,4 +1227,110 @@ class AssetBundle {
   }
 }
 
+/**
+ * Extract CAB (SerializedFile) data from an AssetBundle
+ * This is a utility function for testing and analysis
+ */
+export function extractCAB(bundleBuffer: Buffer): Buffer | null {
+  try {
+    const reader = new BinaryReader(bundleBuffer);
+    
+    // Read signature
+    const signature = reader.readAsciiNullTerminatedString(16);
+    if (signature !== 'UnityFS') {
+      Logger.error(`Invalid UnityFS signature: ${signature}`);
+      return null;
+    }
+    
+    // Read file version
+    reader.readBigEndianUInt32();
+    
+    // Read player version
+    reader.readAsciiNullTerminatedString(32);
+    
+    // Read engine version
+    reader.readAsciiNullTerminatedString(32);
+    
+    // Read total file size
+    reader.readBigEndianUInt64();
+    
+    // Read compressed block info size
+    const compressedSize = reader.readBigEndianUInt32();
+    
+    // Read decompressed block info size
+    const decompSize = reader.readBigEndianUInt32();
+    
+    // Read flags
+    reader.readBigEndianUInt32();
+    
+    // Align to 16-byte boundary
+    reader.alignToBoundary(16);
+    
+    // Read and decompress block info
+    const compressedData = reader.readBytes(compressedSize);
+    const decompressedData = Buffer.alloc(decompSize);
+    const actualSize = lz4.decodeBlock(compressedData, decompressedData);
+    
+    if (actualSize !== decompSize) {
+      Logger.error(`Block info decompression size mismatch: expected ${decompSize}, got ${actualSize}`);
+      return null;
+    }
+    
+    // Parse block info
+    const blockReader = new BinaryReader(decompressedData);
+    
+    // Skip GUID (16 bytes)
+    blockReader.readBytes(16);
+    
+    // Read block count
+    const blockCount = blockReader.readBigEndianUInt32();
+    
+    // Read block entries
+    const blocks: BlockInfo[] = [];
+    for (let i = 0; i < blockCount; i++) {
+      const uncompressedSize = blockReader.readBigEndianUInt32();
+      const compressedSize = blockReader.readBigEndianUInt32();
+      const flags = blockReader.readBigEndianUInt16();
+      blocks.push({ uncompressedSize, compressedSize, flags });
+    }
+    
+    // Skip directory info
+    const directoryCount = blockReader.readBigEndianUInt32();
+    for (let i = 0; i < directoryCount; i++) {
+      blockReader.readBigEndianUInt64(); // offset
+      blockReader.readBigEndianUInt64(); // size
+      blockReader.readBigEndianUInt32(); // flags
+      blockReader.readAsciiNullTerminatedString(256); // path
+    }
+    
+    // Now extract CAB data by decompressing blocks
+    reader.alignToBoundary(16);
+    
+    let cabData = Buffer.alloc(0);
+    for (const block of blocks) {
+      if (block.compressedSize !== block.uncompressedSize) {
+        // Compressed block
+        const compressed = reader.readBytes(block.compressedSize);
+        const decompressed = Buffer.alloc(block.uncompressedSize);
+        const size = lz4.decodeBlock(compressed, decompressed);
+        
+        if (size !== block.uncompressedSize) {
+          Logger.error(`CAB block decompression size mismatch`);
+          return null;
+        }
+        
+        cabData = Buffer.concat([cabData, decompressed]);
+      } else {
+        // Uncompressed block
+        cabData = Buffer.concat([cabData, reader.readBytes(block.uncompressedSize)]);
+      }
+    }
+    
+    return cabData;
+  } catch (error) {
+    Logger.error(`Failed to extract CAB: ${error}`);
+    return null;
+  }
+}
+
 export { AssetBundle };
