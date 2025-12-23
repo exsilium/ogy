@@ -48,6 +48,8 @@ export class SerializedFileReader {
    */
   parseHeader(): SerializedFileHeader {
     Logger.log('📖 Parsing SerializedFile header...');
+    Logger.log(`  Buffer size: ${this.buffer.length} bytes`);
+    Logger.log(`  First 32 bytes (hex): ${this.buffer.slice(0, Math.min(32, this.buffer.length)).toString('hex')}`);
     
     // Read metadata size (UInt32, big-endian initially)
     const metadataSize = this.buffer.readUInt32BE(this.offset);
