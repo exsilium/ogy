@@ -7,6 +7,10 @@ export class Logger {
     }
   }
 
+  static error(...args: any[]) {
+    console.log(...args);
+  }
+
   static enableDebug() {
     Logger.debugMode = true;
   }
