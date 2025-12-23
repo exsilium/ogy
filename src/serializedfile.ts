@@ -38,45 +38,48 @@ export class SerializedFileReader {
     this.offset += 4;
     Logger.log(`  Metadata size: ${metadataSize} bytes`);
 
-    // Read file size (UInt32 or Int64 depending on version)
-    // We need to peek at the version to determine this
-    // For now, read as UInt32 and adjust if needed
-    const fileSizeU32 = this.buffer.readUInt32BE(this.offset);
-    this.offset += 4;
+    // Peek at version to determine header format
+    // For version < 22: fileSize and dataOffset are 32-bit (at offsets 4, 12)
+    // For version >= 22: fileSize and dataOffset are 64-bit (at offsets 4, 16)
+    const versionPeekOffset = this.offset + 4; // After fileSize32
+    const versionPeek = this.buffer.readUInt32BE(versionPeekOffset);
     
-    // Read version (UInt32, big-endian)
-    const version = this.buffer.readUInt32BE(this.offset);
-    this.offset += 4;
-    Logger.log(`  Version: ${version}`);
-
-    // Read data offset (UInt32 or Int64 depending on version)
-    const dataOffsetU32 = this.buffer.readUInt32BE(this.offset);
-    this.offset += 4;
-
-    // For version >= 22, file size and data offset are 64-bit
     let fileSize: bigint;
+    let version: number;
     let dataOffset: bigint;
 
-    if (version >= 22) {
-      // Rewind and read as 64-bit values
-      this.offset = 4; // After metadata size
-      
-      // File size is Int64
+    if (versionPeek >= 22) {
+      // Version >= 22: Use 64-bit format
+      // File size is Int64 (8 bytes)
       fileSize = this.buffer.readBigInt64BE(this.offset);
       this.offset += 8;
       
-      // Skip version again
+      // Version is UInt32 (4 bytes)
+      version = this.buffer.readUInt32BE(this.offset);
       this.offset += 4;
+      Logger.log(`  Version: ${version}`);
       
-      // Data offset is Int64
+      // Data offset is Int64 (8 bytes)
       dataOffset = this.buffer.readBigInt64BE(this.offset);
       this.offset += 8;
       
       Logger.log(`  File size (64-bit): ${fileSize} bytes`);
       Logger.log(`  Data offset (64-bit): ${dataOffset}`);
     } else {
-      // For older versions, use 32-bit values
+      // Version < 22: Use 32-bit format
+      // File size is UInt32 (4 bytes)
+      const fileSizeU32 = this.buffer.readUInt32BE(this.offset);
+      this.offset += 4;
       fileSize = BigInt(fileSizeU32);
+      
+      // Version is UInt32 (4 bytes)
+      version = this.buffer.readUInt32BE(this.offset);
+      this.offset += 4;
+      Logger.log(`  Version: ${version}`);
+      
+      // Data offset is UInt32 (4 bytes)
+      const dataOffsetU32 = this.buffer.readUInt32BE(this.offset);
+      this.offset += 4;
       dataOffset = BigInt(dataOffsetU32);
       
       Logger.log(`  File size (32-bit): ${fileSize} bytes`);
