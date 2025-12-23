@@ -230,25 +230,26 @@ export class SerializedFileReader {
 export function validateHeader(header: SerializedFileHeader): boolean {
   // Basic sanity checks
   if (header.version < 1 || header.version > 100) {
-    Logger.log(`⚠️  Invalid version: ${header.version}`);
+    Logger.error(`⚠️  Invalid version: ${header.version} (must be 1-100)`);
     return false;
   }
 
   if (header.metadataSize < 0 || header.metadataSize > 100000) {
-    Logger.log(`⚠️  Invalid metadata size: ${header.metadataSize}`);
+    Logger.error(`⚠️  Invalid metadata size: ${header.metadataSize} (must be 0-100000)`);
     return false;
   }
 
   if (header.fileSize < BigInt(0) || header.fileSize > BigInt(100000000)) {
-    Logger.log(`⚠️  Invalid file size: ${header.fileSize}`);
+    Logger.error(`⚠️  Invalid file size: ${header.fileSize} (must be 0-100000000)`);
     return false;
   }
 
   if (header.endianness !== 0 && header.endianness !== 1) {
-    Logger.log(`⚠️  Invalid endianness: ${header.endianness}`);
+    Logger.error(`⚠️  Invalid endianness: ${header.endianness} (must be 0 or 1)`);
     return false;
   }
 
+  Logger.log(`✅ Header validation passed`);
   return true;
 }
 
@@ -258,17 +259,37 @@ export function validateHeader(header: SerializedFileHeader): boolean {
  */
 export function parseSerializedFile(cabData: Buffer): { header: SerializedFileHeader; reader: SerializedFileReader } | null {
   try {
+    Logger.log(`🔍 Parsing SerializedFile from CAB data (${cabData.length} bytes)`);
+    
+    if (!cabData || cabData.length === 0) {
+      Logger.error('❌ CAB data is empty or null');
+      return null;
+    }
+    
+    if (cabData.length < 28) {
+      Logger.error(`❌ CAB data too small (${cabData.length} bytes, minimum 28 bytes required for header)`);
+      return null;
+    }
+    
     const reader = new SerializedFileReader(cabData);
     const header = reader.parseHeader();
     
     if (!validateHeader(header)) {
-      Logger.log('❌ SerializedFile header validation failed');
+      Logger.error('❌ SerializedFile header validation failed');
+      Logger.error(`  Version: ${header.version}`);
+      Logger.error(`  Metadata size: ${header.metadataSize}`);
+      Logger.error(`  File size: ${header.fileSize}`);
+      Logger.error(`  Data offset: ${header.dataOffset}`);
+      Logger.error(`  Endianness: ${header.endianness}`);
       return null;
     }
     
     return { header, reader };
   } catch (error) {
-    Logger.log(`❌ Failed to parse SerializedFile: ${error}`);
+    Logger.error(`❌ Failed to parse SerializedFile: ${error}`);
+    if (error instanceof Error) {
+      Logger.error(`  Stack: ${error.stack}`);
+    }
     return null;
   }
 }
