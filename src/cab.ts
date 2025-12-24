@@ -3,6 +3,7 @@ import { Buffer } from 'buffer';
 import path from "path";
 import { Logger } from './logger.js';
 import { MAD_BUNDLE_FILES, MAD_BUNDLE_PATHS } from './mad-constants.js';
+import { SerializedFile as SerializedFileWriter } from './cab-file.js';
 
 class EndianBinaryReader {
   private buffer: Buffer;
@@ -449,5 +450,204 @@ export class CABExtractor {
 
     fs.writeFileSync(outputCabPath, finalBuffer);
     Logger.log(`✅ CAB updated and saved to: ${outputCabPath}`);
+  }
+}
+
+/**
+ * CAB (SerializedFile) writer that supports both same-size and different-size asset updates
+ */
+export class CABWriter {
+  /**
+   * Rebuild a CAB file with updated asset data
+   * Supports both same-size and different-size updates
+   *
+   * @param originalCABData Original CAB file data
+   * @param originalAssetData Original asset data (for finding which object to update)
+   * @param newAssetData New asset data to insert
+   * @returns Updated CAB file data
+   */
+  static rebuildCAB(
+    originalCABData: Buffer,
+    originalAssetData: Buffer,
+    newAssetData: Buffer
+  ): Buffer {
+    Logger.log('\n🔧 CABWriter: Rebuilding CAB file...');
+    Logger.log(`  Original CAB size: ${originalCABData.length}`);
+    Logger.log(`  Original asset size: ${originalAssetData.length}`);
+    Logger.log(`  New asset size: ${newAssetData.length}`);
+
+    // If same size, use simple byte replacement (faster and safer)
+    if (originalAssetData.length === newAssetData.length) {
+      return this.rebuildCABSameSize(originalCABData, originalAssetData, newAssetData);
+    }
+
+    // Different size - use full SerializedFile parsing
+    Logger.log(`  Asset size changed, using SerializedFile parser...`);
+
+    try {
+      // Parse the SerializedFile
+      const serializedFile = new SerializedFileWriter(originalCABData);
+
+      // Load all object data before making any modifications
+      serializedFile.loadAllObjectData(originalCABData);
+
+      // Find which object contains the asset data
+      const pathId = serializedFile.findObjectByData(originalAssetData, originalCABData);
+
+      if (pathId === null) {
+        throw new Error('❌ Failed to locate asset in any object within SerializedFile');
+      }
+
+      Logger.log(`  ✅ Found asset in object with pathId: ${pathId}`);
+
+      // Get the object
+      const obj = serializedFile.objects.get(pathId)!;
+      const objectData = obj.data!;
+
+      // Find the asset within the object data and replace it
+      let assetOffsetInObject = -1;
+      for (let i = 0; i <= objectData.length - originalAssetData.length; i++) {
+        if (objectData.slice(i, i + originalAssetData.length).equals(originalAssetData)) {
+          assetOffsetInObject = i;
+          break;
+        }
+      }
+
+      if (assetOffsetInObject === -1) {
+        throw new Error('❌ Failed to locate asset within object data');
+      }
+
+      Logger.log(`  ✅ Found asset at offset ${assetOffsetInObject} within object data`);
+
+      // The m_Script length field is 4 bytes BEFORE the asset data
+      // TextAsset structure:
+      //   m_Name: aligned string (length + data + padding)
+      //   m_Script: bytes array (length + data)
+      // We need to update the m_Script length field when the asset size changes
+
+      const lengthFieldOffset = assetOffsetInObject - 4;
+      if (lengthFieldOffset < 0) {
+        throw new Error('❌ Invalid asset offset - length field would be before object start');
+      }
+
+      // Verify the length field contains the original asset length
+      const storedLength = objectData.readInt32LE(lengthFieldOffset);
+      if (storedLength !== originalAssetData.length) {
+        Logger.log(`  ⚠️ Length field mismatch: stored=${storedLength}, expected=${originalAssetData.length}`);
+        // This might not be a TextAsset or the structure is different
+        // Try to continue anyway
+      } else {
+        Logger.log(`  ✅ Verified m_Script length field at offset ${lengthFieldOffset}: ${storedLength}`);
+      }
+
+      // TextAsset structure:
+      //   m_Name: aligned string (length + data + padding to 4)
+      //   m_Script: aligned byte array (length + data + padding to 4)
+      //
+      // The object data ends with m_Script + its 4-byte alignment padding.
+      // When we replace m_Script data, we need to recalculate the alignment.
+
+      // Calculate old and new alignment padding for m_Script
+      const oldPadding = (4 - (originalAssetData.length % 4)) % 4;
+      const newPadding = (4 - (newAssetData.length % 4)) % 4;
+
+      Logger.log(`  Old m_Script padding: ${oldPadding} bytes (size ${originalAssetData.length} % 4 = ${originalAssetData.length % 4})`);
+      Logger.log(`  New m_Script padding: ${newPadding} bytes (size ${newAssetData.length} % 4 = ${newAssetData.length % 4})`);
+
+      // Check if there's any data after m_Script + its padding
+      const originalAssetEnd = assetOffsetInObject + originalAssetData.length;
+      const originalObjectEnd = originalAssetEnd + oldPadding;
+      const hasDataAfterScript = originalObjectEnd < objectData.length;
+
+      if (hasDataAfterScript) {
+        Logger.log(`  ⚠️ Found ${objectData.length - originalObjectEnd} bytes after m_Script+padding, will preserve`);
+      }
+
+      // Calculate new object data size:
+      // = data before m_Script + length field (4) + new asset + new padding + data after (if any)
+      const dataBeforeAsset = assetOffsetInObject; // includes length field
+      const dataAfterScriptPadding = hasDataAfterScript ? (objectData.length - originalObjectEnd) : 0;
+      const newObjectSize = dataBeforeAsset + newAssetData.length + newPadding + dataAfterScriptPadding;
+
+      const newObjectData = Buffer.alloc(newObjectSize);
+
+      // Copy data before asset (includes the length field, which we'll update)
+      objectData.copy(newObjectData, 0, 0, assetOffsetInObject);
+
+      // UPDATE the m_Script length field with the new asset size
+      newObjectData.writeInt32LE(newAssetData.length, lengthFieldOffset);
+      Logger.log(`  ✅ Updated m_Script length field: ${originalAssetData.length} -> ${newAssetData.length}`);
+
+      // Copy new asset data
+      newAssetData.copy(newObjectData, assetOffsetInObject);
+
+      // Add new 4-byte alignment padding (zeros already from Buffer.alloc)
+      const newAssetEnd = assetOffsetInObject + newAssetData.length;
+      // Padding is already zeros from Buffer.alloc
+
+      // Copy data after m_Script+padding (if any)
+      if (hasDataAfterScript) {
+        objectData.copy(newObjectData, newAssetEnd + newPadding, originalObjectEnd);
+      }
+
+      Logger.log(`  New object data size: ${newObjectData.length} (was ${objectData.length})`);
+
+      // Update the object in the SerializedFile
+      serializedFile.updateObject(pathId, newObjectData);
+
+      // Serialize the SerializedFile back to binary
+      Logger.log('\n📝 Serializing SerializedFile with updated object...');
+      const newCABData = serializedFile.save();
+
+      Logger.log(`\n✅ CAB rebuilt successfully`);
+      Logger.log(`  Final CAB size: ${newCABData.length}`);
+
+      return newCABData;
+    } catch (error) {
+      Logger.log(`\n❌ SerializedFile parsing failed: ${error}`);
+      Logger.log(`  Falling back to same-size check...`);
+
+      // If parsing failed and sizes are same, try simple replacement as fallback
+      if (originalAssetData.length === newAssetData.length) {
+        Logger.log(`  Sizes match, using simple byte replacement`);
+        return this.rebuildCABSameSize(originalCABData, originalAssetData, newAssetData);
+      }
+
+      throw error;
+    }
+  }
+
+  /**
+   * Simple byte replacement for same-size updates
+   */
+  private static rebuildCABSameSize(
+    originalCABData: Buffer,
+    originalAssetData: Buffer,
+    newAssetData: Buffer
+  ): Buffer {
+    Logger.log(`  Using simple byte replacement (same size)...`);
+
+    // Find the asset in CAB
+    let assetOffset = -1;
+    for (let i = 0; i <= originalCABData.length - originalAssetData.length; i++) {
+      if (originalCABData.slice(i, i + originalAssetData.length).equals(originalAssetData)) {
+        assetOffset = i;
+        break;
+      }
+    }
+
+    if (assetOffset === -1) {
+      throw new Error('❌ Failed to locate original asset in CAB');
+    }
+
+    Logger.log(`  ✅ Found asset at offset: 0x${assetOffset.toString(16)}`);
+
+    // Create new buffer and replace asset bytes
+    const newCABData = Buffer.from(originalCABData);
+    newAssetData.copy(newCABData, assetOffset);
+
+    Logger.log(`  ✅ CAB rebuilt successfully`);
+
+    return newCABData;
   }
 }
