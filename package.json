@@ -21,7 +21,7 @@
     "@types/figlet": "^1.5.8",
     "@types/gettext-parser": "^8.0.0",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^24.0.1",
+    "@types/node": "^25.1.0",
     "@types/progress": "^2.0.7",
     "chai": "^6.0.1",
     "gettext-parser": "^8.0.0",
