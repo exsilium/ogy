@@ -2,6 +2,7 @@
   "compilerOptions": {
     "rootDir": "src",
     "typeRoots": ["./@types", "./node_modules/@types"],
+    "types": ["node", "mocha", "@scanreco__node-lz4", "diff-match-patch"],
     "outDir": "dist",
     "strict": true,
     "target": "es2022",
