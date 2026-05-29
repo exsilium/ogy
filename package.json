@@ -33,7 +33,7 @@
     "zlib": "^1.0.5"
   },
   "dependencies": {
-    "commander": "^14.0.0",
+    "commander": "^15.0.0",
     "figlet": "^1.7.0",
     "diff-match-patch": "^1.0.5"
   }
